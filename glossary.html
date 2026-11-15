@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="my" data-lang="mm">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Critical Anti-FOUC & Anti-Flash Engine (Instant Theme & Language Initialization - 0ms Delay) -->
+  <script>
+    (function() {
+      // 1. Instant Theme Restore (Supports 14 curated themes across 4 categories)
+      try {
+        var validThemes = [
+          'light', 'sepia', 'dark', 'amoled',
+          'red', 'red-crimson', 'red-rosewood',
+          'purple', 'purple-lavender', 'purple-plum', 'purple-indigo',
+          'pink', 'pink-peach', 'pink-rose'
+        ];
+        var savedTheme = null;
+        try { savedTheme = localStorage.getItem('site_theme'); } catch(e) {}
+        var theme = (savedTheme && validThemes.indexOf(savedTheme) !== -1) ? savedTheme : 
+          ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light');
+        
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark' || theme === 'amoled') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+
+        var themeBgs = {
+          light: '#FAF8F5',
+          sepia: '#F5EEDB',
+          dark: '#121110',
+          amoled: '#000000',
+          red: '#FAF5F5',
+          'red-crimson': '#FAF4F5',
+          'red-rosewood': '#FAF6F3',
+          purple: '#F8F6FD',
+          'purple-lavender': '#F8F7FD',
+          'purple-plum': '#F9F5FA',
+          'purple-indigo': '#F5F6FC',
+          pink: '#FDF6F8',
+          'pink-peach': '#FDF7F4',
+          'pink-rose': '#FDF5F7'
+        };
+        if (themeBgs[theme]) {
+          document.documentElement.style.backgroundColor = themeBgs[theme];
+        }
+      } catch (e) {}
+
+      // 2. Instant Language Restore & Anti-Flicker Cloak
+      try {
+        var validLangs = ['mm', 'en', 'zh', 'th', 'ja'];
+        var savedLang = localStorage.getItem('site_lang');
+        var lang = (validLangs.indexOf(savedLang) !== -1) ? savedLang : 'mm';
+        
+        document.documentElement.setAttribute('data-lang', lang);
+        var htmlLangMap = { mm: 'my', en: 'en', zh: 'zh-Hans', th: 'th', ja: 'ja' };
+        document.documentElement.lang = htmlLangMap[lang] || 'my';
+
+        // If the user preferred a language other than Burmese, apply instant anti-flicker
+        if (lang !== 'mm') {
+          document.documentElement.classList.add('i18n-cloaked');
+          // Failsafe timer: guarantee reveal in under 300ms even if script hangs
+          setTimeout(function() {
+            document.documentElement.classList.remove('i18n-cloaked');
+          }, 300);
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    /* Critical zero-latency base paint to completely eliminate theme and language flash */
+    html { color-scheme: light dark; }
+    html[data-theme="amoled"], html[data-theme="amoled"].dark { background-color: #000000 !important; }
+    html[data-theme="amoled"] body, html[data-theme="amoled"].dark body { background-color: #000000 !important; color: #FFFFFF !important; }
+    html[data-theme="amoled"] header.sticky { background-color: rgba(0, 0, 0, 0.9) !important; }
+    html[data-theme="dark"], html.dark { background-color: #121110 !important; }
+    html[data-theme="dark"] body, html.dark body { background-color: #121110 !important; color: #F5EFE6 !important; }
+    html[data-theme="dark"] .bg-cream, html.dark .bg-cream { background-color: #221F1C !important; }
+    html[data-theme="dark"] header.sticky, html.dark header.sticky { background-color: rgba(18, 17, 16, 0.85) !important; }
+    html[data-theme="pink"] { background-color: #FDF6F8 !important; }
+    html[data-theme="pink"] body { background-color: #FDF6F8 !important; color: #2D1A24 !important; }
+    html[data-theme="purple"] { background-color: #F8F6FD !important; }
+    html[data-theme="purple"] body { background-color: #F8F6FD !important; color: #211B33 !important; }
+    html[data-theme="red"] { background-color: #FAF5F5 !important; }
+    html[data-theme="red"] body { background-color: #FAF5F5 !important; color: #2A1717 !important; }
+    html[data-theme="sepia"] { background-color: #F5EEDB !important; }
+    html[data-theme="sepia"] body, html.sepia body { background-color: #F5EEDB !important; color: #383024 !important; }
+    html[data-theme="light"] { background-color: #FAF8F5; }
+    html[data-theme="light"] body { background-color: #FAF8F5; color: #252321; }
+
+    /* Instant language transition cloaking - hides Burmese text until translated to chosen language */
+    html.i18n-cloaked body {
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+  </style>
+
+  <title data-mm="ဒဿနနှင့် ဂျန်ဒါ သဘောတရားအဘိဓာန် — ထက် (Htet Official)" data-en="Conceptual Glossary & Philosophy Lexicon — Htet Official">ဒဿနနှင့် ဂျန်ဒါ သဘောတရားအဘိဓာန် — ထက် (Htet Official)</title>
+  <!-- SEO, Open Graph (Facebook/Telegram) & Structured Data -->
+  <meta name="description" content="Commufemocratism, Wàe Thī Democracy, Intersectionality, Epistemic Injustice, Biopolitics စသည့် ခေတ်သစ်ဒဿနနှင့် ဂျန်ဒါ ဝေါဟာရများကို ဘာသာစုံဖြင့် ရှင်းလင်းထားသော အဘိဓာန်။">
+  <meta name="keywords" content="Political Philosophy Glossary Burmese, Gender Studies Lexicon Myanmar, Commufemocratism, Intersectionality, Epistemic Injustice">
+  <meta name="author" content="Htet Myat Ekri (ထက်မြတ်ဧကရီ)">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://htetofficial.github.io/glossary.html">
+
+  <!-- Open Graph (Facebook, Telegram, LinkedIn) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Htet Official (ထက်)">
+  <meta property="og:title" content="ဒဿနနှင့် ဂျန်ဒါ ဝေါဟာရအဘိဓာန် | Htet Official — Conceptual Glossary">
+  <meta property="og:description" content="Commufemocratism, Wàe Thī Democracy, Intersectionality, Epistemic Injustice, Biopolitics စသည့် ခေတ်သစ်ဒဿနနှင့် ဂျန်ဒါ ဝေါဟာရများကို ဘာသာစုံဖြင့် ရှင်းလင်းထားသော အဘိဓာန်။">
+  <meta property="og:url" content="https://htetofficial.github.io/glossary.html">
+  <meta property="og:image" content="https://htetofficial.github.io/assets/images/influences-role-models-collage.jpg">
+  <meta property="og:image:secure_url" content="https://htetofficial.github.io/assets/images/influences-role-models-collage.jpg">
+  <meta property="og:image:width" content="856">
+  <meta property="og:image:height" content="822">
+  <meta property="og:image:alt" content="Conceptual Glossary &amp; Theoretical Lexicon by Htet">
+  <meta property="og:locale" content="my_MM">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:locale:alternate" content="th_TH">
+  <meta property="og:locale:alternate" content="ja_JP">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ဒဿနနှင့် ဂျန်ဒါ ဝေါဟာရအဘိဓာန် | Htet Official — Conceptual Glossary">
+  <meta name="twitter:description" content="Commufemocratism, Wàe Thī Democracy, Intersectionality, Epistemic Injustice, Biopolitics စသည့် ခေတ်သစ်ဒဿနနှင့် ဂျန်ဒါ ဝေါဟာရများကို ဘာသာစုံဖြင့် ရှင်းလင်းထားသော အဘိဓာန်။">
+  <meta name="twitter:image" content="https://htetofficial.github.io/assets/images/influences-role-models-collage.jpg">
+  <meta name="twitter:image:alt" content="Conceptual Glossary &amp; Theoretical Lexicon by Htet">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "DefinedTermSet",
+      "@id": "https://htetofficial.github.io/glossary.html#termset",
+      "name": "Conceptual Glossary & Theoretical Lexicon",
+      "description": "Multilingual glossary of political philosophy, feminist theory, and gender justice concepts.",
+      "url": "https://htetofficial.github.io/glossary.html",
+      "hasDefinedTerm": [
+        {
+          "@type": "DefinedTerm",
+          "name": "Commufemocratism",
+          "description": "An active middle-path political philosophy synthesizing Ethics of Care, Radical Equality, and grassroots democracy."
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Wàe Thī Democracy",
+          "description": "Bottom-up participatory grassroots democracy rooted in local accountability."
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Intersectionality",
+          "description": "Analytical framework examining how overlapping social identities and systems of oppression interact."
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Epistemic Injustice",
+          "description": "Miranda Fricker's concept of unfairness related to knowledge, credibility, and testimonial silencing."
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Gender Performativity",
+          "description": "Judith Butler's theory that gender is constituted through repeated social acts and norms."
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Biopolitics",
+          "description": "Michel Foucault's concept describing how state power regulates bodies and populations."
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://htetofficial.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Glossary",
+          "item": "https://htetofficial.github.io/glossary.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- /SEO -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="mask-icon" href="assets/seal-stamp.svg" color="#B83A2D">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ထက် (Htet)">
+  <meta name="application-name" content="ထက် (Htet)">
+  <meta name="msapplication-TileColor" content="#B83A2D">
+  <meta name="msapplication-TileImage" content="assets/mstile-150x150.png">
+  <meta name="msapplication-config" content="browserconfig.xml">
+  <meta name="theme-color" content="#FAF8F5">
+
+  <!-- Local Downloaded Bootstrap 5.3 & Bootstrap Icons -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-icons.min.css">
+
+  <!-- Online Remix Icon CDN (Latest v4.5.0) -->
+  <!-- Local Downloaded Remix Icon v4.5.0 -->
+  <link rel="stylesheet" href="css/remixicon.css">
+  <!-- Local Downloaded AOS CSS -->
+  <link rel="stylesheet" href="css/aos.css">
+
+  <!-- Tailwind CSS CDN Configured with Dynamic CSS Variables -->
+  <script src="js/tailwind.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['class', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          screens: {
+            'xs': '400px'
+          },
+          colors: {
+            ivory: 'var(--bg-ivory)',
+            cream: 'var(--bg-cream)',
+            card: 'var(--bg-card)',
+            taupe: 'var(--border-taupe)',
+            charcoal: 'var(--text-charcoal)',
+            muted: 'var(--text-muted)',
+            faint: 'var(--text-faint)',
+            vermilion: {
+              DEFAULT: 'var(--accent-vermilion)',
+              light: '#E25B52',
+              dark: '#8A2B1D',
+              soft: 'var(--accent-vermilion-soft)'
+            }
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Pyidaungsu', 'Georgia', 'serif'],
+            sans: ['Pyidaungsu', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            burmese: ['Pyidaungsu', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/custom.css">
+  <script src="js/theme.js"></script>
+</head>
+<body class="bg-ivory text-charcoal min-h-screen flex flex-col font-sans">
+
+  <!-- Top Announcement Bar / Solidarity Note -->
+  <div class="bg-cream border-b border-hairline py-2 px-4 text-center text-xs text-muted flex items-center justify-center space-x-2 font-sans-ui">
+    <span class="inline-block w-2 h-2 rounded-full bg-vermilion animate-pulse"></span>
+    <i class="ri-shield-star-line text-vermilion text-sm"></i>
+    <span data-mm="ကျား၊ မ တရားမျှတမှု၊ လူမှုတန်းတူညီမျှရေးနှင့် လွတ်လပ်မှုအတွက် ရပ်တည်ချက်" data-en="Standing for gender justice, social equality, and collective liberation." data-zh="坚守性别正义、社会平等与集体解放的学术与实践立场。" data-th="ยืนหยัดเพื่อความยุติธรรมทางเพศ ความเท่าเทียมทางสังคม และการปลดปล่อยร่วมกัน" data-ja="ジェンダー正義、社会の平等、そして連帯による解放を希求する学術的実践。">ကျား၊ မ တရားမျှတမှု၊ လူမှုတန်းတူညီမျှရေးနှင့် လွတ်လပ်မှုအတွက် ရပ်တည်ချက်</span>
+  </div>
+
+  <!-- Main Navigation Header -->
+    <!-- Master Minimalist Header -->
+  <header class="sticky top-0 z-40 bg-ivory/85 dark:bg-[#121110]/85 backdrop-blur-md border-b border-hairline transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-4">
+      
+      <!-- Minimalist Brand Identity (Calibrated for 360px - 1920px+) -->
+      <a href="index.html" class="flex items-center space-x-2 sm:space-x-2.5 group shrink-0" aria-label="Htet — Home">
+        <div class="nav-brand-glass-icon w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0" title="ထက် (Htet)">
+          <img src="assets/favicon.svg" alt="ထက်" class="w-full h-full object-contain">
+        </div>
+        <div class="flex flex-col">
+          <span class="font-serif-editorial text-lg sm:text-xl font-bold tracking-tight text-charcoal group-hover:text-vermilion transition-colors leading-none">HTET</span>
+          <span class="nav-brand-subtitle text-[9px] tracking-wider text-muted uppercase font-sans-ui mt-0.5 leading-none hidden xs:inline sm:inline truncate max-w-[130px]" data-mm="စာရေးဆရာမ • သုတေသီ" data-en="WRITER • RESEARCHER" data-zh="作家 • 政治哲学研究者" data-th="นักเขียน • นักวิจัยปรัชญา" data-ja="作家・政治哲学研究者">စာရေးဆရာမ • သုတေသီ</span>
+        </div>
+      </a>
+
+      <!-- Floating Minimalist Navigation Capsule (Desktop & Laptop Viewports) -->
+      <nav class="hidden lg:flex items-center p-1 rounded-full border border-hairline/80 bg-cream/70 dark:bg-stone-900/60 nav-capsule font-sans-ui text-xs xl:text-[13px] shadow-xs">
+        <a href="index.html" class="nav-link-pill px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ပင်မ" data-en="Home" data-zh="首页" data-th="หน้าแรก" data-ja="ホーム">ပင်မ</a>
+        <a href="articles.html" class="nav-link-pill px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဆောင်းပါးများ" data-en="Articles" data-zh="学术文章" data-th="บทความ" data-ja="論考・論文">ဆောင်းပါးများ</a>
+        <a href="publications.html" class="nav-link-pill px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ထုတ်ဝေမှုများ" data-en="Publications" data-zh="出版专著" data-th="ผลงานตีพิมพ์" data-ja="出版物・著作">ထုတ်ဝေမှုများ</a>
+        <a href="journal.html" class="nav-link-pill px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌">မှတ်စုနှင့် ပို့စ်များ</a>
+        <a href="glossary.html" class="nav-link-pill px-3 xl:px-3.5 py-1 xl:py-1.5 rounded-full active bg-vermilion text-white font-medium shadow-xs" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典">ဝေါဟာရအဘိဓာန်</a>
+        <a href="about.html" class="nav-link-pill px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について">စာရေးသူအကြောင်း</a>
+        <a href="contact.html" class="nav-link-pill px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系交流" data-th="ติดต่อเรา" data-ja="お問い合わせ">ဆက်သွယ်ရန်</a>
+      </nav>
+
+      <!-- Action Utilities Capsule (Adaptive for Phone, Tablet & Desktop) -->
+      <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+        <!-- Spotlight Search Trigger (Cmd+K) -->
+        <button id="spotlight-search-trigger" class="nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-charcoal hover:text-vermilion hover:border-vermilion/50 transition-all flex items-center justify-center shadow-xs" title="Global Search (⌘K)" aria-label="Search">
+          <i class="ri-search-2-line text-sm"></i>
+        </button>
+
+        <!-- Bookmarks Reading List Trigger with Live Badge -->
+        <button id="reading-list-trigger" class="nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-charcoal hover:text-vermilion hover:border-vermilion/50 transition-all flex items-center justify-center shadow-xs relative" title="Saved Reading List" aria-label="Reading List">
+          <i class="ri-bookmark-3-line text-sm"></i>
+          <span id="reading-list-badge" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-vermilion text-white text-[9px] font-bold flex items-center justify-center hidden">0</span>
+        </button>
+
+        <!-- Reading Theme Segmented Controller (Tablet & Desktop Visible) -->
+        <div class="hidden md:flex items-center p-0.5 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 shadow-xs theme-segmented-glass">
+          <button data-set-theme="light" data-theme-btn="light" title="Light / စာရွက်ဖြူ" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90">
+            <i class="ri-sun-cloudy-line text-xs"></i>
+          </button>
+          <button data-set-theme="sepia" data-theme-btn="sepia" title="Sepia / စာအုပ်ညို" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90">
+            <i class="ri-book-open-line text-xs"></i>
+          </button>
+          <button data-set-theme="dark" data-theme-btn="dark" title="Dark / မှောင်ရိပ်" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90">
+            <i class="ri-moon-clear-line text-xs"></i>
+          </button>
+          <button data-set-theme="palette" title="စာဖတ်ရောင်စဉ် စတူဒီယို (14 Themes Studio)" class="w-7 h-7 rounded-full flex items-center justify-center text-xs text-charcoal hover:text-vermilion hover:bg-vermilion/10 transition-all cursor-pointer btn-palette-glow active:scale-90 relative" aria-label="Open Theme Palette Studio">
+            <i class="ri-palette-line text-xs"></i>
+            <span class="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full theme-active-dot ring-1 ring-white/60"></span>
+          </button>
+        </div>
+
+        <!-- Mobile Dedicated Theme Studio Button (Mobile & Tablet Visible) -->
+        <button data-set-theme="palette" class="md:hidden nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 flex items-center justify-center text-charcoal hover:text-vermilion transition-all shadow-xs relative cursor-pointer active:scale-95 btn-palette-glow" title="စာဖတ်ရောင်စဉ် စတူဒီယို (14 Themes Studio)" aria-label="Reading Themes">
+          <i class="ri-palette-line text-sm"></i>
+          <span class="absolute top-1 right-1 w-2 h-2 rounded-full theme-active-dot ring-1 ring-white/60"></span>
+        </button>
+
+        <!-- International Multi-Language Selector (5 Languages: MM, EN, ZH, TH, JA) -->
+        <div class="relative lang-switcher-container">
+          <button id="lang-dropdown-btn" class="nav-lang-btn flex items-center space-x-1 sm:space-x-1.5 px-2 sm:px-2.5 py-1 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 hover:border-vermilion/50 text-charcoal text-xs font-semibold shadow-xs transition-all cursor-pointer active:scale-95" aria-label="Select Language" aria-haspopup="true" aria-expanded="false" title="ဘာသာစကား ရွေးချယ်ရန် (Choose Language)">
+            <span id="current-lang-flag" class="text-sm">🇲🇲</span>
+            <span id="current-lang-label" class="font-mono text-xs font-bold">MM</span>
+            <i class="ri-arrow-down-s-line text-[11px] opacity-60 lang-chevron transition-transform duration-200"></i>
+          </button>
+          <div id="lang-dropdown-menu" class="absolute right-0 mt-2 w-52 py-2 rounded-2xl shadow-2xl z-50 hidden transition-all font-sans-ui text-xs border border-hairline lang-dropdown-glass" role="menu" aria-orientation="vertical">
+            <div class="px-3 py-1 mb-1 border-b border-hairline/60 flex items-center justify-between text-[10px] text-muted font-mono uppercase tracking-wider">
+              <span data-mm="ဘာသာစကား ရွေးရန်" data-en="Select Language" data-zh="选择语言" data-th="เลือกภาษา" data-ja="言語を選択">ဘာသာစကား ရွေးရန်</span>
+              <span class="text-vermilion font-bold">5 LANGS</span>
+            </div>
+            <button data-switch-lang="mm" class="w-full text-left px-3 py-2 hover:bg-vermilion/10 dark:hover:bg-white/10 flex items-center justify-between transition-all rounded-xl mx-auto my-0.5 group/item cursor-pointer" role="menuitem">
+              <span class="flex items-center space-x-2.5">
+                <span class="w-6 h-6 rounded-full flex items-center justify-center text-sm shadow-2xs border border-hairline/60 bg-card">🇲🇲</span>
+                <span class="font-semibold text-charcoal">မြန်မာ</span>
+              </span>
+              <div class="flex items-center space-x-1.5">
+                <span class="text-[10px] font-mono opacity-50">MM</span>
+                <i class="ri-check-line text-xs text-vermilion opacity-0 lang-check-mm"></i>
+              </div>
+            </button>
+            <button data-switch-lang="en" class="w-full text-left px-3 py-2 hover:bg-vermilion/10 dark:hover:bg-white/10 flex items-center justify-between transition-all rounded-xl mx-auto my-0.5 group/item cursor-pointer" role="menuitem">
+              <span class="flex items-center space-x-2.5">
+                <span class="w-6 h-6 rounded-full flex items-center justify-center text-sm shadow-2xs border border-hairline/60 bg-card">🇬🇧</span>
+                <span class="font-semibold text-charcoal">English</span>
+              </span>
+              <div class="flex items-center space-x-1.5">
+                <span class="text-[10px] font-mono opacity-50">EN</span>
+                <i class="ri-check-line text-xs text-vermilion opacity-0 lang-check-en"></i>
+              </div>
+            </button>
+            <button data-switch-lang="zh" class="w-full text-left px-3 py-2 hover:bg-vermilion/10 dark:hover:bg-white/10 flex items-center justify-between transition-all rounded-xl mx-auto my-0.5 group/item cursor-pointer" role="menuitem">
+              <span class="flex items-center space-x-2.5">
+                <span class="w-6 h-6 rounded-full flex items-center justify-center text-sm shadow-2xs border border-hairline/60 bg-card">🇨🇳</span>
+                <span class="font-semibold text-charcoal">中文</span>
+              </span>
+              <div class="flex items-center space-x-1.5">
+                <span class="text-[10px] font-mono opacity-50">ZH</span>
+                <i class="ri-check-line text-xs text-vermilion opacity-0 lang-check-zh"></i>
+              </div>
+            </button>
+            <button data-switch-lang="th" class="w-full text-left px-3 py-2 hover:bg-vermilion/10 dark:hover:bg-white/10 flex items-center justify-between transition-all rounded-xl mx-auto my-0.5 group/item cursor-pointer" role="menuitem">
+              <span class="flex items-center space-x-2.5">
+                <span class="w-6 h-6 rounded-full flex items-center justify-center text-sm shadow-2xs border border-hairline/60 bg-card">🇹🇭</span>
+                <span class="font-semibold text-charcoal">ภาษาไทย</span>
+              </span>
+              <div class="flex items-center space-x-1.5">
+                <span class="text-[10px] font-mono opacity-50">TH</span>
+                <i class="ri-check-line text-xs text-vermilion opacity-0 lang-check-th"></i>
+              </div>
+            </button>
+            <button data-switch-lang="ja" class="w-full text-left px-3 py-2 hover:bg-vermilion/10 dark:hover:bg-white/10 flex items-center justify-between transition-all rounded-xl mx-auto my-0.5 group/item cursor-pointer" role="menuitem">
+              <span class="flex items-center space-x-2.5">
+                <span class="w-6 h-6 rounded-full flex items-center justify-center text-sm shadow-2xs border border-hairline/60 bg-card">🇯🇵</span>
+                <span class="font-semibold text-charcoal">日本語</span>
+              </span>
+              <div class="flex items-center space-x-1.5">
+                <span class="text-[10px] font-mono opacity-50">JA</span>
+                <i class="ri-check-line text-xs text-vermilion opacity-0 lang-check-ja"></i>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Direct Telegram Channel Quick Link (Wide Laptop & Desktop Visible) -->
+        <a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="hidden xl:flex nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-charcoal hover:bg-vermilion hover:text-white hover:border-vermilion transition-all items-center justify-center shadow-xs" title="Official Telegram Channel" aria-label="Telegram">
+          <i class="ri-telegram-fill text-sm"></i>
+        </a>
+
+        <!-- Mobile & Tablet Hamburger Toggle -->
+        <button id="mobile-menu-toggle" class="lg:hidden nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 flex items-center justify-center text-charcoal hover:text-vermilion focus:outline-none transition-colors" aria-label="Open Navigation">
+          <i class="ri-menu-3-line text-base"></i>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay Backdrop -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 bg-charcoal/40 dark:bg-black/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
+
+  <!-- Mobile Drawer Sidebar (Calibrated for 360px - 820px) -->
+  <div id="mobile-menu-drawer" class="fixed top-0 left-0 bottom-0 w-72 sm:w-80 max-w-[85vw] bg-ivory dark:bg-[#141312] z-50 transform -translate-x-full transition-transform duration-300 ease-in-out border-r border-hairline p-5 sm:p-6 flex flex-col justify-between shadow-2xl overflow-y-auto overscroll-contain">
+    <div>
+      <!-- Drawer Header -->
+      <div class="flex items-center justify-between pb-5 border-b border-hairline">
+        <a href="index.html" class="flex items-center space-x-2.5">
+          <div class="nav-brand-glass-icon w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0" title="ထက် (Htet)">
+            <img src="assets/favicon.svg" alt="ထက်" class="w-full h-full object-contain">
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif-editorial text-xl font-bold tracking-tight text-charcoal leading-none">HTET</span>
+            <span class="text-[9px] tracking-wider text-muted uppercase font-sans-ui mt-0.5" data-mm="စာရေးဆရာမ • သုတေသီ" data-en="WRITER • RESEARCHER" data-zh="作家 • 政治哲学研究者" data-th="นักเขียน • นักวิจัยปรัชญา" data-ja="作家・政治哲学研究者">စာရေးဆရာမ • သုတေသီ</span>
+          </div>
+        </a>
+        <button id="mobile-menu-close" class="w-8 h-8 rounded-full border border-hairline/80 flex items-center justify-center text-muted hover:text-charcoal hover:border-charcoal/30 transition-colors" aria-label="Close Navigation">
+          <i class="ri-close-line text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation Links -->
+      <nav class="flex flex-col space-y-1.5 py-5 font-sans-ui text-sm">
+        <a href="index.html" class="mobile-nav-link flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/60 dark:hover:bg-stone-800/60 group" data-mm="ပင်မ" data-en="Home" data-zh="首页" data-th="หน้าแรก" data-ja="ホーム">
+          <i class="ri-home-5-line text-lg text-muted group-hover:text-vermilion transition-colors"></i>
+          <span>ပင်မ</span>
+        </a>
+        <a href="articles.html" class="mobile-nav-link flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/60 dark:hover:bg-stone-800/60 group" data-mm="ဆောင်းပါးများ" data-en="Articles" data-zh="学术文章" data-th="บทความ" data-ja="論考・論文">
+          <i class="ri-article-line text-lg text-muted group-hover:text-vermilion transition-colors"></i>
+          <span>ဆောင်းပါးများ</span>
+        </a>
+        <a href="publications.html" class="mobile-nav-link flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/60 dark:hover:bg-stone-800/60 group" data-mm="ထုတ်ဝေမှုများ" data-en="Publications" data-zh="出版专著" data-th="ผลงานตีพิมพ์" data-ja="出版物・著作">
+          <i class="ri-file-paper-2-line text-lg text-muted group-hover:text-vermilion transition-colors"></i>
+          <span>ထုတ်ဝေမှုများ</span>
+        </a>
+        <a href="journal.html" class="mobile-nav-link flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/60 dark:hover:bg-stone-800/60 group" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌">
+          <i class="ri-booklet-line text-lg text-muted group-hover:text-vermilion transition-colors"></i>
+          <span>မှတ်စုနှင့် ပို့စ်များ</span>
+        </a>
+        <a href="glossary.html" class="mobile-nav-link active flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-semibold transition-all text-vermilion bg-vermilion/10 dark:bg-vermilion/20 border-l-4 border-vermilion shadow-xs" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典">
+          <i class="ri-book-read-line text-lg text-vermilion"></i>
+          <span>ဝေါဟာရအဘိဓာန်</span>
+        </a>
+        <a href="about.html" class="mobile-nav-link flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/60 dark:hover:bg-stone-800/60 group" data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について">
+          <i class="ri-user-star-line text-lg text-muted group-hover:text-vermilion transition-colors"></i>
+          <span>စာရေးသူအကြောင်း</span>
+        </a>
+        <a href="contact.html" class="mobile-nav-link flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/60 dark:hover:bg-stone-800/60 group" data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系交流" data-th="ติดต่อเรา" data-ja="お問い合わせ">
+          <i class="ri-send-plane-2-line text-lg text-muted group-hover:text-vermilion transition-colors"></i>
+          <span>ဆက်သွယ်ရန်</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Mobile Drawer Footer Options -->
+    <div class="pt-4 border-t border-hairline space-y-3">
+      <!-- Device-Adaptive Font Size Scaler Control (Available across all devices) -->
+      <div class="flex items-center justify-between text-xs text-muted font-sans-ui">
+        <span class="flex items-center space-x-1.5">
+          <i class="ri-font-size-2 text-sm text-vermilion"></i>
+          <span data-mm="ဖောင့်အရွယ်အစား" data-en="Font Size" data-zh="字体大小" data-th="ขนาดตัวอักษร" data-ja="フォントサイズ">ဖောင့်အရွယ်အစား</span>
+        </span>
+        <div class="flex items-center p-0.5 rounded-full border border-hairline bg-cream dark:bg-stone-900 shadow-inner font-sans-ui text-xs">
+          <button data-font-action="decrease" title="Smaller Font (ဖောင့်သေး)" class="px-2.5 py-0.5 rounded-full text-xs font-medium hover:text-vermilion transition-all">A-</button>
+          <button data-font-action="reset" title="Standard Font (ဖောင့်ပုံမှန်)" class="px-2 py-0.5 rounded-full text-xs font-semibold hover:text-vermilion transition-all">A</button>
+          <button data-font-action="increase" title="Larger Font (ဖောင့်ကြီး)" class="px-2.5 py-0.5 rounded-full text-xs font-medium hover:text-vermilion transition-all">A+</button>
+        </div>
+      </div>
+
+      <!-- Join Telegram Channel Link -->
+      <a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 rounded-xl border border-hairline bg-cream/60 dark:bg-stone-900/60 text-xs font-sans-ui flex items-center justify-center space-x-1.5 text-charcoal hover:text-vermilion transition-colors">
+        <i class="ri-telegram-fill text-sm text-[#24A1DE]"></i>
+        <span data-mm="တယ်လီဂရမ် ချန်နယ်သို့" data-en="Join Telegram Channel" data-zh="加入 Telegram 频道" data-th="เข้าร่วมช่อง Telegram" data-ja="Telegramチャンネルに参加">တယ်လီဂရမ် ချန်နယ်သို့</span>
+      </a>
+
+      <!-- Multi-Language Switcher Section -->
+      <div class="flex flex-col space-y-2 text-xs text-muted font-sans-ui">
+        <div class="flex items-center justify-between">
+          <span class="flex items-center space-x-1.5">
+            <i class="ri-translate-2 text-sm text-vermilion"></i>
+            <span data-mm="ဘာသာစကား ရွေးချယ်ရန်" data-en="Language Selector" data-zh="语言切换" data-th="เลือกภาษา" data-ja="言語設定">ဘာသာစကား ရွေးချယ်ရန်</span>
+          </span>
+          <button id="drawer-lang-modal-btn" class="text-[11px] text-vermilion hover:underline font-semibold flex items-center space-x-0.5 cursor-pointer active:scale-95" title="Open Full Sheet">
+            <span data-mm="အားလုံး (၅ မျိုး)" data-en="All 5 Langs" data-zh="全部5种" data-th="ทั้ง 5 ภาษา" data-ja="全5言語">အားလုံး (၅ မျိုး)</span>
+            <i class="ri-arrow-right-s-line text-xs"></i>
+          </button>
+        </div>
+        <div class="grid grid-cols-5 gap-1.5 p-1.5 rounded-2xl border border-hairline bg-cream/70 dark:bg-stone-900/70 shadow-inner">
+          <button data-switch-lang="mm" class="lang-toggle-btn py-2 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="mm" title="မြန်မာဘာသာ">
+            <span class="text-sm">🇲🇲</span>
+            <span class="text-[10px] font-mono leading-none">MM</span>
+          </button>
+          <button data-switch-lang="en" class="lang-toggle-btn py-2 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="en" title="English">
+            <span class="text-sm">🇬🇧</span>
+            <span class="text-[10px] font-mono leading-none">EN</span>
+          </button>
+          <button data-switch-lang="zh" class="lang-toggle-btn py-2 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="zh" title="简体中文">
+            <span class="text-sm">🇨🇳</span>
+            <span class="text-[10px] font-mono leading-none">ZH</span>
+          </button>
+          <button data-switch-lang="th" class="lang-toggle-btn py-2 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="th" title="ภาษาไทย">
+            <span class="text-sm">🇹🇭</span>
+            <span class="text-[10px] font-mono leading-none">TH</span>
+          </button>
+          <button data-switch-lang="ja" class="lang-toggle-btn py-2 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="ja" title="日本語">
+            <span class="text-sm">🇯🇵</span>
+            <span class="text-[10px] font-mono leading-none">JA</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Reading Theme Switcher Section (14 Themes) -->
+      <div class="flex flex-col space-y-2 text-xs text-muted font-sans-ui">
+        <div class="flex items-center justify-between">
+          <span class="flex items-center space-x-1.5">
+            <i class="ri-palette-line text-sm text-vermilion"></i>
+            <span data-mm="စာဖတ်ရောင်စဉ်" data-en="Reading Themes" data-zh="阅读主题" data-th="ธีมการอ่าน" data-ja="読書テーマ">စာဖတ်ရောင်စဉ်</span>
+          </span>
+          <button data-set-theme="palette" class="text-[11px] text-vermilion hover:underline font-semibold flex items-center space-x-1 cursor-pointer active:scale-95" title="Open Theme Studio">
+            <span data-mm="စတူဒီယို (၁၄ မျိုး)" data-en="Studio (14 Themes)" data-zh="14种调色盘" data-th="14 ธีม" data-ja="14テーマ">စတူဒီယို (၁၄ မျိုး)</span>
+            <i class="ri-arrow-right-s-line text-xs"></i>
+          </button>
+        </div>
+        <div class="flex items-center justify-between p-1 rounded-2xl border border-hairline bg-cream/70 dark:bg-stone-900/70 shadow-inner">
+          <button data-set-theme="light" data-theme-btn="light" title="Light / စာရွက်ဖြူ" class="flex-1 py-1.5 rounded-xl flex items-center justify-center text-xs transition-all cursor-pointer active:scale-95" aria-label="Light Theme">
+            <i class="ri-sun-cloudy-line text-xs mr-1"></i>
+            <span class="text-[10px] font-mono">LIGHT</span>
+          </button>
+          <button data-set-theme="sepia" data-theme-btn="sepia" title="Sepia / စာအုပ်ညို" class="flex-1 py-1.5 rounded-xl flex items-center justify-center text-xs transition-all cursor-pointer active:scale-95" aria-label="Sepia Theme">
+            <i class="ri-book-open-line text-xs mr-1"></i>
+            <span class="text-[10px] font-mono">SEPIA</span>
+          </button>
+          <button data-set-theme="dark" data-theme-btn="dark" title="Dark / မှောင်ရိပ်" class="flex-1 py-1.5 rounded-xl flex items-center justify-center text-xs transition-all cursor-pointer active:scale-95" aria-label="Dark Theme">
+            <i class="ri-moon-clear-line text-xs mr-1"></i>
+            <span class="text-[10px] font-mono">DARK</span>
+          </button>
+          <button data-set-theme="palette" title="စာဖတ်ရောင်စဉ် ၁၄ မျိုး စတူဒီယို" class="px-2.5 py-1.5 rounded-xl flex items-center justify-center text-xs transition-all text-vermilion hover:bg-vermilion/10 cursor-pointer active:scale-95 relative" aria-label="Theme Studio">
+            <i class="ri-palette-line text-xs"></i>
+            <span class="w-1.5 h-1.5 rounded-full theme-active-dot ml-1 ring-1 ring-white/60"></span>
+          </button>
+        </div>
+      </div>
+      <!-- PWA Native Install Button -->
+      <div class="pt-2">
+        <button data-pwa-install class="w-full py-2 px-3 rounded-xl border border-hairline/80 bg-cream/70 dark:bg-stone-900/60 hover:border-vermilion/50 text-charcoal hover:text-vermilion transition-all flex items-center justify-between text-xs font-medium cursor-pointer shadow-2xs group">
+          <span class="flex items-center space-x-2">
+            <i class="ri-download-cloud-2-line text-base text-vermilion group-hover:scale-110 transition-transform"></i>
+            <span data-mm="အက်ပ်သွင်းယူရန် (Install App)" data-en="Install App">အက်ပ်သွင်းယူရန် (Install App)</span>
+          </span>
+          <span class="text-[9px] px-1.5 py-0.2 rounded-md bg-vermilion/15 text-vermilion font-mono font-bold">PWA</span>
+        </button>
+      </div>
+    </div>
+  </div><main class="flex-grow">
+    
+    <!-- Hero Header -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-16 pb-8" data-aos="fade-up">
+      <div class="border-b border-hairline pb-8">
+        <div class="flex items-center space-x-2 text-xs font-sans-ui uppercase tracking-wider text-faint mb-2">
+          <span class="hanko-stamp px-1.5 py-0.2 text-[10px]">အဘိဓာန်</span>
+          <span data-mm="ဒဿနိကဗေဒနှင့် ဂျန်ဒါ သဘောတရား မူဘောင်များ" data-en="PHILOSOPHY, GENDER & CRITICAL THEORY LEXICON">ဒဿနိကဗေဒနှင့် ဂျန်ဒါ သဘောတရား မူဘောင်များ</span>
+        </div>
+        <h1 class="font-serif-editorial text-4xl sm:text-5xl font-normal text-charcoal" data-mm="သဘောတရားနှင့် ဒဿန အဘိဓာန်" data-en="Conceptual Glossary & Philosophy Lexicon">
+          သဘောတရားနှင့် ဒဿန အဘိဓာန်
+        </h1>
+        <p class="text-sm text-muted font-sans-ui mt-3 max-w-2xl leading-relaxed" data-mm="ဂျန်ဒါလေ့လာမှု၊ နိုင်ငံရေးဒဿနိကဗေဒ၊ ဝေဖန်ရေးသီအိုရီနှင့် လူမှုတရားမျှတမှုဆိုင်ရာ အဓိက သဘောတရားများကို လူငယ်များနှင့် သုတေသီများ လွယ်ကူစွာ ကိုးကားလေ့လာနိုင်ရန် စီစဉ်တင်ဆက်ထားသော နှစ်ဘာသာ အဘိဓာန် ဖြစ်ပါသည်။" data-en="A curated bilingual theoretical lexicon for activists, students, and researchers exploring Gender Studies, Political Philosophy, and Critical Theory in Myanmar.">
+          ဂျန်ဒါလေ့လာမှု၊ နိုင်ငံရေးဒဿနိကဗေဒ၊ ဝေဖန်ရေးသီအိုရီနှင့် လူမှုတရားမျှတမှုဆိုင်ရာ အဓိက သဘောတရားများကို လူငယ်များနှင့် သုတေသီများ လွယ်ကူစွာ ကိုးကားလေ့လာနိုင်ရန် စီစဉ်တင်ဆက်ထားသော နှစ်ဘာသာ အဘိဓာန် ဖြစ်ပါသည်။
+        </p>
+      </div>
+    </section>
+
+    <!-- Search & Filter Controls -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8" data-aos="fade-up" data-aos-delay="70">
+      <div class="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
+        
+        <!-- Live Search Bar -->
+        <div class="relative flex-grow max-w-md">
+          <i class="ri-search-line absolute left-3.5 top-1/2 -translate-y-1/2 text-faint text-base"></i>
+          <input 
+            type="text" 
+            id="glossary-search" 
+            placeholder="သဘောတရား သို့မဟုတ် ပညာရှင် အမည် ရှာဖွေပါ..." 
+            data-mm-placeholder="သဘောတရား သို့မဟုတ် ပညာရှင် အမည် ရှာဖွေပါ..." 
+            data-en-placeholder="Search concept, thinker, or definition..."
+            class="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-taupe-light bg-card text-charcoal placeholder-faint focus:outline-none focus:border-vermilion transition-all shadow-sm font-sans-ui"
+          />
+        </div>
+
+        <!-- Category Filters -->
+        <div id="glossary-category-filter" class="flex flex-wrap gap-2 text-xs font-sans-ui">
+          <button data-category="all" class="px-3.5 py-1.5 rounded-xl bg-vermilion text-white font-medium shadow-sm transition-all flex items-center space-x-1">
+            <span data-mm="အားလုံး" data-en="All">အားလုံး</span>
+            <span id="glossary-count-badge" class="ml-1 opacity-80 text-[10px]">8</span>
+          </button>
+          <button data-category="gender" class="px-3.5 py-1.5 rounded-xl bg-cream text-charcoal font-medium hover:bg-taupe-light transition-all">
+            <span data-mm="ဂျန်ဒါနှင့် ကွင်းယား" data-en="Gender & Queer">ဂျန်ဒါနှင့် ကွင်းယား</span>
+          </button>
+          <button data-category="philosophy" class="px-3.5 py-1.5 rounded-xl bg-cream text-charcoal font-medium hover:bg-taupe-light transition-all">
+            <span data-mm="နိုင်ငံရေးဒဿန" data-en="Political Philosophy">နိုင်ငံရေးဒဿန</span>
+          </button>
+          <button data-category="critical-theory" class="px-3.5 py-1.5 rounded-xl bg-cream text-charcoal font-medium hover:bg-taupe-light transition-all">
+            <span data-mm="ဝေဖန်ရေးသီအိုရီ" data-en="Critical Theory">ဝေဖန်ရေးသီအိုရီ</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Glossary Cards Container -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+      <div id="glossary-terms-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Dynamically rendered via JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Editorial Footer -->
+  <footer class="border-t border-hairline bg-cream/70 py-12 text-xs text-muted font-sans-ui transition-colors">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="space-y-3">
+        <div class="flex items-center space-x-2">
+          <div class="nav-brand-glass-icon w-8 h-8 rounded-xl flex items-center justify-center shrink-0" title="ထက် (Htet)">
+            <img src="assets/favicon.svg" alt="ထက်" class="w-full h-full object-contain">
+          </div>
+          <span class="font-serif-editorial text-lg font-semibold text-charcoal">Htet Official</span>
+        </div>
+        <p class="leading-relaxed" data-mm="မြန်မာ Transgirl စာရေးဆရာမ၊ နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် လူမှုတက်ကြွလှုပ်ရှားသူ ထက်၏ တရားဝင် ဝက်ဘ်စာမျက်နှာ။" data-en="Official platform of Htet — Burmese trans writer, political philosophy researcher, and activist.">
+          မြန်မာ Transgirl စာရေးဆရာမ၊ နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် လူမှုတက်ကြွလှုပ်ရှားသူ ထက်၏ တရားဝင် ဝက်ဘ်စာမျက်နှာ။
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]" data-mm="စာမျက်နှာများ" data-en="Navigation" data-zh="全站导航" data-th="การนำทาง" data-ja="ナビゲーション">စာမျက်နှာများ</h4>
+        <ul class="space-y-2">
+          <li><a href="index.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ပင်မ" data-en="Home" data-zh="首页" data-th="หน้าแรก" data-ja="ホーム"><i class="ri-home-5-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ပင်မ</span></a></li>
+          <li><a href="articles.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ဆောင်းပါးများ" data-en="Articles" data-zh="学术文章" data-th="บทความ" data-ja="論考・論文"><i class="ri-article-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ဆောင်းပါးများ</span></a></li>
+          <li><a href="publications.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ထုတ်ဝေမှုများ" data-en="Publications" data-zh="出版专著" data-th="ผลงานตีพิมพ์" data-ja="出版物・著作"><i class="ri-file-paper-2-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ထုတ်ဝေမှုများ</span></a></li>
+          <li><a href="journal.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌"><i class="ri-booklet-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>မှတ်စုနှင့် ပို့စ်များ</span></a></li>
+          <li><a href="glossary.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典"><i class="ri-book-read-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ဝေါဟာရအဘိဓာန်</span></a></li>
+          <li><a href="about.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について"><i class="ri-user-star-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>စာရေးသူအကြောင်း</span></a></li>
+          <li><a href="contact.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系交流" data-th="ติดต่อเรา" data-ja="お問い合わせ"><i class="ri-send-plane-2-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ဆက်သွယ်ရန်</span></a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]" data-mm="တိုက်ရိုက်လိုင်းများ" data-en="Direct Channels">တိုက်ရိုက်လိုင်းများ</h4>
+        <ul class="space-y-2">
+          <li><a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-telegram-fill text-[#2AABEE]"></i> <span>Telegram: @htetmmofficial</span></a></li>
+          <li><a href="https://t.me/womennationwomenkingdom" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-telegram-fill text-[#2AABEE]"></i> <span>@womennationwomenkingdom</span></a></li>
+          <li><a href="https://t.me/ideahubmyanmar" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-telegram-fill text-[#2AABEE]"></i> <span>@ideahubmyanmar</span></a></li>
+          <li><a href="https://t.me/ideahublibrary" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-book-open-fill text-amber-600"></i> <span>Library: @ideahublibrary (1,522+ PDFs)</span></a></li>
+          <li><a href="https://t.me/For_The_Future_Myanmar" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-team-fill text-blue-500"></i> <span>For The Future Myanmar (@For_The_Future_Myanmar)</span></a></li>
+          <li><a href="https://facebook.com/htetmyatekri" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-facebook-circle-fill text-[#1877F2]"></i> <span>Facebook: htetmyatekri</span></a></li>
+          <li><a href="https://htetofficial.wordpress.com" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-wordpress-fill text-[#21759B]"></i> <span>htetofficial.wordpress.com</span></a></li>
+          <li><a href="mailto:htethtet2025ideahub@gmail.com" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-mail-line text-vermilion"></i> <span>htethtet2025ideahub@gmail.com</span></a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-3">
+        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]" data-mm="တန်ဖိုးထားမှု" data-en="Commitment">တန်ဖိုးထားမှု</h4>
+        <p class="leading-relaxed" data-mm="ခွဲခြားဆက်ဆံမှု ကင်းမဲ့သော၊ ကျား၊ မ တန်းတူညီမျှပြီး တရားမျှတသော လူ့ဘောင် တည်ဆောက်ရေး။" data-en="Committed to an egalitarian, anti-oppressive society rooted in absolute justice.">
+          ခွဲခြားဆက်ဆံမှု ကင်းမဲ့သော၊ ကျား၊ မ တန်းတူညီမျှပြီး တရားမျှတသော လူ့ဘောင် တည်ဆောက်ရေး။
+        </p>
+        <div class="pt-2">
+          <span class="text-[11px] text-faint">© 2026 Htet (ထက်). All Rights Reserved.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Local Downloaded Bootstrap 5.3 & AOS Scripts -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/confetti.browser.min.js"></script>
+
+  <!-- Data & Failover Scripts -->
+  <!-- Core UI Engines First (Zero Latency Execution) -->
+  <script src="js/i18n.js"></script>
+  <script src="js/pwa.js"></script>
+
+  <!-- Local Data & Core Engine Scripts -->
+  <script src="js/data/articles-backup.js"></script>
+  <script src="js/data/posts-backup.js"></script>
+  <script src="js/data/glossary-backup.js"></script>
+  <script src="js/data/publications-backup.js"></script>
+  <script src="js/data/books-backup.js"></script>
+  <script src="js/data/quotes-backup.js"></script>
+  <script src="js/data-loader.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

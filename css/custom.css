@@ -1,0 +1,4130 @@
+/* ==========================================================================
+   Htet Official — Master Editorial Design System (Sino-Japanese Minimalism)
+   Aesthetic: Wabi-Sabi, Soft Paper Texture, Hanko Red Seal Stamp
+   Modes: Light (Rice Paper), Sepia (Parchment), Dark (Deep Obsidian)
+   Fully Calibrated for 100% Legibility in Dark & Sepia Modes
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* Pyidaungsu Unicode Primary Web Font (Official MCF Release & System Locals) */
+@font-face {
+  font-family: 'Pyidaungsu';
+  src: local('Pyidaungsu'),
+       local('Pyidaungsu-2.5_Regular'),
+       local('PyidaungsuBook'),
+       url('fonts/Pyidaungsu-Regular.ttf') format('truetype'),
+       url('../fonts/Pyidaungsu-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pyidaungsu';
+  src: local('Pyidaungsu-Bold'),
+       local('Pyidaungsu-2.5_Bold'),
+       url('fonts/Pyidaungsu-Bold.ttf') format('truetype'),
+       url('../fonts/Pyidaungsu-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pyidaungsu-Numbers';
+  src: local('Pyidaungsu-Numbers'),
+       url('fonts/Pyidaungsu-Numbers.ttf') format('truetype'),
+       url('../fonts/Pyidaungsu-Numbers.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   Base Theme Variables (Light Mode Default)
+   ========================================================================== */
+:root {
+  color-scheme: light;
+  --bg-ivory: #FAF8F5;
+  --bg-cream: #F3ECE2;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FCFAF7;
+  --bg-input: #FFFFFF;
+  --border-taupe: #E2D8CB;
+  --border-subtle: rgba(156, 143, 131, 0.22);
+  --text-charcoal: #252321;
+  --text-muted: #645D56;
+  --text-faint: #968A7E;
+  --accent-vermilion: #B83A2D;
+  --accent-vermilion-soft: rgba(184, 58, 45, 0.08);
+  --accent-vermilion-glow: rgba(184, 58, 45, 0.25);
+  --accent-vermilion-hover: #9E2F23;
+  --ink-shadow: 0 4px 20px -2px rgba(43, 41, 39, 0.06), 0 2px 6px -1px rgba(43, 41, 39, 0.04);
+  --ink-shadow-lg: 0 12px 32px -4px rgba(43, 41, 39, 0.1), 0 4px 12px -2px rgba(43, 41, 39, 0.05);
+  --stamp-border-radius: 4px;
+
+  /* Liquid Glass System Tokens (Light Mode Rice Paper) */
+  --liquid-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.84) 0%, rgba(250, 246, 240, 0.70) 100%);
+  --liquid-glass-border: rgba(255, 255, 255, 0.85);
+  --liquid-glass-border-bottom: rgba(226, 216, 203, 0.55);
+  --liquid-glass-inner-bevel: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95), inset 0 -1.5px 2px 0 rgba(44, 40, 37, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  --liquid-glass-shadow: 0 16px 36px -6px rgba(44, 40, 37, 0.14), 0 4px 12px -2px rgba(44, 40, 37, 0.06);
+  --liquid-glass-blur: blur(24px) saturate(200%) contrast(104%);
+}
+
+/* ==========================================================================
+   Sepia Mode (Vintage Literary Parchment)
+   ========================================================================== */
+html[data-theme="sepia"] {
+  color-scheme: light;
+  --bg-ivory: #F5EEDB;
+  --bg-cream: #EAE0C7;
+  --bg-card: #FAF4E5;
+  --bg-elevated: #FFF9ED;
+  --bg-input: #FCF7EC;
+  --border-taupe: #D6C8A6;
+  --border-subtle: rgba(138, 122, 90, 0.28);
+  --text-charcoal: #342A1E;
+  --text-muted: #5D503C;
+  --text-faint: #84755E;
+  --accent-vermilion: #A83626;
+  --accent-vermilion-soft: rgba(168, 54, 38, 0.12);
+  --accent-vermilion-glow: rgba(168, 54, 38, 0.32);
+  --accent-vermilion-hover: #8A2B1D;
+  --ink-shadow: 0 4px 20px -2px rgba(56, 48, 35, 0.08);
+  --ink-shadow-lg: 0 12px 32px -4px rgba(56, 48, 35, 0.12);
+
+  /* Liquid Glass System Tokens (Sepia Vintage Parchment) */
+  --liquid-glass-bg: linear-gradient(135deg, rgba(248, 242, 228, 0.88) 0%, rgba(236, 226, 205, 0.74) 100%);
+  --liquid-glass-border: rgba(255, 255, 255, 0.65);
+  --liquid-glass-border-bottom: rgba(200, 185, 155, 0.45);
+  --liquid-glass-inner-bevel: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.92), inset 0 -1.5px 2px 0 rgba(56, 48, 35, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  --liquid-glass-shadow: 0 16px 36px -6px rgba(56, 48, 35, 0.16), 0 4px 12px -2px rgba(56, 48, 35, 0.08);
+  --liquid-glass-blur: blur(24px) saturate(190%) contrast(104%);
+}
+
+/* ==========================================================================
+   Dark Mode (High-Contrast Obsidian Luxury)
+   Calibrated for 100% Crystal-Clear Readability
+   ========================================================================== */
+html[data-theme="dark"],
+html.dark {
+  color-scheme: dark;
+  --bg-ivory: #121110;
+  --bg-cream: #221F1C;
+  --bg-card: #1A1816;
+  --bg-elevated: #282420;
+  --bg-input: #161514;
+  --border-taupe: #3D3730;
+  --border-subtle: rgba(255, 255, 255, 0.14);
+  --text-charcoal: #F5EFE6; /* High-contrast bright ivory white */
+  --text-muted: #D1C9BE;    /* High-contrast readable body text */
+  --text-faint: #B0A79A;    /* Clearly legible metadata & tags */
+  --accent-vermilion: #E55C52;
+  --accent-vermilion-soft: rgba(229, 92, 82, 0.18);
+  --accent-vermilion-glow: rgba(229, 92, 82, 0.42);
+  --accent-vermilion-hover: #F26E65;
+  --ink-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.65);
+  --ink-shadow-lg: 0 16px 40px -4px rgba(0, 0, 0, 0.85);
+
+  /* Liquid Glass System Tokens (Dark Obsidian Luxury) */
+  --liquid-glass-bg: linear-gradient(135deg, rgba(32, 29, 26, 0.84) 0%, rgba(18, 16, 15, 0.76) 100%);
+  --liquid-glass-border: rgba(255, 255, 255, 0.18);
+  --liquid-glass-border-bottom: rgba(255, 255, 255, 0.08);
+  --liquid-glass-inner-bevel: inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.32), inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.65), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --liquid-glass-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.80), 0 4px 16px -2px rgba(0, 0, 0, 0.55);
+  --liquid-glass-blur: blur(24px) saturate(200%) contrast(106%);
+}
+
+/* Base canvas background overrides to prevent any FOUC or white flash */
+html {
+  background-color: var(--bg-ivory);
+  color-scheme: light dark;
+}
+html[data-theme="dark"],
+html.dark {
+  background-color: #121110 !important;
+}
+html[data-theme="dark"] body,
+html.dark body {
+  background-color: #121110 !important;
+  color: #F5EFE6 !important;
+}
+html[data-theme="sepia"] {
+  background-color: #F5EEDB !important;
+}
+html[data-theme="sepia"] body {
+  background-color: #F5EEDB !important;
+  color: #383024 !important;
+}
+
+/* ==========================================================================
+   AMOLED Pitch Black Theme (Ultra Battery Saving for OLED/AMOLED)
+   ========================================================================== */
+html[data-theme="amoled"] {
+  color-scheme: dark;
+  --bg-ivory: #000000;
+  --bg-cream: #090909;
+  --bg-card: #0D0D0D;
+  --bg-elevated: #151515;
+  --bg-input: #080808;
+  --border-taupe: #222222;
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --text-charcoal: #FFFFFF;
+  --text-muted: #D4D4D4;
+  --text-faint: #9E9E9E;
+  --accent-vermilion: #FF4D42;
+  --accent-vermilion-soft: rgba(255, 77, 66, 0.16);
+  --accent-vermilion-glow: rgba(255, 77, 66, 0.45);
+  --accent-vermilion-hover: #FF665C;
+  --ink-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.95);
+  --ink-shadow-lg: 0 16px 40px -4px rgba(0, 0, 0, 1);
+
+  --liquid-glass-bg: linear-gradient(135deg, rgba(18, 18, 18, 0.88) 0%, rgba(5, 5, 5, 0.94) 100%);
+  --liquid-glass-border: rgba(255, 255, 255, 0.15);
+  --liquid-glass-border-bottom: rgba(255, 255, 255, 0.06);
+  --liquid-glass-inner-bevel: inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.28), inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.85), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --liquid-glass-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.95);
+  --liquid-glass-blur: blur(26px) saturate(210%) contrast(110%);
+}
+
+html[data-theme="amoled"],
+html[data-theme="amoled"] body {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="amoled"] header,
+html[data-theme="amoled"] #mobile-menu-drawer,
+html[data-theme="amoled"] .site-header,
+html[data-theme="amoled"] .bg-ivory,
+html[data-theme="amoled"] .dark\:bg-\[\#121110\]\/85,
+html[data-theme="amoled"] .dark\:bg-\[\#141312\],
+html[data-theme="amoled"] .dark\:bg-stone-900 {
+  background-color: #000000 !important;
+}
+
+/* ==========================================================================
+   Pink / Sakura Rose Theme (ချယ်ရီပန်းရောင်)
+   ========================================================================== */
+/* ==========================================================================
+   Pink / Sakura Rose Themes (ပန်းရောင် ၃ မျိုး)
+   1. Sakura Blossom (ချယ်ရီပန်းရောင်)
+   2. Warm Peach (မက်မွန်ပန်းရောင်)
+   3. Desert Rose (နှင်းဆီရင့်ရောင်)
+   ========================================================================== */
+
+/* 1. Pink: Sakura Rose Pink (ချယ်ရီပန်းရောင်) */
+html[data-theme="pink"] {
+  color-scheme: light;
+  --bg-ivory: #FDF6F8;
+  --bg-cream: #F9E9F0;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FFF9FC;
+  --bg-input: #FFFFFF;
+  --border-taupe: #EACFD9;
+  --border-subtle: rgba(217, 70, 118, 0.18);
+  --text-charcoal: #2D1A24;
+  --text-muted: #6B4E5D;
+  --text-faint: #9E7D8E;
+  --accent-vermilion: #D94676; /* Vivid Rose Carmine */
+  --accent-vermilion-soft: rgba(217, 70, 118, 0.12);
+  --accent-vermilion-glow: rgba(217, 70, 118, 0.32);
+  --accent-vermilion-hover: #BE185D;
+  --ink-shadow: 0 4px 20px -2px rgba(80, 24, 46, 0.08);
+  --ink-shadow-lg: 0 12px 32px -4px rgba(80, 24, 46, 0.14);
+
+  --liquid-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(253, 242, 246, 0.76) 100%);
+  --liquid-glass-border: rgba(255, 255, 255, 0.9);
+  --liquid-glass-border-bottom: rgba(234, 207, 217, 0.6);
+  --liquid-glass-inner-bevel: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95), inset 0 -1.5px 2px 0 rgba(217, 70, 118, 0.06), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  --liquid-glass-shadow: 0 16px 36px -6px rgba(180, 50, 90, 0.12);
+  --liquid-glass-blur: blur(24px) saturate(200%) contrast(104%);
+}
+
+html[data-theme="pink"],
+html[data-theme="pink"] body {
+  background-color: #FDF6F8 !important;
+  color: #2D1A24 !important;
+}
+
+/* 2. Pink: Warm Peach Blossom (မက်မွန်ပန်းရောင်) */
+html[data-theme="pink-peach"] {
+  color-scheme: light;
+  --bg-ivory: #FDF7F4;
+  --bg-cream: #FAECE4;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FEFAF8;
+  --bg-input: #FFFFFF;
+  --border-taupe: #EBD4CA;
+  --border-subtle: rgba(244, 63, 94, 0.18);
+  --text-charcoal: #2E1C15;
+  --text-muted: #6B4E44;
+  --text-faint: #9E7E75;
+  --accent-vermilion: #F43F5E; /* Warm Coral Peach */
+  --accent-vermilion-soft: rgba(244, 63, 94, 0.12);
+  --accent-vermilion-glow: rgba(244, 63, 94, 0.32);
+  --accent-vermilion-hover: #E11D48;
+  --ink-shadow: 0 4px 20px -2px rgba(85, 30, 20, 0.08);
+  --ink-shadow-lg: 0 12px 32px -4px rgba(85, 30, 20, 0.14);
+
+  --liquid-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 241, 237, 0.78) 100%);
+  --liquid-glass-border: rgba(255, 255, 255, 0.9);
+  --liquid-glass-border-bottom: rgba(235, 212, 202, 0.6);
+  --liquid-glass-inner-bevel: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95), inset 0 -1.5px 2px 0 rgba(244, 63, 94, 0.06), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  --liquid-glass-shadow: 0 16px 36px -6px rgba(190, 50, 40, 0.12);
+  --liquid-glass-blur: blur(24px) saturate(200%) contrast(104%);
+}
+
+html[data-theme="pink-peach"],
+html[data-theme="pink-peach"] body {
+  background-color: #FDF7F4 !important;
+  color: #2E1C15 !important;
+}
+
+/* 3. Pink: Antique Desert Rose (နှင်းဆီရင့်ရောင်) */
+html[data-theme="pink-rose"] {
+  color-scheme: light;
+  --bg-ivory: #FDF5F7;
+  --bg-cream: #F8E2E8;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FEF9FA;
+  --bg-input: #FFFFFF;
+  --border-taupe: #E8CCD5;
+  --border-subtle: rgba(190, 24, 93, 0.18);
+  --text-charcoal: #2E151E;
+  --text-muted: #694551;
+  --text-faint: #9C7582;
+  --accent-vermilion: #BE185D; /* Antique Rose Magenta */
+  --accent-vermilion-soft: rgba(190, 24, 93, 0.12);
+  --accent-vermilion-glow: rgba(190, 24, 93, 0.32);
+  --accent-vermilion-hover: #9D174D;
+  --ink-shadow: 0 4px 20px -2px rgba(80, 18, 40, 0.08);
+  --ink-shadow-lg: 0 12px 32px -4px rgba(80, 18, 40, 0.14);
+
+  --liquid-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(253, 238, 243, 0.78) 100%);
+  --liquid-glass-border: rgba(255, 255, 255, 0.9);
+  --liquid-glass-border-bottom: rgba(232, 204, 213, 0.6);
+  --liquid-glass-inner-bevel: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95), inset 0 -1.5px 2px 0 rgba(190, 24, 93, 0.06), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  --liquid-glass-shadow: 0 16px 36px -6px rgba(170, 30, 80, 0.12);
+  --liquid-glass-blur: blur(24px) saturate(200%) contrast(104%);
+}
+
+html[data-theme="pink-rose"],
+html[data-theme="pink-rose"] body {
+  background-color: #FDF5F7 !important;
+  color: #2E151E !important;
+}
+
+/* ==========================================================================
+   Purple / Amethyst & Violet Themes (ခရမ်းရောင် ၄ မျိုး)
+   1. Royal Amethyst (ခရမ်းသလင်း)
+   2. Soft Lavender Mist (လာဗင်ဒါခရမ်းနု)
+   3. Velvet Plum (စပျစ်သီးရင့်ခရမ်း)
+   4. Twilight Indigo (မိုးပြာခရမ်းရင့်)
+   ========================================================================== */
+
+/* 1. Purple: Royal Amethyst (ခရမ်းသလင်း) */
+html[data-theme="purple"] {
+  color-scheme: light;
+  --bg-ivory: #F8F6FD;
+  --bg-cream: #EDE8F8;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FAF9FE;
+  --bg-input: #FFFFFF;
+  --border-taupe: #D7CEEC;
+  --border-subtle: rgba(124, 58, 237, 0.16);
+  --text-charcoal: #211B33;
+  --text-muted: #564E6E;
+  --text-faint: #877E9E;
+  --accent-vermilion: #7C3AED; /* Royal Violet */
+  --accent-vermilion-soft: rgba(124, 58, 237, 0.12);
+  --accent-vermilion-glow: rgba(124, 58, 237, 0.30);
+  --accent-vermilion-hover: #6D28D9;
+  --ink-shadow: 0 4px 20px -2px rgba(45, 25, 80, 0.08);
+  --ink-shadow-lg: 0 12px 32px -4px rgba(45, 25, 80, 0.14);
+
+  --liquid-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(245, 240, 255, 0.75) 100%);
+  --liquid-glass-border: rgba(255, 255, 255, 0.9);
+  --liquid-glass-border-bottom: rgba(215, 206, 236, 0.55);
+  --liquid-glass-inner-bevel: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95), inset 0 -1.5px 2px 0 rgba(124, 58, 237, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  --liquid-glass-shadow: 0 16px 36px -6px rgba(100, 45, 180, 0.12);
+  --liquid-glass-blur: blur(24px) saturate(200%) contrast(104%);
+}
+
+html[data-theme="purple"],
+html[data-theme="purple"] body {
+  background-color: #F8F6FD !important;
+  color: #211B33 !important;
+}
+
+/* 2. Purple: Soft Lavender Mist (လာဗင်ဒါခရမ်းနု) */
+html[data-theme="purple-lavender"] {
+  color-scheme: light;
+  --bg-ivory: #F8F7FD;
+  --bg-cream: #EEEBFA;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FAF9FE;
+  --bg-input: #FFFFFF;
+  --border-taupe: #DAD2F0;
+  --border-subtle: rgba(139, 92, 246, 0.16);
+  --text-charcoal: #1E1830;
+  --text-muted: #554D6C;
+  --text-faint: #887E9F;
+  --accent-vermilion: #8B5CF6; /* Gentle Lavender Violet */
+  --accent-vermilion-soft: rgba(139, 92, 246, 0.12);
+  --accent-vermilion-glow: rgba(139, 92, 246, 0.30);
+  --accent-vermilion-hover: #7C3AED;
+  --ink-shadow: 0 4px 20px -2px rgba(45, 25, 80, 0.08);
+  --ink-shadow-lg: 0 12px 32px -4px rgba(45, 25, 80, 0.14);
+
+  --liquid-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(245, 243, 255, 0.76) 100%);
+  --liquid-glass-border: rgba(255, 255, 255, 0.9);
+  --liquid-glass-border-bottom: rgba(218, 210, 240, 0.55);
+  --liquid-glass-inner-bevel: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95), inset 0 -1.5px 2px 0 rgba(139, 92, 246, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  --liquid-glass-shadow: 0 16px 36px -6px rgba(110, 60, 200, 0.12);
+  --liquid-glass-blur: blur(24px) saturate(200%) contrast(104%);
+}
+
+html[data-theme="purple-lavender"],
+html[data-theme="purple-lavender"] body {
+  background-color: #F8F7FD !important;
+  color: #1E1830 !important;
+}
+
+/* 3. Purple: Royal Velvet Plum (စပျစ်သီးရင့်ခရမ်း) */
+html[data-theme="purple-plum"] {
+  color-scheme: light;
+  --bg-ivory: #F9F5FA;
+  --bg-cream: #F1E3F5;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FAF7FB;
+  --bg-input: #FFFFFF;
+  --border-taupe: #DECEE4;
+  --border-subtle: rgba(162, 28, 175, 0.18);
+  --text-charcoal: #28112C;
+  --text-muted: #624467;
+  --text-faint: #95759A;
+  --accent-vermilion: #A21CAF; /* Velvet Plum Fuchsia */
+  --accent-vermilion-soft: rgba(162, 28, 175, 0.12);
+  --accent-vermilion-glow: rgba(162, 28, 175, 0.30);
+  --accent-vermilion-hover: #86198F;
+  --ink-shadow: 0 4px 20px -2px rgba(60, 15, 65, 0.08);
+  --ink-shadow-lg: 0 12px 32px -4px rgba(60, 15, 65, 0.14);
+
+  --liquid-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(250, 240, 252, 0.76) 100%);
+  --liquid-glass-border: rgba(255, 255, 255, 0.9);
+  --liquid-glass-border-bottom: rgba(222, 206, 228, 0.55);
+  --liquid-glass-inner-bevel: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95), inset 0 -1.5px 2px 0 rgba(162, 28, 175, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  --liquid-glass-shadow: 0 16px 36px -6px rgba(130, 20, 140, 0.12);
+  --liquid-glass-blur: blur(24px) saturate(200%) contrast(104%);
+}
+
+html[data-theme="purple-plum"],
+html[data-theme="purple-plum"] body {
+  background-color: #F9F5FA !important;
+  color: #28112C !important;
+}
+
+/* 4. Purple: Twilight Indigo (မိုးပြာခရမ်းရင့်) */
+html[data-theme="purple-indigo"] {
+  color-scheme: light;
+  --bg-ivory: #F5F6FC;
+  --bg-cream: #E5E9F8;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #F8F9FE;
+  --bg-input: #FFFFFF;
+  --border-taupe: #CCD4EE;
+  --border-subtle: rgba(79, 70, 229, 0.16);
+  --text-charcoal: #131B36;
+  --text-muted: #475373;
+  --text-faint: #7985A5;
+  --accent-vermilion: #4F46E5; /* Twilight Electric Indigo */
+  --accent-vermilion-soft: rgba(79, 70, 229, 0.12);
+  --accent-vermilion-glow: rgba(79, 70, 229, 0.30);
+  --accent-vermilion-hover: #4338CA;
+  --ink-shadow: 0 4px 20px -2px rgba(20, 30, 70, 0.08);
+  --ink-shadow-lg: 0 12px 32px -4px rgba(20, 30, 70, 0.14);
+
+  --liquid-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(240, 244, 255, 0.76) 100%);
+  --liquid-glass-border: rgba(255, 255, 255, 0.9);
+  --liquid-glass-border-bottom: rgba(204, 212, 238, 0.55);
+  --liquid-glass-inner-bevel: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95), inset 0 -1.5px 2px 0 rgba(79, 70, 229, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  --liquid-glass-shadow: 0 16px 36px -6px rgba(40, 50, 160, 0.12);
+  --liquid-glass-blur: blur(24px) saturate(200%) contrast(104%);
+}
+
+html[data-theme="purple-indigo"],
+html[data-theme="purple-indigo"] body {
+  background-color: #F5F6FC !important;
+  color: #131B36 !important;
+}
+
+/* ==========================================================================
+   Red / Imperial, Crimson & Rosewood Themes (အနီရောင် ၃ မျိုး)
+   1. Imperial Ruby (သွေးကြောနီ)
+   2. Crimson Velvet (ကြက်သွေးနီ)
+   3. Antique Rosewood (နှင်းဆီသစ်နီ)
+   ========================================================================== */
+
+/* 1. Red: Imperial Ruby (သွေးကြောနီ) */
+html[data-theme="red"] {
+  color-scheme: light;
+  --bg-ivory: #FAF5F5;
+  --bg-cream: #F5E5E5;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FCF8F8;
+  --bg-input: #FFFFFF;
+  --border-taupe: #E7C9C9;
+  --border-subtle: rgba(220, 38, 38, 0.16);
+  --text-charcoal: #2A1717;
+  --text-muted: #644848;
+  --text-faint: #967575;
+  --accent-vermilion: #DC2626; /* Imperial Ruby Red */
+  --accent-vermilion-soft: rgba(220, 38, 38, 0.12);
+  --accent-vermilion-glow: rgba(220, 38, 38, 0.32);
+  --accent-vermilion-hover: #B91C1C;
+  --ink-shadow: 0 4px 20px -2px rgba(80, 20, 20, 0.08);
+  --ink-shadow-lg: 0 12px 32px -4px rgba(80, 20, 20, 0.14);
+
+  --liquid-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(254, 242, 242, 0.78) 100%);
+  --liquid-glass-border: rgba(255, 255, 255, 0.9);
+  --liquid-glass-border-bottom: rgba(231, 201, 201, 0.6);
+  --liquid-glass-inner-bevel: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95), inset 0 -1.5px 2px 0 rgba(220, 38, 38, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  --liquid-glass-shadow: 0 16px 36px -6px rgba(180, 30, 30, 0.12);
+  --liquid-glass-blur: blur(24px) saturate(200%) contrast(104%);
+}
+
+html[data-theme="red"],
+html[data-theme="red"] body {
+  background-color: #FAF5F5 !important;
+  color: #2A1717 !important;
+}
+
+/* 2. Red: Crimson Velvet (ကြက်သွေးနီ) */
+html[data-theme="red-crimson"] {
+  color-scheme: light;
+  --bg-ivory: #FAF4F5;
+  --bg-cream: #F4E2E5;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FCF7F8;
+  --bg-input: #FFFFFF;
+  --border-taupe: #E5C3C8;
+  --border-subtle: rgba(159, 18, 57, 0.18);
+  --text-charcoal: #2E1218;
+  --text-muted: #69464E;
+  --text-faint: #9C7780;
+  --accent-vermilion: #9F1239; /* Deep Rose Crimson */
+  --accent-vermilion-soft: rgba(159, 18, 57, 0.12);
+  --accent-vermilion-glow: rgba(159, 18, 57, 0.32);
+  --accent-vermilion-hover: #881337;
+  --ink-shadow: 0 4px 20px -2px rgba(70, 15, 25, 0.08);
+  --ink-shadow-lg: 0 12px 32px -4px rgba(70, 15, 25, 0.14);
+
+  --liquid-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(254, 240, 242, 0.78) 100%);
+  --liquid-glass-border: rgba(255, 255, 255, 0.9);
+  --liquid-glass-border-bottom: rgba(229, 195, 200, 0.6);
+  --liquid-glass-inner-bevel: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95), inset 0 -1.5px 2px 0 rgba(159, 18, 57, 0.06), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  --liquid-glass-shadow: 0 16px 36px -6px rgba(150, 20, 50, 0.12);
+  --liquid-glass-blur: blur(24px) saturate(200%) contrast(104%);
+}
+
+html[data-theme="red-crimson"],
+html[data-theme="red-crimson"] body {
+  background-color: #FAF4F5 !important;
+  color: #2E1218 !important;
+}
+
+/* 3. Red: Antique Rosewood (နှင်းဆီသစ်နီ) */
+html[data-theme="red-rosewood"] {
+  color-scheme: light;
+  --bg-ivory: #FAF6F3;
+  --bg-cream: #F5EBE4;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FCF8F6;
+  --bg-input: #FFFFFF;
+  --border-taupe: #E4D0C5;
+  --border-subtle: rgba(180, 52, 3, 0.18);
+  --text-charcoal: #2C1A14;
+  --text-muted: #684E44;
+  --text-faint: #9B7F75;
+  --accent-vermilion: #B43403; /* Rich Terracotta Rosewood */
+  --accent-vermilion-soft: rgba(180, 52, 3, 0.12);
+  --accent-vermilion-glow: rgba(180, 52, 3, 0.32);
+  --accent-vermilion-hover: #9A3412;
+  --ink-shadow: 0 4px 20px -2px rgba(75, 30, 15, 0.08);
+  --ink-shadow-lg: 0 12px 32px -4px rgba(75, 30, 15, 0.14);
+
+  --liquid-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(254, 244, 238, 0.78) 100%);
+  --liquid-glass-border: rgba(255, 255, 255, 0.9);
+  --liquid-glass-border-bottom: rgba(228, 208, 197, 0.6);
+  --liquid-glass-inner-bevel: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95), inset 0 -1.5px 2px 0 rgba(180, 52, 3, 0.06), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  --liquid-glass-shadow: 0 16px 36px -6px rgba(160, 45, 10, 0.12);
+  --liquid-glass-blur: blur(24px) saturate(200%) contrast(104%);
+}
+
+html[data-theme="red-rosewood"],
+html[data-theme="red-rosewood"] body {
+  background-color: #FAF6F3 !important;
+  color: #2C1A14 !important;
+}
+
+/* ==========================================================================
+   Global Reset & Bootstrap Compatibility
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-ivory);
+  color: var(--text-charcoal);
+  font-family: 'Pyidaungsu', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  line-height: 1.95;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Smooth color transitions ONLY during manual user theme toggling (prevents page-transition flash) */
+body.theme-transitioning,
+body.theme-transitioning * {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease !important;
+}
+
+/* Remove default Bootstrap underline on links */
+a {
+  text-decoration: none !important;
+}
+
+/* Subtle Wabi-Sabi Paper Grain Texture Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   Icon Font Protection (Guarantees Remix Icon & Bootstrap Icons Never Show ??)
+   ========================================================================== */
+i[class*="ri-"], [class^="ri-"], [class*=" ri-"],
+i[class*="bi-"], [class^="bi-"], [class*=" bi-"] {
+  font-family: 'remixicon', 'bootstrap-icons' !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  line-height: 1 !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+  display: inline-block;
+  vertical-align: -0.125em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Burmese Unicode Enhancement — All Burmese text strictly rendered in Pyidaungsu Font */
+:lang(my):not([class*="ri-"]):not([class*="bi-"]):not(i),
+[lang="my"]:not([class*="ri-"]):not([class*="bi-"]):not(i),
+.font-burmese,
+.myanmar-text,
+body:not([data-lang="en"]) {
+  font-family: 'Pyidaungsu', sans-serif;
+  line-height: 2.15;
+  letter-spacing: 0.015em;
+  word-spacing: 0.05em;
+}
+
+/* Headings in Burmese: strictly Pyidaungsu with balanced editorial line-height */
+:lang(my) h1, :lang(my) h2, :lang(my) h3, :lang(my) h4, :lang(my) h5, :lang(my) h6,
+body:not([data-lang="en"]) h1, body:not([data-lang="en"]) h2, body:not([data-lang="en"]) h3,
+body:not([data-lang="en"]) h4, body:not([data-lang="en"]) h5, body:not([data-lang="en"]) h6 {
+  font-family: 'Pyidaungsu', 'Cormorant Garamond', Georgia, serif;
+}
+
+/* Cormorant Garamond Heading Style (Serif for English, Pyidaungsu fallback for Burmese) */
+.font-serif-editorial {
+  font-family: 'Cormorant Garamond', 'Pyidaungsu', Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+.font-sans-ui {
+  font-family: 'Plus Jakarta Sans', 'Pyidaungsu', system-ui, sans-serif;
+}
+
+/* Dynamic Classes Overrides */
+.bg-ivory { background-color: var(--bg-ivory) !important; }
+.bg-cream { background-color: var(--bg-cream) !important; }
+.bg-card { background-color: var(--bg-card) !important; }
+.border-taupe-light { border-color: var(--border-taupe) !important; }
+.border-hairline { border-color: var(--border-subtle) !important; }
+.text-charcoal { color: var(--text-charcoal) !important; }
+.text-muted { color: var(--text-muted) !important; }
+.text-faint { color: var(--text-faint) !important; }
+
+/* ==========================================================================
+   Explicit Dark Mode Overrides (Guarantees zero unreadable text)
+   Calibrated for high-contrast obsidian luxury & 100% legibility
+   ========================================================================== */
+html[data-theme="dark"] body,
+html.dark body {
+  background-color: #121110 !important;
+  color: #F5EFE6 !important;
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6,
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6,
+html[data-theme="dark"] .font-serif-editorial,
+html.dark .font-serif-editorial,
+html[data-theme="dark"] strong,
+html[data-theme="dark"] b,
+html.dark strong,
+html.dark b {
+  color: #F5EFE6 !important;
+}
+
+/* Universal Text Charcoal Protection (catches text-charcoal/80, 90, 70, etc.) */
+html[data-theme="dark"] [class*="text-charcoal"],
+html.dark [class*="text-charcoal"],
+body[data-theme="dark"] [class*="text-charcoal"],
+body.dark [class*="text-charcoal"],
+html[data-theme="dark"] .text-charcoal,
+html.dark .text-charcoal {
+  color: #F5EFE6 !important;
+}
+
+/* Universal Background Charcoal Protection (prevents bg-charcoal turning white in dark mode) */
+html[data-theme="dark"] .bg-charcoal,
+html.dark .bg-charcoal,
+body[data-theme="dark"] .bg-charcoal,
+body.dark .bg-charcoal,
+html[data-theme="dark"] [class*="bg-charcoal"],
+html.dark [class*="bg-charcoal"] {
+  background-color: #1A1816 !important;
+  color: #F5EFE6 !important;
+}
+
+/* Universal Text Muted Protection */
+html[data-theme="dark"] p,
+html.dark p,
+html[data-theme="dark"] .text-muted,
+html.dark .text-muted,
+html[data-theme="dark"] [class*="text-muted"],
+html.dark [class*="text-muted"],
+html[data-theme="dark"] .article-prose p,
+html[data-theme="dark"] .article-prose li,
+html.dark .article-prose p,
+html.dark .article-prose li {
+  color: #D1C9BE !important;
+}
+
+/* Universal Text Faint & Meta Protection */
+html[data-theme="dark"] .text-faint,
+html.dark .text-faint,
+html[data-theme="dark"] [class*="text-faint"],
+html.dark [class*="text-faint"],
+html[data-theme="dark"] small,
+html.dark small {
+  color: #B8B0A2 !important;
+}
+
+/* Fix subdued and dark utility text classes in dark mode */
+html[data-theme="dark"] [class*="text-stone-400"],
+html[data-theme="dark"] [class*="text-stone-500"],
+html[data-theme="dark"] [class*="text-gray-400"],
+html[data-theme="dark"] [class*="text-gray-500"],
+html.dark [class*="text-stone-400"],
+html.dark [class*="text-stone-500"],
+html.dark [class*="text-gray-400"],
+html.dark [class*="text-gray-500"] {
+  color: #C7BFB4 !important;
+}
+
+html[data-theme="dark"] [class*="text-stone-600"],
+html[data-theme="dark"] [class*="text-stone-700"],
+html[data-theme="dark"] [class*="text-stone-800"],
+html[data-theme="dark"] [class*="text-stone-900"],
+html.dark [class*="text-stone-600"],
+html.dark [class*="text-stone-700"],
+html.dark [class*="text-stone-800"],
+html.dark [class*="text-stone-900"],
+html[data-theme="dark"] [class*="text-gray-600"],
+html[data-theme="dark"] [class*="text-gray-700"],
+html[data-theme="dark"] [class*="text-gray-800"],
+html[data-theme="dark"] [class*="text-gray-900"],
+html.dark [class*="text-gray-600"],
+html.dark [class*="text-gray-700"],
+html.dark [class*="text-gray-800"],
+html.dark [class*="text-gray-900"] {
+  color: #E2DBD0 !important;
+}
+
+/* Luminous Badge & Accent Text Protection for Dark Mode */
+html[data-theme="dark"] [class*="text-amber-7"],
+html[data-theme="dark"] [class*="text-amber-8"],
+html[data-theme="dark"] [class*="text-amber-9"],
+html.dark [class*="text-amber-7"],
+html.dark [class*="text-amber-8"],
+html.dark [class*="text-amber-9"] {
+  color: #FCD34D !important; /* amber-300 */
+}
+
+html[data-theme="dark"] [class*="text-blue-7"],
+html[data-theme="dark"] [class*="text-blue-8"],
+html[data-theme="dark"] [class*="text-blue-9"],
+html.dark [class*="text-blue-7"],
+html.dark [class*="text-blue-8"],
+html.dark [class*="text-blue-9"] {
+  color: #93C5FD !important; /* blue-300 */
+}
+
+html[data-theme="dark"] [class*="text-purple-7"],
+html[data-theme="dark"] [class*="text-purple-8"],
+html[data-theme="dark"] [class*="text-purple-9"],
+html.dark [class*="text-purple-7"],
+html.dark [class*="text-purple-8"],
+html.dark [class*="text-purple-9"] {
+  color: #D8B4FE !important; /* purple-300 */
+}
+
+html[data-theme="dark"] [class*="text-green-8"],
+html[data-theme="dark"] [class*="text-green-9"],
+html.dark [class*="text-green-8"],
+html.dark [class*="text-green-9"] {
+  color: #86EFAC !important; /* green-300 */
+}
+
+html[data-theme="dark"] [class*="text-cyan-7"],
+html[data-theme="dark"] [class*="text-cyan-8"],
+html.dark [class*="text-cyan-7"],
+html.dark [class*="text-cyan-8"] {
+  color: #67E8F9 !important; /* cyan-300 */
+}
+
+html[data-theme="dark"] [class*="text-red-7"],
+html[data-theme="dark"] [class*="text-red-8"],
+html.dark [class*="text-red-7"],
+html.dark [class*="text-red-8"] {
+  color: #FCA5A5 !important; /* red-300 */
+}
+
+/* Badge & Soft Container Background Protection in Dark Mode */
+html[data-theme="dark"] [class*="bg-amber-100"],
+html[data-theme="dark"] [class*="bg-amber-50"],
+html.dark [class*="bg-amber-100"],
+html.dark [class*="bg-amber-50"] {
+  background-color: rgba(245, 158, 11, 0.18) !important;
+  border-color: rgba(245, 158, 11, 0.35) !important;
+}
+
+html[data-theme="dark"] [class*="bg-blue-100"],
+html[data-theme="dark"] [class*="bg-blue-50"],
+html.dark [class*="bg-blue-100"],
+html.dark [class*="bg-blue-50"] {
+  background-color: rgba(59, 130, 246, 0.18) !important;
+  border-color: rgba(59, 130, 246, 0.35) !important;
+}
+
+html[data-theme="dark"] [class*="bg-purple-100"],
+html[data-theme="dark"] [class*="bg-purple-50"],
+html.dark [class*="bg-purple-100"],
+html.dark [class*="bg-purple-50"] {
+  background-color: rgba(168, 85, 247, 0.18) !important;
+  border-color: rgba(168, 85, 247, 0.35) !important;
+}
+
+html[data-theme="dark"] [class*="bg-green-100"],
+html[data-theme="dark"] [class*="bg-green-50"],
+html.dark [class*="bg-green-100"],
+html.dark [class*="bg-green-50"] {
+  background-color: rgba(34, 197, 94, 0.18) !important;
+  border-color: rgba(34, 197, 94, 0.35) !important;
+}
+
+html[data-theme="dark"] [class*="bg-cyan-100"],
+html[data-theme="dark"] [class*="bg-cyan-50"],
+html.dark [class*="bg-cyan-100"],
+html.dark [class*="bg-cyan-50"] {
+  background-color: rgba(6, 182, 212, 0.18) !important;
+  border-color: rgba(6, 182, 212, 0.35) !important;
+}
+
+html[data-theme="dark"] [class*="bg-red-100"],
+html[data-theme="dark"] [class*="bg-red-50"],
+html.dark [class*="bg-red-100"],
+html.dark [class*="bg-red-50"] {
+  background-color: rgba(239, 68, 68, 0.18) !important;
+  border-color: rgba(239, 68, 68, 0.35) !important;
+}
+
+html[data-theme="dark"] [class*="bg-sky-50"],
+html[data-theme="dark"] [class*="bg-violet-50"],
+html[data-theme="dark"] [class*="bg-pink-50"],
+html.dark [class*="bg-sky-50"],
+html.dark [class*="bg-violet-50"],
+html.dark [class*="bg-pink-50"] {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] a:not(.btn):not(.bg-vermilion),
+html.dark a:not(.btn):not(.bg-vermilion) {
+  color: #F5EFE6;
+}
+
+html[data-theme="dark"] a:hover:not(.btn):not(.bg-vermilion),
+html.dark a:hover:not(.btn):not(.bg-vermilion) {
+  color: #E55C52 !important;
+}
+
+html[data-theme="dark"] .bg-card,
+html.dark .bg-card {
+  background-color: #1A1816 !important;
+  border-color: #38322B !important;
+  color: #F5EFE6 !important;
+}
+
+/* Language Selector Dropdown in Dark Mode */
+html[data-theme="dark"] #lang-dropdown-menu,
+html.dark #lang-dropdown-menu,
+html[data-theme="amoled"] #lang-dropdown-menu {
+  background: var(--liquid-glass-bg) !important;
+  border-color: var(--liquid-glass-border) !important;
+  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.85) !important;
+}
+
+html[data-theme="dark"] #lang-dropdown-menu button,
+html.dark #lang-dropdown-menu button,
+html[data-theme="amoled"] #lang-dropdown-menu button {
+  color: #F5EFE6 !important;
+}
+
+html[data-theme="dark"] #lang-dropdown-menu button:hover,
+html.dark #lang-dropdown-menu button:hover,
+html[data-theme="amoled"] #lang-dropdown-menu button:hover {
+  background-color: rgba(229, 92, 82, 0.15) !important;
+  color: #E55C52 !important;
+}
+
+html[data-theme="dark"] .bg-cream,
+html.dark .bg-cream,
+html[data-theme="dark"] [class*="bg-cream"],
+html.dark [class*="bg-cream"] {
+  background-color: #24211E !important;
+  border-color: #3D3730 !important;
+  color: #F5EFE6 !important;
+}
+
+html[data-theme="dark"] [class*="bg-white"],
+html.dark [class*="bg-white"] {
+  background-color: #1E1B18 !important;
+  color: #F5EFE6 !important;
+}
+
+html[data-theme="dark"] .border-hairline,
+html[data-theme="dark"] .border-taupe-light,
+html.dark .border-hairline,
+html.dark .border-taupe-light {
+  border-color: #38322B !important;
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select,
+html[data-theme="dark"] option,
+html[data-theme="dark"] optgroup,
+html.dark input,
+html.dark textarea,
+html.dark select,
+html.dark option,
+html.dark optgroup {
+  background-color: #161514 !important;
+  color: #F5EFE6 !important;
+  border-color: #38322B !important;
+}
+
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder,
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #8E877C !important;
+}
+
+html[data-theme="dark"] header,
+html[data-theme="dark"] footer,
+html[data-theme="dark"] #mobile-menu-drawer,
+html.dark header,
+html.dark footer,
+html.dark #mobile-menu-drawer {
+  background-color: #141312 !important;
+  color: #F5EFE6 !important;
+  border-color: #302A24 !important;
+}
+
+/* Article Prose & Long-form Content in Dark Mode */
+html[data-theme="dark"] .prose,
+html.dark .prose,
+html[data-theme="dark"] #article-content-body,
+html.dark #article-content-body {
+  color: #D1C9BE !important;
+}
+
+html[data-theme="dark"] .prose h1,
+html[data-theme="dark"] .prose h2,
+html[data-theme="dark"] .prose h3,
+html[data-theme="dark"] .prose h4,
+html.dark .prose h1,
+html.dark .prose h2,
+html.dark .prose h3,
+html.dark .prose h4 {
+  color: #F5EFE6 !important;
+}
+
+html[data-theme="dark"] .prose blockquote,
+html.dark .prose blockquote {
+  color: #F5EFE6 !important;
+  background-color: rgba(229, 92, 82, 0.08) !important;
+  border-left-color: #E55C52 !important;
+}
+
+html[data-theme="dark"] .prose code,
+html.dark .prose code {
+  background-color: #24211E !important;
+  color: #F5A97F !important;
+  border-color: #3D3730 !important;
+}
+
+html[data-theme="dark"] .prose table,
+html.dark .prose table {
+  color: #D1C9BE !important;
+}
+
+html[data-theme="dark"] .prose th,
+html.dark .prose th {
+  background-color: #24211E !important;
+  color: #F5EFE6 !important;
+  border-color: #3D3730 !important;
+}
+
+html[data-theme="dark"] .prose td,
+html.dark .prose td {
+  border-color: #38322B !important;
+}
+
+/* ==========================================================================
+   Deluxe Hanko Traditional Red Seal Stamp (印鑑)
+   ========================================================================== */
+.hanko-stamp {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.8px solid var(--accent-vermilion);
+  color: var(--accent-vermilion);
+  font-weight: 700;
+  border-radius: var(--stamp-border-radius);
+  background-color: var(--accent-vermilion-soft);
+  transform: rotate(-2.5deg);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background-color 0.25s ease,
+              box-shadow 0.3s ease;
+  user-select: none;
+  box-shadow: 0 0 0 1px rgba(184, 58, 45, 0.12) inset, 0 2px 4px rgba(184, 58, 45, 0.08);
+}
+
+.hanko-stamp:hover {
+  transform: rotate(0deg) scale(1.08);
+  background-color: rgba(184, 58, 45, 0.18);
+  box-shadow: 0 0 14px var(--accent-vermilion-glow);
+}
+
+.hanko-stamp:active {
+  transform: scale(0.94) rotate(-1deg);
+}
+
+/* Card Hover Elevation with Ink Shadows */
+.card-hover-lift {
+  box-shadow: var(--ink-shadow);
+  transition: transform 0.28s cubic-bezier(0.2, 0, 0, 1),
+              box-shadow 0.28s cubic-bezier(0.2, 0, 0, 1),
+              border-color 0.28s ease;
+}
+
+.card-hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ink-shadow-lg);
+  border-color: var(--accent-vermilion) !important;
+}
+
+/* Vertical Japanese/Editorial Accent Text (間 - Ma whitespace ornament) */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 0.28em;
+}
+
+/* Editorial Dropcap with Elegant Flourish */
+.dropcap::first-letter {
+  font-family: 'Cormorant Garamond', 'Pyidaungsu', Georgia, serif;
+  float: left;
+  font-size: 3.8em;
+  line-height: 0.82;
+  margin-right: 0.2em;
+  margin-bottom: -0.06em;
+  color: var(--accent-vermilion);
+  font-weight: 600;
+  text-shadow: 1px 1px 0 rgba(184, 58, 45, 0.15);
+}
+
+/* Reading Progress Bar with Ambient Glow (Fades in only when scrolling starts) */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3.5px;
+  background: linear-gradient(90deg, var(--accent-vermilion), #F26E65);
+  z-index: 100;
+  transition: width 0.08s linear, opacity 0.2s ease;
+  box-shadow: 0 0 10px var(--accent-vermilion-glow);
+  opacity: 0;
+  pointer-events: none;
+}
+
+#reading-progress.is-active {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Smart Combined Scroll Pill & Floating Navigation Hub
+   Features: Dual Direction (Top & Bottom), Circular Progress Gauge,
+   Live Percentage Tracker, and Expandable Quick Actions Flyout.
+   ========================================================================== */
+#smart-back-to-top,
+#back-to-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 45;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+  visibility: hidden;
+}
+
+@media (min-width: 640px) {
+  #smart-back-to-top,
+  #back-to-top {
+    bottom: 2rem;
+    right: 2rem;
+  }
+}
+
+#smart-back-to-top.visible,
+#back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.smart-scroll-pill,
+#back-to-top-progress-btn {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: var(--liquid-glass-shadow), var(--liquid-glass-inner-bevel) !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+}
+
+.smart-scroll-pill:hover,
+#back-to-top-progress-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 42px -6px rgba(44, 40, 37, 0.16), 0 6px 16px -2px rgba(44, 40, 37, 0.08), var(--liquid-glass-inner-bevel) !important;
+}
+
+html[data-theme="dark"] .smart-scroll-pill:hover,
+html[data-theme="dark"] #back-to-top-progress-btn:hover {
+  box-shadow: 0 24px 52px -8px rgba(0, 0, 0, 0.85), 0 8px 20px -2px rgba(0, 0, 0, 0.6), var(--liquid-glass-inner-bevel) !important;
+}
+
+#floating-reader-toolbar {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: var(--liquid-glass-shadow), var(--liquid-glass-inner-bevel) !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.smart-scroll-pill button:focus-visible,
+#back-to-top-progress-btn button:focus-visible {
+  outline: 2px solid var(--accent-vermilion);
+  outline-offset: 2px;
+}
+
+/* Quick Action Flyout Menu */
+#smart-scroll-flyout {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: var(--liquid-glass-shadow), var(--liquid-glass-inner-bevel) !important;
+  transform: scale(0.9) translateX(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: right bottom;
+}
+
+#smart-scroll-flyout.is-open {
+  display: flex !important;
+  transform: scale(1) translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Master Command Flyout Menu for Article Reader (Rises smoothly above the dock) */
+#article-scroll-flyout {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: var(--liquid-glass-shadow), var(--liquid-glass-inner-bevel) !important;
+  transform: scale(0.94) translateY(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: right bottom;
+}
+
+#article-scroll-flyout.is-open {
+  display: flex !important;
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#article-scroll-flyout,
+#smart-scroll-flyout {
+  color: var(--text-charcoal) !important;
+}
+
+#article-scroll-flyout button,
+#smart-scroll-flyout button {
+  color: var(--text-charcoal) !important;
+}
+
+#article-scroll-flyout button span,
+#smart-scroll-flyout button span {
+  color: var(--text-charcoal) !important;
+}
+
+#article-scroll-flyout button:hover,
+#smart-scroll-flyout button:hover {
+  color: var(--accent-vermilion) !important;
+  background-color: var(--accent-vermilion-soft) !important;
+}
+
+#article-scroll-flyout button:hover span,
+#smart-scroll-flyout button:hover span {
+  color: var(--accent-vermilion) !important;
+}
+
+#article-scroll-flyout button:hover i,
+#smart-scroll-flyout button:hover i {
+  color: var(--accent-vermilion) !important;
+}
+
+/* Prevent duplicate floating button overlap on article reading page */
+body:has(#floating-reading-companion) #smart-back-to-top,
+body:has(#floating-reading-companion) #back-to-top,
+body:has(#back-to-top-progress-btn) #smart-back-to-top,
+body:has(#back-to-top-progress-btn) #back-to-top {
+  display: none !important;
+}
+
+/* Custom Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-ivory);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-taupe);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-faint);
+}
+
+/* Academic Blockquotes */
+.academic-blockquote {
+  position: relative;
+  border-left: 3px solid var(--accent-vermilion);
+  padding: 1rem 1.5rem;
+  margin: 1.8rem 0;
+  background-color: var(--accent-vermilion-soft);
+  border-radius: 0 10px 10px 0;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+/* Interactive Quote Popover */
+#quote-popover {
+  position: absolute;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-taupe);
+  border-radius: 10px;
+  box-shadow: var(--ink-shadow-lg);
+  font-size: 0.75rem;
+  transform: translate(-50%, -100%);
+  margin-top: -8px;
+  animation: popoverFadeIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popoverFadeIn {
+  from { opacity: 0; transform: translate(-50%, -90%) scale(0.95); }
+  to { opacity: 1; transform: translate(-50%, -100%) scale(1); }
+}
+
+/* ==========================================================================
+   Academic Inline Citations System (Interactive Badges & Floating Cards)
+   ========================================================================== */
+.inline-citation-badge {
+  display: inline-flex;
+  align-items: baseline;
+  padding: 0.12rem 0.48rem;
+  margin: 0 0.2rem;
+  border-radius: 6px;
+  background-color: var(--accent-vermilion-soft);
+  color: var(--accent-vermilion);
+  font-family: inherit;
+  font-size: 0.88em;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid rgba(184, 58, 45, 0.28);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  vertical-align: baseline;
+  white-space: normal;
+  word-break: break-word;
+  max-width: 100%;
+  line-height: normal;
+}
+
+/* Responsive Tables & Geopolitical Matrix in Articles */
+.table-responsive-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.article-prose table,
+.geopolitical-matrix-table,
+.table-responsive-wrapper table {
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Citations bibliography mobile-safe wrapping */
+#citations-list li {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.inline-citation-badge:hover,
+.inline-citation-badge:focus-visible,
+.inline-citation-badge.is-active {
+  background-color: var(--accent-vermilion);
+  color: #FFFFFF !important;
+  border-color: var(--accent-vermilion);
+  box-shadow: 0 2px 10px var(--accent-vermilion-glow);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.inline-citation-badge .cite-num-sup {
+  font-size: 0.74em;
+  font-weight: 700;
+  margin-left: 0.25rem;
+  opacity: 0.95;
+  letter-spacing: -0.02em;
+}
+
+/* Glowing Pulse for Targeted Citation Jumping */
+@keyframes citationPulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--accent-vermilion-glow);
+    background-color: var(--accent-vermilion-soft);
+  }
+  35% {
+    box-shadow: 0 0 0 10px rgba(184, 58, 45, 0.4);
+    background-color: rgba(184, 58, 45, 0.22);
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.citation-highlight-pulse {
+  animation: citationPulse 1.8s cubic-bezier(0.25, 1, 0.5, 1) 2;
+  border-left-color: var(--accent-vermilion) !important;
+  border-radius: 12px;
+}
+
+/* Floating Citation Popover Card (Liquid Glass System) */
+#citation-floating-popover {
+  position: absolute;
+  z-index: 1000;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  padding: 1.15rem 1.35rem;
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  border-radius: 18px;
+  box-shadow: var(--liquid-glass-shadow), var(--liquid-glass-inner-bevel) !important;
+  font-family: 'Plus Jakarta Sans', 'Pyidaungsu', system-ui, sans-serif;
+  color: var(--text-charcoal);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.2s;
+  pointer-events: none;
+}
+
+#citation-floating-popover.popover-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Arrow indicator with Glass effect */
+#citation-floating-popover::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--liquid-glass-bg);
+  backdrop-filter: var(--liquid-glass-blur);
+  -webkit-backdrop-filter: var(--liquid-glass-blur);
+  border-bottom: 1px solid var(--liquid-glass-border-bottom);
+  border-right: 1px solid var(--liquid-glass-border);
+  transform: rotate(45deg);
+  bottom: -7px;
+  left: 50%;
+  margin-left: -6px;
+}
+
+#citation-floating-popover.popover-flipped::before {
+  bottom: auto;
+  top: -7px;
+  border-bottom: none;
+  border-right: none;
+  border-top: 1px solid var(--liquid-glass-border);
+  border-left: 1px solid var(--liquid-glass-border);
+}
+
+.citation-popover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.citation-popover-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-vermilion);
+}
+
+.citation-popover-title {
+  font-family: 'Cormorant Garamond', 'Pyidaungsu', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-charcoal);
+  margin-bottom: 0.35rem;
+}
+
+.citation-popover-author {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0.65rem;
+}
+
+.citation-popover-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.74rem;
+}
+
+.citation-popover-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-taupe);
+  background: var(--bg-cream);
+  color: var(--text-charcoal);
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.citation-popover-btn:hover {
+  border-color: var(--accent-vermilion);
+  color: var(--accent-vermilion);
+  background: var(--bg-card);
+  transform: translateY(-1px);
+}
+
+.citation-popover-btn.btn-primary-cite {
+  background-color: var(--accent-vermilion);
+  border-color: var(--accent-vermilion);
+  color: #FFFFFF;
+}
+
+.citation-popover-btn.btn-primary-cite:hover {
+  background-color: var(--accent-vermilion-hover);
+  color: #FFFFFF;
+}
+
+/* Bibliography Item Return & Copy Buttons */
+.cite-return-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.72rem;
+  border-radius: 6px;
+  background-color: var(--accent-vermilion-soft);
+  color: var(--accent-vermilion);
+  border: 1px solid rgba(184, 58, 45, 0.25);
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+
+.cite-return-btn:hover {
+  background-color: var(--accent-vermilion);
+  color: #FFFFFF;
+}
+
+.cite-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.72rem;
+  border-radius: 6px;
+  background-color: var(--bg-elevated);
+  color: var(--text-muted);
+  border: 1px solid var(--border-taupe);
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+
+.cite-copy-btn:hover {
+  color: var(--accent-vermilion);
+  border-color: var(--accent-vermilion);
+  background-color: var(--bg-card);
+}
+
+/* ==========================================================================
+   Editorial Heading Enhancements (Anchor links, section badges, read-time)
+   ========================================================================== */
+.heading-wrapper {
+  position: relative;
+  margin-top: 2.85rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.heading-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+  margin-bottom: 0.45rem;
+  letter-spacing: 0.05em;
+}
+
+.heading-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.12rem 0.55rem;
+  border-radius: 9999px;
+  background: var(--bg-cream);
+  border: 1px solid var(--border-taupe);
+  color: var(--accent-vermilion);
+  font-weight: 700;
+  font-size: 0.72rem;
+}
+
+.heading-read-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.74rem;
+}
+
+.heading-inner-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.heading-inner-row h2,
+.heading-inner-row h3 {
+  margin: 0 !important;
+}
+
+.heading-anchor-btn {
+  opacity: 0;
+  color: var(--text-faint);
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.85em;
+  transition: all 0.18s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.heading-wrapper:hover .heading-anchor-btn,
+.heading-anchor-btn:focus-visible {
+  opacity: 1;
+}
+
+.heading-anchor-btn:hover {
+  color: var(--accent-vermilion);
+  background-color: var(--accent-vermilion-soft);
+  border-color: rgba(184, 58, 45, 0.2);
+}
+
+/* Active Scrollspy in Table of Contents */
+#table-of-contents-list a.toc-active {
+  color: var(--accent-vermilion) !important;
+  font-weight: 600;
+  border-left-color: var(--accent-vermilion) !important;
+  background-color: var(--accent-vermilion-soft);
+  border-radius: 0 8px 8px 0;
+  padding-left: 0.85rem !important;
+}
+
+/* ==========================================================================
+   Analytical Comparison Matrix & Key Takeaway Boxes
+   ========================================================================== */
+.matrix-table-wrapper {
+  overflow-x: auto;
+  margin: 2.2rem 0;
+  border-radius: 16px;
+  border: 1px solid var(--border-taupe);
+  box-shadow: var(--ink-shadow);
+  background: var(--bg-card);
+}
+
+.geopolitical-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.geopolitical-matrix-table th {
+  padding: 0.95rem 1.15rem;
+  background: var(--bg-cream);
+  color: var(--text-charcoal);
+  font-weight: 600;
+  font-family: 'Plus Jakarta Sans', 'Pyidaungsu', sans-serif;
+  border-bottom: 2px solid var(--border-taupe);
+  white-space: nowrap;
+}
+
+.geopolitical-matrix-table td {
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-charcoal);
+  line-height: 1.65;
+  vertical-align: top;
+}
+
+.geopolitical-matrix-table tr:last-child td {
+  border-bottom: none;
+}
+
+.geopolitical-matrix-table tr:hover td {
+  background-color: var(--accent-vermilion-soft);
+}
+
+/* Key Takeaway Callout Box */
+.key-takeaway-box {
+  margin: 2.2rem 0;
+  padding: 1.4rem 1.6rem;
+  border-radius: 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-taupe);
+  border-left: 5px solid var(--accent-vermilion);
+  box-shadow: var(--ink-shadow);
+}
+
+/* KaTeX Aesthetic Tuning */
+.katex {
+  font-size: 1.08em;
+  color: var(--text-charcoal) !important;
+}
+
+.katex-display {
+  margin: 1.6rem 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.85rem 1.2rem;
+  background: var(--bg-cream);
+  border-radius: 14px;
+  border: 1px solid var(--border-taupe);
+}
+
+/* Melancholic Queer Lament & Mourning Card Styling */
+.melancholic-lament-card {
+  position: relative;
+  border-left: 4px solid #9F1239 !important; /* Rose-800 */
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(159, 18, 57, 0.04) 50%, rgba(136, 19, 55, 0.08) 100%) !important;
+  box-shadow: 0 4px 20px -2px rgba(159, 18, 57, 0.12), var(--ink-shadow) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.melancholic-lament-card:hover {
+  border-left-color: #BE123C !important; /* Rose-700 */
+  box-shadow: 0 8px 28px -4px rgba(159, 18, 57, 0.22), var(--ink-shadow-lg) !important;
+}
+
+.melancholic-lament-card .lament-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Cormorant Garamond', 'Pyidaungsu', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #BE123C;
+  margin-top: 1.35rem;
+  margin-bottom: 0.45rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px dashed rgba(190, 18, 60, 0.3);
+  font-style: italic;
+}
+
+html[data-theme="dark"] .melancholic-lament-card {
+  border-left-color: #FB7185 !important; /* Rose-400 */
+  background: linear-gradient(135deg, #1A1816 0%, rgba(225, 29, 72, 0.07) 50%, rgba(159, 18, 57, 0.14) 100%) !important;
+}
+
+html[data-theme="dark"] .melancholic-lament-card .lament-section-heading {
+  color: #FDA4AF;
+  border-bottom-color: rgba(253, 164, 175, 0.3);
+}
+
+.lament-rose-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.65rem;
+  border-radius: 9999px;
+  background-color: rgba(225, 29, 72, 0.12);
+  color: #BE123C;
+  border: 1px solid rgba(225, 29, 72, 0.28);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+html[data-theme="dark"] .lament-rose-badge {
+  color: #FDA4AF;
+  background-color: rgba(225, 29, 72, 0.2);
+  border-color: rgba(253, 164, 175, 0.35);
+}
+
+/* Print Stylesheet */
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  body::before, header, footer, #reading-progress, #smart-back-to-top, #back-to-top, .no-print, .theme-toggle, .lang-toggle {
+    display: none !important;
+  }
+  article {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   Category Pills & Multi-Category System Styles (Compact & Space-Saving)
+   ========================================================================== */
+.category-scroll-container {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.35rem 0.15rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.category-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-family: var(--font-sans-ui);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-bottom: 1.5px solid var(--liquid-glass-border-bottom) !important;
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08), var(--liquid-glass-inner-bevel);
+  color: var(--text-charcoal);
+  white-space: nowrap;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.category-pill:hover {
+  border-color: var(--accent-vermilion) !important;
+  color: var(--accent-vermilion);
+  transform: translateY(-2.5px) scale(1.03);
+  box-shadow: 0 10px 22px -3px rgba(184, 58, 45, 0.24), var(--liquid-glass-inner-bevel);
+}
+
+.category-pill:active {
+  transform: translateY(1px) scale(0.96);
+}
+
+.category-pill.active {
+  background: linear-gradient(135deg, var(--accent-vermilion) 0%, var(--accent-vermilion-hover) 100%) !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 8px 22px -2px rgba(184, 51, 42, 0.42), inset 0 1.5px 1px rgba(255, 255, 255, 0.45) !important;
+  font-weight: 600;
+  transform: translateY(-1.5px);
+}
+
+.category-pill.active i {
+  color: #FFFFFF !important;
+}
+
+.category-color-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+}
+
+.category-pill.active .category-color-dot {
+  background-color: #FFFFFF !important;
+}
+
+/* 7 Color Dot Utilities */
+.dot-sky-blue { background-color: #0EA5E9; }
+.dot-true-red { background-color: #DC2626; }
+.dot-royal-blue { background-color: #2563EB; }
+.dot-violet { background-color: #7C3AED; }
+.dot-pink { background-color: #EC4899; }
+.dot-soft-pink { background-color: #F472B6; }
+.dot-rose { background-color: #E11D48; }
+
+.category-pill-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.05rem 0.4rem;
+  border-radius: 9999px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  background-color: rgba(0, 0, 0, 0.06);
+  color: inherit;
+}
+
+.category-pill.active .category-pill-count {
+  background-color: rgba(255, 255, 255, 0.28);
+  color: #FFFFFF;
+}
+
+html[data-theme="dark"] .category-pill-count {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Category Expandable Drawer */
+.category-drawer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin 0.3s ease;
+  opacity: 0;
+}
+.category-drawer.open {
+  max-height: 600px;
+  opacity: 1;
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Active Filter Tag Chips */
+.active-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  background-color: rgba(184, 51, 42, 0.08);
+  color: var(--accent-vermilion);
+  border: 1px solid rgba(184, 51, 42, 0.25);
+  font-size: 0.72rem;
+  font-family: var(--font-sans-ui);
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+html[data-theme="dark"] .active-filter-chip {
+  background-color: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #FCA5A5;
+}
+.active-filter-chip button {
+  cursor: pointer;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1rem;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+  background: transparent;
+  border: none;
+}
+.active-filter-chip button:hover {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Enhanced Post & Journal Feed Styles
+   ========================================================================== */
+.post-content-container {
+  position: relative;
+  transition: max-height 0.4s ease;
+}
+
+.post-content-collapsed {
+  max-height: 280px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+}
+
+.post-content-expanded {
+  max-height: none;
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+.post-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-vermilion);
+  background-color: var(--accent-vermilion-soft);
+  border: 1px solid rgba(184, 51, 42, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.post-expand-btn:hover {
+  background-color: var(--accent-vermilion);
+  color: #FFFFFF;
+}
+
+.post-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.6rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background-color: var(--bg-cream);
+  border: 1px solid var(--border-hairline);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.post-action-btn:hover {
+  color: var(--accent-vermilion);
+  border-color: var(--accent-vermilion);
+  background-color: var(--bg-card);
+}
+
+/* Related Articles Styling */
+.related-article-card {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.related-article-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================================================================
+   Minimalist Editorial Navigation Bar & Floating Capsule System (Liquid Glass)
+   ========================================================================== */
+header.sticky {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 50 !important;
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border-bottom: 1px solid var(--liquid-glass-border-bottom) !important;
+  box-shadow: 0 4px 20px -2px rgba(44, 40, 37, 0.05), inset 0 -1px 0 rgba(255, 255, 255, 0.4) !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease;
+}
+
+html[data-theme="dark"] header.sticky,
+html.dark header.sticky {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+.nav-capsule {
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  background: var(--liquid-glass-bg) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: var(--liquid-glass-shadow), var(--liquid-glass-inner-bevel) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[data-theme="dark"] .nav-capsule {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), var(--liquid-glass-inner-bevel) !important;
+}
+
+/* nav-util-btn defined with crystal glass & floating physics in section below */
+
+.nav-link-pill {
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.nav-link-pill:hover:not(.active) {
+  transform: translateY(-1px);
+  color: var(--accent-vermilion) !important;
+  background-color: rgba(229, 92, 82, 0.08);
+}
+
+html[data-theme="dark"] .nav-link-pill:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #FF7B6E !important;
+}
+
+.nav-link-pill.active {
+  background: linear-gradient(135deg, #D44335 0%, #B83A2D 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 3px 12px rgba(184, 58, 45, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  font-weight: 600;
+}
+
+/* Enhanced Tactile Mobile Drawer Navigation */
+.mobile-nav-link {
+  position: relative;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-nav-link:hover:not(.active) {
+  transform: translateX(3px);
+  color: var(--accent-vermilion) !important;
+}
+
+.mobile-nav-link::after {
+  content: "›";
+  margin-left: auto;
+  font-size: 1.25rem;
+  line-height: 1;
+  opacity: 0.35;
+  color: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+}
+
+.mobile-nav-link:hover::after {
+  opacity: 0.9;
+  transform: translateX(2px);
+  color: var(--accent-vermilion);
+}
+
+.mobile-nav-link.active::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background-color: var(--accent-vermilion);
+  box-shadow: 0 0 10px rgba(229, 92, 82, 0.7);
+  opacity: 1;
+}
+
+/* Consolidated into Crystal Optical Liquid Glass System */
+
+/* ==========================================================================
+   Comprehensive Multi-Device Viewport Calibration System
+   Exact CSS Logical Viewports Supported:
+   - Compact / Budget Android (360 x 800 px)
+   - Compact iOS (375 x 667 / 812 px)
+   - Standard Modern iOS (390 x 844 / 393 x 852 px)
+   - Standard Modern Android (412 x 915 px)
+   - Large / Pro Max iOS (428 x 926 / 430 x 932 px)
+   - Tablets in Portrait (768 x 1024, 820 x 1180, 834 x 1194 px)
+   - Tablets in Landscape & Compact Laptops (1024 x 768 / 1366 px)
+   - Standard & Large Laptops (1280 x 800, 1440 x 900, 1536 x 864 px)
+   - Desktop & Ultrawide Displays (1920 x 1080, 2560 x 1440 px)
+   ========================================================================== */
+
+/* Universal Overflow & Layout Boundary Protection */
+html {
+  max-width: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* ==========================================================================
+   Comprehensive Device-Adaptive Fluid Typography & Scaler System
+   ========================================================================== */
+:root {
+  --user-font-scale: 1;
+  --base-font-size: 16px;
+  --article-body-font: 1.125rem;
+}
+
+html {
+  font-size: var(--base-font-size);
+}
+
+/* 1. Compact / Budget Phones (<= 375px: Samsung Galaxy A-series, Redmi, iPhone SE) */
+@media (max-width: 375px) {
+  :root {
+    --base-font-size: 14.5px;
+    --article-body-font: 1.05rem;
+  }
+}
+
+/* 2. Standard Modern Phones (376px - 639px: iPhone 14/15/16, Pixel 8/9, Galaxy S24) */
+@media (min-width: 376px) and (max-width: 639px) {
+  :root {
+    --base-font-size: 15.2px;
+    --article-body-font: 1.08rem;
+  }
+}
+
+/* 3. Tablets in Portrait (640px - 1023px: iPad Mini, iPad Air, Galaxy Tab) */
+@media (min-width: 640px) and (max-width: 1023px) {
+  :root {
+    --base-font-size: 16px;
+    --article-body-font: 1.12rem;
+  }
+}
+
+/* 4. Compact Laptops & Landscape Tablets (1024px - 1439px: MacBook Air 13", iPad Pro) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  :root {
+    --base-font-size: 16px;
+    --article-body-font: 1.15rem;
+  }
+}
+
+/* 5. Large Desktop Displays (>= 1440px: MacBook Pro 15/16", 1080p, 2K/4K) */
+@media (min-width: 1440px) {
+  :root {
+    --base-font-size: 16.5px;
+    --article-body-font: 1.18rem;
+  }
+}
+
+/* App Header & Navigation Chrome Protection - Never overflows or blows up when reading font is resized */
+header.sticky {
+  font-size: 14px !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  left: 0 !important;
+  right: 0 !important;
+  box-sizing: border-box !important;
+  overflow-x: clip !important;
+}
+
+header.sticky * {
+  box-sizing: border-box;
+}
+
+/* Compact Laptop Viewport (1024px - 1279px): Keep 7 nav pills perfectly fitted */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .nav-capsule {
+    padding: 0.15rem !important;
+    gap: 0.15rem !important;
+  }
+  .nav-link-pill {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+    font-size: 11.5px !important;
+  }
+}
+
+/* Dynamic Reading Content Sizing (Scales beautifully with user-font-scale) */
+#article-content-body, 
+.article-prose,
+.reading-scalable {
+  font-size: calc(var(--article-body-font) * var(--user-font-scale)) !important;
+  line-height: calc(2.15 * max(0.95, min(1.15, var(--user-font-scale))));
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+#article-lead-excerpt {
+  font-size: calc(1.02rem * var(--user-font-scale)) !important;
+  line-height: 1.85 !important;
+}
+
+#article-citations {
+  font-size: calc(0.9rem * var(--user-font-scale));
+}
+
+.post-content-container,
+.post-item-body {
+  font-size: calc(1rem * var(--user-font-scale));
+}
+
+/* Table of Contents Active Scrollspy Indicator */
+.toc-active {
+  color: var(--accent-vermilion) !important;
+  font-weight: 600 !important;
+  border-left-color: var(--accent-vermilion) !important;
+  background-color: var(--accent-vermilion-soft) !important;
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding-left: 0.85rem !important;
+}
+
+/* Reading List / Saved Articles Drawer (Liquid Glass System) */
+#reading-list-overlay {
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#reading-list-overlay:not(.is-open):not(.visible) {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+#reading-list-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 22rem;
+  max-width: 88vw;
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: blur(28px) saturate(180%) contrast(102%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) contrast(102%) !important;
+  z-index: 50;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+  visibility: hidden;
+  pointer-events: none;
+  border-left: 1px solid var(--liquid-glass-border) !important;
+  box-shadow: -8px 0 36px rgba(0, 0, 0, 0.15), var(--liquid-glass-inner-bevel) !important;
+}
+
+#reading-list-drawer.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+#reading-list-drawer.is-open {
+  transform: translateX(0) !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  display: flex !important;
+}
+
+/* Master Combined Icon Floating Reading Companion & Navigation Hub */
+#floating-reading-companion {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  max-width: calc(100vw - 2rem);
+}
+
+#floating-reading-companion.visible {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) !important;
+}
+
+#floating-reader-toolbar button {
+  touch-action: manipulation;
+  user-select: none;
+}
+
+@media (max-width: 639px) {
+  #floating-reading-companion {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+body.zen-focus-active #floating-reading-companion {
+  display: flex !important;
+}
+
+/* Adjacent Next/Previous Article Cards */
+.adjacent-article-card {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.adjacent-article-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-vermilion);
+  box-shadow: 0 10px 25px -4px rgba(184, 58, 45, 0.12);
+}
+
+/* iOS Safe Area Padding for notch & home bar */
+header.sticky {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+#mobile-menu-drawer {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: blur(28px) saturate(180%) contrast(102%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) contrast(102%) !important;
+  border-right: 1px solid var(--liquid-glass-border) !important;
+  box-shadow: 8px 0 36px rgba(0, 0, 0, 0.15), var(--liquid-glass-inner-bevel) !important;
+  padding-top: max(1.25rem, env(safe-area-inset-top, 1.25rem));
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 1.25rem));
+}
+
+/* 1. Phone Viewport Refinements (<= 639px) */
+@media (max-width: 639px) {
+  img, svg, video, iframe {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  table {
+    max-width: 100% !important;
+  }
+
+  pre, code {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    max-width: 100% !important;
+  }
+
+  .matrix-table-wrapper {
+    margin: 1.25rem 0 !important;
+    border-radius: 12px !important;
+  }
+
+  .matrix-table-wrapper table {
+    font-size: 0.78rem !important;
+  }
+
+  .matrix-table-wrapper th, 
+  .matrix-table-wrapper td {
+    padding: 0.65rem 0.75rem !important;
+  }
+
+  h1 {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  #spotlight-search-modal > div,
+  #citation-modal > div {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}
+
+/* 2. Compact / Budget Android & Compact iOS (< 390px) */
+@media (max-width: 389px) {
+  .nav-brand-subtitle {
+    display: none !important;
+  }
+
+  .hanko-stamp {
+    width: 2rem !important;
+    height: 2rem !important;
+    font-size: 0.85rem !important;
+  }
+
+  .nav-util-btn {
+    width: 1.85rem !important;
+    height: 1.85rem !important;
+  }
+
+  #citation-floating-popover {
+    width: calc(100vw - 20px) !important;
+    max-width: 330px !important;
+    padding: 0.75rem 0.85rem !important;
+  }
+
+  .milestone-stat-card {
+    padding: 0.85rem !important;
+  }
+}
+
+/* 3. Compact Laptops & Landscape Tablets (1024px to 1279px) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .nav-capsule {
+    padding: 0.25rem 0.35rem !important;
+  }
+
+  .nav-link-pill {
+    padding: 0.32rem 0.65rem !important;
+    font-size: 0.78rem !important;
+  }
+}
+
+/* 4. Large Laptops & Desktops (>= 1280px) */
+@media (min-width: 1280px) {
+  .nav-link-pill {
+    padding: 0.38rem 0.85rem !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+/* 5. Ultra-Wide Desktops & 4K Displays (>= 1920px) */
+@media (min-width: 1920px) {
+  .nav-link-pill {
+    padding: 0.42rem 1.05rem !important;
+    font-size: 0.92rem !important;
+  }
+}
+
+/* ==========================================================================
+   Curated Editorial Palette (7 Harmonious Literary Colors)
+   Light Blue (အပြာနု), True Red (အနီအစစ်), Royal Blue (အပြာ),
+   Violet (ခရမ်း), Vibrant Pink (ပန်းရောင်), Soft Pink (ပန်းနုရောင်), Rose (နှင်းဆီရောင်)
+   ========================================================================== */
+:root {
+  --color-sky-blue: #0EA5E9;
+  --color-sky-blue-soft: rgba(14, 165, 233, 0.12);
+  --color-sky-blue-border: rgba(14, 165, 233, 0.35);
+
+  --color-true-red: #DC2626;
+  --color-true-red-soft: rgba(220, 38, 38, 0.12);
+  --color-true-red-border: rgba(220, 38, 38, 0.35);
+
+  --color-royal-blue: #2563EB;
+  --color-royal-blue-soft: rgba(37, 99, 235, 0.12);
+  --color-royal-blue-border: rgba(37, 99, 235, 0.35);
+
+  --color-violet: #7C3AED;
+  --color-violet-soft: rgba(124, 58, 237, 0.12);
+  --color-violet-border: rgba(124, 58, 237, 0.35);
+
+  --color-pink: #EC4899;
+  --color-pink-soft: rgba(236, 72, 153, 0.12);
+  --color-pink-border: rgba(236, 72, 153, 0.35);
+
+  --color-soft-pink: #F472B6;
+  --color-soft-pink-soft: rgba(244, 114, 182, 0.14);
+  --color-soft-pink-border: rgba(244, 114, 182, 0.35);
+
+  --color-rose: #E11D48;
+  --color-rose-soft: rgba(225, 29, 72, 0.12);
+  --color-rose-border: rgba(225, 29, 72, 0.35);
+}
+
+/* 7 Color Badge Classes (Light & Sepia Modes) */
+.badge-sky-blue { background-color: var(--color-sky-blue-soft); color: #0284C7; border: 1px solid var(--color-sky-blue-border); }
+.badge-true-red { background-color: var(--color-true-red-soft); color: var(--color-true-red); border: 1px solid var(--color-true-red-border); }
+.badge-royal-blue { background-color: var(--color-royal-blue-soft); color: var(--color-royal-blue); border: 1px solid var(--color-royal-blue-border); }
+.badge-violet { background-color: var(--color-violet-soft); color: var(--color-violet); border: 1px solid var(--color-violet-border); }
+.badge-pink { background-color: var(--color-pink-soft); color: #BE185D; border: 1px solid var(--color-pink-border); }
+.badge-soft-pink { background-color: var(--color-soft-pink-soft); color: #BE123C; border: 1px solid var(--color-soft-pink-border); }
+.badge-rose { background-color: var(--color-rose-soft); color: var(--color-rose); border: 1px solid var(--color-rose-border); }
+
+/* 7 Color Badges (Dark Mode High-Contrast) */
+html[data-theme="dark"] .badge-sky-blue { background-color: rgba(14, 165, 233, 0.22); color: #7DD3FC; border-color: rgba(56, 189, 248, 0.45); }
+html[data-theme="dark"] .badge-true-red { background-color: rgba(220, 38, 38, 0.22); color: #FCA5A5; border-color: rgba(239, 68, 68, 0.45); }
+html[data-theme="dark"] .badge-royal-blue { background-color: rgba(37, 99, 235, 0.22); color: #93C5FD; border-color: rgba(96, 165, 250, 0.45); }
+html[data-theme="dark"] .badge-violet { background-color: rgba(124, 58, 237, 0.22); color: #C4B5FD; border-color: rgba(167, 139, 250, 0.45); }
+html[data-theme="dark"] .badge-pink { background-color: rgba(236, 72, 153, 0.22); color: #F9A8D4; border-color: rgba(244, 114, 182, 0.45); }
+html[data-theme="dark"] .badge-soft-pink { background-color: rgba(244, 114, 182, 0.22); color: #FBCFE8; border-color: rgba(249, 168, 212, 0.45); }
+html[data-theme="dark"] .badge-rose { background-color: rgba(225, 29, 72, 0.22); color: #FDA4AF; border-color: rgba(251, 113, 133, 0.45); }
+
+/* ==========================================================================
+   Post System 6 Layout Modes Styles
+   ========================================================================== */
+.layout-btn {
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.layout-btn:hover {
+  color: var(--accent-vermilion);
+  background-color: var(--bg-card);
+}
+.layout-btn.active {
+  background-color: var(--accent-vermilion) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(184, 58, 45, 0.25);
+  font-weight: 600;
+}
+
+/* Layout 1: Card Grid */
+.journal-layout-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .journal-layout-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Layout 2: Timeline List (Handled with timeline CSS) */
+.journal-layout-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Layout 3: Magazine Editorial */
+.journal-layout-magazine {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .journal-layout-magazine {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .journal-layout-magazine .magazine-hero-card {
+    grid-column: span 2 / span 2;
+  }
+}
+
+/* Layout 4: Minimalist Text-Only */
+.journal-layout-minimal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Layout 5: Carousel Horizontal Slider */
+.journal-layout-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 1.25rem;
+  padding-bottom: 1.5rem;
+  padding-top: 0.5rem;
+}
+.journal-layout-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+.journal-layout-carousel::-webkit-scrollbar-track {
+  background: var(--bg-cream);
+  border-radius: 9999px;
+}
+.journal-layout-carousel::-webkit-scrollbar-thumb {
+  background: var(--border-taupe);
+  border-radius: 9999px;
+}
+.journal-layout-carousel .carousel-card {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 85vw;
+  max-width: 440px;
+}
+
+/* Layout 6: Bento Box Showcase */
+.journal-layout-bento {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+@media (min-width: 768px) {
+  .journal-layout-bento {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .journal-layout-bento .bento-lead-card {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+}
+
+/* Carousel Dot Indicator */
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: var(--border-taupe);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+.carousel-dot.active {
+  width: 24px;
+  background-color: var(--accent-vermilion);
+}
+
+/* ==========================================================================
+   AOS Animation Visibility Guarantee & Fallback Engine
+   Guarantees that under any circumstance (slow JS, reduced motion, or offline),
+   no page or body content will ever remain invisible or at opacity: 0.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Fallback visibility guarantee: smoothly brings opacity to 1 even if animation script stalls */
+body:not([data-aos-easing]) [data-aos],
+html.no-js [data-aos] {
+  animation: aos-force-visible 0.5s ease 0.3s forwards;
+}
+
+@keyframes aos-force-visible {
+  to {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   Global Viewport & Download Button Containment Engine
+   Guarantees zero horizontal overflow, perfectly wrapping action buttons,
+   and enhanced tactile visual aesthetics.
+   ========================================================================== */
+body {
+  overflow-x: clip;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure all cards, articles, and sections respect viewport boundaries */
+.card-hover-lift, 
+.card,
+article,
+section,
+.container {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Universal Button Wrapping & Responsive Overflow Prevention */
+.download-action-group,
+.flex-wrap {
+  max-width: 100%;
+  flex-wrap: wrap !important;
+}
+
+/* Premium PDF Download Button Styling & Responsive Safety */
+a[href$=".pdf"][download],
+.btn-pdf-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  max-width: 100%;
+  text-decoration: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.15s ease;
+}
+
+a[href$=".pdf"][download]:active,
+.btn-pdf-primary:active {
+  transform: scale(0.97);
+}
+
+/* Slim Custom Scrollbar for responsive tables & code blocks */
+.overflow-x-auto {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-taupe) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+  height: 6px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background-color: var(--border-taupe);
+  border-radius: 9999px;
+}
+
+/* Malala Quote Banner Polish */
+.quote-card-malala {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.quote-card-malala:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(219, 39, 119, 0.12);
+}
+
+/* Certificate & Institutional Recognition Cards */
+.cert-card {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease;
+}
+.cert-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.08);
+}
+.cert-thumb-preview {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.875rem;
+  background-color: var(--bg-cream);
+}
+.cert-thumb-preview img {
+  transition: transform 0.35s ease;
+}
+.cert-card:hover .cert-thumb-preview img {
+  transform: scale(1.03);
+}
+
+/* Founded Initiatives Grid Cards */
+.initiative-card {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease;
+}
+.initiative-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.06);
+}
+
+
+
+
+
+
+
+/* Interactive Seismic Map & Scientific Chart Enhancements */
+#earthquake-leaflet-map {
+  border-radius: 1.25rem;
+  z-index: 10;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+}
+.leaflet-popup-content-wrapper {
+  border-radius: 0.75rem;
+  font-family: 'Pyidaungsu', 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+}
+.leaflet-popup-content {
+  margin: 12px 14px;
+}
+.zoomable-shakemap {
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+.zoomable-shakemap:hover {
+  transform: scale(1.02);
+}
+
+/* ==========================================================================
+   HTET POP-UP READER ANIMATIONS & STYLES (လှပသော Pop-Up ဖတ်ရှုခြင်းစနစ်)
+   ========================================================================== */
+@keyframes modalBackdropFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(14px);
+  }
+}
+
+@keyframes modalSpringIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(24px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.01) translateY(-3px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modalContentFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes moonPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(52, 211, 153, 0.4), 0 0 45px rgba(16, 185, 129, 0.25);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(52, 211, 153, 0.7), 0 0 75px rgba(16, 185, 129, 0.45);
+    transform: scale(1.04);
+  }
+}
+
+@keyframes starTwinkle {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25) rotate(15deg);
+  }
+}
+
+@keyframes birdFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-12deg);
+  }
+}
+
+@keyframes leafDrift {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(12px) translateX(6px) rotate(20deg);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(24px) rotate(40deg);
+    opacity: 0.2;
+  }
+}
+
+/* Modal animation classes */
+.animate-modal-backdrop {
+  animation: modalBackdropFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-modal-spring {
+  animation: modalSpringIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-modal-content {
+  animation: modalContentFadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-moon-pulse {
+  animation: moonPulseGlow 3.5s ease-in-out infinite;
+}
+
+.animate-star-twinkle {
+  animation: starTwinkle 2.5s ease-in-out infinite;
+}
+
+.animate-bird-float {
+  animation: birdFloat 3s ease-in-out infinite;
+}
+
+.animate-leaf-drift {
+  animation: leafDrift 4s ease-in-out infinite;
+}
+
+/* Custom smooth scrollbar for popup reader */
+#journal-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+#journal-modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+#journal-modal-body::-webkit-scrollbar-thumb {
+  background: rgba(160, 160, 160, 0.3);
+  border-radius: 9999px;
+}
+#journal-modal-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(160, 160, 160, 0.55);
+}
+
+/* Compact Journal Cards (Index Grid: ပိစိလေး အကွက် ၄ ခု) */
+.journal-compact-card {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease;
+}
+.journal-compact-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Zen Focus Mode: အာရုံစူးစိုက် ဖတ်ရှုခြင်းစနစ် */
+body.zen-focus-active header,
+body.zen-focus-active footer,
+body.zen-focus-active #reading-progress,
+body.zen-focus-active .no-print,
+body.zen-focus-active #article-reading-sidebar,
+body.zen-focus-active #article-comments-section,
+body.zen-focus-active #article-related-monographs {
+  display: none !important;
+}
+
+body.zen-focus-active #article-content-wrapper {
+  max-width: 840px !important;
+  margin: 0 auto !important;
+  padding-top: 3.5rem !important;
+  padding-bottom: 5rem !important;
+}
+
+/* ==========================================================================
+   HTET LIQUID GLASS & OPTICAL BLUR ENGINE (2026 High-End Glassmorphism)
+   Sino-Japanese Minimalism + Modern Optical Refraction & Specular Luster
+   ========================================================================== */
+
+/* Universal Liquid Glass Core Classes */
+.liquid-glass {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: var(--liquid-glass-shadow), var(--liquid-glass-inner-bevel) !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+}
+
+.liquid-glass-pill {
+  border-radius: 9999px !important;
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: var(--liquid-glass-shadow), var(--liquid-glass-inner-bevel) !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass-card {
+  border-radius: 1.25rem !important;
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: var(--liquid-glass-shadow), var(--liquid-glass-inner-bevel) !important;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease;
+}
+
+.liquid-glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 42px -6px rgba(44, 40, 37, 0.14), var(--liquid-glass-inner-bevel) !important;
+}
+
+html[data-theme="dark"] .liquid-glass-card:hover,
+html.dark .liquid-glass-card:hover {
+  box-shadow: 0 24px 50px -8px rgba(0, 0, 0, 0.85), var(--liquid-glass-inner-bevel) !important;
+}
+
+.liquid-glass-panel {
+  border-radius: 1rem !important;
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: var(--liquid-glass-shadow), var(--liquid-glass-inner-bevel) !important;
+}
+
+.liquid-glass-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: 0 2px 8px -1px rgba(44, 40, 37, 0.06), var(--liquid-glass-inner-bevel) !important;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Glass Sheen Specular Animation Sweep */
+.liquid-glass-interactive {
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass-interactive::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.25) 50%, transparent 80%);
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 0.3s ease, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.liquid-glass-interactive:hover::after {
+  opacity: 1;
+  transform: translateX(100%);
+}
+
+/* Spotlight Search Modal (Deep Frosted Glass Backdrop & Container) */
+#spotlight-search-modal {
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  background: rgba(18, 17, 16, 0.45) !important;
+}
+
+html[data-theme="dark"] #spotlight-search-modal,
+html.dark #spotlight-search-modal {
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+
+#spotlight-search-modal > div {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: 0 28px 64px -12px rgba(0, 0, 0, 0.35), var(--liquid-glass-inner-bevel) !important;
+}
+
+#spotlight-search-modal input#spotlight-input {
+  background: transparent !important;
+}
+
+/* Article Download Dropdown Menu */
+#article-download-dropdown {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: var(--liquid-glass-shadow), var(--liquid-glass-inner-bevel) !important;
+}
+
+/* Table of Contents Container */
+#table-of-contents {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: 0 8px 30px -4px rgba(44, 40, 37, 0.06), var(--liquid-glass-inner-bevel) !important;
+}
+
+html[data-theme="dark"] #table-of-contents,
+html.dark #table-of-contents {
+  box-shadow: 0 12px 36px -4px rgba(0, 0, 0, 0.6), var(--liquid-glass-inner-bevel) !important;
+}
+
+/* Article Header Action Glass Buttons */
+.article-action-btn-glass {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: 0 2px 6px -1px rgba(44, 40, 37, 0.04), var(--liquid-glass-inner-bevel) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.article-action-btn-glass:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(184, 58, 45, 0.16), var(--liquid-glass-inner-bevel) !important;
+  border-color: var(--accent-vermilion) !important;
+}
+
+/* Frosted Modal Overlay Backdrop */
+.modal-backdrop-blur {
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+}
+
+/* Journal Reader Pop-up Modal (Liquid Glass System) */
+#journal-reader-modal {
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+}
+
+#journal-modal-container {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.45), var(--liquid-glass-inner-bevel) !important;
+}
+
+#journal-modal-header,
+#journal-modal-footer {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+#spotlight-search-modal > div > div:first-child,
+#spotlight-search-modal > div > div:last-child {
+  background: transparent !important;
+}
+
+/* ==========================================================================
+   HTET 3D PERSPECTIVE, FLOATING LEVITATION & EXPANDED GLASS SYSTEM
+   ========================================================================== */
+
+/* 1. 3D Floating Levitation Keyframes */
+@keyframes float3DLevitate {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.4deg);
+  }
+}
+
+@keyframes float3DSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-0.3deg);
+  }
+}
+
+@keyframes float3DBreath {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 16px 36px -6px rgba(44, 40, 37, 0.12), var(--liquid-glass-inner-bevel);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 26px 50px -8px rgba(44, 40, 37, 0.18), var(--liquid-glass-inner-bevel);
+  }
+}
+
+/* 2. Floating Physics Classes */
+.float-3d-levitate {
+  animation: float3DLevitate 4.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.float-3d-slow {
+  animation: float3DSlow 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.float-3d-breath {
+  animation: float3DBreath 4s ease-in-out infinite;
+  will-change: transform, box-shadow;
+}
+
+/* Floating Navigation Hub Levitation Physics */
+#floating-reading-companion {
+  animation: float3DSlow 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+#floating-reading-companion:hover {
+  animation-play-state: paused;
+}
+
+/* 3. Calm Interactive Glass Depth System (Optimized for comfortable reading without angular distortion) */
+.card-3d-depth,
+.card-3d-interactive,
+.glass-3d-card,
+.card-hover-lift,
+.journal-card {
+  position: relative;
+  will-change: transform;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+}
+
+/* Dynamic 3D Specular Glare Reflection (tracks pointer position) */
+.card-3d-interactive::before,
+.glass-3d-card::before,
+.card-hover-lift::before,
+.journal-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--glare-x, 50%) var(--glare-y, 50%),
+    rgba(255, 255, 255, 0.24) 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    transparent 70%
+  );
+  opacity: var(--glare-opacity, 0);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+html[data-theme="dark"] .card-3d-interactive::before,
+html[data-theme="dark"] .glass-3d-card::before,
+html[data-theme="dark"] .card-hover-lift::before,
+html[data-theme="dark"] .journal-card::before {
+  background: radial-gradient(
+    circle at var(--glare-x, 50%) var(--glare-y, 50%),
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.04) 40%,
+    transparent 75%
+  );
+}
+
+/* Glass 3D Card Full Styling */
+.glass-3d-card {
+  border-radius: 1.5rem !important;
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: 
+    0 16px 36px -6px rgba(44, 40, 37, 0.12),
+    0 4px 12px -2px rgba(44, 40, 37, 0.05),
+    var(--liquid-glass-inner-bevel) !important;
+}
+
+.glass-3d-card:hover {
+  border-color: rgba(184, 58, 45, 0.35) !important;
+  box-shadow: 
+    0 26px 60px -10px rgba(44, 40, 37, 0.18),
+    0 10px 24px -3px rgba(44, 40, 37, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.8) inset,
+    var(--liquid-glass-inner-bevel) !important;
+}
+
+html[data-theme="dark"] .glass-3d-card {
+  box-shadow: 
+    0 20px 48px -8px rgba(0, 0, 0, 0.75),
+    0 4px 16px -2px rgba(0, 0, 0, 0.5),
+    var(--liquid-glass-inner-bevel) !important;
+}
+
+html[data-theme="dark"] .glass-3d-card:hover {
+  border-color: rgba(229, 92, 82, 0.45) !important;
+  box-shadow: 
+    0 30px 70px -12px rgba(0, 0, 0, 0.9),
+    0 12px 28px -4px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+    var(--liquid-glass-inner-bevel) !important;
+}
+
+/* 4. 3D Glass Pill Capsule */
+.glass-3d-pill {
+  border-radius: 9999px !important;
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom-color: var(--liquid-glass-border-bottom) !important;
+  box-shadow: 
+    0 8px 24px -4px rgba(44, 40, 37, 0.1),
+    var(--liquid-glass-inner-bevel) !important;
+  transform-style: preserve-3d;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-3d-pill:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 14px 30px -4px rgba(184, 58, 45, 0.18),
+    var(--liquid-glass-inner-bevel) !important;
+}
+
+/* 5. 3D Tactile Cinnabar Hanko Wax Seal */
+.hanko-seal-3d {
+  position: relative;
+  background: radial-gradient(circle at 35% 35%, #D9483B 0%, #B83A2D 60%, #87251B 100%) !important;
+  color: #FFFFFF !important;
+  border: 2px solid rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 
+    0 12px 26px -3px rgba(184, 58, 45, 0.45),
+    0 3px 8px 0 rgba(0, 0, 0, 0.2),
+    inset 0 2px 3px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.35) !important;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.35), 0 1px 1px rgba(255, 255, 255, 0.25);
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hanko-seal-3d:hover {
+  transform: translateY(-3px) scale(1.06) rotate(-2deg);
+  box-shadow: 
+    0 18px 36px -4px rgba(184, 58, 45, 0.55),
+    0 6px 14px 0 rgba(0, 0, 0, 0.25),
+    inset 0 2px 3px rgba(255, 255, 255, 0.6),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.35) !important;
+}
+
+.hanko-seal-3d:active {
+  transform: translateY(1px) scale(0.96);
+}
+
+/* 6. Tactile 3D Buttons */
+.btn-3d-tactile {
+  transform-style: preserve-3d;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-3d-tactile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -3px rgba(184, 58, 45, 0.22);
+}
+
+.btn-3d-tactile:active {
+  transform: translateY(1px) scale(0.97) !important;
+  box-shadow: 0 2px 6px -1px rgba(184, 58, 45, 0.15) !important;
+}
+
+/* 7. 3D Floating Popover / Flyout Perspective */
+#article-scroll-flyout {
+  perspective: 1000px;
+}
+
+#article-scroll-flyout.is-open {
+  animation: flyoutSpringIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes flyoutSpringIn {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(12deg) translateY(14px) scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+  }
+}
+
+/* ==========================================================================
+   Liquid Glass Floating Web Brand Icon (印鑑 Floating Glass Monogram)
+   ========================================================================== */
+@keyframes navBrandFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(-1.5deg);
+    filter: drop-shadow(0 4px 10px rgba(184, 58, 45, 0.42));
+  }
+  50% {
+    transform: translateY(-3.2px) rotate(1.2deg);
+    filter: drop-shadow(0 10px 18px rgba(184, 58, 45, 0.62));
+  }
+}
+
+@keyframes navGlassSheenSweep {
+  0% {
+    transform: translateX(-160%) skewX(-25deg);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.85;
+  }
+  50%, 100% {
+    transform: translateX(260%) skewX(-25deg);
+    opacity: 0;
+  }
+}
+
+.nav-brand-glass-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  animation: navBrandFloat 4.8s ease-in-out infinite;
+  cursor: pointer;
+  overflow: hidden;
+  transform-origin: center center;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              filter 0.35s ease;
+  user-select: none;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.nav-brand-glass-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  display: block;
+  border-radius: inherit;
+}
+
+/* Ambient Refractive Glass Sheen sweep */
+.nav-brand-glass-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.5) 48%,
+    rgba(255, 255, 255, 0.85) 52%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: navGlassSheenSweep 5.5s infinite ease-in-out;
+}
+
+.nav-brand-glass-icon:hover {
+  animation-play-state: paused;
+  transform: translateY(-3.5px) scale(1.1) rotate(0deg);
+  filter: drop-shadow(0 12px 24px rgba(229, 75, 60, 0.78)) brightness(1.08);
+}
+
+.nav-brand-glass-icon:active {
+  transform: scale(0.92) translateY(0px);
+  filter: drop-shadow(0 2px 6px rgba(184, 58, 45, 0.5));
+}
+
+.dark .nav-brand-glass-icon {
+  filter: drop-shadow(0 5px 12px rgba(229, 75, 60, 0.45));
+}
+
+.dark .nav-brand-glass-icon:hover {
+  filter: drop-shadow(0 14px 28px rgba(229, 75, 60, 0.85)) drop-shadow(0 0 16px rgba(229, 75, 60, 0.4)) brightness(1.1);
+}
+
+/* 8. Reduced Motion Accessibility Support */
+@media (prefers-reduced-motion: reduce) {
+  .nav-brand-glass-icon,
+  .nav-brand-glass-icon::after,
+  .float-3d-levitate,
+  .float-3d-slow,
+  .float-3d-breath,
+  #floating-reading-companion {
+    animation: none !important;
+  }
+  .nav-brand-glass-icon,
+  .card-3d-interactive,
+  .glass-3d-card,
+  .card-hover-lift,
+  .journal-card,
+  .glass-3d-pill,
+  .btn-3d-tactile,
+  .hanko-seal-3d,
+  .lang-btn-card,
+  .nav-lang-btn .lang-chevron {
+    transition: none !important;
+    transform: none !important;
+  }
+  .lang-dropdown-glass {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   Deluxe International Language Switcher Engine (Touch & Mouse Dual-Engine)
+   ========================================================================== */
+
+/* Navbar Trigger Button */
+.nav-lang-btn {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+.nav-lang-btn:active {
+  transform: scale(0.96);
+}
+
+.nav-lang-btn .lang-chevron {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+}
+
+.nav-lang-btn.is-open .lang-chevron {
+  transform: rotate(180deg);
+}
+
+/* Deluxe Floating Liquid Glass Dropdown (Desktop & Laptop) */
+.lang-dropdown-glass {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-bottom: 1px solid var(--liquid-glass-border-bottom) !important;
+  box-shadow: var(--liquid-glass-shadow), 0 20px 40px -8px rgba(0, 0, 0, 0.25) !important;
+  transform-origin: top right;
+  animation: langDropdownEntrance 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes langDropdownEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.lang-dropdown-glass button[data-switch-lang] {
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lang-dropdown-glass button[data-switch-lang]:hover {
+  transform: translateX(2px);
+}
+
+/* Deluxe Liquid Glass Language Modal (Touchscreen & Mobile Bottom Sheet) */
+.lang-modal-glass {
+  background: var(--card-bg, #FFFFFF) !important;
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+html[data-theme="dark"] .lang-modal-glass,
+html[data-theme="amoled"] .lang-modal-glass {
+  border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.lang-btn-card {
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.lang-btn-card:active {
+  transform: scale(0.98);
+}
+
+.lang-flag-badge {
+  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile drawer lang pill targets */
+.lang-toggle-btn {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ==========================================================================
+   Deluxe Reading Theme Studio & Tactical Glass Controller
+   ========================================================================== */
+
+/* Navbar Segmented Glass Pill (Desktop) */
+.theme-segmented-glass {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  border: 1px solid var(--liquid-glass-border) !important;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08), var(--liquid-glass-inner-bevel) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-segmented-glass:hover {
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.14), var(--liquid-glass-inner-bevel) !important;
+  border-color: rgba(229, 92, 82, 0.4) !important;
+}
+
+/* Theme Button Tactile Scaling */
+.theme-segmented-glass button,
+.theme-card-option {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.theme-card-option {
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-card-option:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.12);
+}
+
+.theme-card-option:active {
+  transform: scale(0.98);
+}
+
+/* Active Color Dot Pulsing/Glow */
+.theme-active-dot {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Category Filter Pills */
+.theme-filter-pill {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.theme-filter-pill:active {
+  transform: scale(0.95);
+}
+
+/* Palette button shimmering glow effect */
+.btn-palette-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-palette-glow:hover i {
+  animation: paletteSpin 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes paletteSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(45deg) scale(1.15); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-palette-glow:hover i {
+    animation: none !important;
+  }
+  .theme-card-option {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   Crystal Liquid Glass System 2.0 (ဖန်သားစစ်စစ် Optical Frosted Glass Realism)
+   ========================================================================== */
+
+/* Directional Light Source: Specular Top Highlight Rims & Translucent Boundaries */
+.liquid-glass,
+.nav-capsule,
+.nav-util-btn,
+.nav-lang-btn,
+.theme-segmented-glass,
+.smart-scroll-pill,
+#back-to-top-progress-btn,
+#floating-reader-toolbar,
+.glass-3d-card,
+.glass-3d-pill,
+.lang-dropdown-glass,
+.theme-palette-modal-glass,
+.glass-crystal-surface {
+  border-top: 1.5px solid rgba(255, 255, 255, 0.90) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-bottom: 1.5px solid var(--liquid-glass-border-bottom) !important;
+}
+
+html[data-theme="dark"] .liquid-glass,
+html[data-theme="dark"] .nav-capsule,
+html[data-theme="dark"] .nav-util-btn,
+html[data-theme="dark"] .nav-lang-btn,
+html[data-theme="dark"] .theme-segmented-glass,
+html[data-theme="dark"] .smart-scroll-pill,
+html[data-theme="dark"] #back-to-top-progress-btn,
+html[data-theme="dark"] #floating-reader-toolbar,
+html[data-theme="dark"] .glass-3d-card,
+html[data-theme="dark"] .glass-3d-pill,
+html[data-theme="dark"] .lang-dropdown-glass,
+html[data-theme="dark"] .theme-palette-modal-glass,
+html[data-theme="dark"] .glass-crystal-surface {
+  border-top: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.55) !important;
+}
+
+html[data-theme="amoled"] .liquid-glass,
+html[data-theme="amoled"] .nav-capsule,
+html[data-theme="amoled"] .nav-util-btn,
+html[data-theme="amoled"] .nav-lang-btn,
+html[data-theme="amoled"] .theme-segmented-glass,
+html[data-theme="amoled"] .smart-scroll-pill,
+html[data-theme="amoled"] #back-to-top-progress-btn,
+html[data-theme="amoled"] #floating-reader-toolbar,
+html[data-theme="amoled"] .glass-3d-card,
+html[data-theme="amoled"] .glass-3d-pill,
+html[data-theme="amoled"] .lang-dropdown-glass,
+html[data-theme="amoled"] .theme-palette-modal-glass,
+html[data-theme="amoled"] .glass-crystal-surface {
+  border-top: 1.5px solid rgba(255, 255, 255, 0.28) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.85) !important;
+}
+
+/* ==========================================================================
+   Noticeable Floating Elevation & Levitation Physics (ထင်ရှားသိသာသော Floating ခလုတ်များ)
+   ========================================================================== */
+
+/* Noticeable Floating Levitation Animation (Idle Breathing Physics) */
+@keyframes floatNoticeableLevitate {
+  0%, 100% {
+    transform: translateY(0px);
+    box-shadow: 
+      0 12px 28px -4px rgba(0, 0, 0, 0.16),
+      0 4px 10px -2px rgba(0, 0, 0, 0.08),
+      var(--liquid-glass-inner-bevel);
+  }
+  50% {
+    transform: translateY(-4.5px);
+    box-shadow: 
+      0 20px 40px -4px rgba(0, 0, 0, 0.22),
+      0 8px 16px -2px rgba(0, 0, 0, 0.12),
+      var(--liquid-glass-inner-bevel);
+  }
+}
+
+@keyframes floatGentleLevitate {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* 1. Base Noticeable Floating Button Class */
+.btn-floating-noticeable {
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  box-shadow: 
+    0 12px 28px -4px rgba(0, 0, 0, 0.16),
+    0 4px 12px -2px rgba(0, 0, 0, 0.08),
+    var(--liquid-glass-inner-bevel) !important;
+  transition: 
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.28s ease,
+    background 0.28s ease,
+    filter 0.28s ease !important;
+  will-change: transform, box-shadow;
+}
+
+/* Hover Elevation & Shadow Bloom: Noticeable Lift Upwards */
+.btn-floating-noticeable:hover {
+  transform: translateY(-5px) scale(1.025) !important;
+  box-shadow: 
+    0 22px 46px -6px rgba(0, 0, 0, 0.24),
+    0 10px 20px -3px rgba(0, 0, 0, 0.14),
+    var(--liquid-glass-inner-bevel) !important;
+}
+
+/* Springy Tactile Active Depression */
+.btn-floating-noticeable:active {
+  transform: translateY(1.5px) scale(0.96) !important;
+  box-shadow: 
+    0 4px 10px -1px rgba(0, 0, 0, 0.14),
+    0 2px 4px -1px rgba(0, 0, 0, 0.08),
+    var(--liquid-glass-inner-bevel) !important;
+  transition-duration: 0.1s !important;
+}
+
+/* Continuous Idle Floating Levitation Variant */
+.btn-floating-levitate {
+  animation: floatNoticeableLevitate 5s ease-in-out infinite;
+}
+
+.btn-floating-levitate:hover {
+  animation-play-state: paused;
+}
+
+/* 2. Glass Crystal Surface (Authentic Physical Frosted Glass Button & Card) */
+.glass-crystal-surface {
+  position: relative;
+  overflow: hidden;
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  box-shadow: 
+    0 12px 28px -4px rgba(0, 0, 0, 0.14),
+    0 4px 10px -2px rgba(0, 0, 0, 0.06),
+    var(--liquid-glass-inner-bevel) !important;
+  transform-style: preserve-3d;
+  transition: 
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.28s ease !important;
+}
+
+.glass-crystal-surface:hover {
+  transform: translateY(-4px) scale(1.02) !important;
+  box-shadow: 
+    0 20px 42px -6px rgba(184, 58, 45, 0.20),
+    0 8px 18px -2px rgba(0, 0, 0, 0.10),
+    var(--liquid-glass-inner-bevel) !important;
+  border-color: rgba(229, 92, 82, 0.5) !important;
+}
+
+.glass-crystal-surface:active {
+  transform: translateY(1.5px) scale(0.97) !important;
+}
+
+/* Polished Lens Optical Sheen Glint Sweep on Hover */
+.btn-floating-noticeable::before,
+.glass-crystal-surface::before,
+.nav-util-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.40) 48%,
+    rgba(255, 255, 255, 0.75) 52%,
+    transparent 75%
+  );
+  transform: translateX(-160%) skewX(-25deg);
+  pointer-events: none;
+  z-index: 2;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-floating-noticeable:hover::before,
+.glass-crystal-surface:hover::before,
+.nav-util-btn:hover::before {
+  transform: translateX(160%) skewX(-25deg);
+}
+
+/* 3. High-Elevation Floating Upgrades for Navbar Utility Buttons */
+.nav-util-btn {
+  position: relative;
+  overflow: hidden;
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  box-shadow: 
+    0 8px 20px -3px rgba(0, 0, 0, 0.12),
+    0 3px 8px -1px rgba(0, 0, 0, 0.06),
+    var(--liquid-glass-inner-bevel) !important;
+  transition: 
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s ease,
+    color 0.2s ease !important;
+}
+
+.nav-util-btn:hover {
+  transform: translateY(-3.5px) scale(1.08) !important;
+  box-shadow: 
+    0 16px 32px -4px rgba(184, 58, 45, 0.24),
+    0 6px 14px -2px rgba(184, 58, 45, 0.12),
+    var(--liquid-glass-inner-bevel) !important;
+  border-color: var(--accent-vermilion) !important;
+  color: var(--accent-vermilion) !important;
+}
+
+.nav-util-btn:active {
+  transform: translateY(1px) scale(0.94) !important;
+  box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.12), var(--liquid-glass-inner-bevel) !important;
+}
+
+/* 4. Noticeably Floating Theme Segmented Controller */
+.theme-segmented-glass {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  box-shadow: 
+    0 10px 24px -4px rgba(0, 0, 0, 0.14),
+    0 4px 10px -2px rgba(0, 0, 0, 0.08),
+    var(--liquid-glass-inner-bevel) !important;
+  transition: 
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease !important;
+}
+
+.theme-segmented-glass:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 
+    0 18px 36px -5px rgba(0, 0, 0, 0.20),
+    0 8px 16px -2px rgba(0, 0, 0, 0.10),
+    var(--liquid-glass-inner-bevel) !important;
+  border-color: rgba(229, 92, 82, 0.5) !important;
+}
+
+/* 5. Noticeably Floating International Language Button */
+.nav-lang-btn {
+  background: var(--liquid-glass-bg) !important;
+  backdrop-filter: var(--liquid-glass-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-glass-blur) !important;
+  box-shadow: 
+    0 8px 20px -3px rgba(0, 0, 0, 0.12),
+    0 3px 8px -1px rgba(0, 0, 0, 0.06),
+    var(--liquid-glass-inner-bevel) !important;
+  transition: 
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s ease !important;
+}
+
+.nav-lang-btn:hover {
+  transform: translateY(-3px) scale(1.03) !important;
+  box-shadow: 
+    0 16px 32px -4px rgba(184, 58, 45, 0.22),
+    0 6px 14px -2px rgba(184, 58, 45, 0.10),
+    var(--liquid-glass-inner-bevel) !important;
+  border-color: rgba(229, 92, 82, 0.5) !important;
+}
+
+.nav-lang-btn:active {
+  transform: translateY(1px) scale(0.95) !important;
+}
+
+/* 6. Smart Back-to-Top Floating Navigation Hub */
+.smart-scroll-pill,
+#back-to-top-progress-btn {
+  box-shadow: 
+    0 14px 34px -4px rgba(0, 0, 0, 0.18),
+    0 6px 14px -2px rgba(0, 0, 0, 0.10),
+    var(--liquid-glass-inner-bevel) !important;
+  animation: floatNoticeableLevitate 5s ease-in-out infinite;
+}
+
+.smart-scroll-pill:hover,
+#back-to-top-progress-btn:hover {
+  animation-play-state: paused;
+  transform: translateY(-5px) scale(1.04) !important;
+  box-shadow: 
+    0 24px 50px -6px rgba(184, 58, 45, 0.28),
+    0 10px 22px -3px rgba(184, 58, 45, 0.16),
+    var(--liquid-glass-inner-bevel) !important;
+}
+
+/* 7. Hanko Seal Stamp Floating Elevation */
+.hanko-seal-3d {
+  box-shadow: 
+    0 14px 30px -3px rgba(184, 58, 45, 0.50),
+    0 4px 10px 0 rgba(0, 0, 0, 0.25),
+    inset 0 2px 3px rgba(255, 255, 255, 0.6),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.35) !important;
+}
+
+.hanko-seal-3d:hover {
+  transform: translateY(-5px) scale(1.08) rotate(-2deg) !important;
+  box-shadow: 
+    0 22px 42px -4px rgba(184, 58, 45, 0.65),
+    0 8px 18px 0 rgba(0, 0, 0, 0.30),
+    inset 0 2px 3px rgba(255, 255, 255, 0.7),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* 8. Category & Topic Filter Pills Floating Physics */
+.filter-pill {
+  transition: 
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s ease,
+    background-color 0.2s ease !important;
+}
+
+.filter-pill:hover {
+  transform: translateY(-3px) scale(1.03) !important;
+  box-shadow: 0 10px 22px -4px rgba(184, 58, 45, 0.20), var(--liquid-glass-inner-bevel) !important;
+}
+
+.filter-pill:active {
+  transform: translateY(1px) scale(0.96) !important;
+}
+
+/* 9. Dark & AMOLED Mode Shadows for Floating Elements */
+html[data-theme="dark"] .btn-floating-noticeable,
+html[data-theme="dark"] .glass-crystal-surface {
+  box-shadow: 
+    0 16px 38px -6px rgba(0, 0, 0, 0.75),
+    0 6px 14px -2px rgba(0, 0, 0, 0.50),
+    var(--liquid-glass-inner-bevel) !important;
+}
+
+html[data-theme="dark"] .btn-floating-noticeable:hover,
+html[data-theme="dark"] .glass-crystal-surface:hover {
+  box-shadow: 
+    0 26px 56px -8px rgba(0, 0, 0, 0.90),
+    0 12px 24px -3px rgba(0, 0, 0, 0.65),
+    var(--liquid-glass-inner-bevel) !important;
+}
+
+html[data-theme="amoled"] .btn-floating-noticeable,
+html[data-theme="amoled"] .glass-crystal-surface {
+  box-shadow: 
+    0 18px 42px -6px rgba(0, 0, 0, 0.95),
+    0 8px 18px -2px rgba(0, 0, 0, 0.75),
+    var(--liquid-glass-inner-bevel) !important;
+}
+
+/* 10. Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .btn-floating-levitate,
+  .smart-scroll-pill,
+  #back-to-top-progress-btn,
+  #floating-reading-companion {
+    animation: none !important;
+  }
+  .btn-floating-noticeable,
+  .glass-crystal-surface,
+  .nav-util-btn,
+  .nav-lang-btn,
+  .theme-segmented-glass,
+  .filter-pill,
+  .hanko-seal-3d {
+    transition: none !important;
+    transform: none !important;
+  }
+  .btn-floating-noticeable::before,
+  .glass-crystal-surface::before,
+  .nav-util-btn::before {
+    display: none !important;
+  }
+}

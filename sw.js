@@ -1,0 +1,153 @@
+/**
+ * Service Worker for Htet Official Progressive Web App (PWA)
+ * Comprehensive offline-first caching, background sync & fast delivery
+ * Supports Android, iOS, iPadOS, macOS, and Windows
+ */
+
+const CACHE_NAME = 'htet-pwa-v2.1';
+const CORE_SHELL_ASSETS = [
+  './',
+  './index.html',
+  './articles.html',
+  './publications.html',
+  './journal.html',
+  './about.html',
+  './contact.html',
+  './glossary.html',
+  './article.html',
+  './404.html',
+  './offline.html',
+  './manifest.webmanifest',
+  './manifest.json',
+  './browserconfig.xml',
+  './css/custom.css',
+  './css/remixicon.css',
+  './css/aos.css',
+  './js/tailwind.min.js',
+  './js/main.js',
+  './js/theme.js',
+  './js/pwa.js',
+  './assets/favicon.svg',
+  './assets/favicon-16x16.png',
+  './assets/favicon-32x32.png',
+  './assets/favicon-192x192.png',
+  './assets/favicon-512x512.png',
+  './assets/favicon-maskable-192.png',
+  './assets/favicon-maskable-512.png',
+  './assets/apple-touch-icon.png',
+  './assets/mstile-150x150.png',
+  './assets/seal-stamp.svg'
+];
+
+// Install Event: Precache core application shell
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      // Add each asset gracefully so one missing optional asset doesn't abort installation
+      return Promise.allSettled(
+        CORE_SHELL_ASSETS.map((url) => {
+          return fetch(url, { cache: 'reload' }).then((response) => {
+            if (response.ok) {
+              return cache.put(url, response);
+            }
+          }).catch((err) => {
+            console.warn('[PWA SW] Precache failed for:', url, err);
+          });
+        })
+      );
+    }).then(() => self.skipWaiting())
+  );
+});
+
+// Activate Event: Clear outdated caches and claim clients immediately
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
+      );
+    }).then(() => self.clients.claim())
+  );
+});
+
+// Fetch Event: Smart Multi-Tier Strategy
+self.addEventListener('fetch', (event) => {
+  const req = event.request;
+  const url = new URL(req.url);
+
+  // Ignore non-GET and cross-origin analytics/trackers
+  if (req.method !== 'GET') return;
+
+  // 1. Navigation requests (HTML pages): Network-First with Cache fallback & Offline page
+  if (req.mode === 'navigate') {
+    event.respondWith(
+      fetch(req).then((networkRes) => {
+        if (networkRes && networkRes.status === 200) {
+          const resClone = networkRes.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
+        }
+        return networkRes;
+      }).catch(async () => {
+        // Network failed, look in cache
+        const cached = await caches.match(req);
+        if (cached) return cached;
+        // Check for specific clean URL matches (e.g. index.html)
+        const cachedIndex = await caches.match('./index.html');
+        if (cachedIndex) return cachedIndex;
+        // Fallback to offline page
+        return caches.match('./offline.html');
+      })
+    );
+    return;
+  }
+
+  // 2. Static Assets (CSS, JS, Fonts, Images): Cache-First with Background Stale Update
+  const isStatic = (
+    url.pathname.endsWith('.css') ||
+    url.pathname.endsWith('.js') ||
+    url.pathname.endsWith('.svg') ||
+    url.pathname.endsWith('.png') ||
+    url.pathname.endsWith('.jpg') ||
+    url.pathname.endsWith('.jpeg') ||
+    url.pathname.endsWith('.webp') ||
+    url.pathname.endsWith('.woff') ||
+    url.pathname.endsWith('.woff2') ||
+    url.pathname.endsWith('.ttf')
+  );
+
+  if (isStatic) {
+    event.respondWith(
+      caches.match(req).then((cachedRes) => {
+        const fetchPromise = fetch(req).then((networkRes) => {
+          if (networkRes && networkRes.status === 200) {
+            const resClone = networkRes.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
+          }
+          return networkRes;
+        }).catch(() => null);
+
+        // Return cached immediately if found, else wait for network
+        return cachedRes || fetchPromise;
+      })
+    );
+    return;
+  }
+
+  // 3. Default: Network with Cache Fallback
+  event.respondWith(
+    fetch(req).then((networkRes) => {
+      if (networkRes && networkRes.status === 200) {
+        const resClone = networkRes.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
+      }
+      return networkRes;
+    }).catch(() => caches.match(req))
+  );
+});
+
+// Message listener for skipWaiting trigger
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});

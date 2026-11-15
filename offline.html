@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="my" data-theme="dark" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>အော့ဖ်လိုင်း ဖြစ်နေပါသည် | Htet — စာရေးဆရာမနှင့် သုတေသီ</title>
+  <!-- SEO, Open Graph (Facebook/Telegram) & Structured Data -->
+  <meta name="description" content="အင်တာနက် ချိတ်ဆက်မှု မရှိသေးသော်လည်း သိမ်းဆည်းထားသော အော့ဖ်လိုင်း စာမူများကို ဖတ်ရှုနိုင်ပါသည်။">
+  <meta name="keywords" content="Offline, PWA, Htet Official">
+  <meta name="author" content="Htet Myat Ekri (ထက်မြတ်ဧကရီ)">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://htetofficial.github.io/offline.html">
+
+  <!-- Open Graph (Facebook, Telegram, LinkedIn) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Htet Official (ထက်)">
+  <meta property="og:title" content="အော့ဖ်လိုင်း ဖြစ်နေပါသည် | Htet Official">
+  <meta property="og:description" content="အင်တာနက် ချိတ်ဆက်မှု မရှိသေးသော်လည်း သိမ်းဆည်းထားသော အော့ဖ်လိုင်း စာမူများကို ဖတ်ရှုနိုင်ပါသည်။">
+  <meta property="og:url" content="https://htetofficial.github.io/offline.html">
+  <meta property="og:image" content="https://htetofficial.github.io/assets/favicon-512x512.png">
+  <meta property="og:image:secure_url" content="https://htetofficial.github.io/assets/favicon-512x512.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:image:alt" content="Htet Official PWA">
+  <meta property="og:locale" content="my_MM">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:locale:alternate" content="th_TH">
+  <meta property="og:locale:alternate" content="ja_JP">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="အော့ဖ်လိုင်း ဖြစ်နေပါသည် | Htet Official">
+  <meta name="twitter:description" content="အင်တာနက် ချိတ်ဆက်မှု မရှိသေးသော်လည်း သိမ်းဆည်းထားသော အော့ဖ်လိုင်း စာမူများကို ဖတ်ရှုနိုင်ပါသည်။">
+  <meta name="twitter:image" content="https://htetofficial.github.io/assets/favicon-512x512.png">
+  <meta name="twitter:image:alt" content="Htet Official PWA">
+  <!-- /SEO -->
+  
+  <meta name="theme-color" content="#121110">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ထက် (Htet)">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <link rel="stylesheet" href="css/remixicon.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <script src="js/tailwind.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['class', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          colors: {
+            ivory: 'var(--bg-ivory)',
+            cream: 'var(--bg-cream)',
+            card: 'var(--bg-card)',
+            taupe: 'var(--border-taupe)',
+            charcoal: 'var(--text-charcoal)',
+            muted: 'var(--text-muted)',
+            vermilion: {
+              DEFAULT: 'var(--accent-vermilion)'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-ivory text-charcoal flex flex-col justify-between selection:bg-vermilion selection:text-white font-sans">
+  
+  <!-- Ambient Offline Background Mesh -->
+  <div class="fixed inset-0 pointer-events-none opacity-25 dark:opacity-15 bg-[radial-gradient(#B83A2D_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+  <header class="py-6 px-6 max-w-4xl mx-auto w-full flex items-center justify-between border-b border-hairline/60 relative z-10">
+    <a href="index.html" class="flex items-center space-x-2.5 group">
+      <div class="nav-brand-glass-icon w-9 h-9 rounded-xl flex items-center justify-center shrink-0">
+        <img src="assets/favicon.svg" alt="ထက်" class="w-full h-full object-contain">
+      </div>
+      <div>
+        <span class="font-serif text-xl font-bold tracking-tight text-charcoal leading-none">HTET</span>
+        <span class="block text-[9px] tracking-wider text-muted uppercase mt-0.5 leading-none">OFFLINE MODE</span>
+      </div>
+    </a>
+
+    <div class="flex items-center space-x-2 px-3 py-1 rounded-full border border-hairline bg-cream/70 text-xs font-mono">
+      <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+      <span id="offline-status-text">OFFLINE</span>
+    </div>
+  </header>
+
+  <main class="max-w-xl mx-auto px-6 py-12 text-center relative z-10 flex-grow flex flex-col items-center justify-center">
+    <!-- Offline Signal Icon in Liquid Glass Disc -->
+    <div class="w-20 h-20 rounded-3xl p-1 mb-6 flex items-center justify-center bg-cream/80 border border-hairline shadow-lg relative group">
+      <div class="w-full h-full rounded-2xl bg-card flex items-center justify-center text-vermilion text-3xl shadow-inner">
+        <i class="ri-wifi-off-line"></i>
+      </div>
+      <span class="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-vermilion text-white text-xs flex items-center justify-center shadow-md">
+        <i class="ri-cloud-off-line"></i>
+      </span>
+    </div>
+
+    <h1 class="font-serif text-2xl sm:text-3xl font-bold text-charcoal mb-3">
+      အင်တာနက် လိုင်းကျနေပါသည်
+    </h1>
+    <p class="text-sm text-muted mb-8 leading-relaxed max-w-md">
+      လက်ရှိတွင် ကွန်ရက်ချိတ်ဆက်မှု မရှိသေးသော်လည်း သိမ်းဆည်းထားသော အော့ဖ်လိုင်း စာမူများနှင့် စာမျက်နှာများကို စိတ်ကြိုက် ဖတ်ရှုနိုင်ပါသေးသည်။
+    </p>
+
+    <!-- Reconnect Button -->
+    <div class="flex flex-wrap items-center justify-center gap-3 mb-10">
+      <button id="retry-btn" onclick="window.location.reload()" class="px-6 py-2.5 rounded-full bg-vermilion text-white font-medium text-xs shadow-md hover:bg-vermilion-hover hover:scale-105 active:scale-95 transition-all flex items-center space-x-2">
+        <i class="ri-refresh-line"></i>
+        <span>ပြန်လည်စစ်ဆေးရန် (Retry)</span>
+      </button>
+      <a href="index.html" class="px-5 py-2.5 rounded-full border border-hairline bg-cream/80 hover:bg-cream text-charcoal text-xs font-medium transition-all flex items-center space-x-2">
+        <i class="ri-home-4-line"></i>
+        <span>ပင်မစာမျက်နှာ (Home)</span>
+      </a>
+    </div>
+
+    <!-- Cached Navigation Shortcuts -->
+    <div class="w-full p-4 sm:p-5 rounded-2xl border border-hairline bg-card/85 backdrop-blur-md shadow-sm text-left">
+      <span class="text-[11px] font-semibold text-muted uppercase tracking-wider block mb-3 font-mono">
+        <i class="ri-archive-line mr-1 text-vermilion"></i> အော့ဖ်လိုင်း ဖတ်ရှုနိုင်သော စာမျက်နှာများ
+      </span>
+      <div class="grid grid-cols-2 gap-2 text-xs">
+        <a href="articles.html" class="p-2.5 rounded-xl border border-hairline hover:border-vermilion/50 bg-cream/50 hover:bg-cream transition-all flex items-center space-x-2">
+          <i class="ri-article-line text-vermilion"></i>
+          <span class="font-medium text-charcoal">ဆောင်းပါးများ</span>
+        </a>
+        <a href="publications.html" class="p-2.5 rounded-xl border border-hairline hover:border-vermilion/50 bg-cream/50 hover:bg-cream transition-all flex items-center space-x-2">
+          <i class="ri-book-2-line text-vermilion"></i>
+          <span class="font-medium text-charcoal">ထုတ်ဝေမှုများ</span>
+        </a>
+        <a href="journal.html" class="p-2.5 rounded-xl border border-hairline hover:border-vermilion/50 bg-cream/50 hover:bg-cream transition-all flex items-center space-x-2">
+          <i class="ri-quill-pen-line text-vermilion"></i>
+          <span class="font-medium text-charcoal">မှတ်စုများ</span>
+        </a>
+        <a href="glossary.html" class="p-2.5 rounded-xl border border-hairline hover:border-vermilion/50 bg-cream/50 hover:bg-cream transition-all flex items-center space-x-2">
+          <i class="ri-book-open-line text-vermilion"></i>
+          <span class="font-medium text-charcoal">ဝေါဟာရ</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="py-5 text-center text-xs text-muted border-t border-hairline/60 relative z-10 font-mono">
+    <span>HTET OFFICIAL PWA &bull; PROGRESSIVE WEB APPLICATION</span>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script>
+    // Auto-reconnect detector
+    window.addEventListener('online', () => {
+      const badge = document.getElementById('offline-status-text');
+      if (badge) {
+        badge.textContent = 'ONLINE - RECONNECTING...';
+        badge.parentElement.classList.remove('bg-cream/70');
+        badge.parentElement.classList.add('bg-emerald-500/20', 'text-emerald-500');
+      }
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
