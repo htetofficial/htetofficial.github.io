@@ -4,7 +4,7 @@
  * Supports Android, iOS, iPadOS, macOS, and Windows
  */
 
-const CACHE_NAME = 'htet-pwa-v2.1';
+const CACHE_NAME = 'htet-pwa-v2.2';
 const CORE_SHELL_ASSETS = [
   './',
   './index.html',
@@ -20,13 +20,44 @@ const CORE_SHELL_ASSETS = [
   './manifest.webmanifest',
   './manifest.json',
   './browserconfig.xml',
-  './css/custom.css',
+  './css/bootstrap.min.css',
+  './css/bootstrap-icons.min.css',
+  './css/bootstrap-icons.woff2',
   './css/remixicon.css',
+  './css/remixicon.woff2',
   './css/aos.css',
+  './css/katex.min.css',
+  './css/leaflet.css',
+  './css/custom.css',
+  './fonts/Pyidaungsu-Regular.ttf',
+  './fonts/Pyidaungsu-Bold.ttf',
+  './fonts/Pyidaungsu-Numbers.ttf',
   './js/tailwind.min.js',
-  './js/main.js',
+  './js/bootstrap.bundle.min.js',
+  './js/aos.js',
+  './js/confetti.browser.min.js',
+  './js/chart.min.js',
+  './js/katex.min.js',
+  './js/katex-auto-render.min.js',
+  './js/leaflet.js',
+  './js/data-loader.js',
+  './js/i18n.js',
   './js/theme.js',
   './js/pwa.js',
+  './js/reader.js',
+  './js/main.js',
+  './data/articles.json',
+  './data/posts.json',
+  './data/publications.json',
+  './data/books.json',
+  './data/glossary.json',
+  './data/quotes.json',
+  './js/data/articles-backup.js',
+  './js/data/posts-backup.js',
+  './js/data/publications-backup.js',
+  './js/data/books-backup.js',
+  './js/data/glossary-backup.js',
+  './js/data/quotes-backup.js',
   './assets/favicon.svg',
   './assets/favicon-16x16.png',
   './assets/favicon-32x32.png',
@@ -38,6 +69,7 @@ const CORE_SHELL_ASSETS = [
   './assets/mstile-150x150.png',
   './assets/seal-stamp.svg'
 ];
+
 
 // Install Event: Precache core application shell
 self.addEventListener('install', (event) => {
