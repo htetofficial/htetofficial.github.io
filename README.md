@@ -1,9 +1,11 @@
 # Htet Official (ထက်) — Personal Editorial & Research Platform
 
-[[https://img.shields.io/badge/Website-htetofficial.github.io-B83A2D?style=flat-square]](https://htetofficial.github.io/)
-[[https://img.shields.io/badge/Apps-Android%20%7C%20macOS%20%7C%20Windows-252321?style=flat-square]](https://github.com/htetofficial/htetofficial.github.io/releases)
-[[https://img.shields.io/badge/Languages-MM%20%7C%20EN%20%7C%20ZH%20%7C%20TH%20%7C%20JA-0EA5E9?style=flat-square]](https://htetofficial.github.io/)
-[[https://img.shields.io/badge/Community-Discussions-7C3AED?style=flat-square]](https://github.com/htetofficial/htetofficial.github.io/discussions)
+[![Website](https://img.shields.io/badge/Website-htetofficial.github.io-B83A2D?style=flat-square)](https://htetofficial.github.io/)
+[![Apps](https://img.shields.io/badge/Apps-Android%20%7C%20macOS%20%7C%20Windows-252321?style=flat-square)](https://github.com/htetofficial/htetofficial.github.io/releases)
+[![Languages](https://img.shields.io/badge/Languages-MM%20%7C%20EN%20%7C%20ZH%20%7C%20TH%20%7C%20JA-0EA5E9?style=flat-square)](https://htetofficial.github.io/)
+[![Community](https://img.shields.io/badge/Community-Discussions-7C3AED?style=flat-square)](https://github.com/htetofficial/htetofficial.github.io/discussions)
+
+
 
 **Official Website:** [https://htetofficial.github.io/](https://htetofficial.github.io/)  
 **Author:** Htet Myat Ekri (ထက်မြတ်ဧကရီ) — *Writer · Political Philosophy Researcher · Activist*
@@ -105,3 +107,35 @@ Download standalone native wrappers from the [GitHub Releases](https://github.co
 ├── downloads/                 # PDFs, Markdown essays, BibTeX, CV & Press Kit
 ├── fonts/                     # Pyidaungsu Unicode & KaTeX local font binaries
 └── assets/                    # Icons, Hanko seal SVG/PNG, cover images
+
+```
+
+---
+
+## 🚀 Deployment (GitHub Pages)
+
+1. Push all files to the `main` branch of `htetofficial/htetofficial.github.io`:
+   ```bash
+   git add .
+   git commit -m "chore: update site, SEO, and documentation"
+   git push -u origin main
+   ```
+2. In GitHub **Settings > Pages**, set **Source** to **Deploy from a branch** (`main` / `/ (root)`).
+3. Ensure `.nojekyll` exists at the repository root so `.well-known/assetlinks.json` is served directly.
+4. Visit [https://htetofficial.github.io/](https://htetofficial.github.io/) once deployment completes.
+
+---
+
+## 🔒 Security & Privacy
+
+- **Security Policy:** See [SECURITY.md](SECURITY.md) or use GitHub **Private Vulnerability Reporting** under the **Security** tab.
+- **Zero Tracking:** No third-party ad networks or invasive analytics trackers are embedded.
+
+---
+
+## 📬 Official Contact & Community
+
+- **Email:** `htethtet2025ideahub@gmail.com`
+- **Telegram:** [@htetmmofficial](https://t.me/htetmmofficial)
+- **Community Discussions:** [GitHub Discussions](https://github.com/htetofficial/htetofficial.github.io/discussions)
+- **Other Archives:** [WordPress](https://htetofficial.wordpress.com) · [Blogger](https://htetofficialmm.blogspot.com)
