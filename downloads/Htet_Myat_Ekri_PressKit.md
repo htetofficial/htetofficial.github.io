@@ -11,7 +11,7 @@
 သူမ ရေးသားထုတ်ဝေခဲ့သော 'ငလျင်နှင့်ဆိုင်သမျှသိစရာမှတ်စရာ အထူးဆောင်းပါး — ၂၀၂၅ မတ် ၂၈ စစ်ကိုင်း-မန္တလေး Mw 7.7 ငလျင်ကြီး သုတေသနနှင့် ဘေးအန္တရာယ် ကာကွယ်ရေး လက်စွဲ' (၄၀-မျက်နှာပါ စာတမ်းရှည်)၊ 'တော်လှန်ရေးအစိုးရ၏ နိုင်ငံရေးဒဿနနှင့် လက်တွေ့ရုပ်လုံး' (၃၅-မျက်နှာပါ ဒဿနစာတမ်း) နှင့် 'The Road of Slow Walkers' ဒဿနစာအုပ်တို့သည် မြန်မာလူငယ်များအကြား တွေးခေါ်မှုလှိုင်းသစ်ကို ဖန်တီးပေးနိုင်ခဲ့သည်။ ထို့အပြင် ၂၀၂၄ ခုနှစ်တွင် သူမ စတင်တည်ထောင်ခဲ့သော "IdeaHub Myanmar" အတွေးအခေါ်ပလက်ဖောင်းသည် *"Every Generation Must Rethink the World"* ဟူသော ဆောင်ပုဒ်ဖြင့် မြန်မာ့လူ့ဘောင်သစ်အတွက် အသိပညာဗေဒဆိုင်ရာ အရင်းအမြစ်များကို စဉ်ဆက်မပြတ် ဖြန့်ဝေပေးလျက်ရှိသည်။
 
 ### Media Contact & Verification Channels
-- Email (Direct Official): htetmyanmar321bb@gmail.com *(သတိပြုရန် - အဖွဲ့အစည်းအီးမေးလ် htetmyatekri@women-nation.org သည် သက်တမ်းကုန်ဆုံးတော့မည်ဖြစ်သဖြင့် ဆက်သွယ်ရန်စာလွှာများကို htetmyanmar321bb@gmail.com သို့သာ တိုက်ရိုက် ပေးပို့နိုင်ပါသည်)*
+- Email (Direct Official): htethtet2025ideahub@gmail.com *(သတိပြုရန် - အဖွဲ့အစည်းအီးမေးလ် htetmyatekri@women-nation.org သည် သက်တမ်းကုန်ဆုံးတော့မည်ဖြစ်သဖြင့် ဆက်သွယ်ရန်စာလွှာများကို htethtet2025ideahub@gmail.com သို့သာ တိုက်ရိုက် ပေးပို့နိုင်ပါသည်)*
 - Telegram (Direct): https://t.me/htetmmofficial
 - IdeaHub Myanmar Channel: https://t.me/ideahubmyanmar
 - IdeaHub Open Digital Library: https://t.me/ideahublibrary (၁,၅၂၂+ စာအုပ်နှင့် သုတေသနဖိုင်များ)
