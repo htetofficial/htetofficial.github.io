@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181513"/>
+      <stop offset="50%" stop-color="#25201C"/>
+      <stop offset="100%" stop-color="#12100E"/>
+    </linearGradient>
+    <linearGradient id="crimsonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E55C52"/>
+      <stop offset="100%" stop-color="#C94437"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  
+  <!-- Subtle accent borders & grid -->
+  <rect x="30" y="30" width="1140" height="570" rx="24" fill="none" stroke="#3D352E" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.6"/>
+  <rect x="45" y="45" width="1110" height="540" rx="16" fill="none" stroke="#E55C52" stroke-width="1" opacity="0.2"/>
+
+  <!-- Top Badges -->
+  <rect x="80" y="80" width="280" height="38" rx="19" fill="url(#crimsonGrad)"/>
+  <text x="220" y="104" font-family="'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="1.5">HONEST INFORMATION</text>
+
+  <rect x="375" y="80" width="250" height="38" rx="19" fill="#2E2924" stroke="#4A423A" stroke-width="1"/>
+  <text x="500" y="104" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#E55C52" text-anchor="middle" letter-spacing="1">EXCLUSIVE INTERVIEW</text>
+
+  <rect x="640" y="80" width="170" height="38" rx="19" fill="#22201D" stroke="#3D3730" stroke-width="1"/>
+  <text x="725" y="104" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#C5BCB2" text-anchor="middle">JANUARY 29, 2026</text>
+
+  <!-- Hanko Stamp -->
+  <rect x="1030" y="75" width="85" height="85" rx="20" fill="none" stroke="#E55C52" stroke-width="3.5"/>
+  <text x="1072" y="132" font-family="'Pyidaungsu', 'Myanmar3', serif" font-size="42" font-weight="bold" fill="#E55C52" text-anchor="middle">ထက်</text>
+
+  <!-- Coup 5th Anniversary Flagship Tag -->
+  <text x="80" y="185" font-family="'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="bold" fill="#E55C52" letter-spacing="2">5TH ANNIVERSARY OF MYANMAR MILITARY COUP (2021-2026)</text>
+
+  <!-- Main Burmese Heading -->
+  <text x="80" y="250" font-family="'Pyidaungsu', 'Padauk', sans-serif" font-size="40" font-weight="bold" fill="#F5EFE6">စစ်အာဏာသိမ်းမှု (၅) နှစ်ပြည့် CDM ကျောင်းသူ</text>
+  <text x="80" y="310" font-family="'Pyidaungsu', 'Padauk', sans-serif" font-size="40" font-weight="bold" fill="#F5EFE6">ထက်မြတ်ဧကရီ၏ သမိုင်းနှင့် အနာဂတ် ရပ်တည်ချက်</text>
+
+  <!-- English Subtitle -->
+  <text x="80" y="370" font-family="'Georgia', serif" font-size="22" font-style="italic" fill="#D1C9BE">From 12-Year-Old Grade 7 Dreamer to 17-Year-Old Revolutionary Feminist Thinker</text>
+
+  <!-- Quote Pullout Box -->
+  <rect x="80" y="415" width="1040" height="125" rx="16" fill="#1E1A17" stroke="#3D352E" stroke-width="1"/>
+  <line x1="80" y1="415" x2="80" y2="540" stroke="#E55C52" stroke-width="8"/>
+  
+  <text x="110" y="455" font-family="'Pyidaungsu', sans-serif" font-size="17" fill="#E8E2D8">“အာဏာသိမ်းမှုက ကျွန်မရဲ့ အလှမယ်ဖြစ်ချင်တဲ့ အိပ်မက်ကို အပြီးတိုင် ရိုက်ချိုးလိုက်ပေမဲ့ တစ်ဖက်မှာလည်း</text>
+  <text x="110" y="490" font-family="'Pyidaungsu', sans-serif" font-size="17" fill="#E8E2D8">စနစ်ဆိုးတွေကို ပြုပြင်ပြောင်းလဲနိုင်မယ့် Intellectual တစ်ယောက်၊ Feminist Writer တစ်ယောက် ဖြစ်လာစေခဲ့တယ်။”</text>
+  <text x="110" y="525" font-family="'Pyidaungsu', sans-serif" font-size="14" font-weight="bold" fill="#E55C52">— ထက်မြတ်ဧကရီ (အသက် ၁၇ နှစ်၊ CDM ကျောင်းသူ၊ သုတေသီနှင့် စာရေးဆရာမ)</text>
+
+  <!-- Bottom Metadata Strip -->
+  <text x="80" y="585" font-family="'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8C827A">Media: Honest Information • Series: Spring Revolution 5-Year CDM Perspectives • Author: Htet Myat Ekri</text>
+</svg>

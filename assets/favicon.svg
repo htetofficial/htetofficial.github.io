@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Liquid Ruby Cinnabar Glass Gradient -->
+    <radialGradient id="glassBodyGrad" cx="36%" cy="26%" r="82%">
+      <stop offset="0%" stop-color="#F25646"/>
+      <stop offset="28%" stop-color="#D73B2C"/>
+      <stop offset="65%" stop-color="#AA2216"/>
+      <stop offset="100%" stop-color="#70120B"/>
+    </radialGradient>
+
+    <!-- Refractive Glass Perimeter Bevel -->
+    <linearGradient id="glassPrismBevel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.75"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.25"/>
+      <stop offset="70%" stop-color="#4A0A05" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#260402" stop-opacity="0.6"/>
+    </linearGradient>
+
+    <!-- Specular Curved Gloss Arc Gradient -->
+    <linearGradient id="specularGloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="40%" stop-color="#FFFFFF" stop-opacity="0.25"/>
+      <stop offset="90%" stop-color="#FFFFFF" stop-opacity="0.02"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Glass Inner Caustic Radial Light -->
+    <radialGradient id="causticGlow" cx="50%" cy="85%" r="60%">
+      <stop offset="0%" stop-color="#FF7A6B" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#D73B2C" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#70120B" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Ambient Shadow for Floating Glass -->
+    <filter id="glassDropShadow" x="-15%" y="-15%" width="130%" height="135%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#80150B" flood-opacity="0.45"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+
+    <!-- Frosted Glass Monogram Emboss Filter -->
+    <filter id="chiseledGlass" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#4A0803" flood-opacity="0.55"/>
+      <feDropShadow dx="0" dy="-1" stdDeviation="1" flood-color="#FFFFFF" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Floating Glass Ambient Shadow -->
+  <rect x="22" y="32" width="468" height="468" rx="112" fill="#000000" opacity="0.22" filter="blur(18px)"/>
+
+  <!-- Liquid Glass Base Body -->
+  <rect x="16" y="16" width="480" height="480" rx="106" fill="url(#glassBodyGrad)" filter="url(#glassDropShadow)"/>
+
+  <!-- Lower Glass Internal Caustic Light Diffusion -->
+  <rect x="18" y="18" width="476" height="476" rx="104" fill="url(#causticGlow)"/>
+
+  <!-- Specular Curved Glass Reflection (Apple-style Gloss Arc) -->
+  <path d="M 16 122 C 16 63 63 16 122 16 L 390 16 C 449 16 496 63 496 122 L 496 230 C 370 290 142 290 16 230 Z" fill="url(#specularGloss)"/>
+
+  <!-- Refractive Outer Glass Prism Rim -->
+  <rect x="17.5" y="17.5" width="477" height="477" rx="104.5" fill="none" stroke="url(#glassPrismBevel)" stroke-width="3"/>
+
+  <!-- Inner Subtle Glass Inset Hairline -->
+  <rect x="22" y="22" width="468" height="468" rx="100" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-opacity="0.35"/>
+
+  <!-- Frosted Hanko Double-Frame (Inner Box) -->
+  <rect x="44" y="44" width="424" height="424" rx="80" fill="none" stroke="#FAF8F5" stroke-width="14" stroke-opacity="0.94"/>
+  <rect x="67" y="67" width="378" height="378" rx="58" fill="none" stroke="#FAF8F5" stroke-width="2.5" stroke-opacity="0.6"/>
+
+  <!-- Classical Tenkoku Corner Accents -->
+  <circle cx="56" cy="56" r="4.5" fill="#FAF8F5" opacity="0.85"/>
+  <circle cx="456" cy="56" r="4.5" fill="#FAF8F5" opacity="0.85"/>
+  <circle cx="56" cy="456" r="4.5" fill="#FAF8F5" opacity="0.85"/>
+  <circle cx="456" cy="456" r="4.5" fill="#FAF8F5" opacity="0.85"/>
+
+  <!-- Chiseled Frosted Calligraphic Monogram "ထက်" -->
+  <path d="M420.05 150.96 L426.77 152.20 L432.00 153.94 L432.00 188.05 L425.78 185.81 L416.57 184.56 L404.62 184.81 L396.90 186.31 L390.68 189.04 L387.69 191.78 L386.20 194.27 L384.95 200.00 L385.20 203.48 L386.20 206.97 L387.44 209.71 L389.18 212.20 L393.41 216.43 L396.90 219.17 L403.87 223.65 L412.83 228.38 L412.58 245.55 L404.12 241.57 L391.42 234.10 L382.46 227.38 L375.99 220.66 L371.01 213.44 L367.77 205.97 L366.03 197.51 L365.78 189.04 L367.03 180.08 L368.52 175.35 L371.01 170.12 L374.74 164.90 L380.97 159.17 L388.19 154.94 L396.15 152.20 L405.86 150.71 L412.33 150.46 L419.80 150.96 Z M415.07 255.76 L425.03 257.00 L432.00 259.24 L432.00 295.09 L428.27 294.10 L421.05 293.10 L407.36 292.60 L392.67 293.85 L383.71 296.34 L383.21 296.83 L383.21 298.33 L383.95 303.31 L383.95 316.75 L382.96 325.21 L381.22 333.43 L379.22 338.91 L375.24 346.12 L371.51 350.85 L364.79 356.83 L360.06 359.82 L354.08 362.55 L348.36 364.30 L339.15 365.54 L339.15 328.45 L350.10 327.21 L356.07 325.71 L360.55 323.72 L364.29 321.23 L365.78 319.74 L367.52 317.00 L368.52 313.26 L368.52 308.04 L368.02 305.55 L366.78 302.81 L364.54 300.07 L361.30 297.83 L357.07 295.84 L351.84 294.35 L345.62 293.35 L335.16 292.60 L328.69 292.60 L318.23 293.35 L310.02 294.84 L305.54 296.34 L299.32 300.07 L297.07 302.81 L295.58 306.54 L295.33 313.26 L295.83 315.50 L296.83 317.99 L299.56 321.23 L303.30 323.72 L307.78 325.71 L316.74 327.70 L324.71 328.45 L324.71 365.54 L319.23 365.04 L314.50 364.05 L308.53 362.06 L302.80 359.32 L295.58 354.09 L289.36 347.12 L284.63 338.91 L282.39 332.43 L281.14 326.71 L279.90 316.50 L279.90 304.80 L280.40 299.57 L282.89 286.88 L284.38 282.64 L286.87 277.67 L290.85 271.94 L295.83 266.96 L299.07 264.47 L306.04 260.49 L315.50 257.25 L326.45 255.76 L337.15 255.76 L348.36 257.25 L356.57 259.99 L364.04 263.97 L367.77 266.71 L370.51 269.45 L371.01 269.45 L374.25 266.46 L380.22 262.48 L386.44 259.49 L391.42 257.75 L401.13 256.01 L414.82 255.76 Z M140.49 256.01 L151.20 258.00 L157.17 260.24 L164.39 264.22 L170.86 269.70 L175.09 265.97 L179.08 263.23 L186.55 259.49 L194.76 257.00 L204.72 255.76 L215.42 255.76 L227.37 257.50 L232.85 259.24 L239.07 262.23 L246.29 267.21 L250.77 271.69 L253.51 275.18 L257.49 282.40 L260.48 291.86 L261.97 303.06 L261.97 318.24 L260.48 329.45 L259.49 333.43 L256.75 340.65 L254.26 345.13 L250.77 349.86 L244.55 355.58 L239.57 358.82 L235.09 361.06 L229.86 363.05 L225.13 364.30 L215.42 365.54 L201.23 365.29 L197.25 364.79 L190.03 363.05 L184.80 361.06 L179.08 358.07 L173.85 354.34 L171.36 351.85 L163.39 357.82 L156.67 361.31 L147.21 364.30 L137.26 365.54 L126.55 365.54 L114.85 363.80 L105.89 360.56 L101.66 358.32 L96.68 354.84 L91.70 350.11 L86.97 343.39 L83.73 336.42 L81.24 326.96 L80.00 315.50 L80.25 301.56 L81.74 291.36 L84.48 282.64 L87.72 276.42 L90.95 271.94 L96.68 266.46 L104.89 261.24 L112.11 258.25 L119.83 256.51 L126.55 255.76 L140.24 256.01 Z M129.04 292.60 L120.83 293.10 L111.12 294.59 L105.14 296.59 L100.16 299.57 L98.17 301.56 L96.43 304.55 L95.43 309.28 L95.93 315.26 L97.18 318.24 L98.42 319.99 L99.92 321.48 L103.65 323.97 L107.63 325.71 L112.11 326.96 L121.07 328.20 L133.77 328.70 L145.47 327.95 L154.18 326.46 L157.92 325.21 L161.90 323.22 L164.39 321.48 L166.63 318.99 L168.12 316.00 L168.62 313.76 L168.62 307.29 L167.13 303.06 L166.13 301.56 L163.15 298.83 L157.92 296.09 L150.70 294.10 L140.74 292.85 L129.29 292.60 Z M207.46 292.60 L192.52 293.85 L187.29 295.09 L183.31 296.83 L184.31 306.79 L184.31 314.51 L183.31 323.72 L183.31 324.47 L183.81 324.96 L190.28 326.96 L198.74 328.20 L207.46 328.70 L220.90 328.20 L230.11 326.96 L235.09 325.46 L240.57 322.72 L244.30 319.24 L245.79 316.50 L246.54 313.51 L246.54 307.79 L245.30 303.56 L243.80 301.32 L241.31 299.07 L236.33 296.34 L229.86 294.35 L218.66 292.85 L207.71 292.60 Z M432.00 326.21 L432.00 362.06 L425.03 364.30 L418.56 365.29 L406.86 365.54 L401.88 364.79 L401.63 328.70 L420.80 328.20 L431.75 326.46 Z" fill="#FAF8F5" fill-rule="evenodd" filter="url(#chiseledGlass)"/>
+</svg>
