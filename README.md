@@ -1,127 +1,107 @@
 # Htet Official (ထက်) — Personal Editorial & Research Platform
 
-တရားဝင် ဝက်ဘ်ဆိုဒ် ပလက်ဖောင်း — [https://htetofficial.github.io/](https://htetofficial.github.io/)  
-(Burmese Transgirl Writer, Political Philosophy Researcher & Activist)
+[[https://img.shields.io/badge/Website-htetofficial.github.io-B83A2D?style=flat-square]](https://htetofficial.github.io/)
+[[https://img.shields.io/badge/Apps-Android%20%7C%20macOS%20%7C%20Windows-252321?style=flat-square]](https://github.com/htetofficial/htetofficial.github.io/releases)
+[[https://img.shields.io/badge/Languages-MM%20%7C%20EN%20%7C%20ZH%20%7C%20TH%20%7C%20JA-0EA5E9?style=flat-square]](https://htetofficial.github.io/)
+[[https://img.shields.io/badge/Community-Discussions-7C3AED?style=flat-square]](https://github.com/htetofficial/htetofficial.github.io/discussions)
+
+**Official Website:** [https://htetofficial.github.io/](https://htetofficial.github.io/)  
+**Author:** Htet Myat Ekri (ထက်မြတ်ဧကရီ) — *Writer · Political Philosophy Researcher · Activist*
+
+**Htet Official** is a multilingual digital research library and literary archive dedicated to Political Philosophy, Federalism, Gender Studies, and Burmese Literature, engineered with a Sino-Japanese Wabi-Sabi editorial aesthetic, full offline PWA support, and companion mobile/desktop apps.
 
 ---
 
-## 🌟 အဓိက အသွင်အပြင်များနှင့် နည်းပညာစနစ် (Architecture & Features)
+## 🌐 Quick Links & Navigation
+
+- **Home & Showcase:** [https://htetofficial.github.io/](https://htetofficial.github.io/)
+- **Research Articles (25 Papers):** [https://htetofficial.github.io/articles.html](https://htetofficial.github.io/articles.html)
+- **Publications & Monographs (26 + 4 Books):** [https://htetofficial.github.io/publications.html](https://htetofficial.github.io/publications.html)
+- **Journal & Spoken Reflections (37 Posts):** [https://htetofficial.github.io/journal.html](https://htetofficial.github.io/journal.html)
+- **Philosophical & Gender Glossary (12 Terms):** [https://htetofficial.github.io/glossary.html](https://htetofficial.github.io/glossary.html)
+- **About & Contact:** [About](https://htetofficial.github.io/about.html) · [Contact](https://htetofficial.github.io/contact.html)
+- **Multilingual Academic Dossier (PDF):** [Download PDF](https://htetofficial.github.io/downloads/Htet_International_Academic_Dossier_Multilingual.pdf)
+- **Wiki & User Guide:** [GitHub Wiki](https://github.com/htetofficial/htetofficial.github.io/wiki)
+
+---
+
+## 📱 Mobile & Desktop Apps (Beta Releases)
+
+Download standalone native wrappers from the [GitHub Releases](https://github.com/htetofficial/htetofficial.github.io/releases) page:
+
+- **Android APK (`v1.2.0 Beta`):** Fullscreen reader with App Links (`.well-known/assetlinks.json`) and remote announcements (`app-update.json`).
+  - *Install:* Download `.apk`, allow **"Install unknown apps"**, and optionally enable **Settings > Apps > Htet Official > Open by default > Open supported links**.
+- **macOS Desktop App (`v1.0.0 Beta`):** Dedicated `1200×800` desktop reader with Rice Paper (`#FAF8F5`) canvas and fullscreen support.
+  - *First Launch (Gatekeeper):* If macOS shows *"Apple could not verify Htet Official.app"*, click **Done**, open **System Settings > Privacy & Security > Security > Open Anyway** (or run `xattr -cr "/Applications/Htet Official.app"` in Terminal after moving to Applications).
+- **Progressive Web App (PWA):** Open `https://htetofficial.github.io/` in Chrome, Safari, or Edge and click **"Add to Home Screen"** / **"Install App"** for offline reading.
+
+---
+
+## 📊 Archive Corpus Overview (မာတိကာ အနှစ်ချုပ်)
+
+| Section / ကဏ္ဍ | Count | Description / ဖော်ပြချက် |
+| :--- | :---: | :--- |
+| **Research Articles (`articles.json`)** | 25 | Long-form papers on political philosophy, federalism, gender studies, and neuroscience |
+| **Publications (`publications.json`)** | 26 | Downloadable PDF monographs, policy papers, translations, and magazine essays |
+| **Books & Monographs (`books.json`)** | 4 | Full-length theoretical books and monographs |
+| **Journal Posts (`posts.json`)** | 37 | Daily reflections, commentary, and essays (81 total feed items) |
+| **Daily Wisdom Quotes (`quotes.json`)** | 19 | Curated philosophical quotes with instant copy and Telegram share |
+| **Glossary (`glossary.json`)** | 12 | Multilingual lexicon (Intersectionality, Biopolitics, Hegemony, Subalternity, etc.) |
+
+---
+
+## 🌟 Architecture & Core Features (နည်းပညာစနစ်နှင့် အသွင်အပြင်များ)
 
 1. **Soft Sino-Japanese Editorial Aesthetic:**
-   - Palette: `ivory` (`#FAF8F5`), `cream` (`#F2ECE4`), `taupe` (`#9C8F83`), `charcoal` (`#2B2927`), `vermilion` (`#B83A2D`).
-   - Cultural Accent: Traditional Red Hanko Seal Stamp (`assets/seal-stamp.svg`), hairline borders, and generous whitespace (*Ma* / 間).
-   - Wabi-Sabi Paper Grain texture overlay for authentic literary tactile experience.
+   - Palette: Rice Paper `ivory` (`#FAF8F5`), `cream` (`#F3ECE2`), `taupe` (`#9C8F83`), `charcoal` (`#252321`), and Hanko `vermilion` (`#B83A2D`).
+   - Traditional Red Hanko Seal Stamp (`assets/seal-stamp.svg`), *Ma* (間) whitespace, and subtle Wabi-Sabi paper grain overlay.
 
-2. **Dual-Language i18n System (မြန်မာ & English):**
-   - မြန်မာစာ (Pyidaungsu Unicode default, line-height 2.15) နှင့် English (Cormorant Garamond + Plus Jakarta Sans).
-   - `data-mm="..."` နှင့် `data-en="..."` attributes များဖြင့် Reload လုပ်စရာမလိုဘဲ ချက်ချင်း DOM ဘာသာပြန်စနစ်။
-   - `localStorage.getItem('site_lang')` ဖြင့် အသုံးပြုသူ ရွေးချယ်မှု မှတ်သားခြင်း။
+2. **5-Language Internationalization (`js/i18n.js`):**
+   - Instant zero-reload switching across **🇲🇲 မြန်မာ (Burmese)**, **🇬🇧 English**, **🇨🇳 简体中文 (Chinese)**, **🇹🇭 ภาษาไทย (Thai)**, and **🇯🇵 日本語 (Japanese)**.
+   - Burmese typography rendered in local Pyidaungsu Unicode (`fonts/Pyidaungsu-*.ttf`), paired with Cormorant Garamond and Plus Jakarta Sans.
 
-3. **High-Contrast Dark Mode & Multi-Theme System:**
-   - **Light Mode (ရိုးရာစက္ကူဖြူ):** နေ့ခင်းစာဖတ်ရှုရန် နူးညံ့သောအဖြူ။
-   - **Sepia Mode (ရှေးဟောင်းကျမ်းစာပေအသွင်):** မျက်စိအေးသက်သာစေသော Parchment အဝါနု။
-   - **Dark Mode (ဇိမ်ခံမှောင်ရီအနက်ရောင်):** `#F5EFE6` High-contrast ivory text, `#D1C9BE` body text, `#1A1816` card backgrounds ဖြင့် စာလုံးတိုင်း ၁၀၀% ရှင်းလင်းပြတ်သားစွာ ဖတ်ရှုနိုင်သော စနစ်။
-   - Keyboard Shortcut `T` ဖြင့် မုဒ်များကို အလွယ်တကူ အလှည့်ကျ ပြောင်းလဲနိုင်ခြင်း။
+3. **14-Theme Reading Studio (`js/theme.js`):**
+   - Includes **Light (Rice Paper)**, **Sepia (Parchment)**, **Dark (High-Contrast Obsidian `#121110`)**, **AMOLED Pitch Black**, plus curated Rose, Sakura, Peach, Amethyst, Lavender, Plum, Indigo, Ruby, Crimson, and Rosewood editions.
+   - Zero-FOUC initialization and keyboard shortcut (`T`) toggling.
 
-4. **Global Spotlight Search (⌘K / Ctrl+K):**
-   - မည်သည့်စာမျက်နှာမှမဆို `⌘K` သို့မဟုတ် Header Search ခလုတ်ကို နှိပ်၍ ဆောင်းပါးများ၊ ဒဿနသဘောတရားများ၊ ဂျာနယ်မှတ်စုများကို Real-time ရှာဖွေနိုင်ခြင်း။
+4. **Global Spotlight Search (`⌘K` / `Ctrl+K`) & Reading List Drawer:**
+   - Real-time cross-corpus search across articles, glossary terms, publications, and journal posts.
+   - Persistent `localStorage` bookmarks drawer with live badge counts and Canvas Confetti feedback.
 
-5. **Bookmarks & Reading List Drawer (စာဖတ်မှတ်တမ်း ဆွဲထုတ်ခန်း):**
-   - နှစ်သက်သော စာမူများကို Bookmark လုပ်၍ `localStorage` တွင် သိမ်းဆည်းနိုင်ခြင်း။
-   - Header ပေါ်ရှိ Bookmark Icon (တိုက်ရိုက်အရေအတွက် Badge ပါဝင်) ကို ကလစ်နှိပ်ရုံဖြင့် စာဖတ်မှတ်တမ်း Panel ပွင့်လာပြီး ချက်ချင်း ဖတ်ရှုနိုင်ခြင်း။
-   - သိမ်းဆည်းချိန်တွင် ပျော်ရွှင်ဖွယ် Canvas Confetti ဖောက်ပေးခြင်း။
+5. **Interactive Academic Reader (`js/reader.js`):**
+   - Scrollspy Table of Contents, reading progress bar, font size scaler, Zen Focus Mode, KaTeX math rendering, Leaflet interactive maps, and clickable inline citation popovers.
+   - One-click academic citation export in **APA 7**, **Chicago 17th**, **MLA 9th**, and **BibTeX**.
 
-6. **ဒဿနနှင့် ဂျန်ဒါ သဘောတရား အဘိဓာန် (`glossary.html`):**
-   - Intersectionality, Gender Performativity, Hegemony, Epistemic Injustice, Biopolitics, Subalternity စသည့် အဓိက သဘောတရားများကို ပညာရှင်များ၊ အသံထွက်လမ်းညွှန်၊ မြန်မာ့လူ့ဘောင်နှင့် ဆက်စပ်မှုများဖြင့် ပြည့်စုံစွာ ဖော်ပြထားသော နှစ်ဘာသာ အဘိဓာန်။
+6. **Dual Data Layer with Zero-Fail Fallback:**
+   - Loads from `data/*.json` and automatically falls back to `js/data/*-backup.js` on `file://` or offline/network errors.
 
-7. **သုတေသနစာစောင်များနှင့် ကျမ်းကိုးစနစ် (`publications.html`):**
-   - သုတေသန မိုနိုဂရပ်ဖ်များ၊ မူဝါဒစာတမ်းများနှင့် လူထုလက်စွဲ ဇင်းန် (Zines) စုစည်းမှု။
-   - APA 7, Chicago 17th, MLA 9th နှင့် BibTeX ပုံစံများဖြင့် Academic Citation ချက်ချင်း ကူးယူနိုင်သော စနစ်။
-
-8. **နေ့စဉ် ဒဿနဉာဏ်အလင်းပွင့် ဝစ်ဂျက် (Daily Wisdom Generator):**
-   - အစ်မထက်၏ တန်ဖိုးထား ဒဿနစကားရပ်များကို “နောက်တစ်ပုဒ်” ခလုတ်ဖြင့် လှည့်လည်ဖတ်ရှုနိုင်ပြီး၊ Citation ပါဝင်သော Quote အဖြစ် Copy ယူနိုင်ခြင်း သို့မဟုတ် Telegram သို့ ချက်ချင်း မျှဝေနိုင်ခြင်း။
-
-9. **အသံမှတ်တမ်းနှင့် ဒဿနစကားဝိုင်း UI (Spoken Reflections Audio Player):**
-   - `journal.html` တွင် နှုတ်ဖြင့် ဒဿနအတွေးစကားဝိုင်းများကို အမြန်နှုန်းချိန်ညှိမှု (1x, 1.25x, 1.5x) ဖြင့် နားဆင်နိုင်သော အသံ UI စနစ်။
-
-10. **Dual Data Layer with Zero-Fail Fallback (ကြံ့ခိုင်မှု အမြင့်ဆုံး စနစ်):**
-    - ပုံမှန်အခြေအနေတွင် `data/*.json` မှ fetch လုပ်သည်။
-    - `file://` protocol သို့မဟုတ် ကွန်ရက်ပြတ်တောက်ချိန်များတွင် အလိုအလျောက် `js/data/*-backup.js` မှ fallback dataset သို့ ကူးပြောင်းပေးသဖြင့် မည်သည့်အခါမျှ Error မတက်ပါ။
-
-11. **5-Language i18n, 14 Themes & PWA Offline Support:**
-    - မြန်မာ၊ English၊ 中文၊ ภาษาไทย နှင့် 日本語 (၅ ဘာသာ) + 0ms Anti-FOUC Theme ၁၄ မျိုး။
-    - `manifest.webmanifest`, `sw.js` နှင့် `offline.html` တို့ဖြင့် PWA အဖြစ် ထည့်သွင်းအသုံးပြုနိုင်ခြင်း။
-
-12. **SEO, Open Graph (Facebook/Telegram Link Preview) & JSON-LD Structured Data:**
-    - စာမျက်နှာ ၁၀ ခုလုံးတွင် `meta[name="description"]`, `robots`, `<link rel="canonical">`, Open Graph (`og:*`), Twitter Cards နှင့် Schema.org JSON-LD များ ထည့်သွင်းထားခြင်း။
-    - `article.html?id=...` တွင် `js/reader.js` မှတစ်ဆင့် ဆောင်းပါးတစ်ပုဒ်ချင်းစီ၏ Title, Description, Cover Image, Canonical URL နှင့် `ScholarlyArticle` JSON-LD တို့ကို အလိုအလျောက် Dynamic Update လုပ်ပေးခြင်း။
+7. **SEO, Open Graph, PWA & App Integration:**
+   - Full `meta` tags, Open Graph (`og-preview.jpeg`), Twitter Cards, and Schema.org JSON-LD across all 10 HTML pages, plus dynamic `ScholarlyArticle` JSON-LD in `js/reader.js`.
+   - `sitemap.xml`, `robots.txt`, `manifest.json` / `manifest.webmanifest`, `sw.js`, `offline.html`, `.well-known/assetlinks.json`, `.nojekyll`, and `app-update.json`.
 
 ---
 
-## 📁 ဖိုင်ဖွဲ့စည်းပုံ (Directory Structure)
+## 📁 Directory Structure (ဖိုင်ဖွဲ့စည်းပုံ)
 
-```
+```text
 .
-├── index.html                 # ပင်မ စာမျက်နှာ (Editorial Showcase, Hero, Daily Wisdom, Pillars)
-├── about.html                 # ကိုယ်ရေးအကျဉ်း၊ ပညာရပ်နောက်ခံနှင့် တန်ဖိုးထားရပ်တည်ချက်များ
-├── articles.html              # သုတေသန စာတမ်းများ အပြည့်အစုံ (Live Search & Category Filter)
-├── article.html               # သီးသန့် စာဖတ်ခန်း (?id=slug စနစ်ဖြင့် dynamically load)
-├── glossary.html              # ဒဿနနှင့် ဂျန်ဒါ သဘောတရားအဘိဓာန် (Searchable Lexicon)
-├── publications.html          # စာစောင်များ၊ မိုနိုဂရပ်ဖ်များနှင့် Citation Generator Modal
-├── journal.html               # နေ့စဉ် အတွေးစများ၊ အသံမှတ်တမ်းနှင့် လှုပ်ရှားမှု Timeline
-├── contact.html               # Telegram, Facebook, TikTok တိုက်ရိုက် ဆက်သွယ်ရန်နှင့် စာလွှာဖောင်
-├── 404.html                   # Sino-Japanese "無" ရသ ၄၀၄ စာမျက်နှာ
-├── css/
-│   ├── bootstrap.min.css      # Downloaded Bootstrap 5.3 framework
-│   ├── bootstrap-icons.min.css# Downloaded Bootstrap Icons CSS
-│   ├── fonts/                 # Bootstrap Icons WOFF/WOFF2 font binaries
-│   ├── aos.css                # Downloaded AOS scroll animations
-│   └── custom.css             # Pyidaungsu Font-face, High-Contrast Dark Mode & Master Styles
-├── js/
-│   ├── bootstrap.bundle.min.js# Downloaded Bootstrap 5.3 JS
-│   ├── aos.js                 # Downloaded AOS Library JS
-│   ├── confetti.browser.min.js# Downloaded Canvas Confetti Library JS
-│   ├── data-loader.js         # Articles, Posts, Glossary, Publications & Quotes Data Engine
-│   ├── theme.js               # Light / Sepia / Dark mode switch, shortcuts & storage
-│   ├── i18n.js                # Instant dual-language switcher (data-mm / data-en)
-│   ├── reader.js              # TOC, Reading Progress, Font Resizer, Citations
-│   ├── main.js                # Spotlight (⌘K), Bookmarks Drawer, Quote Generator, UI Engine
-│   └── data/
-│       ├── articles-backup.js # Backup dataset for articles
-│       ├── posts-backup.js    # Backup dataset for journal posts
-│       ├── glossary-backup.js # Backup dataset for philosophical glossary
-│       └── publications-backup.js # Backup dataset for research monographs
-├── data/
-│   ├── articles.json          # Main articles dataset (JSON)
-│   ├── posts.json             # Main posts dataset (JSON)
-│   ├── glossary.json          # Conceptual glossary dataset (JSON)
-│   └── publications.json      # Research monographs dataset (JSON)
-└── assets/
-    ├── favicon.svg            # Hanko seal favicon
-    └── seal-stamp.svg         # Stylized vermilion seal stamp vector
-```
-
----
-
-## 🚀 GitHub Pages တွင် တင်နည်း (Deployment)
-
-1. Repository ကို GitHub တွင် အသစ်ပြုလုပ်ပါ။
-2. ဖိုင်အားလုံးကို commit & push ပြုလုပ်ပါ-
-   ```bash
-   git init
-   git add .
-   git commit -m "feat: complete master upgrade with glossary, publications, and spotlight search"
-   git branch -M main
-   git remote add origin <your-repo-url>
-   git push -u origin main
-   ```
-3. GitHub Repository > **Settings** > **Pages** သို့ သွားပါ။
-4. **Branch** နေရာတွင် `main` (သို့မဟုတ် `root`) ကို ရွေးချယ်ပြီး **Save** နှိပ်ပါ။
-5. မိနစ်အနည်းငယ်အတွင်း [https://htetofficial.github.io/](https://htetofficial.github.io/) တွင် တိုက်ရိုက် လွှင့်တင်အသုံးပြုနိုင်ပါပြီ။
-
----
-
-## 📬 တရားဝင် ဆက်သွယ်ရန် (Official Contact)
-
-* **Email:** `htethtet2025ideahub@gmail.com`
-* **Telegram:** [@htetmmofficial](https://t.me/htetmmofficial)
+├── index.html                 # Editorial showcase, hero, daily wisdom, pillars
+├── about.html                 # Author biography, academic background, initiatives
+├── articles.html              # Research articles catalog (search & category filters)
+├── article.html               # Dynamic article reader (?id=slug)
+├── publications.html          # Monographs, PDFs & citation generator
+├── journal.html               # Reflections, spoken audio player & 6 layout modes
+├── glossary.html              # Searchable political & gender philosophy lexicon
+├── contact.html               # Direct contact & social channels
+├── 404.html / offline.html    # Custom Sino-Japanese 404 & PWA offline fallback
+├── sitemap.xml / robots.txt   # Search engine indexing configuration
+├── manifest.json              # Web App Manifest (PWA)
+├── sw.js                      # Service Worker for offline caching
+├── app-update.json            # FreeWebToApk Remote Update manifest
+├── .well-known/assetlinks.json# Android Digital Asset Links verification
+├── css/                       # Bootstrap, AOS, KaTeX, Leaflet, RemixIcon & custom.css
+├── js/                        # i18n, theme, reader, data-loader, pwa, main & backups
+├── data/                      # Primary JSON datasets (articles, posts, books, etc.)
+├── downloads/                 # PDFs, Markdown essays, BibTeX, CV & Press Kit
+├── fonts/                     # Pyidaungsu Unicode & KaTeX local font binaries
+└── assets/                    # Icons, Hanko seal SVG/PNG, cover images
