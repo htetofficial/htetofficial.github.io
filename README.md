@@ -1,6 +1,7 @@
 # Htet Official (ထက်) — Personal Editorial & Research Platform
 
-တရားဝင် ဝက်ဘ်ဆိုဒ် ပလက်ဖောင်း (Burmese Transgirl Writer, Political Philosophy Researcher & Activist).
+တရားဝင် ဝက်ဘ်ဆိုဒ် ပလက်ဖောင်း — [https://htetofficial.github.io/](https://htetofficial.github.io/)  
+(Burmese Transgirl Writer, Political Philosophy Researcher & Activist)
 
 ---
 
@@ -46,6 +47,14 @@
 10. **Dual Data Layer with Zero-Fail Fallback (ကြံ့ခိုင်မှု အမြင့်ဆုံး စနစ်):**
     - ပုံမှန်အခြေအနေတွင် `data/*.json` မှ fetch လုပ်သည်။
     - `file://` protocol သို့မဟုတ် ကွန်ရက်ပြတ်တောက်ချိန်များတွင် အလိုအလျောက် `js/data/*-backup.js` မှ fallback dataset သို့ ကူးပြောင်းပေးသဖြင့် မည်သည့်အခါမျှ Error မတက်ပါ။
+
+11. **5-Language i18n, 14 Themes & PWA Offline Support:**
+    - မြန်မာ၊ English၊ 中文၊ ภาษาไทย နှင့် 日本語 (၅ ဘာသာ) + 0ms Anti-FOUC Theme ၁၄ မျိုး။
+    - `manifest.webmanifest`, `sw.js` နှင့် `offline.html` တို့ဖြင့် PWA အဖြစ် ထည့်သွင်းအသုံးပြုနိုင်ခြင်း။
+
+12. **SEO, Open Graph (Facebook/Telegram Link Preview) & JSON-LD Structured Data:**
+    - စာမျက်နှာ ၁၀ ခုလုံးတွင် `meta[name="description"]`, `robots`, `<link rel="canonical">`, Open Graph (`og:*`), Twitter Cards နှင့် Schema.org JSON-LD များ ထည့်သွင်းထားခြင်း။
+    - `article.html?id=...` တွင် `js/reader.js` မှတစ်ဆင့် ဆောင်းပါးတစ်ပုဒ်ချင်းစီ၏ Title, Description, Cover Image, Canonical URL နှင့် `ScholarlyArticle` JSON-LD တို့ကို အလိုအလျောက် Dynamic Update လုပ်ပေးခြင်း။
 
 ---
 
@@ -108,4 +117,11 @@
    ```
 3. GitHub Repository > **Settings** > **Pages** သို့ သွားပါ။
 4. **Branch** နေရာတွင် `main` (သို့မဟုတ် `root`) ကို ရွေးချယ်ပြီး **Save** နှိပ်ပါ။
-5. မိနစ်အနည်းငယ်အတွင်း `https://<username>.github.io/<repo-name>/` တွင် တိုက်ရိုက် လွှင့်တင်အသုံးပြုနိုင်ပါပြီ။
+5. မိနစ်အနည်းငယ်အတွင်း [https://htetofficial.github.io/](https://htetofficial.github.io/) တွင် တိုက်ရိုက် လွှင့်တင်အသုံးပြုနိုင်ပါပြီ။
+
+---
+
+## 📬 တရားဝင် ဆက်သွယ်ရန် (Official Contact)
+
+* **Email:** `htethtet2025ideahub@gmail.com`
+* **Telegram:** [@htetmmofficial](https://t.me/htetmmofficial)
