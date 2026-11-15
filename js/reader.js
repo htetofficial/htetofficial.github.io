@@ -294,6 +294,7 @@
       const siteLang = window.I18n ? window.I18n.getLang() : 'mm';
       const effectiveLang = this.overrideLang || siteLang;
       const lang = effectiveLang;
+      this.updateMetaAndSchema(article, lang);
 
       // Update #article-lang-toggle-btn label and title
       const langToggleBtn = document.getElementById('article-lang-toggle-btn');
@@ -516,6 +517,78 @@
     // --------------------------------------------------------------------------
     // 4. Heading Enhancements (Anchors, Badges, Section Read-Time)
     // --------------------------------------------------------------------------
+    updateMetaAndSchema(article, lang) {
+      if (!article) return;
+      const baseUrl = 'https://htetofficial.github.io/';
+      const slug = article.id || article.slug || '';
+      const pageUrl = `${baseUrl}article.html?id=${encodeURIComponent(slug)}`;
+      const title = ((lang === 'mm' ? (article.title_mm || article.title_en) : (article.title_en || article.title_mm)) || 'Htet Official') + ' | Htet Official';
+      const desc = ((lang === 'mm' ? (article.excerpt_mm || article.excerpt_en) : (article.excerpt_en || article.excerpt_mm)) || '').trim();
+      const rawImg = article.image || article.cover_image || 'assets/images/phoenix-from-ashes-cover.jpg';
+      const imageUrl = rawImg.startsWith('http') ? rawImg : (baseUrl + rawImg.replace(/^\//, ''));
+
+      document.title = title;
+
+      const setMeta = (selector, attr, val) => {
+        if (!val) return;
+        const el = document.querySelector(selector);
+        if (el) el.setAttribute(attr, val);
+      };
+
+      setMeta('meta[name="description"]', 'content', desc);
+      setMeta('link[rel="canonical"]', 'href', pageUrl);
+      setMeta('meta[property="og:title"]', 'content', title);
+      setMeta('meta[property="og:description"]', 'content', desc);
+      setMeta('meta[property="og:url"]', 'content', pageUrl);
+      setMeta('meta[property="og:image"]', 'content', imageUrl);
+      setMeta('meta[property="og:image:secure_url"]', 'content', imageUrl);
+      setMeta('meta[property="og:image:alt"]', 'content', title);
+      setMeta('meta[name="twitter:title"]', 'content', title);
+      setMeta('meta[name="twitter:description"]', 'content', desc);
+      setMeta('meta[name="twitter:image"]', 'content', imageUrl);
+      setMeta('meta[name="twitter:image:alt"]', 'content', title);
+
+      const ldScript = document.getElementById('article-jsonld');
+      if (ldScript) {
+        const schema = {
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'ScholarlyArticle',
+              '@id': pageUrl + '#article',
+              'headline': title.replace(' | Htet Official', ''),
+              'description': desc,
+              'datePublished': article.date || '2026-02-14',
+              'author': {
+                '@type': 'Person',
+                'name': 'Htet Myat Ekri',
+                'alternateName': 'ထက်မြတ်ဧကရီ',
+                'url': baseUrl + 'about.html'
+              },
+              'publisher': {
+                '@type': 'Person',
+                'name': 'Htet Official',
+                'url': baseUrl
+              },
+              'mainEntityOfPage': pageUrl,
+              'image': imageUrl,
+              'keywords': Array.isArray(article.tags) ? article.tags.join(', ') : '',
+              'inLanguage': lang === 'mm' ? 'my' : 'en'
+            },
+            {
+              '@type': 'BreadcrumbList',
+              'itemListElement': [
+                { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': baseUrl },
+                { '@type': 'ListItem', 'position': 2, 'name': 'Articles', 'item': baseUrl + 'articles.html' },
+                { '@type': 'ListItem', 'position': 3, 'name': title.replace(' | Htet Official', ''), 'item': pageUrl }
+              ]
+            }
+          ]
+        };
+        ldScript.textContent = JSON.stringify(schema, null, 2);
+      }
+    },
+
     enhanceHeadings(container) {
       const headings = container.querySelectorAll('h2, h3, h4');
       const lang = window.I18n ? window.I18n.getLang() : 'mm';
