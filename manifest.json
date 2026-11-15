@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "id": "htet-official-pwa",
+  "name": "ထက် | Htet — စာရေးဆရာမနှင့် နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီ",
+  "short_name": "ထက် (Htet)",
+  "description": "မြန်မာ Transgirl စာရေးဆရာမ၊ နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် လူမှုတက်ကြွလှုပ်ရှားသူ ထက်၏ တရားဝင် စာမူများနှင့် သုတေသန စာကြည့်တိုက်",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#121110",
+  "theme_color": "#B83A2D",
+  "lang": "my",
+  "dir": "ltr",
+  "categories": ["books", "education", "news", "lifestyle", "philosophy"],
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "assets/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/favicon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/favicon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "ဆောင်းပါးများ (Articles)",
+      "short_name": "ဆောင်းပါးများ",
+      "description": "သုတေသန စာတမ်းများနှင့် ဆောင်းပါးများ ဖတ်ရှုရန်",
+      "url": "./articles.html",
+      "icons": [{ "src": "assets/favicon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "ထုတ်ဝေမှုများ (Publications)",
+      "short_name": "ထုတ်ဝေမှုများ",
+      "description": "စာအုပ်များနှင့် သုတေသနစာစောင်များ ဒေါင်းလုဒ်ရယူရန်",
+      "url": "./publications.html",
+      "icons": [{ "src": "assets/favicon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "မှတ်စုနှင့် ပို့စ်များ (Journal)",
+      "short_name": "မှတ်စုများ",
+      "description": "နေ့စဉ် အတွေးအမြင်နှင့် လူမှုမှတ်စုများ",
+      "url": "./journal.html",
+      "icons": [{ "src": "assets/favicon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "ဝေါဟာရအဘိဓာန် (Glossary)",
+      "short_name": "ဝေါဟာရ",
+      "description": "နိုင်ငံရေးနှင့် လူမှုဒဿန ဝေါဟာရအဘိဓာန်",
+      "url": "./glossary.html",
+      "icons": [{ "src": "assets/favicon-192x192.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false
+}
