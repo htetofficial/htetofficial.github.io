@@ -1,7 +1,6 @@
 /**
  * Service Worker for Htet Official Progressive Web App (PWA)
  * Comprehensive offline-first caching, background sync & fast delivery
- * Supports Android, iOS, iPadOS, macOS, and Windows
  */
 
 const CACHE_NAME = 'htet-pwa-v2.2';
@@ -70,12 +69,10 @@ const CORE_SHELL_ASSETS = [
   './assets/seal-stamp.svg'
 ];
 
-
 // Install Event: Precache core application shell
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      // Add each asset gracefully so one missing optional asset doesn't abort installation
       return Promise.allSettled(
         CORE_SHELL_ASSETS.map((url) => {
           return fetch(url, { cache: 'reload' }).then((response) => {
@@ -107,7 +104,6 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   const url = new URL(req.url);
 
-  // Ignore non-GET and cross-origin analytics/trackers
   if (req.method !== 'GET') return;
 
   // 1. Navigation requests (HTML pages): Network-First with Cache fallback & Offline page
@@ -120,13 +116,10 @@ self.addEventListener('fetch', (event) => {
         }
         return networkRes;
       }).catch(async () => {
-        // Network failed, look in cache
-        const cached = await caches.match(req);
+        const cached = await caches.match(req, { ignoreSearch: true });
         if (cached) return cached;
-        // Check for specific clean URL matches (e.g. index.html)
         const cachedIndex = await caches.match('./index.html');
         if (cachedIndex) return cachedIndex;
-        // Fallback to offline page
         return caches.match('./offline.html');
       })
     );
@@ -158,7 +151,6 @@ self.addEventListener('fetch', (event) => {
           return networkRes;
         }).catch(() => null);
 
-        // Return cached immediately if found, else wait for network
         return cachedRes || fetchPromise;
       })
     );
@@ -173,7 +165,7 @@ self.addEventListener('fetch', (event) => {
         caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
       }
       return networkRes;
-    }).catch(() => caches.match(req))
+    }).catch(() => caches.match(req, { ignoreSearch: true }))
   );
 });
 
