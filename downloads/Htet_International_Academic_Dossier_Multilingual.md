@@ -6,7 +6,7 @@
 **Nationality / Origin:** Myanmar (Burma)  
 **Specialization:** Political Philosophy, Radical & Intersectional Feminism, Labor Rights, Generational Sociology  
 **Official Portal:** https://htetofficial.github.io  
-**Contact / Verification Email:** htetmyanmar321bb@gmail.com  
+**Contact / Verification Email:** htethtet2025ideahub@gmail.com  
 **Official Telegram:** https://t.me/htetmmofficial  
 **Dossier Revision Date:** November 2026  
 
@@ -162,4 +162,4 @@ Ekri, Htet Myat. 2026. *The Road of Slow Walkers: Silent Steps in a Rushing Worl
 ```
 
 ---
-*Official Verification Portal: https://htetofficial.github.io | Academic Inquiries: htetmyanmar321bb@gmail.com*
+*Official Verification Portal: https://htetofficial.github.io | Academic Inquiries: htethtet2025ideahub@gmail.com*
