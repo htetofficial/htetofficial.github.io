@@ -1,7 +1,12 @@
+# Robots.txt for Htet Official Research Portal
+# Website: https://htetofficial.github.io
+
 User-agent: *
 Allow: /
 
+# Prevent indexing error & fallback screens
 Disallow: /404.html
 Disallow: /offline.html
 
+# XML Sitemap
 Sitemap: https://htetofficial.github.io/sitemap.xml
