@@ -12,7 +12,13 @@
   "theme_color": "#B83A2D",
   "lang": "my",
   "dir": "ltr",
-  "categories": ["books", "education", "news", "lifestyle", "philosophy"],
+  "categories": [
+    "books",
+    "education",
+    "news",
+    "lifestyle",
+    "philosophy"
+  ],
   "icons": [
     {
       "src": "assets/favicon.svg",
@@ -65,29 +71,77 @@
       "short_name": "ဆောင်းပါးများ",
       "description": "သုတေသန စာတမ်းများနှင့် ဆောင်းပါးများ ဖတ်ရှုရန်",
       "url": "./articles.html",
-      "icons": [{ "src": "assets/favicon-192x192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "assets/favicon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "ထုတ်ဝေမှုများ (Publications)",
       "short_name": "ထုတ်ဝေမှုများ",
       "description": "စာအုပ်များနှင့် သုတေသနစာစောင်များ ဒေါင်းလုဒ်ရယူရန်",
       "url": "./publications.html",
-      "icons": [{ "src": "assets/favicon-192x192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "assets/favicon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "မှတ်စုနှင့် ပို့စ်များ (Journal)",
       "short_name": "မှတ်စုများ",
       "description": "နေ့စဉ် အတွေးအမြင်နှင့် လူမှုမှတ်စုများ",
       "url": "./journal.html",
-      "icons": [{ "src": "assets/favicon-192x192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "assets/favicon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "ဝေါဟာရအဘိဓာန် (Glossary)",
       "short_name": "ဝေါဟာရ",
       "description": "နိုင်ငံရေးနှင့် လူမှုဒဿန ဝေါဟာရအဘိဓာန်",
       "url": "./glossary.html",
-      "icons": [{ "src": "assets/favicon-192x192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "assets/favicon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ],
-  "prefer_related_applications": false
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "play",
+      "id": "com.htetofficial.app",
+      "url": "https://github.com/htetofficial/htetofficial.github.io/releases/tag/v1.2.0-beta"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/images/og-preview.jpeg",
+      "sizes": "1376x768",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "ထက် (Htet) — နိုင်ငံရေးဒဿနိကဗေဒနှင့် စာပေမော်ကွန်း စာကြည့်တိုက်"
+    },
+    {
+      "src": "assets/images/og-preview.jpeg",
+      "sizes": "1376x768",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "ထက် (Htet) — Android & Mobile စာဖတ်အတွေ့အကြုံ"
+    }
+  ],
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ]
 }
