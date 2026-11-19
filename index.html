@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="my" data-lang="mm">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
 
@@ -329,16 +330,18 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap">
   </noscript>
 
-  <!-- Local Downloaded Bootstrap 5.3 & Bootstrap Icons (Non-blocking) -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/bootstrap-icons.min.css" >
+  <!-- Asynchronously loaded non-critical stylesheets (Eliminates Render Blocking) -->
+  <link rel="preload" href="css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/bootstrap.min.css"></noscript>
+  <link rel="preload" href="css/bootstrap-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="css/bootstrap-icons.min.css"></noscript>
-
-  <!-- Local Downloaded Remix Icon v4.5.0 -->
-  <link rel="stylesheet" href="css/remixicon.css">
-  <!-- Local Downloaded AOS CSS (Non-blocking) -->
-  <link rel="stylesheet" href="css/aos.css" >
+  <link rel="preload" href="css/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/remixicon.css"></noscript>
+  <link rel="preload" href="css/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="css/aos.css"></noscript>
+
+  <!-- Custom Editorial CSS (Minified for Fast Paint) -->
+  <link rel="stylesheet" href="css/custom.min.css">
 
   <!-- Tailwind CSS Configuration Defined Before Deferred Script -->
   <script>
@@ -375,14 +378,11 @@
       }
     };
   </script>
-  <script src="js/tailwind.min.js"></script>
-
-  <!-- Custom Editorial CSS (Highest Priority) -->
-  <link rel="stylesheet" href="css/custom.css">
-  <script src="js/theme.js"></script>
-  <!-- Telegram WebApp SDK & Mini App Controller -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script src="js/telegram-webapp.js"></script>
+  <script defer src="js/tailwind.min.js"></script>
+  <script defer src="js/theme.js"></script>
+  <!-- Telegram WebApp SDK & Mini App Controller (Deferred) -->
+  <script defer src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script defer src="js/telegram-webapp.js"></script>
 </head>
 <body class="bg-ivory text-charcoal min-h-screen flex flex-col font-sans">
 
@@ -897,21 +897,21 @@
               <div class="flex items-center justify-between gap-2">
                 <span class="text-faint flex items-center space-x-1 shrink-0"><i class="ri-women-line text-purple-600"></i> <span data-mm="အမျိုးသမီးကွန်ရက်" data-en="Network" data-zh="女性网络" data-th="เครือข่ายสตรี" data-ja="女性ネットワーク">အမျိုးသမီးကွန်ရက်</span></span>
                 <a href="https://t.me/womennationwomenkingdom" target="_blank" rel="noopener noreferrer" class="font-medium text-purple-700 dark:text-purple-400 hover:underline text-right text-[11px] sm:text-xs flex items-center gap-1.5" title="Women Nation">
-                  <img src="assets/images/women-nation-logo.jpg" alt="Women Nation" class="w-3.5 h-3.5 rounded-full object-cover">
+                  <img src="assets/images/women-nation-logo.jpg" alt="" aria-hidden="true" class="w-3.5 h-3.5 rounded-full object-cover">
                   <span>Women Nation (2024)</span>
                 </a>
               </div>
               <div class="flex items-center justify-between gap-2">
                 <span class="text-faint flex items-center space-x-1 shrink-0"><i class="ri-lightbulb-line text-amber-600"></i> <span data-mm="ပလက်ဖောင်း" data-en="Initiative" data-zh="学术平台" data-th="แพลตฟอร์ม" data-ja="プラットフォーム">ပလက်ဖောင်း</span></span>
                 <a href="https://t.me/ideahubmyanmar" target="_blank" rel="noopener noreferrer" class="font-medium text-amber-700 dark:text-amber-400 hover:underline text-right text-[11px] sm:text-xs flex items-center gap-1.5" title="IdeaHub Myanmar (Est. 2024)">
-                  <img src="assets/images/ideahub-logo.jpg" alt="IdeaHub" class="w-3.5 h-3.5 rounded-full object-cover">
+                  <img src="assets/images/ideahub-logo.jpg" alt="" aria-hidden="true" class="w-3.5 h-3.5 rounded-full object-cover">
                   <span>IdeaHub Myanmar (2024)</span>
                 </a>
               </div>
               <div class="flex items-center justify-between gap-2">
                 <span class="text-faint flex items-center space-x-1 shrink-0"><i class="ri-team-line text-blue-600"></i> <span data-mm="လူငယ်အဖွဲ့" data-en="Organization" data-zh="青年组织" data-th="องค์กรเยาวชน" data-ja="青年組織">လူငယ်အဖွဲ့</span></span>
                 <a href="https://t.me/For_The_Future_Myanmar" target="_blank" rel="noopener noreferrer" class="font-medium text-blue-700 dark:text-blue-400 hover:underline text-right text-[11px] sm:text-xs flex items-center gap-1.5" title="For The Future Myanmar (Certificate Recipient Nov 2026)">
-                  <img src="assets/images/for-the-future-myanmar-logo.jpg" alt="For The Future Myanmar" class="w-3.5 h-3.5 rounded-full object-cover">
+                  <img src="assets/images/for-the-future-myanmar-logo.jpg" alt="" aria-hidden="true" class="w-3.5 h-3.5 rounded-full object-cover">
                   <span>For The Future Myanmar</span>
                 </a>
               </div>
@@ -932,15 +932,15 @@
                 <span class="text-[10px] sm:text-[11px]">Telegram</span>
               </a>
               <a href="https://t.me/womennationwomenkingdom" target="_blank" rel="noopener noreferrer" class="p-1.5 sm:p-2 rounded-xl bg-cream hover:bg-vermilion-soft transition-colors text-charcoal hover:text-vermilion" title="Channel: Women Nation">
-                <img src="assets/images/women-nation-logo.jpg" alt="Women Nation" class="w-4 h-4 mx-auto mb-1 rounded-sm object-cover">
+                <img src="assets/images/women-nation-logo.jpg" alt="" aria-hidden="true" class="w-4 h-4 mx-auto mb-1 rounded-sm object-cover">
                 <span class="text-[10px] sm:text-[11px]">Women</span>
               </a>
               <a href="https://t.me/ideahubmyanmar" target="_blank" rel="noopener noreferrer" class="p-1.5 sm:p-2 rounded-xl bg-cream hover:bg-vermilion-soft transition-colors text-charcoal hover:text-vermilion" title="IdeaHub Myanmar (Est. 2024)">
-                <img src="assets/images/ideahub-logo.jpg" alt="IdeaHub" class="w-4 h-4 mx-auto mb-1 rounded-sm object-cover">
+                <img src="assets/images/ideahub-logo.jpg" alt="" aria-hidden="true" class="w-4 h-4 mx-auto mb-1 rounded-sm object-cover">
                 <span class="text-[10px] sm:text-[11px]">IdeaHub</span>
               </a>
               <a href="https://t.me/ideahublibrary" target="_blank" rel="noopener noreferrer" class="p-1.5 sm:p-2 rounded-xl bg-cream hover:bg-vermilion-soft transition-colors text-charcoal hover:text-vermilion" title="IdeaHub Library (1,522+ PDFs)">
-                <img src="assets/images/ideahub-library-logo.jpg" alt="IdeaHub Library" class="w-4 h-4 mx-auto mb-1 rounded-sm object-cover">
+                <img src="assets/images/ideahub-library-logo.jpg" alt="" aria-hidden="true" class="w-4 h-4 mx-auto mb-1 rounded-sm object-cover">
                 <span class="text-[10px] sm:text-[11px]">Library</span>
               </a>
               <a href="https://facebook.com/htetmyatekri" target="_blank" rel="noopener noreferrer" class="p-1.5 sm:p-2 rounded-xl bg-cream hover:bg-vermilion-soft transition-colors text-charcoal hover:text-vermilion" title="Facebook">
@@ -1111,7 +1111,7 @@
               <i class="ri-file-pdf-2-line text-base"></i>
               <span data-mm="ကြေညာစာတမ်း Full PDF (2.7 MB)" data-en="Full Manifesto PDF (2.7 MB)" data-zh="宣言全文 PDF (2.7 MB)" data-th="คำประกาศฉบับเต็ม PDF (2.7 MB)" data-ja="宣言全文 PDF (2.7 MB)">ကြေညာစာတမ်း Full PDF (2.7 MB)</span>
             </a>
-            <a href="downloads/commufemocratism-manifesto.md" download class="px-3.5 py-2.5 rounded-xl bg-cream border border-taupe-light hover:border-purple-600 text-charcoal hover:text-purple-700 transition-colors font-medium flex items-center space-x-1.5" title="Markdown Source">
+            <a href="downloads/commufemocratism-manifesto.md" download class="px-3.5 py-2.5 rounded-xl bg-cream border border-taupe-light hover:border-purple-600 text-charcoal hover:text-purple-700 transition-colors font-medium flex items-center space-x-1.5" title="Markdown Source" aria-label="Commufemocratism Manifesto Markdown ဖိုင် ရယူရန်">
               <i class="ri-markdown-line text-purple-700 dark:text-purple-400"></i>
               <span>.md</span>
             </a>
@@ -1165,7 +1165,7 @@
               <i class="ri-file-pdf-2-line text-base"></i>
               <span data-mm="Full Book PDF ရယူရန် (9.2 MB)" data-en="Download Full Book (9.2 MB PDF)" data-zh="下载全书原版 (9.2 MB PDF)" data-th="ดาวน์โหลดหนังสือฉบับเต็ม (9.2 MB PDF)" data-ja="完全版書籍ダウンロード (9.2 MB PDF)">Full Book PDF ရယူရန် (9.2 MB)</span>
             </a>
-            <a href="downloads/the-road-of-slow-walkers-171p.md" download class="px-3.5 py-2.5 rounded-xl bg-cream border border-taupe-light hover:border-amber-600 text-charcoal hover:text-amber-700 transition-colors font-medium flex items-center space-x-1.5" title="Markdown Synopsis">
+            <a href="downloads/the-road-of-slow-walkers-171p.md" download class="px-3.5 py-2.5 rounded-xl bg-cream border border-taupe-light hover:border-amber-600 text-charcoal hover:text-amber-700 transition-colors font-medium flex items-center space-x-1.5" title="Markdown Synopsis" aria-label="The Road of Slow Walkers Markdown ဖိုင် ရယူရန်">
               <i class="ri-markdown-line text-amber-700 dark:text-amber-400"></i>
               <span>.md</span>
             </a>
@@ -1213,7 +1213,7 @@
         </div>
         <div class="w-full md:w-72 rounded-2xl overflow-hidden border border-amber-400/35 bg-slate-950/90 p-1.5 flex-shrink-0 shadow-xl relative z-10">
           <a href="article.html?id=myanmar-on-the-tightrope" class="block">
-            <img src="assets/images/myanmar-on-the-tightrope-cover.svg" alt="Myanmar on the Tightrope Cover" class="w-full h-auto object-contain rounded-xl" loading="lazy">
+            <img src="assets/images/myanmar-on-the-tightrope-cover.svg" alt="Myanmar on the Tightrope Cover" width="288" height="384" style="aspect-ratio: 3/4;" class="w-full h-auto object-contain rounded-xl" loading="lazy">
           </a>
         </div>
       </div>
@@ -1327,7 +1327,7 @@
               <i class="ri-book-read-line"></i>
             </div>
             <div>
-              <div class="flex items-center space-x-2 text-[10px] font-mono text-faint uppercase mb-0.5">
+              <div class="flex items-center space-x-2 text-[10px] font-mono text-charcoal/80 dark:text-zinc-200 font-semibold uppercase mb-0.5">
                 <span class="hanko-stamp px-2 py-0.5 text-[11px] font-bold">အဘိဓာန်</span>
                 <span>THEORETICAL LEXICON</span>
               </div>
@@ -2053,7 +2053,7 @@
           ခွဲခြားဆက်ဆံမှု ကင်းမဲ့သော၊ ကျား၊ မ တန်းတူညီမျှပြီး တရားမျှတသော လူ့ဘောင် တည်ဆောက်ရေး။
         </p>
         <div class="pt-2">
-          <span class="text-[11px] text-faint">© 2026 Htet (ထက်). All Rights Reserved.</span>
+          <span class="text-[11px] text-charcoal/80 dark:text-zinc-300 font-medium">© 2026 Htet (ထက်). All Rights Reserved.</span>
         </div>
       </div>
 
@@ -2075,7 +2075,7 @@
                 <span class="font-mono text-xs font-semibold text-charcoal group-hover:text-emerald-600 transition-colors flex items-center gap-1.5">
                   <i class="ri-vercel-fill text-sm"></i> Vercel Mirror
                 </span>
-                <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 text-[10px] font-semibold">VPN မလို</span>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-950 dark:text-emerald-100 text-[10px] font-bold">VPN မလို</span>
               </div>
               <span class="font-mono text-[11px] text-muted break-all">htetofficialgithubio.vercel.app</span>
             </div>
@@ -2089,7 +2089,7 @@
                 <span class="font-mono text-xs font-semibold text-charcoal group-hover:text-amber-600 transition-colors flex items-center gap-1.5">
                   <i class="ri-flashlight-fill text-amber-500"></i> Cloudflare Edge
                 </span>
-                <span class="px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-300 text-[10px] font-semibold">Edge CDN</span>
+                <span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-950 dark:text-amber-100 text-[10px] font-bold">Edge CDN</span>
               </div>
               <span class="font-mono text-[11px] text-muted break-all">web.htetofficial.workers.dev</span>
             </div>
@@ -2103,7 +2103,7 @@
                 <span class="font-mono text-xs font-semibold text-charcoal group-hover:text-blue-600 transition-colors flex items-center gap-1.5">
                   <i class="ri-apps-2-line text-blue-500"></i> Cloudflare App
                 </span>
-                <span class="px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-700 dark:text-blue-300 text-[10px] font-semibold">Alternative</span>
+                <span class="px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-950 dark:text-blue-100 text-[10px] font-bold">Alternative</span>
               </div>
               <span class="font-mono text-[11px] text-muted break-all">app.htetofficial.workers.dev</span>
             </div>
@@ -2216,21 +2216,19 @@
     </div>
   </div>
 
-  <!-- Local Downloaded Bootstrap 5.3 & AOS Scripts -->
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/confetti.browser.min.js"></script>
+  <!-- UI & Helper Scripts (Deferred for Zero Main-Thread Blocking) -->
+  <script defer src="js/bootstrap.bundle.min.js"></script>
+  <script defer src="js/aos.js"></script>
+  <script defer src="js/confetti.browser.min.js"></script>
 
-  <!-- Core UI Engines First (Zero Latency Execution) -->
-  <script src="js/i18n.js"></script>
-  <script src="js/pwa.js"></script>
+  <!-- Core Localization & PWA Engine -->
+  <script defer src="js/i18n.js"></script>
+  <script defer src="js/pwa.js"></script>
 
-  <!-- Core UI & Data Engine Scripts (Backups Loaded Dynamically On-Demand) -->
-  <script src="js/data-loader.js"></script>
-  <script src="js/burmesenlp.js"></script>
-  <script src="js/pdf/pdf.min.js"></script>
-  <script src="js/pdf-viewer.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/vocab-lookup.js"></script>
+  <!-- Core Data Loader & Main Application Engine -->
+  <script defer src="js/data-loader.js"></script>
+  <script defer src="js/burmesenlp.js"></script>
+  <script defer fetchpriority="high" src="js/main.js"></script>
+  <script defer src="js/vocab-lookup.js"></script>
 </body>
 </html>

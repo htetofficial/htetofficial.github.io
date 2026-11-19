@@ -125,10 +125,17 @@ export default {
     // 4. Default Static Asset Serving via Cloudflare Pages / Workers Assets
     if (env.ASSETS) {
       const resp = await env.ASSETS.fetch(request);
-      // Ensure CORS for Telegram Mini App
-      if (resp.ok && (url.pathname.endsWith('.json') || url.pathname.endsWith('.txt'))) {
+      if (resp.ok) {
         const newH = new Headers(resp.headers);
-        newH.set('access-control-allow-origin', '*');
+        newH.set('strict-transport-security', 'max-age=63072000; includeSubDomains; preload');
+        newH.set('x-content-type-options', 'nosniff');
+        newH.set('cross-origin-opener-policy', 'same-origin-allow-popups');
+        newH.set('referrer-policy', 'strict-origin-when-cross-origin');
+
+        // Ensure CORS for Telegram Mini App & API requests
+        if (url.pathname.endsWith('.json') || url.pathname.endsWith('.txt') || url.pathname.endsWith('.js') || url.pathname.endsWith('.css')) {
+          newH.set('access-control-allow-origin', '*');
+        }
         return new Response(resp.body, { status: resp.status, headers: newH });
       }
       return resp;

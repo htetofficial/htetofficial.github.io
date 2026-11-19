@@ -954,12 +954,12 @@
               <span class="truncate font-medium">${config.announcementText}</span>
             </div>
             <div class="flex items-center space-x-2 shrink-0">
-              <a href="https://github.com/htetofficial/htetofficial.github.io/releases/tag/v1.2.0-beta" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-full bg-white/20 hover:bg-white/30 text-white font-semibold text-[11px] flex items-center space-x-1 transition-all">
+              <a href="https://github.com/htetofficial/htetofficial.github.io/releases/tag/v1.2.0-beta" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-full bg-white text-[#8A2B1D] hover:bg-cream font-bold text-[11px] flex items-center space-x-1 transition-all shadow-xs" aria-label="Android App ရယူရန်">
                 <i class="ri-android-line text-xs"></i>
                 <span class="hidden sm:inline">Android App</span>
                 <span>ရယူရန်</span>
               </a>
-              <button id="htet-announcement-close-btn" class="w-6 h-6 rounded-full hover:bg-black/20 flex items-center justify-center text-white/90 hover:text-white transition-colors cursor-pointer" title="ပိတ်ရန်" aria-label="Close Announcement">
+              <button id="htet-announcement-close-btn" class="w-6 h-6 rounded-full hover:bg-black/20 flex items-center justify-center text-white transition-colors cursor-pointer" title="ပိတ်ရန်" aria-label="Close Announcement">
                 <i class="ri-close-line text-sm"></i>
               </button>
             </div>

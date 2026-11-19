@@ -185,29 +185,39 @@
   }
 
   const HtetData = {
+    _articlesPromise: null,
+    _postsPromise: null,
+    _glossaryPromise: null,
+    _publicationsPromise: null,
+    _booksPromise: null,
+
     /**
-     * Fetch all articles with automatic fallback
+     * Fetch all articles with automatic fallback and in-memory memoization
      * @returns {Promise<Array>}
      */
     async getArticles() {
-      if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
-        if (!window.HTET_ARTICLES_BACKUP && !window.articlesData) {
-          await loadBackupScript('js/data/articles-backup.js');
+      if (this._articlesPromise) return this._articlesPromise;
+      this._articlesPromise = (async () => {
+        if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+          if (!window.HTET_ARTICLES_BACKUP && !window.articlesData) {
+            await loadBackupScript('js/data/articles-backup.js');
+          }
+          return window.HTET_ARTICLES_BACKUP || window.articlesData || [];
         }
-        return window.HTET_ARTICLES_BACKUP || window.articlesData || [];
-      }
-      try {
-        const response = await fetch('data/articles.json', { cache: 'no-cache' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        return Array.isArray(data) ? data : (window.HTET_ARTICLES_BACKUP || window.articlesData || []);
-      } catch (err) {
-        console.warn('[HtetData] fetch(data/articles.json) fallback triggered.', err);
-        if (!window.HTET_ARTICLES_BACKUP && !window.articlesData) {
-          await loadBackupScript('js/data/articles-backup.js');
+        try {
+          const response = await fetch('data/articles.json');
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const data = await response.json();
+          return Array.isArray(data) ? data : (window.HTET_ARTICLES_BACKUP || window.articlesData || []);
+        } catch (err) {
+          console.warn('[HtetData] fetch(data/articles.json) fallback triggered.', err);
+          if (!window.HTET_ARTICLES_BACKUP && !window.articlesData) {
+            await loadBackupScript('js/data/articles-backup.js');
+          }
+          return window.HTET_ARTICLES_BACKUP || window.articlesData || [];
         }
-        return window.HTET_ARTICLES_BACKUP || window.articlesData || [];
-      }
+      })();
+      return this._articlesPromise;
     },
 
     /**
@@ -226,103 +236,119 @@
     },
 
     /**
-     * Fetch micro-blog & activism posts with fallback
+     * Fetch micro-blog & activism posts with fallback and in-memory memoization
      * @returns {Promise<Array>}
      */
     async getPosts() {
-      if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
-        if (!window.HTET_POSTS_BACKUP && !window.postsData) {
-          await loadBackupScript('js/data/posts-backup.js');
+      if (this._postsPromise) return this._postsPromise;
+      this._postsPromise = (async () => {
+        if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+          if (!window.HTET_POSTS_BACKUP && !window.postsData) {
+            await loadBackupScript('js/data/posts-backup.js');
+          }
+          return window.HTET_POSTS_BACKUP || window.postsData || [];
         }
-        return window.HTET_POSTS_BACKUP || window.postsData || [];
-      }
-      try {
-        const response = await fetch('data/posts.json', { cache: 'no-cache' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        return Array.isArray(data) ? data : (window.HTET_POSTS_BACKUP || window.postsData || []);
-      } catch (err) {
-        console.warn('[HtetData] fetch(data/posts.json) fallback triggered.', err);
-        if (!window.HTET_POSTS_BACKUP && !window.postsData) {
-          await loadBackupScript('js/data/posts-backup.js');
+        try {
+          const response = await fetch('data/posts.json');
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const data = await response.json();
+          return Array.isArray(data) ? data : (window.HTET_POSTS_BACKUP || window.postsData || []);
+        } catch (err) {
+          console.warn('[HtetData] fetch(data/posts.json) fallback triggered.', err);
+          if (!window.HTET_POSTS_BACKUP && !window.postsData) {
+            await loadBackupScript('js/data/posts-backup.js');
+          }
+          return window.HTET_POSTS_BACKUP || window.postsData || [];
         }
-        return window.HTET_POSTS_BACKUP || window.postsData || [];
-      }
+      })();
+      return this._postsPromise;
     },
 
     /**
-     * Fetch conceptual glossary with fallback
+     * Fetch conceptual glossary with fallback and in-memory memoization
      * @returns {Promise<Array>}
      */
     async getGlossary() {
-      if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
-        if (!window.HTET_GLOSSARY_BACKUP) {
-          await loadBackupScript('js/data/glossary-backup.js');
+      if (this._glossaryPromise) return this._glossaryPromise;
+      this._glossaryPromise = (async () => {
+        if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+          if (!window.HTET_GLOSSARY_BACKUP) {
+            await loadBackupScript('js/data/glossary-backup.js');
+          }
+          return window.HTET_GLOSSARY_BACKUP || [];
         }
-        return window.HTET_GLOSSARY_BACKUP || [];
-      }
-      try {
-        const response = await fetch('data/glossary.json', { cache: 'no-cache' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        return Array.isArray(data) ? data : (window.HTET_GLOSSARY_BACKUP || []);
-      } catch (err) {
-        console.warn('[HtetData] fetch(data/glossary.json) fallback triggered.', err);
-        if (!window.HTET_GLOSSARY_BACKUP) {
-          await loadBackupScript('js/data/glossary-backup.js');
+        try {
+          const response = await fetch('data/glossary.json');
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const data = await response.json();
+          return Array.isArray(data) ? data : (window.HTET_GLOSSARY_BACKUP || []);
+        } catch (err) {
+          console.warn('[HtetData] fetch(data/glossary.json) fallback triggered.', err);
+          if (!window.HTET_GLOSSARY_BACKUP) {
+            await loadBackupScript('js/data/glossary-backup.js');
+          }
+          return window.HTET_GLOSSARY_BACKUP || [];
         }
-        return window.HTET_GLOSSARY_BACKUP || [];
-      }
+      })();
+      return this._glossaryPromise;
     },
 
     /**
-     * Fetch academic publications & zines with fallback
+     * Fetch academic publications & zines with fallback and in-memory memoization
      * @returns {Promise<Array>}
      */
     async getPublications() {
-      if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
-        if (!window.HTET_PUBLICATIONS_BACKUP && !window.publicationsData && !window.HtetPublicationsBackup) {
-          await loadBackupScript('js/data/publications-backup.js');
+      if (this._publicationsPromise) return this._publicationsPromise;
+      this._publicationsPromise = (async () => {
+        if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+          if (!window.HTET_PUBLICATIONS_BACKUP && !window.publicationsData && !window.HtetPublicationsBackup) {
+            await loadBackupScript('js/data/publications-backup.js');
+          }
+          return window.HTET_PUBLICATIONS_BACKUP || window.publicationsData || window.HtetPublicationsBackup || [];
         }
-        return window.HTET_PUBLICATIONS_BACKUP || window.publicationsData || window.HtetPublicationsBackup || [];
-      }
-      try {
-        const response = await fetch('data/publications.json', { cache: 'no-cache' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        return (Array.isArray(data) && data.length > 0) ? data : (window.HTET_PUBLICATIONS_BACKUP || window.publicationsData || window.HtetPublicationsBackup || []);
-      } catch (err) {
-        console.warn('[HtetData] fetch(data/publications.json) fallback triggered.', err);
-        if (!window.HTET_PUBLICATIONS_BACKUP && !window.publicationsData && !window.HtetPublicationsBackup) {
-          await loadBackupScript('js/data/publications-backup.js');
+        try {
+          const response = await fetch('data/publications.json');
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const data = await response.json();
+          return (Array.isArray(data) && data.length > 0) ? data : (window.HTET_PUBLICATIONS_BACKUP || window.publicationsData || window.HtetPublicationsBackup || []);
+        } catch (err) {
+          console.warn('[HtetData] fetch(data/publications.json) fallback triggered.', err);
+          if (!window.HTET_PUBLICATIONS_BACKUP && !window.publicationsData && !window.HtetPublicationsBackup) {
+            await loadBackupScript('js/data/publications-backup.js');
+          }
+          return window.HTET_PUBLICATIONS_BACKUP || window.publicationsData || window.HtetPublicationsBackup || [];
         }
-        return window.HTET_PUBLICATIONS_BACKUP || window.publicationsData || window.HtetPublicationsBackup || [];
-      }
+      })();
+      return this._publicationsPromise;
     },
 
     /**
-     * Fetch authored books & long-form educational publications with fallback
+     * Fetch authored books & long-form educational publications with fallback and in-memory memoization
      * @returns {Promise<Array>}
      */
     async getBooks() {
-      if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
-        if (!window.HTET_BOOKS_BACKUP && !window.booksData) {
-          await loadBackupScript('js/data/books-backup.js');
+      if (this._booksPromise) return this._booksPromise;
+      this._booksPromise = (async () => {
+        if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+          if (!window.HTET_BOOKS_BACKUP && !window.booksData) {
+            await loadBackupScript('js/data/books-backup.js');
+          }
+          return window.HTET_BOOKS_BACKUP || window.booksData || [];
         }
-        return window.HTET_BOOKS_BACKUP || window.booksData || [];
-      }
-      try {
-        const response = await fetch('data/books.json', { cache: 'no-cache' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        return Array.isArray(data) ? data : (window.HTET_BOOKS_BACKUP || window.booksData || []);
-      } catch (err) {
-        console.warn('[HtetData] fetch(data/books.json) fallback triggered.', err);
-        if (!window.HTET_BOOKS_BACKUP && !window.booksData) {
-          await loadBackupScript('js/data/books-backup.js');
+        try {
+          const response = await fetch('data/books.json');
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const data = await response.json();
+          return Array.isArray(data) ? data : (window.HTET_BOOKS_BACKUP || window.booksData || []);
+        } catch (err) {
+          console.warn('[HtetData] fetch(data/books.json) fallback triggered.', err);
+          if (!window.HTET_BOOKS_BACKUP && !window.booksData) {
+            await loadBackupScript('js/data/books-backup.js');
+          }
+          return window.HTET_BOOKS_BACKUP || window.booksData || [];
         }
-        return window.HTET_BOOKS_BACKUP || window.booksData || [];
-      }
+      })();
+      return this._booksPromise;
     },
 
     /**

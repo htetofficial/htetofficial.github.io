@@ -34,14 +34,14 @@
         }
 
         // 3. Disable vertical swipes to prevent accidental dismissal while scrolling reading articles (Telegram 7.7+)
-        if (typeof tg.disableVerticalSwipes === 'function') {
+        if (tg.isVersionAtLeast && tg.isVersionAtLeast('7.7') && typeof tg.disableVerticalSwipes === 'function') {
           try {
             tg.disableVerticalSwipes();
           } catch (e) {}
         }
 
         // 4. Request full-screen display for immersive reader experience (Telegram 8.0+)
-        if (typeof tg.requestFullscreen === 'function') {
+        if (tg.isVersionAtLeast && tg.isVersionAtLeast('8.0') && typeof tg.requestFullscreen === 'function') {
           try {
             tg.requestFullscreen();
           } catch (e) {}
@@ -217,7 +217,7 @@
      * Setup Telegram Native SettingsButton in top bar
      */
     setupSettingsButton: function() {
-      if (!tg || !tg.SettingsButton || typeof tg.SettingsButton.show !== 'function') return;
+      if (!tg || (tg.isVersionAtLeast && !tg.isVersionAtLeast('7.0')) || !tg.SettingsButton || typeof tg.SettingsButton.show !== 'function') return;
 
       try {
         tg.SettingsButton.show();
