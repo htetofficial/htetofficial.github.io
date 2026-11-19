@@ -937,9 +937,28 @@
 
       const renderBanner = (config) => {
         if (!config || !config.announcementText) return;
+        const targetId = config.announcementId || 'a1';
         const dismissed = localStorage.getItem('htet_announcement_dismissed');
-        if (dismissed === config.announcementId) return;
-        if (document.getElementById('htet-announcement-bar')) return;
+        const existingBar = document.getElementById('htet-announcement-bar');
+
+        if (existingBar) {
+          if (dismissed === targetId) {
+            existingBar.style.display = 'none';
+            return;
+          }
+          // Wire dismiss handler if pre-rendered in static HTML
+          const closeBtn = document.getElementById('htet-announcement-close-btn');
+          if (closeBtn && !closeBtn._hasListener) {
+            closeBtn._hasListener = true;
+            closeBtn.addEventListener('click', () => {
+              existingBar.remove();
+              localStorage.setItem('htet_announcement_dismissed', targetId);
+            });
+          }
+          return;
+        }
+
+        if (dismissed === targetId) return;
 
         const bar = document.createElement('div');
         bar.id = 'htet-announcement-bar';
@@ -975,7 +994,7 @@
 
         document.getElementById('htet-announcement-close-btn')?.addEventListener('click', () => {
           bar.remove();
-          localStorage.setItem('htet_announcement_dismissed', config.announcementId);
+          localStorage.setItem('htet_announcement_dismissed', targetId);
         });
       };
 

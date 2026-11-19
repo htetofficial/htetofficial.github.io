@@ -330,20 +330,16 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap">
   </noscript>
 
-  <!-- Asynchronously loaded non-critical stylesheets (Eliminates Render Blocking) -->
-  <link rel="preload" href="css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/bootstrap.min.css"></noscript>
-  <link rel="preload" href="css/bootstrap-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/bootstrap-icons.min.css"></noscript>
-  <link rel="preload" href="css/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/remixicon.css"></noscript>
-  <link rel="preload" href="css/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/aos.css"></noscript>
+  <!-- Framework & Icon Stylesheets (Standard render-ready links to guarantee CLS < 0.05) -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/remixicon.css">
+  <link rel="stylesheet" href="css/aos.css">
 
   <!-- Custom Editorial CSS (Minified for Fast Paint) -->
   <link rel="stylesheet" href="css/custom.min.css">
 
-  <!-- Tailwind CSS Configuration Defined Before Deferred Script -->
+  <!-- Tailwind CSS Configuration Defined Before Script -->
   <script>
     window.tailwind = {
       config: {
@@ -378,7 +374,7 @@
       }
     };
   </script>
-  <script defer src="js/tailwind.min.js"></script>
+  <script src="js/tailwind.min.js"></script>
   <script defer src="js/theme.js"></script>
   <!-- Telegram WebApp SDK & Mini App Controller (Deferred) -->
   <script defer src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -386,14 +382,38 @@
 </head>
 <body class="bg-ivory text-charcoal min-h-screen flex flex-col font-sans">
 
-
-
     <!-- Top Announcement Bar / Solidarity Note -->
   <div class="bg-cream border-b border-hairline py-2 px-4 text-center text-xs text-muted flex items-center justify-center space-x-2 font-sans-ui">
     <span class="inline-block w-2 h-2 rounded-full bg-vermilion animate-pulse"></span>
     <i class="ri-shield-star-line text-vermilion text-sm"></i>
     <span data-mm="ကျား၊ မ တရားမျှတမှု၊ လူမှုတန်းတူညီမျှရေးနှင့် လွတ်လပ်မှုအတွက် ရပ်တည်ချက်" data-en="Standing for gender justice, social equality, and collective liberation." data-zh="坚守性别正义、社会平等与集体解放的学术与实践立场。" data-th="ยืนหยัดเพื่อความยุติธรรมทางเพศ ความเท่าเทียมทางสังคม และการปลดปล่อยร่วมกัน" data-ja="ジェンダー正義、社会の平等、そして連帯による解放を希求する学術的実践。">ကျား၊ မ တရားမျှတမှု၊ လူမှုတန်းတူညီမျှရေးနှင့် လွတ်လပ်မှုအတွက် ရပ်တည်ချက်</span>
   </div>
+
+  <!-- Top App Announcement Bar (Pre-rendered static markup to eliminate CLS) -->
+  <div id="htet-announcement-bar" class="w-full py-2 px-3 sm:px-4 text-xs font-sans-ui flex items-center justify-between gap-2 shadow-xs transition-all z-40 relative bg-[#B83A2D] text-white">
+    <div class="max-w-7xl mx-auto w-full flex items-center justify-between gap-2">
+      <div class="flex items-center space-x-2 overflow-hidden text-left flex-1 min-w-0">
+        <span class="w-2 h-2 rounded-full bg-white animate-pulse shrink-0"></span>
+        <span class="truncate font-medium">Htet Official App (Beta) — လက်ရှိတွင် စမ်းသပ်ဆဲကာလ ဖြစ်ပါသည်။ အကြံပြုချက်များနှင့် အမှားအယွင်းများ တွေ့ရှိပါက @htetmmofficial သို့ ဆက်သွယ်အသိပေးနိုင်ပါသည်။</span>
+      </div>
+      <div class="flex items-center space-x-2 shrink-0">
+        <a href="https://github.com/htetofficial/htetofficial.github.io/releases/tag/v1.2.0-beta" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-full bg-white text-[#8A2B1D] hover:bg-cream font-bold text-[11px] flex items-center space-x-1 transition-all shadow-xs" aria-label="Android App ရယူရန်">
+          <i class="ri-android-line text-xs"></i>
+          <span class="hidden sm:inline">Android App</span>
+          <span>ရယူရန်</span>
+        </a>
+        <button id="htet-announcement-close-btn" class="w-6 h-6 rounded-full hover:bg-black/20 flex items-center justify-center text-white transition-colors cursor-pointer" title="ပိတ်ရန်" aria-label="Close Announcement">
+          <i class="ri-close-line text-sm"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <script>
+    if (localStorage.getItem('htet_announcement_dismissed') === 'a1') {
+      var _bar = document.getElementById('htet-announcement-bar');
+      if (_bar) _bar.style.display = 'none';
+    }
+  </script>
 
   <!-- Main Navigation Header -->
     <!-- Master Minimalist Header -->
