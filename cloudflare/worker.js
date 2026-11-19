@@ -16,19 +16,20 @@ export default {
     const isBot = /telegrambot|twitterbot|facebookexternalhit|whatsapp|meta-externalagent|slackbot|discordbot|linkedinbot|viber/i.test(userAgent);
 
     // 2. Dynamic Open Graph & Meta Rewrite for Article Sharing
-    if (url.pathname === '/article.html' && url.searchParams.has('id')) {
+    if ((url.pathname === '/article.html' || url.pathname === '/article') && url.searchParams.has('id')) {
       const articleId = url.searchParams.get('id');
 
       // Fetch base article.html from Static Assets
       let response;
+      const articleReq = new Request(new URL('/article.html', url), { headers: request.headers });
       if (env.ASSETS) {
-        response = await env.ASSETS.fetch(request);
+        response = await env.ASSETS.fetch(articleReq);
       } else {
-        response = await fetch(request);
+        response = await fetch(articleReq);
       }
 
       // If it's a social bot (or instant view crawler), inject dynamic meta tags
-      if (isBot && response.ok) {
+      if (isBot && response) {
         let articlesData = null;
         try {
           if (env.CDN_BUCKET) {
@@ -75,11 +76,12 @@ export default {
             html = html.replace(/<meta name="twitter:image" content="[^"]*">/i, `<meta name="twitter:image" content="${imageUrl}">`);
 
             return new Response(html, {
-              status: response.status,
+              status: 200,
               headers: {
                 'content-type': 'text/html; charset=utf-8',
                 'cache-control': 'public, max-age=3600, s-maxage=86400',
-                'access-control-allow-origin': '*'
+                'access-control-allow-origin': '*',
+                'x-edge-worker': 'active-og-injected'
               }
             });
           }
