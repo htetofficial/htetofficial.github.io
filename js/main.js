@@ -168,11 +168,13 @@
   // 3. Online AOS Library Initialization (Animate on Scroll)
   function initAOS() {
     if (window.AOS) {
-      window.AOS.init({
-        duration: 650,
-        easing: 'ease-out-cubic',
-        once: true,
-        offset: 30
+      requestAnimationFrame(() => {
+        window.AOS.init({
+          duration: 650,
+          easing: 'ease-out-cubic',
+          once: true,
+          offset: 30
+        });
       });
     }
   }
@@ -416,7 +418,7 @@
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    requestAnimationFrame(onScroll);
   }
 
   // Mobile App Bottom Navigation Bar & Tactile Controls
@@ -6242,7 +6244,11 @@
     initFeaturedArticlesOnIndex();
     initBioCardTabs();
     init3DTiltAndFloatingEffects();
-    syncGlobalDynamicCounts();
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(syncGlobalDynamicCounts, { timeout: 3000 });
+    } else {
+      setTimeout(syncGlobalDynamicCounts, 1500);
+    }
   });
 
   

@@ -64,9 +64,12 @@
     },
 
     /**
-     * Preload curated glossary concepts
+     * Preload curated glossary concepts (Only on dedicated reading pages)
      */
     loadGlossaryData: function() {
+      var container = document.getElementById('article-content-body');
+      if (!container) return; // Do not preload 70KB glossary on homepage or non-reading pages
+
       if (window.HtetGlossaryData && Array.isArray(window.HtetGlossaryData)) {
         glossaryCache = window.HtetGlossaryData;
         this.scanAndHighlightGlossary();
@@ -252,15 +255,13 @@
         }
       });
 
-      var lastScrollY = window.scrollY;
+      var lastScrollY = 0;
       window.addEventListener('scroll', function() {
-        if (popoverEl && popoverEl.classList.contains('popover-visible')) {
-          if (Math.abs(window.scrollY - lastScrollY) > 120) {
-            VocabLookup.hide();
-            lastScrollY = window.scrollY;
-          }
-        } else {
-          lastScrollY = window.scrollY;
+        if (!popoverEl || !popoverEl.classList.contains('popover-visible')) return;
+        var currentY = window.scrollY || window.pageYOffset || 0;
+        if (Math.abs(currentY - lastScrollY) > 120) {
+          VocabLookup.hide();
+          lastScrollY = currentY;
         }
       }, { passive: true });
     },
@@ -743,8 +744,15 @@
   // Export to global scope
   window.VocabLookup = VocabLookup;
 
-  // Auto initialize on DOMContentLoaded if reading container exists
+  // Auto initialize on idle if reading container exists
   document.addEventListener('DOMContentLoaded', function() {
-    VocabLookup.init();
+    var hasReadingContainer = !!document.querySelector('#article-content-body, #journal-modal-body, .article-prose');
+    if (hasReadingContainer) {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function() { VocabLookup.init(); }, { timeout: 2500 });
+      } else {
+        setTimeout(function() { VocabLookup.init(); }, 150);
+      }
+    }
   });
 })();

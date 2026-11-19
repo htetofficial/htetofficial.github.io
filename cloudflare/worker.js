@@ -136,6 +136,13 @@ export default {
         if (url.pathname.endsWith('.json') || url.pathname.endsWith('.txt') || url.pathname.endsWith('.js') || url.pathname.endsWith('.css')) {
           newH.set('access-control-allow-origin', '*');
         }
+
+        // Optimize Cache Lifetimes for Static Edge Delivery
+        if (/\.(woff2?|ttf|otf|eot|svg|png|jpe?g|webp|gif|ico|css|js)$/i.test(url.pathname)) {
+          newH.set('cache-control', 'public, max-age=31536000, immutable');
+        } else if (url.pathname.endsWith('.json')) {
+          newH.set('cache-control', 'public, max-age=3600, stale-while-revalidate=86400');
+        }
         return new Response(resp.body, { status: resp.status, headers: newH });
       }
       return resp;
