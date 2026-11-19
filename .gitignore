@@ -15,3 +15,4 @@ __pycache__/
 # Large archive bundles (Hosted on Cloudflare R2 CDN)
 *.zip
 downloads/*.zip
+.DS_Store
