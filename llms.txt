@@ -12,6 +12,7 @@
 - [Dictionary & BurmeseNLP / အဘိဓာန်](https://htetofficial.github.io/dictionary.html): Dual-direction Ornagai dictionary, 12,000+ parallel corpus, and NLP tools.
 - [Translation Studio / ဘာသာပြန်](https://htetofficial.github.io/translate.html): Multi-engine translation and lexical synthesis studio.
 - [About & Curriculum Vitae / ကိုယ်ရေးမှတ်တမ်း](https://htetofficial.github.io/about.html): Biography, curriculum vitae, and verified academic dossier.
+- [Technology Stack & Engineering Colophon / နည်းပညာနှင့် ဖန်တီးသူများ](https://htetofficial.github.io/technology.html): Edge architecture, Burmese NLP engines, offline PWA, security standards, and contributor credits.
 - [Contact & Channels / ဆက်သွယ်ရန်](https://htetofficial.github.io/contact.html): Official communication channels, Telegram networks, and PGP keys.
 
 ## Verified Scholarly Profiles

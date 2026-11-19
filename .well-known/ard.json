@@ -23,6 +23,18 @@
         "all articles on htetofficial.github.io",
         "Htet research directory and sitemap"
       ]
+    },
+    {
+      "identifier": "urn:air:htetofficial.github.io:site:technology",
+      "displayName": "Htet Official Technology Stack & Engineering Colophon",
+      "type": "text/html",
+      "url": "https://htetofficial.github.io/technology.html",
+      "description": "Comprehensive technical architecture, Burmese NLP engines, edge infrastructure, and contributor acknowledgments.",
+      "representativeQueries": [
+        "technologies used on Htet official website",
+        "Htet website architecture and creators",
+        "IdeaHub Myanmar and DeepMind AI tech stack"
+      ]
     }
   ]
 }

@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="my" data-lang="mm">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Critical Anti-FOUC & Anti-Flash Engine -->
+  <script src="js/theme-init.js?v=2.1"></script>
+  <style>
+    /* Critical zero-latency base paint to completely eliminate theme and language flash */
+    html { color-scheme: light dark; }
+    html[data-theme="amoled"], html[data-theme="amoled"].dark { background-color: #000000 !important; }
+    html[data-theme="amoled"] body, html[data-theme="amoled"].dark body { background-color: #000000 !important; color: #FFFFFF !important; }
+    html[data-theme="amoled"] header.sticky { background-color: rgba(0, 0, 0, 0.95) !important; }
+    html[data-theme="dark"], html.dark { background-color: #121110 !important; }
+    html[data-theme="dark"] body, html.dark body { background-color: #121110 !important; color: #F5EFE6 !important; }
+    html[data-theme="dark"] .bg-cream, html.dark .bg-cream { background-color: #221F1C !important; }
+    html[data-theme="dark"] header.sticky, html.dark header.sticky { background-color: rgba(18, 17, 16, 0.85) !important; }
+    html[data-theme="sepia"] { background-color: #F5EEDB !important; }
+    html[data-theme="sepia"] body, html.sepia body { background-color: #F5EEDB !important; color: #342A1E !important; }
+    html[data-theme="light"] { background-color: #FAF8F5; }
+    html[data-theme="light"] body { background-color: #FAF8F5; color: #252321; }
+
+    /* Red Themes (3) */
+    html[data-theme="red"] { background-color: #FAF5F5 !important; }
+    html[data-theme="red"] body { background-color: #FAF5F5 !important; color: #2A1717 !important; }
+    html[data-theme="red-crimson"] { background-color: #FAF4F5 !important; }
+    html[data-theme="red-crimson"] body { background-color: #FAF4F5 !important; color: #2E1218 !important; }
+    html[data-theme="red-rosewood"] { background-color: #FAF6F3 !important; }
+    html[data-theme="red-rosewood"] body { background-color: #FAF6F3 !important; color: #2C1A14 !important; }
+
+    /* Purple Themes (4) */
+    html[data-theme="purple"] { background-color: #F8F6FD !important; }
+    html[data-theme="purple"] body { background-color: #F8F6FD !important; color: #211B33 !important; }
+    html[data-theme="purple-lavender"] { background-color: #F8F7FD !important; }
+    html[data-theme="purple-lavender"] body { background-color: #F8F7FD !important; color: #1E1830 !important; }
+    html[data-theme="purple-plum"] { background-color: #F9F5FA !important; }
+    html[data-theme="purple-plum"] body { background-color: #F9F5FA !important; color: #28112C !important; }
+    html[data-theme="purple-indigo"] { background-color: #F5F6FC !important; }
+    html[data-theme="purple-indigo"] body { background-color: #F5F6FC !important; color: #131B36 !important; }
+
+    /* Pink Themes (3) */
+    html[data-theme="pink"] { background-color: #FDF6F8 !important; }
+    html[data-theme="pink"] body { background-color: #FDF6F8 !important; color: #2D1A24 !important; }
+    html[data-theme="pink-peach"] { background-color: #FDF7F4 !important; }
+    html[data-theme="pink-peach"] body { background-color: #FDF7F4 !important; color: #2E1C15 !important; }
+    html[data-theme="pink-rose"] { background-color: #FDF5F7 !important; }
+    html[data-theme="pink-rose"] body { background-color: #FDF5F7 !important; color: #2E151E !important; }
+
+    /* Green Themes (2) */
+    html[data-theme="green"] { background-color: #F5FAF6 !important; }
+    html[data-theme="green"] body { background-color: #F5FAF6 !important; color: #16261A !important; }
+    html[data-theme="green-forest"] { background-color: #F4F8F5 !important; }
+    html[data-theme="green-forest"] body { background-color: #F4F8F5 !important; color: #14281B !important; }
+
+    /* Blue Themes (2) */
+    html[data-theme="blue"] { background-color: #F4F8FD !important; }
+    html[data-theme="blue"] body { background-color: #F4F8FD !important; color: #142236 !important; }
+    html[data-theme="blue-sapphire"] { background-color: #F3F7FC !important; }
+    html[data-theme="blue-sapphire"] body { background-color: #F3F7FC !important; color: #112038 !important; }
+
+    /* Mobile Drawer */
+    #mobile-menu-drawer {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+      will-change: transform;
+    }
+    #mobile-menu-drawer.is-open {
+      visibility: visible !important;
+      transform: translateX(0) !important;
+      -webkit-transform: translateX(0) !important;
+      pointer-events: auto !important;
+    }
+
+    /* Modal Layer Overrides */
+    #spotlight-search-modal, #reading-list-drawer, #journal-reader-modal, #theme-studio-modal {
+      display: none;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease-out;
+      z-index: 9999 !important;
+    }
+    #spotlight-search-modal.is-open, #reading-list-drawer.is-open, #theme-studio-modal.is-open {
+      display: flex !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      z-index: 9999 !important;
+    }
+    #journal-reader-modal.is-open {
+      display: flex !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+    /* Instant language transition indicator */
+    html.i18n-cloaked { }
+  </style>
+
+  <title data-mm="နည်းပညာနှင့် ဖန်တီးသူများ မှတ်တမ်း — ထက် (Htet Official)" data-en="Technology Stack & Engineering Colophon — Htet Official">နည်းပညာနှင့် ဖန်တီးသူများ မှတ်တမ်း — ထက် (Htet Official)</title>
+  
+  <!-- SEO, Open Graph & Structured Data -->
+  <meta name="description" content="ထက် (Htet Official) ပလက်ဖောင်းတစ်ခုလုံးတွင် အသုံးပြုထားသော ဆာဗာမဲ့ အစွန်းထွက် နည်းပညာများ (Cloudflare Workers, R2, Vercel, PWA, Burmese NLP) နှင့် စနစ်ဖန်တီးသူ နည်းပညာရှင်များ မှတ်တမ်း။">
+  <meta name="keywords" content="Htet Tech Stack, Colophon, Burmese NLP, PWA, Cloudflare Workers, Edge Architecture, Open Source Myanmar, IdeaHub Myanmar">
+  <meta name="author" content="Htet Myat Ekri (ထက်မြတ်ဧကရီ)">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://htetofficial.github.io/technology.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Htet Official (ထက်)">
+  <meta property="og:title" content="နည်းပညာနှင့် ဖန်တီးသူများ မှတ်တမ်း | Technology Stack & Engineering Colophon">
+  <meta property="og:description" content="ဆာဗာမဲ့ အစွန်းထွက် နည်းပညာများ၊ မြန်မာစာ NLP စနစ်၊ PWA အော့ဖ်လိုင်း အင်ဂျင်နှင့် ဖန်တီးသူ နည်းပညာရှင်များ မှတ်တမ်း။">
+  <meta property="og:url" content="https://htetofficial.github.io/technology.html">
+  <meta property="og:image" content="https://htetofficial.github.io/assets/images/og-preview.jpeg">
+  <meta property="telegram:channel" content="@htetmmofficial">
+
+  <!-- Favicon & PWA Manifest -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="ard" type="application/json" href="/.well-known/ard.json">
+  <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM Context">
+
+  <!-- Fonts & Core Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/remixicon.css">
+  <link rel="stylesheet" href="css/aos.css">
+  <link rel="stylesheet" href="css/custom.min.css">
+
+  <!-- Tailwind CSS Configuration & CDN -->
+  <script src="js/tailwind-config.js?v=2.1"></script>
+  <script src="js/tailwind.min.js?v=2.1"></script>
+  <script defer src="js/theme.js?v=2.1"></script>
+  <script defer src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script defer src="js/telegram-webapp.js?v=2.1"></script>
+</head>
+<body class="bg-ivory text-charcoal font-sans antialiased selection:bg-vermilion selection:text-white transition-colors duration-200">
+
+  <!-- Master Minimalist Header -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-ivory/90 dark:bg-[#121110]/90 border-b border-hairline transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-4">
+      
+      <!-- Minimalist Brand Identity -->
+      <a href="index.html" class="flex items-center space-x-2 sm:space-x-2.5 group shrink-0" aria-label="Htet — Home">
+        <div class="nav-brand-glass-icon w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0" title="ထက် (Htet)">
+          <img src="assets/favicon.svg" alt="ထက်" class="w-full h-full object-contain">
+        </div>
+        <div class="flex flex-col">
+          <span class="font-serif-editorial text-lg sm:text-xl font-bold tracking-tight text-charcoal group-hover:text-vermilion transition-colors leading-none">HTET</span>
+          <span class="nav-brand-subtitle text-[9px] tracking-wider text-muted uppercase font-sans-ui mt-0.5 leading-none hidden xs:inline sm:inline truncate max-w-[130px]" data-mm="စာရေးဆရာမ • သုတေသီ" data-en="WRITER • RESEARCHER">စာရေးဆရာမ • သုတေသီ</span>
+        </div>
+      </a>
+
+      <!-- Floating Minimalist Navigation Capsule -->
+      <div class="hidden lg:flex flex-1 justify-center items-center min-w-0 px-1 sm:px-2">
+        <nav class="flex items-center p-1 rounded-full border border-hairline/80 bg-cream/70 dark:bg-stone-900/60 nav-capsule font-sans-ui text-xs 2xl:text-[13px] shadow-xs shrink-0">
+          <a href="index.html" class="nav-link-pill px-2.5 py-1 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ပင်မ" data-en="Home">ပင်မ</a>
+          <a href="articles.html" class="nav-link-pill px-2.5 py-1 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဆောင်းပါးများ" data-en="Articles">ဆောင်းပါးများ</a>
+          <a href="publications.html" class="nav-link-pill px-2.5 py-1 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ထုတ်ဝေမှုများ" data-en="Publications">ထုတ်ဝေမှုများ</a>
+          <a href="journal.html" class="nav-link-pill px-2.5 py-1 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="မှတ်စုများ" data-en="Journal">မှတ်စုများ</a>
+          <a href="glossary.html" class="nav-link-pill px-2.5 py-1 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဝေါဟာရ" data-en="Glossary">ဝေါဟာရ</a>
+          <a href="dictionary.html" class="nav-link-pill px-2.5 py-1 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="အဘိဓာန်" data-en="Dictionary">အဘိဓာန်</a>
+          <a href="translate.html" class="nav-link-pill px-2.5 py-1 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဘာသာပြန်" data-en="Translate">ဘာသာပြန်</a>
+          <a href="about.html" class="nav-link-pill px-2.5 py-1 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="စာရေးသူ" data-en="About">စာရေးသူ</a>
+          <a href="technology.html" class="nav-link-pill px-2.5 py-1 rounded-full active bg-vermilion text-white font-medium shadow-xs" data-mm="နည်းပညာ" data-en="Technology">နည်းပညာ</a>
+          <a href="contact.html" class="nav-link-pill px-2.5 py-1 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဆက်သွယ်ရန်" data-en="Contact">ဆက်သွယ်ရန်</a>
+        </nav>
+      </div>
+
+      <!-- Action Utilities Capsule -->
+      <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+        <!-- Spotlight Search Trigger -->
+        <button id="spotlight-search-trigger" class="nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-charcoal hover:text-vermilion hover:border-vermilion/50 transition-all flex items-center justify-center shadow-xs" title="Global Search (⌘K)" aria-label="Search">
+          <i class="ri-search-2-line text-sm"></i>
+        </button>
+
+        <!-- Bookmarks Reading List Trigger -->
+        <button id="reading-list-trigger" class="nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-charcoal hover:text-vermilion hover:border-vermilion/50 transition-all flex items-center justify-center shadow-xs relative" title="Saved Reading List" aria-label="Reading List">
+          <i class="ri-bookmark-3-line text-sm"></i>
+          <span id="reading-list-badge" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-vermilion text-white text-[9px] font-bold flex items-center justify-center hidden">0</span>
+        </button>
+
+        <!-- Reading Theme Studio Button -->
+        <button data-set-theme="palette" title="စာဖတ်ရောင်စဉ် စတူဒီယို (18 Themes Studio)" class="w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 flex items-center justify-center text-xs text-charcoal hover:text-vermilion hover:bg-vermilion/10 transition-all cursor-pointer btn-palette-glow active:scale-90 relative" aria-label="Open Theme Palette Studio">
+          <i class="ri-palette-line text-xs"></i>
+          <span class="absolute top-1 right-1 w-1.5 h-1.5 rounded-full theme-active-dot ring-1 ring-white/60"></span>
+        </button>
+
+        <!-- Language Selector Capsule -->
+        <div class="relative flex items-center">
+          <button id="global-lang-btn" class="px-2.5 py-1 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-xs font-semibold flex items-center space-x-1 hover:border-vermilion/50 transition-all shadow-xs" title="Language Selector" aria-label="Select Language">
+            <span id="current-lang-flag">🇲🇲</span>
+            <span id="current-lang-text" class="uppercase text-[11px] font-mono">MM</span>
+            <i class="ri-arrow-down-s-line text-xs opacity-60"></i>
+          </button>
+          <div id="global-lang-menu" class="hidden absolute right-0 top-full mt-2 w-36 rounded-2xl bg-card border border-hairline shadow-xl py-1 z-50 text-xs font-medium">
+            <button data-change-lang="mm" class="w-full text-left px-3 py-1.5 flex items-center space-x-2 hover:bg-cream/70 hover:text-vermilion transition-colors">
+              <span>🇲🇲</span> <span>မြန်မာစာ</span>
+            </button>
+            <button data-change-lang="en" class="w-full text-left px-3 py-1.5 flex items-center space-x-2 hover:bg-cream/70 hover:text-vermilion transition-colors">
+              <span>🇬🇧</span> <span>English</span>
+            </button>
+            <button data-change-lang="zh" class="w-full text-left px-3 py-1.5 flex items-center space-x-2 hover:bg-cream/70 hover:text-vermilion transition-colors">
+              <span>🇨🇳</span> <span>中文</span>
+            </button>
+            <button data-change-lang="th" class="w-full text-left px-3 py-1.5 flex items-center space-x-2 hover:bg-cream/70 hover:text-vermilion transition-colors">
+              <span>🇹🇭</span> <span>ไทย</span>
+            </button>
+            <button data-change-lang="ja" class="w-full text-left px-3 py-1.5 flex items-center space-x-2 hover:bg-cream/70 hover:text-vermilion transition-colors">
+              <span>🇯🇵</span> <span>日本語</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile & Tablet Hamburger Toggle -->
+        <button id="mobile-menu-toggle" class="lg:hidden nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 flex items-center justify-center text-charcoal hover:text-vermilion focus:outline-none transition-colors" aria-label="Open Navigation">
+          <i class="ri-menu-3-line text-base"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay Backdrop -->
+  <div id="mobile-menu-overlay" style="display: none;" class="fixed inset-0 bg-charcoal/40 dark:bg-black/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
+
+  <!-- Mobile Drawer Sidebar (Calibrated for 360px - 820px) -->
+  <div id="mobile-menu-drawer" style="visibility: hidden; transform: translateX(-100%); -webkit-transform: translateX(-100%); pointer-events: none;" class="fixed top-0 left-0 bottom-0 w-80 sm:w-88 max-w-[88vw] bg-ivory dark:bg-[#141312] z-50 border-r border-hairline p-4 sm:p-5 flex flex-col justify-between shadow-2xl overflow-y-auto overscroll-contain">
+    <div>
+      <!-- Drawer Header: Deluxe Scholar Profile -->
+      <div class="flex items-center justify-between pb-4 border-b border-hairline">
+        <a href="index.html" class="flex items-center space-x-3 group">
+          <div class="relative shrink-0">
+            <div class="nav-brand-glass-icon w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 shadow-sm border border-hairline/80 group-hover:scale-105 transition-transform" title="ထက် (Htet)">
+              <img src="assets/favicon.svg" alt="ထက်" class="w-6 h-6 object-contain">
+            </div>
+            <!-- Live Scholar Status Dot -->
+            <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-card shadow-xs" title="Open Scholar Hub • အွန်လိုင်း"></span>
+          </div>
+          <div class="flex flex-col">
+            <div class="flex items-center space-x-1.5">
+              <span class="font-serif-editorial text-xl font-bold tracking-tight text-charcoal leading-none">HTET</span>
+              <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-vermilion/10 text-vermilion font-mono font-bold tracking-wide">HUB</span>
+            </div>
+            <span class="text-[10px] tracking-wider text-muted uppercase font-sans-ui mt-1" data-mm="စာရေးဆရာမ • သုတေသီ" data-en="WRITER • RESEARCHER" data-zh="作家 • 政治哲学研究者" data-th="นักเขียน • นักวิจัยปรัชญา" data-ja="作家・政治哲学研究者">စာရေးဆရာမ • သုတေသီ</span>
+          </div>
+        </a>
+        <button id="mobile-menu-close" class="w-8 h-8 rounded-full border border-hairline/80 bg-cream/50 dark:bg-stone-900/50 flex items-center justify-center text-muted hover:text-charcoal hover:border-charcoal/30 active:scale-90 transition-all cursor-pointer" aria-label="Close Navigation">
+          <i class="ri-close-line text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation Links: Deluxe Glass Items -->
+      <nav class="flex flex-col space-y-1 py-3 font-sans-ui text-sm">
+        <a href="index.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-home-5-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ပင်မ" data-en="Home" data-zh="首页" data-th="หน้าแรก" data-ja="ホーム">ပင်မ</span>
+          </span>
+          <i class="ri-arrow-right-s-line text-sm text-muted/50 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i>
+        </a>
+
+        <a href="articles.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-article-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ဆောင်းပါးများ" data-en="Articles" data-zh="学术文章" data-th="บทความ" data-ja="論考・論文">ဆောင်းပါးများ</span>
+          </span>
+          <span data-dynamic-count="articles" class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">…</span>
+        </a>
+
+        <a href="publications.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-book-2-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ထုတ်ဝေမှုများ" data-en="Publications" data-zh="出版专著" data-th="ผลงานตีพิมพ์" data-ja="出版物・著作">ထုတ်ဝေမှုများ</span>
+          </span>
+          <span data-dynamic-count="publications" class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">…</span>
+        </a>
+
+        <a href="journal.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-booklet-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌">မှတ်စုနှင့် ပို့စ်များ</span>
+          </span>
+          <span data-dynamic-count="posts" class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">…</span>
+        </a>
+
+        <a href="glossary.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-book-read-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典">ဝေါဟာရအဘိဓာန်</span>
+          </span>
+          <span data-dynamic-count="glossary" class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">…</span>
+        </a>
+
+        <a href="dictionary.html" class="drawer-nav-item flex items-center justify-between px-3 py-2.5 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-book-2-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="အဘိဓာန်" data-en="Dictionary" data-zh="英语词典" data-th="พจนานุกรม" data-ja="英緬辞典">အဘိဓာန်</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">111K+</span>
+        </a>
+
+        <a href="translate.html" class="drawer-nav-item flex items-center justify-between px-3 py-2.5 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-translate-2 text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ဘာသာပြန်စတူဒီယို" data-en="Translate">ဘာသာပြန်စတူဒီယို</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">Neural</span>
+        </a>
+
+        <a href="about.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-user-star-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について">စာရေးသူအကြောင်း</span>
+          </span>
+          <i class="ri-arrow-right-s-line text-sm text-muted/50 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i>
+        </a>
+
+        <a href="technology.html" class="drawer-nav-item active flex items-center justify-between px-3 py-2 rounded-2xl font-semibold transition-all text-vermilion bg-vermilion/10 dark:bg-vermilion/20 border border-vermilion/30 shadow-2xs group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-vermilion text-white flex items-center justify-center shadow-xs shrink-0">
+              <i class="ri-cpu-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="နည်းပညာနှင့် ဖန်တီးသူများ" data-en="Technology Stack" data-zh="技术架构与作者" data-th="เทคโนโลยีและผู้สร้าง" data-ja="技術構成と開発者">နည်းပညာနှင့် ဖန်တီးသူများ</span>
+          </span>
+          <i class="ri-arrow-right-s-line text-sm text-vermilion group-hover:translate-x-0.5 transition-all"></i>
+        </a>
+
+        <a href="contact.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-mail-send-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系交流" data-th="ติดต่อเรา" data-ja="お問い合わせ">ဆက်သွယ်ရန်</span>
+          </span>
+          <i class="ri-arrow-right-s-line text-sm text-muted/50 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Mobile Drawer Footer Options -->
+    <div class="pt-3.5 border-t border-hairline space-y-2.5 font-sans-ui">
+      <!-- Device-Adaptive Font Size Scaler Control -->
+      <div class="flex items-center justify-between text-xs text-muted">
+        <span class="flex items-center space-x-1.5 font-medium text-charcoal">
+          <i class="ri-font-size-2 text-sm text-vermilion"></i>
+          <span data-mm="ဖောင့်အရွယ်အစား" data-en="Font Size" data-zh="字体大小" data-th="ขนาดตัวอักษร" data-ja="フォントサイズ">ဖောင့်အရွယ်အစား</span>
+        </span>
+        <div class="flex items-center p-0.5 rounded-full border border-hairline bg-cream/80 dark:bg-stone-900/80 shadow-inner text-xs">
+          <button data-font-action="decrease" title="Smaller Font (ဖောင့်သေး)" class="px-2.5 py-1 rounded-full text-xs font-medium hover:text-vermilion active:scale-95 transition-all cursor-pointer">A-</button>
+          <button data-font-action="reset" title="Standard Font (ဖောင့်ပုံမှန်)" class="px-2.5 py-1 rounded-full text-xs font-semibold hover:text-vermilion active:scale-95 transition-all cursor-pointer">A</button>
+          <button data-font-action="increase" title="Larger Font (ဖောင့်ကြီး)" class="px-2.5 py-1 rounded-full text-xs font-medium hover:text-vermilion active:scale-95 transition-all cursor-pointer">A+</button>
+        </div>
+      </div>
+
+      <!-- Multi-Language Switcher Section -->
+      <div class="flex flex-col space-y-1.5 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="flex items-center space-x-1.5 font-medium text-charcoal shrink-0">
+            <i class="ri-translate-2 text-sm text-vermilion"></i>
+            <span data-mm="ဘာသာစကား" data-en="Language" data-zh="语言" data-th="ภาษา" data-ja="言語">ဘာသာစကား</span>
+          </span>
+        </div>
+        <div class="grid grid-cols-5 gap-1.5 p-1 rounded-2xl border border-hairline bg-cream/60 dark:bg-stone-900/60 shadow-inner">
+          <button data-switch-lang="mm" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="mm" title="မြန်မာဘာသာ">
+            <span class="text-sm">🇲🇲</span>
+            <span class="text-[10px] font-mono leading-none">MM</span>
+          </button>
+          <button data-switch-lang="en" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="en" title="English">
+            <span class="text-sm">🇬🇧</span>
+            <span class="text-[10px] font-mono leading-none">EN</span>
+          </button>
+          <button data-switch-lang="zh" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="zh" title="简体中文">
+            <span class="text-sm">🇨🇳</span>
+            <span class="text-[10px] font-mono leading-none">ZH</span>
+          </button>
+          <button data-switch-lang="th" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="th" title="ภาษาไทย">
+            <span class="text-sm">🇹🇭</span>
+            <span class="text-[10px] font-mono leading-none">TH</span>
+          </button>
+          <button data-switch-lang="ja" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="ja" title="日本語">
+            <span class="text-sm">🇯🇵</span>
+            <span class="text-[10px] font-mono leading-none">JA</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Reading Theme Switcher Section -->
+      <div class="flex flex-col space-y-1.5 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="flex items-center space-x-1.5 font-medium text-charcoal shrink-0">
+            <i class="ri-palette-line text-sm text-vermilion"></i>
+            <span data-mm="စာဖတ်ရောင်စဉ်" data-en="Reading Themes" data-zh="阅读主题" data-th="ธีมการอ่าน" data-ja="読書テーマ">စာဖတ်ရောင်စဉ်</span>
+          </span>
+        </div>
+        <div class="grid grid-cols-4 gap-1 p-1 rounded-2xl border border-hairline bg-cream/60 dark:bg-stone-900/60 shadow-inner">
+          <button data-set-theme="light" data-theme-btn="light" title="Light / စာရွက်ဖြူ" class="py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-xs transition-all cursor-pointer active:scale-95 hover:bg-card">
+            <i class="ri-sun-cloudy-line text-sm"></i>
+            <span class="text-[9px] font-mono font-medium">LIGHT</span>
+          </button>
+          <button data-set-theme="sepia" data-theme-btn="sepia" title="Sepia / စာအုပ်ညို" class="py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-xs transition-all cursor-pointer active:scale-95 hover:bg-card">
+            <i class="ri-book-open-line text-sm"></i>
+            <span class="text-[9px] font-mono font-medium">SEPIA</span>
+          </button>
+          <button data-set-theme="dark" data-theme-btn="dark" title="Dark / မှောင်ရိပ်" class="py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-xs transition-all cursor-pointer active:scale-95 hover:bg-card">
+            <i class="ri-moon-clear-line text-sm"></i>
+            <span class="text-[9px] font-mono font-medium">DARK</span>
+          </button>
+          <button data-set-theme="amoled" data-theme-btn="amoled" title="AMOLED / အနက်စစ်" class="py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-xs transition-all cursor-pointer active:scale-95 hover:bg-card">
+            <i class="ri-contrast-drop-2-line text-sm"></i>
+            <span class="text-[9px] font-mono font-medium">OLED</span>
+          </button>
+        </div>
+        <button data-set-theme="palette" class="w-full py-2 px-3 rounded-xl border border-hairline/80 bg-cream/70 dark:bg-stone-900/60 hover:border-vermilion/50 hover:text-vermilion text-charcoal transition-all flex items-center justify-between text-xs font-medium cursor-pointer shadow-2xs group active:scale-98">
+          <span class="flex items-center space-x-2">
+            <i class="ri-palette-fill text-sm text-vermilion group-hover:scale-110 transition-transform"></i>
+            <span data-mm="စာဖတ်ရောင်စဉ် စတူဒီယို (18 Themes)" data-en="Theme Studio (18 Themes)" data-zh="18种主题调色盘" data-th="18 ธีม" data-ja="18テーマ">စာဖတ်ရောင်စဉ် စတူဒီယို (18 Themes)</span>
+          </span>
+          <span class="w-2 h-2 rounded-full theme-active-dot ring-1 ring-white/60"></span>
+        </button>
+      </div>
+
+      <!-- Join Telegram Channel Link -->
+      <a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 rounded-xl border border-sky-300/40 dark:border-sky-900/40 bg-sky-50/50 dark:bg-sky-950/20 text-xs flex items-center justify-between text-[#24A1DE] hover:bg-sky-100/50 transition-colors group">
+        <span class="flex items-center space-x-2">
+          <i class="ri-telegram-fill text-base group-hover:scale-110 transition-transform"></i>
+          <span class="whitespace-nowrap" data-mm="Telegram ချန်နယ်" data-en="Telegram Channel" data-zh="Telegram 频道" data-th="ช่อง Telegram" data-ja="Telegramチャンネル">Telegram ချန်နယ်</span>
+        </span>
+        <span class="text-[10px] font-mono opacity-70">@htetmmofficial ↗</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content Landmark -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+    
+    <!-- Hero Section -->
+    <header class="text-center max-w-4xl mx-auto mb-14 sm:mb-20">
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border border-hairline bg-card shadow-2xs mb-4">
+        <i class="ri-cpu-line text-vermilion text-sm"></i>
+        <span class="text-xs font-mono font-semibold uppercase tracking-wider text-muted" data-mm="ဝက်ဘ်ဆိုက် နည်းပညာနှင့် အင်ဂျင်နီယာ မှတ်တမ်း" data-en="SYSTEM ARCHITECTURE & ENGINEERING COLOPHON">ဝက်ဘ်ဆိုက် နည်းပညာနှင့် အင်ဂျင်နီယာ မှတ်တမ်း</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-serif-editorial font-bold tracking-tight text-charcoal leading-tight mb-5" data-mm="ပလက်ဖောင်း နည်းပညာစနစ်များနှင့် ဖန်တီးသူများ" data-en="Technology Stack & Engineering Colophon">
+        ပလက်ဖောင်း နည်းပညာစနစ်များနှင့် ဖန်တီးသူများ
+      </h1>
+      <p class="text-base sm:text-lg text-muted leading-relaxed font-sans-ui max-w-3xl mx-auto" data-mm="ထက် (Htet Official) ပလက်ဖောင်းတစ်ခုလုံးအား အင်တာနက်ဖြတ်တောက်မှုဒဏ်၊ ဆင်ဆာဒဏ်ခံနိုင်စေရန်နှင့် မည်သည့်စက်ပစ္စည်းတွင်မဆို အော့ဖ်လိုင်းအထိ အမြန်ဆုံး ဖတ်ရှုနိုင်စေရန် တည်ဆောက်ထားသော ခေတ်မီဆာဗာမဲ့ အစွန်းထွက် (Serverless Edge) နည်းပညာများ၊ မြန်မာစာ NLP စနစ်များနှင့် ပူးပေါင်းဖန်တီးခဲ့ကြသူ နည်းပညာရှင်များ မှတ်တမ်းဖြစ်ပါသည်။" data-en="A comprehensive technical colophon detailing the censorship-resilient serverless edge architecture, Burmese Natural Language Processing (NLP) engines, offline-first PWA systems, and the multidisciplinary engineers who built Htet Official.">
+        ထက် (Htet Official) ပလက်ဖောင်းတစ်ခုလုံးအား အင်တာနက်ဖြတ်တောက်မှုဒဏ်၊ ဆင်ဆာဒဏ်ခံနိုင်စေရန်နှင့် မည်သည့်စက်ပစ္စည်းတွင်မဆို အော့ဖ်လိုင်းအထိ အမြန်ဆုံး ဖတ်ရှုနိုင်စေရန် တည်ဆောက်ထားသော ခေတ်မီဆာဗာမဲ့ အစွန်းထွက် (Serverless Edge) နည်းပညာများ၊ မြန်မာစာ NLP စနစ်များနှင့် ပူးပေါင်းဖန်တီးခဲ့ကြသူ နည်းပညာရှင်များ မှတ်တမ်းဖြစ်ပါသည်။
+      </p>
+
+      <!-- Live Infrastructure Health Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-8 text-left">
+        <div class="p-4 rounded-2xl border border-hairline bg-card shadow-2xs">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-xs font-mono font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 99.9% Up
+            </span>
+            <i class="ri-flashlight-line text-muted"></i>
+          </div>
+          <div class="font-serif-editorial font-bold text-sm text-charcoal">Cloudflare Edge</div>
+          <div class="text-[11px] text-muted">0ms Cold Start, R2 CDN</div>
+        </div>
+
+        <div class="p-4 rounded-2xl border border-hairline bg-card shadow-2xs">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-xs font-mono font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> VPN-Free
+            </span>
+            <i class="ri-shield-check-line text-muted"></i>
+          </div>
+          <div class="font-serif-editorial font-bold text-sm text-charcoal">Vercel Edge Mirror</div>
+          <div class="text-[11px] text-muted">Burma Safe-Pass Route</div>
+        </div>
+
+        <div class="p-4 rounded-2xl border border-hairline bg-card shadow-2xs">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-xs font-mono font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Offline PWA
+            </span>
+            <i class="ri-download-cloud-2-line text-muted"></i>
+          </div>
+          <div class="font-serif-editorial font-bold text-sm text-charcoal">Service Worker v7.0</div>
+          <div class="text-[11px] text-muted">Multi-Tier Caching</div>
+        </div>
+
+        <div class="p-4 rounded-2xl border border-hairline bg-card shadow-2xs">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-xs font-mono font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Connected
+            </span>
+            <i class="ri-telegram-fill text-[#2AABEE]"></i>
+          </div>
+          <div class="font-serif-editorial font-bold text-sm text-charcoal">Telegram Mini App</div>
+          <div class="text-[11px] text-muted">Native Viewport &amp; Bot</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Section 1: The 6 Core Technical Pillars -->
+    <section class="mb-16 sm:mb-24" aria-labelledby="pillars-heading">
+      <div class="flex items-center space-x-3 mb-8 pb-3 border-b border-hairline">
+        <div class="w-10 h-10 rounded-2xl bg-vermilion/10 text-vermilion flex items-center justify-center font-bold text-lg">01</div>
+        <div>
+          <h2 id="pillars-heading" class="text-2xl sm:text-3xl font-serif-editorial font-bold text-charcoal" data-mm="အဓိက နည်းပညာ မဏ္ဍိုင်ကြီး ၆ ရပ်" data-en="The 6 Core Architectural Pillars">
+            အဓိက နည်းပညာ မဏ္ဍိုင်ကြီး ၆ ရပ်
+          </h2>
+          <p class="text-xs sm:text-sm text-muted font-sans-ui" data-mm="ဝက်ဘ်ဆိုက်တစ်ခုလုံး လုံခြုံ၊ လျင်မြန်ပြီး အမှီအခိုကင်းစွာ လည်ပတ်နိုင်ရန် တည်ဆောက်ထားသော စနစ်များ" data-en="Deep-dive into the performance, security, linguistic and edge infrastructure systems.">
+            ဝက်ဘ်ဆိုက်တစ်ခုလုံး လုံခြုံ၊ လျင်မြန်ပြီး အမှီအခိုကင်းစွာ လည်ပတ်နိုင်ရန် တည်ဆောက်ထားသော စနစ်များ
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        
+        <!-- Pillar 1: Edge & Multi-Mirror Infrastructure -->
+        <article class="p-6 sm:p-7 rounded-3xl border border-hairline bg-card shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-aos="fade-up">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-2xl mb-4">
+              <i class="ri-global-line"></i>
+            </div>
+            <h3 class="text-xl font-serif-editorial font-bold text-charcoal mb-2" data-mm="ဆာဗာမဲ့ အစွန်းထွက် ကွန်ရက် (Edge Infrastructure)" data-en="Edge Infrastructure & Multi-Mirror">
+              ဆာဗာမဲ့ အစွန်းထွက် ကွန်ရက် (Edge Infrastructure)
+            </h3>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed mb-4 font-sans-ui" data-mm="ကမ္ဘာ့အနှံ့ မြို့ကြီး ၃၀၀ ကျော်ရှိ Cloudflare Edge Nodes များနှင့် Vercel Edge Serverless များကို အသုံးပြုထားပြီး Dynamic OpenGraph Injection ဖြင့် Telegram/Facebook ပို့စ်များတွင် စာတမ်းအကျဉ်းချုပ်နှင့် မျက်နှာဖုံးပုံများ အလိုအလျောက် ပေါ်ထွက်စေပါသည်။ Heavy PDF နှင့် စာအုပ်များအတွက် Cloudflare R2 ကို အသုံးချထားပါသည်။" data-en="Deployed across 300+ global Cloudflare edge data centers with serverless dynamic OpenGraph injection for Telegram and Facebook social crawlers, paired with Cloudflare R2 zero-egress asset streaming for research bundles.">
+              ကမ္ဘာ့အနှံ့ မြို့ကြီး ၃၀၀ ကျော်ရှိ Cloudflare Edge Nodes များနှင့် Vercel Edge Serverless များကို အသုံးပြုထားပြီး Dynamic OpenGraph Injection ဖြင့် Telegram/Facebook ပို့စ်များတွင် စာတမ်းအကျဉ်းချုပ်နှင့် မျက်နှာဖုံးပုံများ အလိုအလျောက် ပေါ်ထွက်စေပါသည်။ Heavy PDF နှင့် စာအုပ်များအတွက် Cloudflare R2 ကို အသုံးချထားပါသည်။
+            </p>
+          </div>
+          <div class="pt-4 border-t border-hairline flex flex-wrap gap-1.5 font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Cloudflare Workers</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Cloudflare R2</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Vercel Edge</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">GitHub Pages</span>
+          </div>
+        </article>
+
+        <!-- Pillar 2: Burmese NLP & Lexical Engine -->
+        <article class="p-6 sm:p-7 rounded-3xl border border-hairline bg-card shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center text-2xl mb-4">
+              <i class="ri-translate-2"></i>
+            </div>
+            <h3 class="text-xl font-serif-editorial font-bold text-charcoal mb-2" data-mm="မြန်မာစာ NLP နှင့် ဘာသာပြန်အင်ဂျင်" data-en="Burmese NLP & Translation Studio">
+              မြန်မာစာ NLP နှင့် ဘာသာပြန်အင်ဂျင်
+            </h3>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed mb-4 font-sans-ui" data-mm="မြန်မာစာ စာလုံးပေါင်းသတ်ပုံ၊ စာလုံးဖြတ်ထုံး (Syllable Segmentation) အတွက် BurmeseNLP စနစ်ကို ရေးဆွဲထားပြီး Ornagai (111K+ Words)၊ Reverse Myanmar-to-English (196K+ Words) နှင့် Myanmar Tools (42K+ POS) အဘိဓာန်ဒေတာဘေ့စ် ၃ ခုကို အင်တာနက်မလိုဘဲ အော့ဖ်လိုင်း ရှာဖွေနိုင်အောင် ထည့်သွင်းထားပါသည်။" data-en="Autonomous linguistic stack incorporating BurmeseNLP syllable tokenization, paired with offline-capable Ornagai (111K+ words), Reverse EN-MY (196K+ words), and 12,000+ local parallel corpus translation synthesis.">
+              မြန်မာစာ စာလုံးပေါင်းသတ်ပုံ၊ စာလုံးဖြတ်ထုံး (Syllable Segmentation) အတွက် BurmeseNLP စနစ်ကို ရေးဆွဲထားပြီး Ornagai (111K+ Words)၊ Reverse Myanmar-to-English (196K+ Words) နှင့် Myanmar Tools (42K+ POS) အဘိဓာန်ဒေတာဘေ့စ် ၃ ခုကို အင်တာနက်မလိုဘဲ အော့ဖ်လိုင်း ရှာဖွေနိုင်အောင် ထည့်သွင်းထားပါသည်။
+            </p>
+          </div>
+          <div class="pt-4 border-t border-hairline flex flex-wrap gap-1.5 font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">BurmeseNLP.js</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Ornagai 111K</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">LibreTranslate</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">HuggingFace API</span>
+          </div>
+        </article>
+
+        <!-- Pillar 3: Offline-First PWA & Nara Voice -->
+        <article class="p-6 sm:p-7 rounded-3xl border border-hairline bg-card shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center text-2xl mb-4">
+              <i class="ri-smartphone-line"></i>
+            </div>
+            <h3 class="text-xl font-serif-editorial font-bold text-charcoal mb-2" data-mm="PWA အော့ဖ်လိုင်းနှင့် Nara AI အသံစနစ်" data-en="Offline-First PWA & Nara Audio">
+              PWA အော့ဖ်လိုင်းနှင့် Nara AI အသံစနစ်
+            </h3>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed mb-4 font-sans-ui" data-mm="အဆင့်မြင့် Service Worker v7.0 ဖြင့် စာတမ်းများ၊ ဖောင့်များနှင့် UI များကို စက်ထဲတွင် သိမ်းဆည်းပေးပြီး အင်တာနက်ပြတ်တောက်ချိန်၌ အော့ဖ်လိုင်း ဖတ်ရှုနိုင်ပါသည်။ Mozilla PDF.js Reader ပါဝင်ပြီး Nara G2P စနစ်ဖြင့် စာတမ်းများကို အသံထွက်ဖတ်ပြနိုင်သော အခြေခံအဆောက်အအုံကို တည်ဆောက်ထားပါသည်။" data-en="Multi-tier Service Worker v7.0 architecture with standalone installability on iOS, Android, and macOS. Incorporates embedded Mozilla PDF.js offline viewing and on-device Nara G2P audio synthesizer.">
+              အဆင့်မြင့် Service Worker v7.0 ဖြင့် စာတမ်းများ၊ ဖောင့်များနှင့် UI များကို စက်ထဲတွင် သိမ်းဆည်းပေးပြီး အင်တာနက်ပြတ်တောက်ချိန်၌ အော့ဖ်လိုင်း ဖတ်ရှုနိုင်ပါသည်။ Mozilla PDF.js Reader ပါဝင်ပြီး Nara G2P စနစ်ဖြင့် စာတမ်းများကို အသံထွက်ဖတ်ပြနိုင်သော အခြေခံအဆောက်အအုံကို တည်ဆောက်ထားပါသည်။
+            </p>
+          </div>
+          <div class="pt-4 border-t border-hairline flex flex-wrap gap-1.5 font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Service Worker v7.0</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Mozilla PDF.js</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Web App Manifest</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Nara G2P</span>
+          </div>
+        </article>
+
+        <!-- Pillar 4: Editorial Design & 18 Dynamic Themes -->
+        <article class="p-6 sm:p-7 rounded-3xl border border-hairline bg-card shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-aos="fade-up">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mb-4">
+              <i class="ri-palette-line"></i>
+            </div>
+            <h3 class="text-xl font-serif-editorial font-bold text-charcoal mb-2" data-mm="စာနယ်ဇင်း စာဖတ်ရောင်စဉ် စနစ် (14 Themes)" data-en="Editorial Design & 14 Reading Themes">
+              စာနယ်ဇင်း စာဖတ်ရောင်စဉ် စနစ် (14 Themes)
+            </h3>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed mb-4 font-sans-ui" data-mm="မျက်စိညောင်းညာမှု သက်သာစေရန် Sepia, AMOLED အနက်စစ်၊ Rosewood, Lavender စသည့် စာဖတ်ရောင်စဉ် ၁၄ မျိုးကို 0ms Anti-FOUC နည်းပညာဖြင့် ဖန်တီးထားပါသည်။ ပြည်ထောင်စုဖောင့်နှင့် Cormorant Garamond ဂျာနယ်အက္ခရာပုံစံကို Tailwind CSS JIT ဖြင့် ပေါင်းစပ်ဖန်တီးထားပါသည်။" data-en="Zero-latency Anti-FOUC theme engine powering 14 reading environments across Sepia, AMOLED, Rosewood, and Lavender. Precision editorial layout pairing Pyidaungsu Unicode with Cormorant Garamond.">
+              မျက်စိညောင်းညာမှု သက်သာစေရန် Sepia, AMOLED အနက်စစ်၊ Rosewood, Lavender စသည့် စာဖတ်ရောင်စဉ် ၁၄ မျိုးကို 0ms Anti-FOUC နည်းပညာဖြင့် ဖန်တီးထားပါသည်။ ပြည်ထောင်စုဖောင့်နှင့် Cormorant Garamond ဂျာနယ်အက္ခရာပုံစံကို Tailwind CSS JIT ဖြင့် ပေါင်းစပ်ဖန်တီးထားပါသည်။
+            </p>
+          </div>
+          <div class="pt-4 border-t border-hairline flex flex-wrap gap-1.5 font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Tailwind CSS</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Pyidaungsu Font</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Anti-FOUC Engine</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">RemixIcon v4.6</span>
+          </div>
+        </article>
+
+        <!-- Pillar 5: Telegram Mini App & Bot Ecosystem -->
+        <article class="p-6 sm:p-7 rounded-3xl border border-hairline bg-card shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-[#2AABEE]/10 text-[#2AABEE] flex items-center justify-center text-2xl mb-4">
+              <i class="ri-telegram-fill"></i>
+            </div>
+            <h3 class="text-xl font-serif-editorial font-bold text-charcoal mb-2" data-mm="Telegram Mini App နှင့် Bot အလိုအလျောက်စနစ်" data-en="Telegram Mini App & Bot Daemon">
+              Telegram Mini App နှင့် Bot အလိုအလျောက်စနစ်
+            </h3>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed mb-4 font-sans-ui" data-mm="Telegram Chat အတွင်း တိုက်ရိုက်အသုံးပြုနိုင်သော Telegram Mini App Controller (`js/telegram-webapp.js`) နှင့် မြန်မာနိုင်ငံတွင်းမှ VPN မလိုဘဲ စာတမ်းများကို ရှာဖွေဖတ်ရှုနိုင်သည့် Python Telegram Bot Daemon (`@HtetOfficialBot`) တို့ကို အပြန်အလှန် ပေါင်းစပ်ထားပါသည်။" data-en="Seamless Telegram Mini App integration with native theme sync, custom haptic feedback, and an autonomous 24/7 Python bot daemon providing censorship-free direct article reading.">
+              Telegram Chat အတွင်း တိုက်ရိုက်အသုံးပြုနိုင်သော Telegram Mini App Controller (`js/telegram-webapp.js`) နှင့် မြန်မာနိုင်ငံတွင်းမှ VPN မလိုဘဲ စာတမ်းများကို ရှာဖွေဖတ်ရှုနိုင်သည့် Python Telegram Bot Daemon (`@HtetOfficialBot`) တို့ကို အပြန်အလှန် ပေါင်းစပ်ထားပါသည်။
+            </p>
+          </div>
+          <div class="pt-4 border-t border-hairline flex flex-wrap gap-1.5 font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Telegram WebApp SDK</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Python Bot Daemon</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Telegram IV</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Haptic Engine</span>
+          </div>
+        </article>
+
+        <!-- Pillar 6: Security, Performance & Agentic Standards -->
+        <article class="p-6 sm:p-7 rounded-3xl border border-hairline bg-card shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-2xl mb-4">
+              <i class="ri-shield-keyhole-line"></i>
+            </div>
+            <h3 class="text-xl font-serif-editorial font-bold text-charcoal mb-2" data-mm="လုံခြုံရေး၊ စွမ်းဆောင်ရည်နှင့် AI စံချိန်စံညွှန်းများ" data-en="Security, HSTS & Agentic Standards">
+              လုံခြုံရေး၊ စွမ်းဆောင်ရည်နှင့် AI စံချိန်စံညွှန်းများ
+            </h3>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed mb-4 font-sans-ui" data-mm="HSTS Preload (63,072,000s)၊ COOP၊ Nosniff နှင့် ခိုင်မာသော Content Security Policy (CSP) တို့ဖြင့် ကာကွယ်ထားပါသည်။ AI Agent များ သုတေသနစာတမ်းများကို ဖတ်ရှုစိစစ်နိုင်ရန် Agentic Resource Discovery (`ard.json`) နှင့် `llms.txt` နိုင်ငံတကာစံနှုန်းများကို အပြည့်အဝ ထည့်သွင်းထားပါသည်။" data-en="Fortified with HSTS Preload (2 years), COOP, nosniff, and comprehensive Content Security Policy. Certified compliant with Agentic Resource Discovery (ARD) and LLMs.txt AI indexing standards.">
+              HSTS Preload (63,072,000s)၊ COOP၊ Nosniff နှင့် ခိုင်မာသော Content Security Policy (CSP) တို့ဖြင့် ကာကွယ်ထားပါသည်။ AI Agent များ သုတေသနစာတမ်းများကို ဖတ်ရှုစိစစ်နိုင်ရန် Agentic Resource Discovery (`ard.json`) နှင့် `llms.txt` နိုင်ငံတကာစံနှုန်းများကို အပြည့်အဝ ထည့်သွင်းထားပါသည်။
+            </p>
+          </div>
+          <div class="pt-4 border-t border-hairline flex flex-wrap gap-1.5 font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">HSTS Preload</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">Full CSP</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">ARD Manifest</span>
+            <span class="px-2 py-0.5 rounded-md bg-cream text-charcoal">llms.txt Standard</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Section 2: Creators & Technical Team -->
+    <section class="mb-16 sm:mb-24" aria-labelledby="creators-heading">
+      <div class="flex items-center space-x-3 mb-8 pb-3 border-b border-hairline">
+        <div class="w-10 h-10 rounded-2xl bg-vermilion/10 text-vermilion flex items-center justify-center font-bold text-lg">02</div>
+        <div>
+          <h2 id="creators-heading" class="text-2xl sm:text-3xl font-serif-editorial font-bold text-charcoal" data-mm="ဖန်တီးသူ နည်းပညာရှင်များနှင့် ဦးဆောင်သူများ" data-en="Creators, Engineers & Architectural Leadership">
+            ဖန်တီးသူ နည်းပညာရှင်များနှင့် ဦးဆောင်သူများ
+          </h2>
+          <p class="text-xs sm:text-sm text-muted font-sans-ui" data-mm="ဤပလက်ဖောင်းကို အတွေးအခေါ်၊ နည်းပညာနှင့် စာပေပေါင်းစပ်၍ ပုံဖော်ခဲ့ကြသူများ" data-en="The multidisciplinary researchers, engineers, and creators behind the vision and execution.">
+            ဤပလက်ဖောင်းကို အတွေးအခေါ်၊ နည်းပညာနှင့် စာပေပေါင်းစပ်၍ ပုံဖော်ခဲ့ကြသူများ
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Creator 1: Author & Research Director -->
+        <div class="p-6 sm:p-8 rounded-3xl border border-hairline bg-card shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center space-x-4 mb-5">
+              <div class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-vermilion/30 shrink-0 shadow-sm">
+                <img src="assets/images/og-preview.jpeg" alt="ထက်မြတ်ဧကရီ" class="w-full h-full object-cover">
+              </div>
+              <div>
+                <span class="text-xs font-mono font-bold text-vermilion uppercase tracking-wider" data-mm="အယူအဆနှင့် ပလက်ဖောင်း ဦးဆောင်သူ" data-en="RESEARCH DIRECTOR & CONCEPT ARCHITECT">အယူအဆနှင့် ပလက်ဖောင်း ဦးဆောင်သူ</span>
+                <h3 class="text-2xl font-serif-editorial font-bold text-charcoal">ထက်မြတ်ဧကရီ (Htet Myat Ekri)</h3>
+                <span class="text-xs text-muted font-sans-ui">Writer, Political Philosophy Researcher &amp; Human Rights Activist</span>
+              </div>
+            </div>
+
+            <p class="text-xs sm:text-sm text-muted leading-relaxed mb-4 font-sans-ui" data-mm="နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် စာရေးဆရာမ ထက်သည် Commufemocratism ဝါဒနှင့် Women Nation လှုပ်ရှားမှုကို ဖော်ထုတ်ခဲ့သူဖြစ်ပြီး၊ မြန်မာစာဖတ်သူများနှင့် ကမ္ဘာ့ပညာရှင်များအတွက် အင်တာနက်ဆင်ဆာဖြတ်တောက်မှု မခံရဘဲ လွတ်လပ်စွာ ဖတ်ရှုနိုင်သော ပညာရပ်ဆိုင်ရာ ဒစ်ဂျစ်တယ်မော်ကွန်းတိုက် ဖြစ်လာစေရန် ပလက်ဖောင်း၏ ရည်မှန်းချက်၊ အယူအဆနှင့် စာပေဗိသုကာကို အစအဆုံး ဦးဆောင်ညွှန်ကြားခဲ့ပါသည်။" data-en="Burmese trans writer, feminist theorist, and researcher who established the philosophical foundations of Commufemocratism. She directed the architectural vision for an independent, censorship-resilient digital portal serving Burmese resistance literature, political philosophy, and human rights research.">
+              နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် စာရေးဆရာမ ထက်သည် Commufemocratism ဝါဒနှင့် Women Nation လှုပ်ရှားမှုကို ဖော်ထုတ်ခဲ့သူဖြစ်ပြီး၊ မြန်မာစာဖတ်သူများနှင့် ကမ္ဘာ့ပညာရှင်များအတွက် အင်တာနက်ဆင်ဆာဖြတ်တောက်မှု မခံရဘဲ လွတ်လပ်စွာ ဖတ်ရှုနိုင်သော ပညာရပ်ဆိုင်ရာ ဒစ်ဂျစ်တယ်မော်ကွန်းတိုက် ဖြစ်လာစေရန် ပလက်ဖောင်း၏ ရည်မှန်းချက်၊ အယူအဆနှင့် စာပေဗိသုကာကို အစအဆုံး ဦးဆောင်ညွှန်ကြားခဲ့ပါသည်။
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-hairline flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+            <a href="https://orcid.org/0009-0004-7908-2949" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 text-emerald-600 dark:text-emerald-400 hover:underline">
+              <i class="ri-orcid-line text-sm"></i>
+              <span>ORCID: 0009-0004-7908-2949</span>
+            </a>
+            <a href="about.html" class="inline-flex items-center space-x-1 text-vermilion hover:underline font-semibold">
+              <span data-mm="ကိုယ်ရေးအကျဉ်း ဖတ်ရှုရန်" data-en="View Full Biography">ကိုယ်ရေးအကျဉ်း ဖတ်ရှုရန်</span>
+              <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Creator 2: Systems & AI Engineering Team -->
+        <div class="p-6 sm:p-8 rounded-3xl border border-hairline bg-card shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center space-x-4 mb-5">
+              <div class="w-16 h-16 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-3xl shrink-0 shadow-sm border border-hairline">
+                <i class="ri-terminal-box-line text-emerald-400"></i>
+              </div>
+              <div>
+                <span class="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider" data-mm="အင်ဂျင်နီယာနှင့် နည်းပညာ တည်ဆောက်ရေး" data-en="SYSTEM ARCHITECTURE & AI PAIR PROGRAMMING">အင်ဂျင်နီယာနှင့် နည်းပညာ တည်ဆောက်ရေး</span>
+                <h3 class="text-2xl font-serif-editorial font-bold text-charcoal">IdeaHub Myanmar Engineering Team</h3>
+                <span class="text-xs text-muted font-sans-ui">DeepMind Advanced Agentic AI Pair Programming Engine</span>
+              </div>
+            </div>
+
+            <p class="text-xs sm:text-sm text-muted leading-relaxed mb-4 font-sans-ui" data-mm="ဝက်ဘ်ဆိုက်၏ ဆာဗာမဲ့ အစွန်းထွက် Edge Worker စနစ်များ၊ Vercel မြန်မာပြည်အထူးလိုင်း လုံခြုံရေးချိတ်ဆက်မှုများ၊ PWA အော့ဖ်လိုင်း Caching စနစ်၊ DOM XSS ကာကွယ်ရေး CSP မူဘောင်၊ ARD Manifest နှင့် မြန်မာစာ NLP အလိုအလျောက် ဘာသာပြန်အင်ဂျင်များကို IdeaHub Myanmar အင်ဂျင်နီယာအဖွဲ့မှ Google DeepMind ၏ အဆင့်မြင့် Agentic AI စနစ်နှင့် တွဲဖက်၍ တည်ဆောက်ခဲ့ပါသည်။" data-en="Engineered by IdeaHub Myanmar in continuous collaboration with Google DeepMind Advanced Agentic AI Pair Programming. Responsible for the Cloudflare serverless edge worker, Vercel high-availability routing, multi-tier PWA service worker caching, Burmese NLP tokenizer, and security hardening.">
+              ဝက်ဘ်ဆိုက်၏ ဆာဗာမဲ့ အစွန်းထွက် Edge Worker စနစ်များ၊ Vercel မြန်မာပြည်အထူးလိုင်း လုံခြုံရေးချိတ်ဆက်မှုများ၊ PWA အော့ဖ်လိုင်း Caching စနစ်၊ DOM XSS ကာကွယ်ရေး CSP မူဘောင်၊ ARD Manifest နှင့် မြန်မာစာ NLP အလိုအလျောက် ဘာသာပြန်အင်ဂျင်များကို IdeaHub Myanmar အင်ဂျင်နီယာအဖွဲ့မှ Google DeepMind ၏ အဆင့်မြင့် Agentic AI စနစ်နှင့် တွဲဖက်၍ တည်ဆောက်ခဲ့ပါသည်။
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-hairline flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+            <span class="text-muted flex items-center gap-1">
+              <i class="ri-git-branch-line"></i> Maintained via Git &amp; CI/CD
+            </span>
+            <a href="https://t.me/ideahubmyanmar" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 text-blue-500 hover:underline font-semibold">
+              <i class="ri-telegram-fill"></i>
+              <span>@ideahubmyanmar</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 3: Open-Source Acknowledgments & Foundations -->
+    <section class="mb-16 sm:mb-24" aria-labelledby="credits-heading">
+      <div class="flex items-center space-x-3 mb-8 pb-3 border-b border-hairline">
+        <div class="w-10 h-10 rounded-2xl bg-vermilion/10 text-vermilion flex items-center justify-center font-bold text-lg">03</div>
+        <div>
+          <h2 id="credits-heading" class="text-2xl sm:text-3xl font-serif-editorial font-bold text-charcoal" data-mm="Open-Source ဂုဏ်ပြုမှတ်တမ်းနှင့် အခြေခံနည်းပညာများ" data-en="Open-Source Acknowledgments &amp; Foundations">
+            Open-Source ဂုဏ်ပြုမှတ်တမ်းနှင့် အခြေခံနည်းပညာများ
+          </h2>
+          <p class="text-xs sm:text-sm text-muted font-sans-ui" data-mm="ဤပလက်ဖောင်းဖြစ်မြောက်ရေးအတွက် အခြေခံအုတ်မြစ်ပံ့ပိုးပေးခဲ့ကြသော အခမဲ့ဆော့ဖ်ဝဲများနှင့် ပညာရှင်များ" data-en="Standing on the shoulders of giants: the open-source libraries, lexical databases, and platforms powering this work.">
+            ဤပလက်ဖောင်းဖြစ်မြောက်ရေးအတွက် အခြေခံအုတ်မြစ်ပံ့ပိုးပေးခဲ့ကြသော အခမဲ့ဆော့ဖ်ဝဲများနှင့် ပညာရှင်များ
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <!-- Ornagai Project -->
+        <div class="p-5 rounded-2xl border border-hairline bg-card">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold font-serif-editorial text-base text-charcoal">Ornagai Dictionary Project</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cream text-muted">Lexicon</span>
+          </div>
+          <p class="text-xs text-muted leading-relaxed font-sans-ui mb-2" data-mm="ကိုရန်နိုင်အေး (Ko Yan Naing Aye) ဦးဆောင်သော မြန်မာ့အကြီးဆုံး အခမဲ့ Open Source အင်္ဂလိပ်-မြန်မာ အဘိဓာန် ဒေတာဘေ့စ် (111,000+ Words)။" data-en="Open-source English-Myanmar lexical corpus of 111,000+ headwords pioneered by Ko Yan Naing Aye.">
+            ကိုရန်နိုင်အေး (Ko Yan Naing Aye) ဦးဆောင်သော မြန်မာ့အကြီးဆုံး အခမဲ့ Open Source အင်္ဂလိပ်-မြန်မာ အဘိဓာန် ဒေတာဘေ့စ် (111,000+ Words)။
+          </p>
+        </div>
+
+        <!-- Pyidaungsu Font -->
+        <div class="p-5 rounded-2xl border border-hairline bg-card">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold font-serif-editorial text-base text-charcoal">Pyidaungsu Unicode Font</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cream text-muted">Typography</span>
+          </div>
+          <p class="text-xs text-muted leading-relaxed font-sans-ui mb-2" data-mm="Myanmar NLP Lab မှ ဖန်တီးခဲ့ပြီး နိုင်ငံတကာ စံချိန်စံညွှန်းပြည့်မီသော မြန်မာယူနီကုဒ်ဖောင့် စနစ်။" data-en="Standard-compliant Myanmar Unicode font family engineered by the Myanmar Natural Language Processing Lab.">
+            Myanmar NLP Lab မှ ဖန်တီးခဲ့ပြီး နိုင်ငံတကာ စံချိန်စံညွှန်းပြည့်မီသော မြန်မာယူနီကုဒ်ဖောင့် စနစ်။
+          </p>
+        </div>
+
+        <!-- Myanmar Tools -->
+        <div class="p-5 rounded-2xl border border-hairline bg-card">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold font-serif-editorial text-base text-charcoal">Google Myanmar Tools</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cream text-muted">NLP Tooling</span>
+          </div>
+          <p class="text-xs text-muted leading-relaxed font-sans-ui mb-2" data-mm="Google Open Source မှ ပံ့ပိုးပေးထားသော မြန်မာစာ ဇော်ဂျီ/ယူနီကုဒ် ခွဲခြားစစ်ဆေးရေးနှင့် စကားလုံးသတ်မှတ်ရေး စနစ်။" data-en="Open-source Burmese encoding detection and segmentation models developed by Google Open Source.">
+            Google Open Source မှ ပံ့ပိုးပေးထားသော မြန်မာစာ ဇော်ဂျီ/ယူနီကုဒ် ခွဲခြားစစ်ဆေးရေးနှင့် စကားလုံးသတ်မှတ်ရေး စနစ်။
+          </p>
+        </div>
+
+        <!-- Mozilla PDF.js -->
+        <div class="p-5 rounded-2xl border border-hairline bg-card">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold font-serif-editorial text-base text-charcoal">Mozilla PDF.js Engine</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cream text-muted">Document Viewer</span>
+          </div>
+          <p class="text-xs text-muted leading-relaxed font-sans-ui mb-2" data-mm="Mozilla Foundation ၏ Web Standards အခြေပြု အော့ဖ်လိုင်း PDF ဖတ်ရှုရေး အင်ဂျင်။" data-en="Web-standards based PDF renderer engineered by the Mozilla Foundation for in-browser offline reading.">
+            Mozilla Foundation ၏ Web Standards အခြေပြု အော့ဖ်လိုင်း PDF ဖတ်ရှုရေး အင်ဂျင်။
+          </p>
+        </div>
+
+        <!-- Remix Icon -->
+        <div class="p-5 rounded-2xl border border-hairline bg-card">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold font-serif-editorial text-base text-charcoal">Remix Icon Project</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cream text-muted">Iconography</span>
+          </div>
+          <p class="text-xs text-muted leading-relaxed font-sans-ui mb-2" data-mm="Remix Design မှ အခမဲ့ပံ့ပိုးပေးထားသော သန့်ရှင်းသပ်ရပ်သည့် 2,800+ Open-Source အိုင်ကွန်စနစ်။" data-en="Over 2,800+ exquisitely crafted open-source neutral style system symbols by Remix Design.">
+            Remix Design မှ အခမဲ့ပံ့ပိုးပေးထားသော သန့်ရှင်းသပ်ရပ်သည့် 2,800+ Open-Source အိုင်ကွန်စနစ်။
+          </p>
+        </div>
+
+        <!-- LibreTranslate -->
+        <div class="p-5 rounded-2xl border border-hairline bg-card">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold font-serif-editorial text-base text-charcoal">LibreTranslate &amp; MyMemory</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cream text-muted">Machine Translation</span>
+          </div>
+          <p class="text-xs text-muted leading-relaxed font-sans-ui mb-2" data-mm="အများပြည်သူသုံး အခမဲ့ စက်ဘာသာပြန် API များနှင့် ဘာသာပြန်မှတ်ဉာဏ် ကွန်ရက်များ။" data-en="Open-source machine translation engine and translation memory APIs powering the multilingual translation studio.">
+            အများပြည်သူသုံး အခမဲ့ စက်ဘာသာပြန် API များနှင့် ဘာသာပြန်မှတ်ဉာဏ် ကွန်ရက်များ။
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 4: Technical Specifications & Mirror Endpoints Table -->
+    <section class="mb-14" aria-labelledby="specs-heading">
+      <div class="flex items-center space-x-3 mb-8 pb-3 border-b border-hairline">
+        <div class="w-10 h-10 rounded-2xl bg-vermilion/10 text-vermilion flex items-center justify-center font-bold text-lg">04</div>
+        <div>
+          <h2 id="specs-heading" class="text-2xl sm:text-3xl font-serif-editorial font-bold text-charcoal" data-mm="နည်းပညာဆိုင်ရာ အချက်အလက်များနှင့် လိုင်စင်" data-en="Technical Specifications &amp; Open Access License">
+            နည်းပညာဆိုင်ရာ အချက်အလက်များနှင့် လိုင်စင်
+          </h2>
+          <p class="text-xs sm:text-sm text-muted font-sans-ui" data-mm="ဝက်ဘ်ဆိုက်ဗားရှင်း၊ အခြေခံမူဘောင်နှင့် အများပြည်သူလွတ်လပ်ခွင့် လိုင်စင်" data-en="Deployment versioning, infrastructure nodes, and Creative Commons licensing.">
+            ဝက်ဘ်ဆိုက်ဗားရှင်း၊ အခြေခံမူဘောင်နှင့် အများပြည်သူလွတ်လပ်ခွင့် လိုင်စင်
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-3xl border border-hairline bg-card overflow-hidden shadow-xs">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs font-sans-ui">
+            <thead class="bg-cream/60 dark:bg-stone-900/60 border-b border-hairline font-mono uppercase text-[10px] text-muted">
+              <tr>
+                <th class="py-3.5 px-5">Component</th>
+                <th class="py-3.5 px-5">Implementation &amp; Provider</th>
+                <th class="py-3.5 px-5">Live Route / Endpoint</th>
+                <th class="py-3.5 px-5">Security &amp; Protocol</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-hairline">
+              <tr>
+                <td class="py-3 px-5 font-bold text-charcoal">Global Edge Worker</td>
+                <td class="py-3 px-5 text-muted">Cloudflare Workers + R2 Assets</td>
+                <td class="py-3 px-5 font-mono text-vermilion"><a href="https://web.htetofficial.workers.dev" target="_blank" rel="noopener noreferrer">web.htetofficial.workers.dev</a></td>
+                <td class="py-3 px-5"><span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 font-mono text-[10px]">HSTS Preload + HTTP/3</span></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-5 font-bold text-charcoal">Burma Safe-Pass Mirror</td>
+                <td class="py-3 px-5 text-muted">Vercel Serverless Node (VPN-Free)</td>
+                <td class="py-3 px-5 font-mono text-vermilion"><a href="https://htetofficialgithubio.vercel.app" target="_blank" rel="noopener noreferrer">htetofficialgithubio.vercel.app</a></td>
+                <td class="py-3 px-5"><span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 font-mono text-[10px]">Censorship-Resilient</span></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-5 font-bold text-charcoal">Primary Git Codebase</td>
+                <td class="py-3 px-5 text-muted">GitHub Pages Infrastructure</td>
+                <td class="py-3 px-5 font-mono text-vermilion"><a href="https://htetofficial.github.io" target="_blank" rel="noopener noreferrer">htetofficial.github.io</a></td>
+                <td class="py-3 px-5"><span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 font-mono text-[10px]">Open Source Origin</span></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-5 font-bold text-charcoal">Telegram Ecosystem</td>
+                <td class="py-3 px-5 text-muted">Telegram Mini App &amp; Python Daemon</td>
+                <td class="py-3 px-5 font-mono text-vermilion"><a href="https://t.me/HtetOfficialBot" target="_blank" rel="noopener noreferrer">@HtetOfficialBot</a></td>
+                <td class="py-3 px-5"><span class="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 font-mono text-[10px]">Instant View Compatible</span></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-5 font-bold text-charcoal">Agentic Resource Discovery</td>
+                <td class="py-3 px-5 text-muted">ARD Manifest Spec (RFC 8141 URN)</td>
+                <td class="py-3 px-5 font-mono text-muted">/.well-known/ard.json</td>
+                <td class="py-3 px-5"><span class="px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-600 font-mono text-[10px]">AI Search Standard</span></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-5 font-bold text-charcoal">LLM Knowledge Context</td>
+                <td class="py-3 px-5 text-muted">Structured Markdown Directory</td>
+                <td class="py-3 px-5 font-mono text-muted">/llms.txt</td>
+                <td class="py-3 px-5"><span class="px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-600 font-mono text-[10px]">AI Context Ready</span></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-5 font-bold text-charcoal">Open Access Content License</td>
+                <td class="py-3 px-5 text-muted">Creative Commons Attribution-NonCommercial 4.0</td>
+                <td class="py-3 px-5 font-mono text-muted">CC BY-NC-SA 4.0</td>
+                <td class="py-3 px-5"><span class="px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 font-mono text-[10px]">Free Knowledge</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Master Minimalist Footer -->
+  <footer class="border-t border-hairline bg-card/60 dark:bg-stone-900/40 py-12 sm:py-16 mt-16 font-sans-ui text-muted text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+      
+      <!-- Brand & Mission -->
+      <div class="space-y-3">
+        <div class="flex items-center space-x-2">
+          <div class="nav-brand-glass-icon w-8 h-8 rounded-xl flex items-center justify-center shrink-0" title="ထက် (Htet)">
+            <img src="assets/favicon.svg" alt="ထက်" class="w-full h-full object-contain">
+          </div>
+          <span class="font-serif-editorial text-lg font-semibold text-charcoal">Htet Official</span>
+        </div>
+        <p class="leading-relaxed" data-mm="မြန်မာ Transgirl စာရေးဆရာမ၊ နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် လူမှုတက်ကြွလှုပ်ရှားသူ ထက်၏ တရားဝင် ဝက်ဘ်စာမျက်နှာ။" data-en="Official platform of Htet — Burmese trans writer, political philosophy researcher, and activist.">
+          မြန်မာ Transgirl စာရေးဆရာမ၊ နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် လူမှုတက်ကြွလှုပ်ရှားသူ ထက်၏ တရားဝင် ဝက်ဘ်စာမျက်နှာ။
+        </p>
+      </div>
+
+      <!-- Quick Nav -->
+      <div class="space-y-2">
+        <span class="font-semibold text-charcoal uppercase tracking-wider text-[11px] font-mono" data-mm="အမြန်သွားရန်" data-en="EXPLORE">အမြန်သွားရန်</span>
+        <ul class="space-y-1.5">
+          <li><a href="index.html" class="hover:text-vermilion transition-colors" data-mm="ပင်မစာမျက်နှာ" data-en="Home">ပင်မစာမျက်နှာ</a></li>
+          <li><a href="articles.html" class="hover:text-vermilion transition-colors" data-mm="ဆောင်းပါးများ" data-en="Articles">ဆောင်းပါးများ</a></li>
+          <li><a href="publications.html" class="hover:text-vermilion transition-colors" data-mm="ထုတ်ဝေမှုများ" data-en="Publications">ထုတ်ဝေမှုများ</a></li>
+          <li><a href="technology.html" class="hover:text-vermilion transition-colors font-medium text-vermilion" data-mm="နည်းပညာနှင့် ဖန်တီးသူများ" data-en="Technology Colophon">နည်းပညာနှင့် ဖန်တီးသူများ</a></li>
+        </ul>
+      </div>
+
+      <!-- Lexical Tools -->
+      <div class="space-y-2">
+        <span class="font-semibold text-charcoal uppercase tracking-wider text-[11px] font-mono" data-mm="ဘာသာစကား ကိရိယာများ" data-en="LANGUAGE TOOLS">ဘာသာစကား ကိရိယာများ</span>
+        <ul class="space-y-1.5">
+          <li><a href="dictionary.html" class="hover:text-vermilion transition-colors" data-mm="အဘိဓာန်နှင့် NLP စတူဒီယို" data-en="Dictionary &amp; BurmeseNLP">အဘိဓာန်နှင့် NLP စတူဒီယို</a></li>
+          <li><a href="translate.html" class="hover:text-vermilion transition-colors" data-mm="စမတ် ဘာသာပြန်စနစ်" data-en="Translation Studio">စမတ် ဘာသာပြန်စနစ်</a></li>
+          <li><a href="glossary.html" class="hover:text-vermilion transition-colors" data-mm="သဘောတရား အဘိဓာန်" data-en="Conceptual Glossary">သဘောတရား အဘိဓာန်</a></li>
+        </ul>
+      </div>
+
+      <!-- Connected Channels -->
+      <div class="space-y-2">
+        <span class="font-semibold text-charcoal uppercase tracking-wider text-[11px] font-mono" data-mm="ဆက်သွယ်ရန် ကွန်ရက်များ" data-en="CHANNELS">ဆက်သွယ်ရန် ကွန်ရက်များ</span>
+        <ul class="space-y-1.5 font-mono text-[11px]">
+          <li><a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center gap-1.5"><i class="ri-telegram-fill text-[#2AABEE]"></i> Telegram: @htetmmofficial</a></li>
+          <li><a href="https://t.me/HtetOfficialBot" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center gap-1.5"><i class="ri-robot-2-line text-amber-500"></i> Bot: @HtetOfficialBot</a></li>
+          <li><a href="https://orcid.org/0009-0004-7908-2949" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center gap-1.5"><i class="ri-orcid-line text-emerald-500"></i> ORCID: 0009-0004-7908-2949</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Official Mirrors & Network Access Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-hairline/60">
+      <div class="rounded-2xl bg-card border border-hairline p-4 sm:p-5 shadow-xs space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="font-semibold text-charcoal text-xs uppercase tracking-wider" data-mm="တရားဝင် Mirror လင့်ခ်များနှင့် ဝင်ရောက်နိုင်မှု" data-en="Official Mirrors & Network Access">တရားဝင် Mirror လင့်ခ်များနှင့် ဝင်ရောက်နိုင်မှု</span>
+          </div>
+          <span class="text-[11px] text-muted font-sans-ui" data-mm="🌐 မြန်မာနိုင်ငံတွင်းမှ အဆင်ပြေချောမွေ့စွာ ဝင်ရောက်ဖတ်ရှုနိုင်ရန်" data-en="🌐 High-availability access across multiple networks">🌐 မြန်မာနိုင်ငံတွင်းမှ အဆင်ပြေချောမွေ့စွာ ဝင်ရောက်ဖတ်ရှုနိုင်ရန်</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <!-- Vercel Mirror (VPN မလို) -->
+          <a href="https://htetofficialgithubio.vercel.app" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl border border-hairline hover:border-emerald-500/50 bg-card/60 hover:bg-card transition-all group flex flex-col justify-between shadow-sm">
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-mono text-xs font-semibold text-charcoal group-hover:text-emerald-600 transition-colors flex items-center gap-1.5">
+                  <i class="ri-vercel-fill text-sm"></i> Vercel Mirror
+                </span>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 text-[10px] font-semibold">VPN မလို</span>
+              </div>
+              <span class="font-mono text-[11px] text-muted break-all">htetofficialgithubio.vercel.app</span>
+            </div>
+            <p class="text-[10px] text-muted/80 mt-2 font-sans-ui" data-mm="မြန်မာနိုင်ငံတွင်းမှ VPN မလိုဘဲ တိုက်ရိုက်ဝင်ရောက်နိုင်သည်" data-en="Accessible directly from Myanmar without VPN">မြန်မာနိုင်ငံတွင်းမှ VPN မလိုဘဲ တိုက်ရိုက်ဝင်ရောက်နိုင်သည်</p>
+          </a>
+
+          <!-- Cloudflare Web Mirror -->
+          <a href="https://web.htetofficial.workers.dev" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl border border-hairline hover:border-amber-500/50 bg-card/60 hover:bg-card transition-all group flex flex-col justify-between shadow-sm">
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-mono text-xs font-semibold text-charcoal group-hover:text-amber-600 transition-colors flex items-center gap-1.5">
+                  <i class="ri-flashlight-fill text-amber-500"></i> Cloudflare Edge
+                </span>
+                <span class="px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-300 text-[10px] font-semibold">Edge CDN</span>
+              </div>
+              <span class="font-mono text-[11px] text-muted break-all">web.htetofficial.workers.dev</span>
+            </div>
+            <p class="text-[10px] text-muted/80 mt-2 font-sans-ui" data-mm="ကမ္ဘာ့အဆင့် Edge Engine နှင့် Mini App စနစ်" data-en="Global high-speed Edge Engine & Mini App">ကမ္ဘာ့အဆင့် Edge Engine နှင့် Mini App စနစ်</p>
+          </a>
+
+          <!-- Cloudflare App Mirror -->
+          <a href="https://app.htetofficial.workers.dev" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl border border-hairline hover:border-blue-500/50 bg-card/60 hover:bg-card transition-all group flex flex-col justify-between shadow-sm">
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-mono text-xs font-semibold text-charcoal group-hover:text-blue-600 transition-colors flex items-center gap-1.5">
+                  <i class="ri-apps-2-line text-blue-500"></i> Cloudflare App
+                </span>
+                <span class="px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-700 dark:text-blue-300 text-[10px] font-semibold">Alternative</span>
+              </div>
+              <span class="font-mono text-[11px] text-muted break-all">app.htetofficial.workers.dev</span>
+            </div>
+            <p class="text-[10px] text-muted/80 mt-2 font-sans-ui" data-mm="အရန် အသုံးပြုနိုင်သော Edge Worker Endpoint" data-en="Alternative high-availability Edge endpoint">အရန် အသုံးပြုနိုင်သော Edge Worker Endpoint</p>
+          </a>
+
+          <!-- GitHub Pages -->
+          <a href="https://htetofficial.github.io" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl border border-hairline hover:border-purple-500/50 bg-card/60 hover:bg-card transition-all group flex flex-col justify-between shadow-sm">
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-mono text-xs font-semibold text-charcoal group-hover:text-purple-600 transition-colors flex items-center gap-1.5">
+                  <i class="ri-github-fill text-sm"></i> GitHub Pages
+                </span>
+                <span class="px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-700 dark:text-purple-300 text-[10px] font-semibold">Primary</span>
+              </div>
+              <span class="font-mono text-[11px] text-muted break-all">htetofficial.github.io</span>
+            </div>
+            <p class="text-[10px] text-muted/80 mt-2 font-sans-ui" data-mm="မူရင်း GitHub Infrastructure ဝက်ဘ်စာမျက်နှာ" data-en="Primary GitHub Infrastructure repository">မူရင်း GitHub Infrastructure ဝက်ဘ်စာမျက်နှာ</p>
+          </a>
+        </div>
+
+        <!-- Security / VPN Advisory Note -->
+        <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-3 text-xs leading-relaxed text-amber-900 dark:text-amber-200">
+          <i class="ri-shield-keyhole-line text-base text-amber-600 dark:text-amber-400 shrink-0 mt-0.5"></i>
+          <div>
+            <span class="font-semibold" data-mm="လုံခြုံရေးနှင့် ဒစ်ဂျစ်တယ် လွတ်လပ်ခွင့် အကြံပြုချက် — " data-en="Security & Digital Privacy Advisory — ">လုံခြုံရေးနှင့် ဒစ်ဂျစ်တယ် လွတ်လပ်ခွင့် အကြံပြုချက် — </span>
+            <span data-mm="မြန်မာနိုင်ငံတွင်းရှိ စာဖတ်သူများအနေဖြင့် Vercel လင့်ခ်မှတစ်ဆင့် VPN မလိုဘဲ တိုက်ရိုက်ဝင်ရောက်နိုင်သော်လည်း၊ မိမိတို့၏ Privacy နှင့် ဆက်သွယ်ရေးလုံခြုံမှုအတွက် မည်သည့်လင့်ခ်ကိုမဆို ဝင်ရောက်သည့်အခါ VPN ချိတ်ဆက်၍ အသုံးပြုရန် လေးနက်စွာ အကြံပြုအပ်ပါသည်။" data-en="While the Vercel mirror is accessible from Myanmar without VPN, readers are strongly advised to use a trusted VPN for digital privacy and safety across all links.">မြန်မာနိုင်ငံတွင်းရှိ စာဖတ်သူများအနေဖြင့် Vercel လင့်ခ်မှတစ်ဆင့် VPN မလိုဘဲ တိုက်ရိုက်ဝင်ရောက်နိုင်သော်လည်း၊ မိမိတို့၏ Privacy နှင့် ဆက်သွယ်ရေးလုံခြုံမှုအတွက် မည်သည့်လင့်ခ်ကိုမဆို ဝင်ရောက်သည့်အခါ VPN ချိတ်ဆက်၍ အသုံးပြုရန် လေးနက်စွာ အကြံပြုအပ်ပါသည်။</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-hairline/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono">
+      <span>&copy; 2026 HTET (ထက်မြတ်ဧကရီ). OPEN ACCESS ARCHIVE.</span>
+      <span>TECHNOLOGY &amp; SYSTEMS BY IDEAHUB MYANMAR &amp; DEEPMIND AI</span>
+    </div>
+  </footer>
+
+  <!-- Local Scripts -->
+  <script src="js/bootstrap.bundle.min.js?v=2.1"></script>
+  <script src="js/aos.js?v=2.1"></script>
+  <script src="js/confetti.browser.min.js?v=2.1"></script>
+  <script src="js/i18n.js?v=2.1"></script>
+  <script src="js/pwa.js?v=2.1"></script>
+  <script src="js/data-loader.js?v=2.1"></script>
+  <script src="js/burmesenlp.js?v=2.1"></script>
+  <script src="js/main.js?v=2.1"></script>
+</body>
+</html>

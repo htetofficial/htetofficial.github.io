@@ -16,6 +16,7 @@ const CORE_SHELL_ASSETS = [
   './glossary.html',
   './dictionary.html',
   './translate.html',
+  './technology.html',
   './article.html',
   './404.html',
   './offline.html',

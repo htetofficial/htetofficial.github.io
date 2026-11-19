@@ -64,6 +64,13 @@
     <priority>0.85</priority>
   </url>
 
+  <url>
+    <loc>https://htetofficial.github.io/technology.html</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
   <!-- Research Articles (25 Monographs) -->
   <url>
     <loc>https://htetofficial.github.io/article.html?id=who-owns-htet-identity-thoughts</loc>
