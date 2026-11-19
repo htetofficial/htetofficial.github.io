@@ -1,20 +1,28 @@
 {
-  "$schema": "https://agenticresourcediscovery.org/schemas/ard-v1.json",
-  "name": "ထက် (Htet Official)",
-  "description": "Official academic portal, political philosophy monographs, and research archive of Burmese writer and researcher Htet.",
-  "url": "https://htetofficial.github.io",
-  "canonical": "https://htetofficial.github.io",
-  "mirrors": [
-    "https://web.htetofficial.workers.dev",
-    "https://htetofficialgithubio.vercel.app"
-  ],
-  "author": {
-    "name": "ထက် (Htet)",
-    "orcid": "https://orcid.org/0009-0004-7908-2949",
-    "telegram": "https://t.me/htetmmofficial"
-  },
-  "resources": [
-    { "type": "llms-txt", "url": "https://htetofficial.github.io/llms.txt" },
-    { "type": "sitemap", "url": "https://htetofficial.github.io/sitemap.xml" }
+  "@context": "https://agenticresourcediscovery.org/context/v1",
+  "entries": [
+    {
+      "identifier": "urn:air:htetofficial.github.io:docs:llms-txt",
+      "displayName": "Htet Official LLM Context & Academic Directory",
+      "type": "text/markdown",
+      "url": "https://htetofficial.github.io/llms.txt",
+      "description": "Structured Markdown context of writer and researcher Htet's political philosophy essays, intersectional feminism monographs, and verified scholarly links.",
+      "representativeQueries": [
+        "Htet official research papers and essays",
+        "Burmese political philosophy and intersectional feminism",
+        "Htet ORCID 0009-0004-7908-2949 publications and archive"
+      ]
+    },
+    {
+      "identifier": "urn:air:htetofficial.github.io:site:sitemap",
+      "displayName": "Htet Official XML Sitemap",
+      "type": "application/xml",
+      "url": "https://htetofficial.github.io/sitemap.xml",
+      "description": "Comprehensive URL and asset index of all research essays, books, and language tools on Htet Official.",
+      "representativeQueries": [
+        "all articles on htetofficial.github.io",
+        "Htet research directory and sitemap"
+      ]
+    }
   ]
 }
