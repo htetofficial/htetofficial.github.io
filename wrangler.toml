@@ -1,4 +1,4 @@
-name = "htetofficial"
+name = "htetofficial-github-io"
 main = "cloudflare/worker.js"
 compatibility_date = "2024-11-01"
 
