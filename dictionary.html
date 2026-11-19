@@ -7,91 +7,98 @@
 
   <!-- Critical Anti-FOUC & Anti-Flash Engine & Trusted Types Policy -->
   <script src="js/theme-init.js?v=2.1"></script>
-
-  <title>အဘိဓာန်၊ ဘာသာပြန်နှင့် မြန်မာစာ NLP စတူဒီယို | Htet Official Dual Dictionary & BurmeseNLP</title>
-  <meta name="description" content="Ornagai အင်္ဂလိပ်-မြန်မာ အဘိဓာန် (111K+ Words)၊ Reverse Myanmar-to-English (196K+ Words)၊ Myanmar Tools ဝေါဟာရများ (42K+ Words)၊ LibreTranslate စက်ဘာသာပြန်အင်ဂျင်၊ HuggingFace ဝါကျစုံတွဲများ (12K+ Pairs) နှင့် Mozilla PDF.js Offline Reader ပေါင်းစပ် ဘာသာစကားစနစ်။">
-
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="stylesheet" href="css/custom.css">
-  <link rel="stylesheet" href="css/remixicon.css">
-
   <style>
-    @font-face {
-      font-family: 'Pyidaungsu';
-      src: url('fonts/Pyidaungsu-Regular.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Pyidaungsu';
-      src: url('fonts/Pyidaungsu-Bold.ttf') format('truetype');
-      font-weight: bold;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Cormorant Garamond';
-      src: url('fonts/CormorantGaramond-Regular.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Cormorant Garamond';
-      src: url('fonts/CormorantGaramond-Bold.ttf') format('truetype');
-      font-weight: bold;
-      font-style: normal;
-      font-display: swap;
-    }
-    body {
-      font-family: 'Pyidaungsu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-    .font-serif-editorial {
-      font-family: 'Cormorant Garamond', 'Pyidaungsu', Georgia, serif;
-    }
-    .font-sans-ui {
-      font-family: 'Pyidaungsu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-    .hanko-stamp {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1.5px solid #C84B31;
-      color: #C84B31;
-      border-radius: 4px;
-      line-height: 1;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      user-select: none;
-    }
+    /* Critical zero-latency base paint to completely eliminate theme and language flash */
+    html { color-scheme: light dark; }
+    html[data-announcement-dismissed="true"] #htet-announcement-bar { display: none !important; }
+    html[data-theme="amoled"], html[data-theme="amoled"].dark { background-color: #000000 !important; }
+    html[data-theme="amoled"] body, html[data-theme="amoled"].dark body { background-color: #000000 !important; color: #FFFFFF !important; }
+    html[data-theme="amoled"] header.sticky { background-color: rgba(0, 0, 0, 0.95) !important; }
+    html[data-theme="dark"], html.dark { background-color: #121110 !important; }
+    html[data-theme="dark"] body, html.dark body { background-color: #121110 !important; color: #F5EFE6 !important; }
+    html[data-theme="dark"] .bg-cream, html.dark .bg-cream { background-color: #221F1C !important; }
+    html[data-theme="dark"] header.sticky, html.dark header.sticky { background-color: rgba(18, 17, 16, 0.85) !important; }
+    html[data-theme="sepia"] { background-color: #F5EEDB !important; }
+    html[data-theme="sepia"] body, html.sepia body { background-color: #F5EEDB !important; color: #342A1E !important; }
+    html[data-theme="light"] { background-color: #FAF8F5; }
+    html[data-theme="light"] body { background-color: #FAF8F5; color: #252321; }
+
+    /* Red Themes (3) */
+    html[data-theme="red"] { background-color: #FAF5F5 !important; }
+    html[data-theme="red"] body { background-color: #FAF5F5 !important; color: #2A1717 !important; }
+    html[data-theme="red-crimson"] { background-color: #FAF4F5 !important; }
+    html[data-theme="red-crimson"] body { background-color: #FAF4F5 !important; color: #2E1218 !important; }
+    html[data-theme="red-ruby"] { background-color: #12080A !important; }
+    html[data-theme="red-ruby"] body { background-color: #12080A !important; color: #F5E8EA !important; }
+
+    /* Yellow Themes (3) */
+    html[data-theme="yellow"] { background-color: #FDFCF0 !important; }
+    html[data-theme="yellow"] body { background-color: #FDFCF0 !important; color: #2E2914 !important; }
+    html[data-theme="yellow-amber"] { background-color: #FCF8EC !important; }
+    html[data-theme="yellow-amber"] body { background-color: #FCF8EC !important; color: #2C2210 !important; }
+    html[data-theme="yellow-gold"] { background-color: #14120A !important; }
+    html[data-theme="yellow-gold"] body { background-color: #14120A !important; color: #F8F2DC !important; }
+
+    /* Green Themes (3) */
+    html[data-theme="green"] { background-color: #F3F8F4 !important; }
+    html[data-theme="green"] body { background-color: #F3F8F4 !important; color: #16261A !important; }
+    html[data-theme="green-sage"] { background-color: #F1F6F2 !important; }
+    html[data-theme="green-sage"] body { background-color: #F1F6F2 !important; color: #1A261D !important; }
+    html[data-theme="green-forest"] { background-color: #0A140D !important; }
+    html[data-theme="green-forest"] body { background-color: #0A140D !important; color: #E8F4EB !important; }
+
+    /* Blue Themes (3) */
+    html[data-theme="blue"] { background-color: #F2F7FB !important; }
+    html[data-theme="blue"] body { background-color: #F2F7FB !important; color: #142230 !important; }
+    html[data-theme="blue-sky"] { background-color: #F0F8FF !important; }
+    html[data-theme="blue-sky"] body { background-color: #F0F8FF !important; color: #102438 !important; }
+    html[data-theme="blue-midnight"] { background-color: #080E18 !important; }
+    html[data-theme="blue-midnight"] body { background-color: #080E18 !important; color: #E4EEF8 !important; }
+
+    /* Violet Themes (3) */
+    html[data-theme="violet"] { background-color: #F8F4FB !important; }
+    html[data-theme="violet"] body { background-color: #F8F4FB !important; color: #241630 !important; }
+    html[data-theme="violet-lavender"] { background-color: #F6F3FA !important; }
+    html[data-theme="violet-lavender"] body { background-color: #F6F3FA !important; color: #231830 !important; }
+    html[data-theme="violet-deep"] { background-color: #100A18 !important; }
+    html[data-theme="violet-deep"] body { background-color: #100A18 !important; color: #F2EAF8 !important; }
   </style>
 
-  <!-- Tailwind CDN & Config -->
+  <title data-mm="အဘိဓာန်နှင့် ဘာသာစကား NLP စတူဒီယို — Htet Official" data-en="Dictionary & Linguistic NLP Studio — Htet Official" data-zh="词典与缅甸语自然语言处理工作室 — Htet Official" data-th="พจนานุกรมและสตูดิโอประมวลผลภาษาพม่า NLP — Htet Official" data-ja="辞書・ビルマ語言語処理スタジオ — Htet Official">အဘိဓာန်နှင့် ဘာသာစကား NLP စတူဒီယို — Htet Official</title>
+  <meta name="description" content="Ornagai အင်္ဂလိပ်-မြန်မာ (၁၁၁,၂၃၂ လုံး)၊ ဝေါဟာရစုံတွဲ (၁၉၆,၂၀၂ စုံ)၊ Myanmar Tools ဝေါဟာရများ (၄၂,၇၈၇ လုံး) နှင့် 12K+ Parallel Corpus ဘာသာစကား သုတေသန စနစ်။">
+  <link rel="canonical" href="https://htetofficial.github.io/dictionary.html">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="အဘိဓာန်နှင့် ဘာသာစကား NLP စတူဒီယို — Htet Official">
+  <meta property="og:description" content="Ornagai အင်္ဂလိပ်-မြန်မာ (၁၁၁,၂၃၂ လုံး)၊ Reverse Pairs (၁၉၆,၂၀၂ စုံ)၊ Myanmar Tools (၄၂,၇၈၇ လုံး) နှင့် 12K+ Parallel Corpus ဘာသာစကား သုတေသန စနစ်။">
+  <meta property="og:image" content="https://htetofficial.github.io/assets/images/og-cover.png">
+  <meta property="og:url" content="https://htetofficial.github.io/dictionary.html">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#B83A2D">
+
+  <!-- Core Performance Prefetch & CDN Links -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="css/remixicon.css">
+
+  <!-- Framework & Icon Stylesheets -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/remixicon.css">
+  <link rel="stylesheet" href="css/aos.css">
+
+  <!-- Custom Editorial CSS (Minified for Fast Paint) -->
+  <link rel="stylesheet" href="css/custom.min.css">
+
+  <!-- Tailwind CSS Configuration Defined Before Script -->
+  <script src="js/tailwind-config.js"></script>
   <script src="js/tailwind.min.js"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            vermilion: '#C84B31',
-            charcoal: '#2D4263',
-            ivory: '#FAF8F5',
-            cream: '#F5EEDB',
-            hairline: 'rgba(45, 66, 99, 0.12)',
-            faint: 'rgba(45, 66, 99, 0.05)',
-            muted: '#6B7280',
-            card: 'var(--bg-card, #FFFFFF)'
-          }
-        }
-      }
-    };
-  </script>
-  <script src="js/theme.js"></script>
-  <!-- Telegram WebApp SDK & Mini App Controller -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script src="js/telegram-webapp.js"></script>
+  <script defer src="js/theme.js"></script>
 </head>
 
 <body class="min-h-screen flex flex-col bg-cream/30 text-charcoal antialiased transition-colors duration-200">
@@ -120,9 +127,7 @@
           <a href="journal.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌">မှတ်စုနှင့် ပို့စ်များ</a>
           <a href="glossary.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典">ဝေါဟာရအဘိဓာန်</a>
           <a href="dictionary.html" class="nav-link-pill px-2.5 2xl:px-3.5 py-1 2xl:py-1.5 rounded-full active bg-vermilion text-white font-medium shadow-xs" data-mm="အဘိဓာန်" data-en="Dictionary" data-zh="英语词典" data-th="พจนานุกรม" data-ja="英緬辞典">အဘိဓာန်</a>
-          <a href="translate.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဘာသာပြန်" data-en="Translate" data-zh="智能翻译" data-th="แปลภาษา" data-ja="翻訳">ဘာသာပြန်</a>
           <a href="about.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について">စာရေးသူအကြောင်း</a>
-          <a href="technology.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="နည်းပညာ" data-en="Technology" data-zh="技术架构" data-th="เทคโนโลยี" data-ja="技術構成">နည်းပညာ</a>
           <a href="contact.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系作者" data-th="ติดต่อ" data-ja="お問い合わせ">ဆက်သွယ်ရန်</a>
         </nav>
       </div>
@@ -173,7 +178,7 @@
           </button>
           <div id="lang-dropdown-menu" class="absolute right-0 mt-2 w-52 py-2 rounded-2xl shadow-2xl z-50 hidden transition-all font-sans-ui text-xs border border-hairline lang-dropdown-glass bg-card" role="menu" aria-orientation="vertical">
             <div class="px-3 py-1 mb-1 border-b border-hairline/60 flex items-center justify-between text-[10px] text-muted font-mono uppercase tracking-wider">
-              <span data-mm="ဘာသာစကား ရွေးရန်" data-en="Select Language">ဘာသာစကား ရွေးရန်</span>
+              <span data-mm="ဘာသာစကား ရွေးရန်" data-en="Select Language" data-zh="选择语言" data-th="เลือกภาษา" data-ja="言語を選択">ဘာသာစကား ရွေးရန်</span>
               <span class="text-vermilion font-bold">5 LANGS</span>
             </div>
             <button data-switch-lang="mm" class="w-full text-left px-3 py-2 hover:bg-vermilion/10 dark:hover:bg-white/10 flex items-center justify-between transition-all rounded-xl mx-auto my-0.5 cursor-pointer" role="menuitem">
@@ -200,7 +205,7 @@
             <button data-switch-lang="th" class="w-full text-left px-3 py-2 hover:bg-vermilion/10 dark:hover:bg-white/10 flex items-center justify-between transition-all rounded-xl mx-auto my-0.5 cursor-pointer" role="menuitem">
               <span class="flex items-center space-x-2.5">
                 <span class="w-6 h-6 rounded-full flex items-center justify-center text-sm shadow-2xs border border-hairline/60 bg-card">🇹🇭</span>
-                <span class="font-semibold text-charcoal">ภาษาไทย</span>
+                <span class="font-semibold text-charcoal">ไทย</span>
               </span>
               <span class="text-[10px] font-mono opacity-50">TH</span>
             </button>
@@ -214,102 +219,76 @@
           </div>
         </div>
 
-        <!-- Direct Telegram Quick Link -->
-        <a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="hidden 2xl:flex nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-[#2AABEE] hover:bg-[#2AABEE] hover:text-white hover:border-[#2AABEE] transition-all items-center justify-center shadow-xs" title="Official Telegram (@htetmmofficial)">
-          <i class="ri-telegram-fill text-sm"></i>
-        </a>
-
-        <!-- Mobile Menu Toggle -->
-        <button id="mobile-menu-toggle" class="lg:hidden nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 flex items-center justify-center text-charcoal hover:text-vermilion focus:outline-none transition-colors" aria-label="Open Navigation">
-          <i class="ri-menu-3-line text-base"></i>
+        <!-- Mobile Drawer Toggle -->
+        <button id="mobile-menu-open-btn" class="lg:hidden nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-charcoal hover:text-vermilion flex items-center justify-center shadow-xs" aria-label="Open Navigation Drawer">
+          <i class="ri-menu-3-line text-sm"></i>
         </button>
       </div>
+
     </div>
   </header>
 
-  <!-- Mobile Menu Overlay & Drawer -->
-  <div id="mobile-menu-overlay" style="display: none;" class="fixed inset-0 bg-charcoal/40 dark:bg-black/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
-
-  <div id="mobile-menu-drawer" style="visibility: hidden; transform: translateX(-100%); -webkit-transform: translateX(-100%); pointer-events: none;" class="fixed top-0 left-0 bottom-0 w-80 sm:w-88 max-w-[88vw] bg-ivory dark:bg-[#141312] z-50 border-r border-hairline p-4 sm:p-5 flex flex-col justify-between shadow-2xl overflow-y-auto overscroll-contain">
-    <div>
+  <!-- Mobile Minimalist Drawer Navigation Menu -->
+  <div id="mobile-nav-backdrop" class="fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300" aria-hidden="true"></div>
+  <div id="mobile-nav-drawer" class="fixed top-0 right-0 bottom-0 z-50 w-72 max-w-[85vw] bg-ivory dark:bg-[#181614] border-l border-hairline shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between p-6">
+    <div class="space-y-6">
       <div class="flex items-center justify-between pb-4 border-b border-hairline">
-        <a href="index.html" class="flex items-center space-x-3 group">
-          <div class="nav-brand-glass-icon w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 shadow-sm border border-hairline/80">
-            <img src="assets/favicon.svg" alt="ထက်" class="w-6 h-6 object-contain">
+        <div class="flex items-center space-x-2.5">
+          <div class="nav-brand-glass-icon w-8 h-8 rounded-xl flex items-center justify-center shrink-0">
+            <img src="assets/favicon.svg" alt="ထက်" class="w-full h-full object-contain">
           </div>
-          <div class="flex flex-col">
-            <span class="font-serif-editorial text-xl font-bold tracking-tight text-charcoal leading-none">HTET</span>
-            <span class="text-[10px] tracking-wider text-muted uppercase font-sans-ui mt-1" data-mm="စာရေးဆရာမ • သုတေသီ">စာရေးဆရာမ • သုတေသီ</span>
-          </div>
-        </a>
-        <button id="mobile-menu-close" class="w-8 h-8 rounded-full border border-hairline/80 bg-cream/50 dark:bg-stone-900/50 flex items-center justify-center text-muted hover:text-charcoal cursor-pointer" aria-label="Close Navigation">
+          <span class="font-serif-editorial text-lg font-bold text-charcoal">HTET</span>
+        </div>
+        <button id="mobile-menu-close-btn" class="w-8 h-8 rounded-full hover:bg-cream dark:hover:bg-stone-800 flex items-center justify-center text-muted hover:text-charcoal cursor-pointer" aria-label="Close menu">
           <i class="ri-close-line text-lg"></i>
         </button>
       </div>
 
-      <nav class="flex flex-col space-y-1 py-3 font-sans-ui text-sm">
-        <a href="index.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60">
+      <nav class="space-y-1 font-sans-ui text-sm">
+        <a href="index.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60" data-mm="ပင်မ" data-en="Home" data-zh="首页" data-th="หน้าแรก" data-ja="ホーム">
           <span class="flex items-center space-x-2.5">
             <i class="ri-home-5-line text-muted"></i>
             <span>ပင်မ</span>
           </span>
-          <i class="ri-arrow-right-s-line text-sm text-muted/50"></i>
         </a>
-        <a href="articles.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60">
+        <a href="articles.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60" data-mm="ဆောင်းပါးများ" data-en="Articles" data-zh="学术文章" data-th="บทความ" data-ja="論考・論文">
           <span class="flex items-center space-x-2.5">
             <i class="ri-article-line text-muted"></i>
             <span>ဆောင်းပါးများ</span>
           </span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold">25</span>
         </a>
-        <a href="publications.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60">
+        <a href="publications.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60" data-mm="ထုတ်ဝေမှုများ" data-en="Publications" data-zh="出版专著" data-th="ผลงานตีพิมพ์" data-ja="出版物・著作">
           <span class="flex items-center space-x-2.5">
-            <i class="ri-book-2-line text-muted"></i>
+            <i class="ri-file-paper-2-line text-muted"></i>
             <span>ထုတ်ဝေမှုများ</span>
           </span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold">4</span>
         </a>
-        <a href="journal.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60">
+        <a href="journal.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌">
           <span class="flex items-center space-x-2.5">
             <i class="ri-booklet-line text-muted"></i>
             <span>မှတ်စုနှင့် ပို့စ်များ</span>
           </span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold">14</span>
         </a>
-        <a href="glossary.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60">
+        <a href="glossary.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典">
           <span class="flex items-center space-x-2.5">
             <i class="ri-book-read-line text-muted"></i>
             <span>ဝေါဟာရအဘိဓာန်</span>
           </span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold">42</span>
         </a>
-        <a href="dictionary.html" class="drawer-nav-item active flex items-center justify-between px-3 py-2 rounded-2xl font-medium bg-vermilion text-white shadow-xs">
+        <a href="dictionary.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-bold transition-all bg-vermilion text-white shadow-xs" data-mm="အဘိဓာန်နှင့် NLP" data-en="Dictionary & NLP" data-zh="词典与NLP" data-th="พจนานุกรมและ NLP" data-ja="辞書とNLP">
           <span class="flex items-center space-x-2.5">
             <i class="ri-book-2-fill text-white"></i>
             <span>အဘိဓာန်နှင့် NLP</span>
           </span>
           <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/20 text-white font-mono font-bold">111K+</span>
         </a>
-        <a href="translate.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60">
-          <span class="flex items-center space-x-2.5">
-            <i class="ri-translate-2 text-muted"></i>
-            <span>ဘာသာပြန်စတူဒီယို</span>
-          </span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold">MT</span>
-        </a>
-        <a href="about.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60">
+        <a href="about.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60" data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について">
           <span class="flex items-center space-x-2.5">
             <i class="ri-user-smile-line text-muted"></i>
             <span>စာရေးသူအကြောင်း</span>
           </span>
         </a>
-        <a href="technology.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60">
-          <span class="flex items-center space-x-2.5">
-            <i class="ri-cpu-line text-muted"></i>
-            <span>နည်းပညာနှင့် ဖန်တီးသူများ</span>
-          </span>
-        </a>
-        <a href="contact.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60">
+        <a href="contact.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60" data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系作者" data-th="ติดต่อ" data-ja="お問い合わせ">
           <span class="flex items-center space-x-2.5">
             <i class="ri-mail-send-line text-muted"></i>
             <span>ဆက်သွယ်ရန်</span>
@@ -324,12 +303,12 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center space-x-2 text-xs text-muted font-sans-ui">
       <a href="index.html" class="hover:text-vermilion flex items-center space-x-1">
         <i class="ri-home-5-line"></i>
-        <span>ပင်မ</span>
+        <span data-mm="ပင်မ" data-en="Home" data-zh="首页" data-th="หน้าแรก" data-ja="ホーム">ပင်မ</span>
       </a>
       <span class="opacity-40">/</span>
       <span class="text-charcoal font-semibold flex items-center space-x-1">
         <i class="ri-book-2-line text-vermilion"></i>
-        <span>အဘိဓာန်နှင့် ဘာသာစကား NLP စတူဒီယို</span>
+        <span data-mm="အဘိဓာန်နှင့် ဘာသာစကား NLP စတူဒီယို" data-en="Dictionary & Linguistic NLP Studio" data-zh="词典与自然语言处理工作室" data-th="พจนานุกรมและสตูดิโอ NLP" data-ja="辞書・自然言語処理スタジオ">အဘိဓာန်နှင့် ဘာသာစကား NLP စတူဒီယို</span>
       </span>
     </div>
   </div>
@@ -340,52 +319,47 @@
     <!-- Hero Banner with Japanese Editorial Hanko Stamp -->
     <div class="text-center space-y-3 max-w-3xl mx-auto">
       <div class="flex items-center justify-center space-x-2">
-        <span class="hanko-stamp px-2.5 py-0.5 text-xs font-semibold">အဘိဓာန်</span>
+        <span class="hanko-stamp px-2.5 py-0.5 text-xs font-semibold" data-mm="အဘိဓာန်" data-en="Dictionary" data-zh="词典" data-th="พจนานุกรม" data-ja="辞書">အဘိဓာန်</span>
         <span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-bold bg-teal-100 text-teal-800 dark:bg-teal-950/60 dark:text-teal-300 border border-teal-300 dark:border-teal-700/60 shadow-xs">
           <i class="ri-translate-2"></i>
           <span>Ornagai • Myanmar Tools • BurmeseNLP • kalixlouiis Corpus</span>
         </span>
       </div>
 
-      <h1 class="text-3xl sm:text-5xl font-black font-serif-editorial text-charcoal tracking-tight">
+      <h1 class="text-3xl sm:text-5xl font-black font-serif-editorial text-charcoal tracking-tight" data-mm="အဘိဓာန်၊ ဘာသာပြန်နှင့် NLP စတူဒီယို" data-en="Dictionary, Translation & NLP Studio" data-zh="词典、机器翻译与NLP语言工作室" data-th="สตูดิโอพจนานุกรม การแปลภาษา และ NLP" data-ja="辞書・翻訳・自然言語処理スタジオ">
         အဘိဓာန်၊ ဘာသာပြန်နှင့် NLP စတူဒီယို
       </h1>
-      <p class="text-sm sm:text-base text-muted max-w-2xl mx-auto leading-relaxed">
-        Ornagai အင်္ဂလိပ်-မြန်မာ (၁၁၁,၂၃၂ လုံး)၊ Myanmar Tools ဝေါဟာရများ (၄၂,၇၈၇ လုံး)၊ HuggingFace ဝါကျစုံတွဲများ (၁၂,၀၂၁ ခု) နှင့် Mozilla PDF.js Offline Reader ပေါင်းစပ် ဘာသာစကားသုတေသနစနစ်။
+      <p class="text-sm sm:text-base text-muted max-w-2xl mx-auto leading-relaxed" data-mm="Ornagai အင်္ဂလိပ်-မြန်မာ (၁၁၁,၂၃၂ လုံး)၊ ဝေါဟာရစုံတွဲ (၁၉၆,၂၀၂ စုံ)၊ Myanmar Tools ဝေါဟာရများ (၄၂,၇၈၇ လုံး) နှင့် 12K+ Parallel Corpus ဘာသာစကား သုတေသန စနစ်။" data-en="Ornagai English-Myanmar (111,232 words), reverse pairs (196,202), Myanmar Words (42,787), and 12K+ parallel corpus for linguistic research." data-zh="Ornagai 英缅词典（111,232词）、反向词对（196,202对）、缅文词库（42,787词）及12,000+平行语料库研究平台。" data-th="พจนานุกรม Ornagai อังกฤษ-พม่า (111,232 คำ), คู่คำย้อนกลับ (196,202 คู่), คำศัพท์พม่า (42,787 คำ) และคลังประโยคคู่ขนาน 12K+" data-ja="Ornagai 英語-ミャンマー語（111,232語）、逆引きペア（196,202組）、42,787語彙および12,000+並列コーパス研究基盤。">
+        Ornagai အင်္ဂလိပ်-မြန်မာ (၁၁၁,၂၃၂ လုံး)၊ ဝေါဟာရစုံတွဲ (၁၉၆,၂၀၂ စုံ)၊ Myanmar Tools ဝေါဟာရများ (၄၂,၇၈၇ လုံး) နှင့် 12K+ Parallel Corpus ဘာသာစကား သုတေသန စနစ်။
       </p>
 
       <!-- Stats Chips -->
       <div class="flex flex-wrap items-center justify-center gap-2 pt-1 font-mono text-xs">
-        <span class="px-2.5 py-1 rounded-lg bg-cream/70 dark:bg-stone-800 text-charcoal border border-hairline font-bold">111,232 En Words</span>
-        <span class="px-2.5 py-1 rounded-lg bg-cream/70 dark:bg-stone-800 text-charcoal border border-hairline font-bold">196,202 Reverse Pairs</span>
-        <span class="px-2.5 py-1 rounded-lg bg-cream/70 dark:bg-stone-800 text-charcoal border border-hairline font-bold">42,787 My Words</span>
-        <span class="px-2.5 py-1 rounded-lg bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300 border border-indigo-300 font-bold">LibreTranslate Neural MT</span>
-        <span class="px-2.5 py-1 rounded-lg bg-teal-100 text-teal-800 dark:bg-teal-950/60 dark:text-teal-300 border border-teal-300 font-bold">12,021 Parallel Pairs</span>
-        <span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 font-bold">100% Offline Ready</span>
+        <span class="px-2.5 py-1 rounded-lg bg-cream/70 dark:bg-stone-800 text-charcoal border border-hairline font-bold" data-mm="၁၁၁,၂၃၂ En Words" data-en="111,232 En Words" data-zh="111,232 英语单词" data-th="111,232 คำอังกฤษ" data-ja="111,232 英語語彙">111,232 En Words</span>
+        <span class="px-2.5 py-1 rounded-lg bg-cream/70 dark:bg-stone-800 text-charcoal border border-hairline font-bold" data-mm="၁၉၆,၂၀၂ Reverse Pairs" data-en="196,202 Reverse Pairs" data-zh="196,202 逆向匹配对" data-th="196,202 คู่คำย้อนกลับ" data-ja="196,202 逆引きペア">196,202 Reverse Pairs</span>
+        <span class="px-2.5 py-1 rounded-lg bg-cream/70 dark:bg-stone-800 text-charcoal border border-hairline font-bold" data-mm="၄၂,၇၈၇ My Words" data-en="42,787 My Words" data-zh="42,787 缅语词汇" data-th="42,787 คำพม่า" data-ja="42,787 緬語語彙">42,787 My Words</span>
+        <span class="px-2.5 py-1 rounded-lg bg-teal-100 text-teal-800 dark:bg-teal-950/60 dark:text-teal-300 border border-teal-300 font-bold" data-mm="၁၂,၀၂၁ Parallel Pairs" data-en="12,021 Parallel Pairs" data-zh="12,021 平行句对" data-th="12,021 ประโยคคู่ขนาน" data-ja="12,021 対訳ペア">12,021 Parallel Pairs</span>
+        <span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 font-bold" data-mm="100% အော့ဖ်လိုင်းအသင့်" data-en="100% Offline Ready" data-zh="100% 离线支持" data-th="100% ใช้งานออฟไลน์ได้" data-ja="100% オフライン完全対応">100% Offline Ready</span>
       </div>
 
-      <!-- Feature Tabs Switcher (5 Subsystems) -->
+      <!-- Feature Tabs Switcher (4 Core Subsystems — PDF Tab Excluded) -->
       <div class="pt-4 flex justify-center overflow-x-auto pb-1">
         <div class="inline-flex items-center p-1.5 rounded-2xl bg-cream/80 dark:bg-stone-900 border border-hairline shadow-xs font-sans-ui text-xs font-semibold gap-1">
           <button onclick="window.HtetDict.switchTab('tab-dict')" data-tab-target="tab-dict" class="dict-tab-btn active px-3.5 py-2 rounded-xl bg-teal-600 text-white shadow-xs transition-all cursor-pointer flex items-center space-x-1.5 shrink-0">
             <i class="ri-book-2-line"></i>
-            <span>အဘိဓာန် ရှာဖွေမှု (Dual Dict)</span>
+            <span data-mm="အဘိဓာန် ရှာဖွေမှု (Dual Dict)" data-en="Dictionary Search (Dual Dict)" data-zh="双向词典搜索 (Dual Dict)" data-th="ค้นหาพจนานุกรม (Dual Dict)" data-ja="辞書検索 (日英・緬英)">အဘိဓာန် ရှာဖွေမှု (Dual Dict)</span>
           </button>
           <button onclick="window.HtetDict.switchTab('tab-sentences')" data-tab-target="tab-sentences" class="dict-tab-btn px-3.5 py-2 rounded-xl text-muted hover:text-charcoal transition-all cursor-pointer flex items-center space-x-1.5 shrink-0">
             <i class="ri-translate-2"></i>
-            <span>LibreTranslate ဘာသာပြန်စတူဒီယို</span>
+            <span data-mm="ဝါကျဘာသာပြန် (12K+ Corpus)" data-en="Sentence Translation (12K+ Corpus)" data-zh="例句与机器翻译 (12K+语料)" data-th="แปลประโยค (12K+ Corpus)" data-ja="用例翻訳 (12K+コーパス)">ဝါကျဘာသာပြန် (12K+ Corpus)</span>
           </button>
           <button onclick="window.HtetDict.switchTab('tab-nlp')" data-tab-target="tab-nlp" class="dict-tab-btn px-3.5 py-2 rounded-xl text-muted hover:text-charcoal transition-all cursor-pointer flex items-center space-x-1.5 shrink-0">
             <i class="ri-cpu-line"></i>
-            <span>မြန်မာစာ NLP (Workbench)</span>
+            <span data-mm="မြန်မာစာ NLP (Workbench)" data-en="Burmese NLP (Workbench)" data-zh="缅甸语NLP工作台 (Workbench)" data-th="การประมวลผลภาษาพม่า NLP" data-ja="ビルマ語NLPワークベンチ">မြန်မာစာ NLP (Workbench)</span>
           </button>
           <button onclick="window.HtetDict.switchTab('tab-explorer')" data-tab-target="tab-explorer" class="dict-tab-btn px-3.5 py-2 rounded-xl text-muted hover:text-charcoal transition-all cursor-pointer flex items-center space-x-1.5 shrink-0">
             <i class="ri-folder-word-line"></i>
-            <span>သဒ္ဒါအလိုက် ဝေါဟာရများ (42K+)</span>
-          </button>
-          <button onclick="window.HtetDict.switchTab('tab-pdf')" data-tab-target="tab-pdf" class="dict-tab-btn px-3.5 py-2 rounded-xl text-muted hover:text-charcoal transition-all cursor-pointer flex items-center space-x-1.5 shrink-0">
-            <i class="ri-file-pdf-2-line text-vermilion"></i>
-            <span>သုတေသန PDF စာတမ်းများ</span>
+            <span data-mm="သဒ္ဒါအလိုက် ဝေါဟာရများ (42K+)" data-en="Grammar & Vocabulary (42K+)" data-zh="语法与词类词库 (42K+)" data-th="คลังคำศัพท์ตามไวยากรณ์ (42K+)" data-ja="品詞別語彙エクスプローラー (42K+)">သဒ္ဒါအလိုက် ဝေါဟာရများ (42K+)</span>
           </button>
         </div>
       </div>
@@ -405,7 +379,12 @@
           <input 
             type="text" 
             id="dict-search-input" 
-            placeholder="အင်္ဂလိပ် သို့မဟုတ် မြန်မာစကားလုံး ရိုက်ထည့်ပါ (freedom, လွတ်လပ်ခွင့်, သတ္တိ)..." 
+            placeholder="အင်္ဂလိပ် သို့မဟုတ် မြန်မာစကားလုံး ရိုက်ထည့်ပါ (freedom, လွတ်လပ်ခွင့်, သတ္တိ)..."
+            data-mm-placeholder="အင်္ဂလိပ် သို့မဟုတ် မြန်မာစကားလုံး ရိုက်ထည့်ပါ (freedom, လွတ်လပ်ခွင့်, သတ္တိ)..."
+            data-en-placeholder="Type an English or Myanmar word (e.g. freedom, လွတ်လပ်ခွင့်, courage)..."
+            data-zh-placeholder="输入英语或缅甸语单词（如：freedom, လွတ်လပ်ခွင့်, courage）..."
+            data-th-placeholder="พิมพ์คำภาษาอังกฤษหรือภาษาพม่า (เช่น freedom, လွတ်လပ်ခွင့်, courage)..."
+            data-ja-placeholder="英語またはミャンマー語の単語を入力（例: freedom, လွတ်လပ်ခွင့်, courage）..."
             autocomplete="off" 
             autocorrect="off" 
             autocapitalize="off"
@@ -415,14 +394,14 @@
           <div id="dict-direction-indicator" class="mr-2 hidden sm:block shrink-0">
             <span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-400/30">Auto Detect</span>
           </div>
-          <button onclick="window.HtetDict.lookup(document.getElementById('dict-search-input').value)" class="mr-2 px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm transition-all cursor-pointer shadow-xs active:scale-95 shrink-0">
+          <button onclick="window.HtetDict.lookup(document.getElementById('dict-search-input').value)" class="mr-2 px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm transition-all cursor-pointer shadow-xs active:scale-95 shrink-0" data-mm="ရှာဖွေရန်" data-en="Search" data-zh="搜索" data-th="ค้นหา" data-ja="検索">
             ရှာဖွေရန်
           </button>
         </div>
 
         <!-- Quick Word Suggestions -->
         <div class="flex items-center space-x-1.5 overflow-x-auto pb-1 text-xs text-muted font-medium scrollbar-thin">
-          <span class="shrink-0 text-slate-500 font-bold">စမ်းသပ်ရန်:</span>
+          <span class="shrink-0 text-slate-500 font-bold" data-mm="စမ်းသပ်ရန်:" data-en="Try:" data-zh="快速尝试:" data-th="ลองค้นหา:" data-ja="お試し:">စမ်းသပ်ရန်:</span>
           <button onclick="window.HtetDict.lookup('freedom')" class="px-2 py-0.5 rounded-md bg-cream/70 dark:bg-stone-800 hover:text-vermilion cursor-pointer shrink-0 font-mono">freedom</button>
           <button onclick="window.HtetDict.lookup('လွတ်လပ်ခွင့်')" class="px-2 py-0.5 rounded-md bg-teal-500/10 text-teal-700 dark:text-teal-300 hover:text-teal-800 cursor-pointer shrink-0 font-sans-ui font-semibold">လွတ်လပ်ခွင့်</button>
           <button onclick="window.HtetDict.lookup('courage')" class="px-2 py-0.5 rounded-md bg-cream/70 dark:bg-stone-800 hover:text-vermilion cursor-pointer shrink-0 font-mono">courage</button>
@@ -441,9 +420,9 @@
         <div class="flex items-center justify-between mb-2 px-1">
           <span class="text-xs font-bold text-charcoal font-sans-ui flex items-center space-x-1.5">
             <i class="ri-sort-alphabet-asc text-teal-600"></i>
-            <span>အင်္ဂလိပ် အက္ခရာအလိုက် ရှာဖွေရန် (Browse English A to Z)</span>
+            <span data-mm="အင်္ဂလိပ် အက္ခရာအလိုက် ရှာဖွေရန် (Browse English A to Z)" data-en="Browse English Alphabet (A to Z)" data-zh="按英文字母浏览 (A 至 Z)" data-th="เรียกดูตามตัวอักษรภาษาอังกฤษ (A ถึง Z)" data-ja="英語アルファベット別ブラウズ (A-Z)">အင်္ဂလိပ် အက္ခရာအလိုက် ရှာဖွေရန် (Browse English A to Z)</span>
           </span>
-          <span class="text-[11px] text-muted font-mono">27 Letter Partitions</span>
+          <span class="text-[11px] text-muted font-mono" data-mm="၂၇ ပိုင်းခွဲထားသည်" data-en="27 Letter Partitions" data-zh="27个字母分区" data-th="27 ส่วนตัวอักษร" data-ja="27文字区分">27 Letter Partitions</span>
         </div>
         <div class="flex flex-wrap gap-1 sm:gap-1.5 justify-center">
           <button onclick="window.HtetDict.browseLetter('a')" data-letter-btn="a" class="w-8 h-8 rounded-lg bg-cream/60 dark:bg-stone-800 text-charcoal font-mono text-xs font-bold hover:bg-teal-600 hover:text-white transition-all cursor-pointer">A</button>
@@ -486,7 +465,7 @@
             <div class="flex items-center justify-between pb-2 border-b border-hairline">
               <span class="text-xs font-bold text-charcoal font-sans-ui flex items-center space-x-1.5">
                 <i class="ri-list-check-2 text-vermilion"></i>
-                <span>စကားလုံးများ စာရင်း</span>
+                <span data-mm="စကားလုံးများ စာရင်း" data-en="Live Matches" data-zh="匹配词条列表" data-th="รายการคำที่ตรงกัน" data-ja="一致単語リスト">စကားလုံးများ စာရင်း</span>
               </span>
               <span class="text-[10px] text-muted font-mono">LIVE MATCHES</span>
             </div>
@@ -498,7 +477,7 @@
             <div class="flex items-center justify-between pb-2 border-b border-hairline">
               <span class="text-xs font-bold text-charcoal font-sans-ui flex items-center space-x-1.5">
                 <i class="ri-bookmark-3-line text-amber-500"></i>
-                <span>မှတ်သားထားသော စကားလုံးများ</span>
+                <span data-mm="မှတ်သားထားသော စကားလုံးများ" data-en="Saved Words" data-zh="已收藏词汇" data-th="คำศัพท์ที่บันทึกไว้" data-ja="保存した単語">မှတ်သားထားသော စကားလုံးများ</span>
               </span>
               <span class="text-[10px] text-muted font-mono">SAVED</span>
             </div>
@@ -512,8 +491,8 @@
             <div class="w-16 h-16 rounded-full bg-teal-50 dark:bg-teal-950/40 text-teal-600 dark:text-teal-400 mx-auto flex items-center justify-center text-3xl">
               <i class="ri-book-open-line"></i>
             </div>
-            <h3 class="text-xl font-bold font-serif-editorial text-charcoal">စကားလုံး ရှာဖွေပါ</h3>
-            <p class="text-sm text-muted max-w-md mx-auto">
+            <h3 class="text-xl font-bold font-serif-editorial text-charcoal" data-mm="စကားလုံး ရှာဖွေပါ" data-en="Search Vocabulary" data-zh="开始查询词汇" data-th="ค้นหาคำศัพท์" data-ja="単語を検索">စကားလုံး ရှာဖွေပါ</h3>
+            <p class="text-sm text-muted max-w-md mx-auto" data-mm="ရှာဖွေလိုသော အင်္ဂလိပ် သို့မဟုတ် မြန်မာစကားလုံးကို အထက်ပါ search box တွင် ရိုက်ထည့်ပါ သို့မဟုတ် အက္ခရာများအလိုက် နှိပ်၍ ကြည့်ရှုနိုင်ပါသည်။" data-en="Enter an English or Myanmar word in the search box above, or browse alphabetically." data-zh="请在上方输入英语或缅甸语单词，亦可按字母索引浏览。" data-th="พิมพ์คำภาษาอังกฤษหรือภาษาพม่าในช่องค้นหาด้านบน หรือเลือกตามตัวอักษร" data-ja="上の検索ボックスに英語またはミャンマー語を入力するか、アルファベット順に閲覧してください。">
               ရှာဖွေလိုသော အင်္ဂလိပ် သို့မဟုတ် မြန်မာစကားလုံးကို အထက်ပါ search box တွင် ရိုက်ထည့်ပါ သို့မဟုတ် အက္ခရာများအလိုက် နှိပ်၍ ကြည့်ရှုနိုင်ပါသည်။
             </p>
           </div>
@@ -526,194 +505,67 @@
     </div>
 
     <!-- ======================================================== -->
-    <!-- TAB 2: LIBRETRANSLATE STUDIO & PARALLEL CORPUS            -->
+    <!-- TAB 2: PARALLEL SENTENCES (12,021 PAIRS CORPUS)           -->
     <!-- ======================================================== -->
-    <div id="tab-sentences" class="dict-view-tab space-y-8 hidden">
-      <div class="max-w-5xl mx-auto space-y-6">
-        
-        <!-- LibreTranslate Banner -->
-        <div class="p-5 sm:p-6 rounded-3xl bg-card border border-hairline shadow-sm space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-hairline">
-            <div class="flex items-center space-x-2.5">
-              <span class="w-9 h-9 rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xl shrink-0">
-                <i class="ri-translate"></i>
-              </span>
-              <div>
-                <h2 class="text-xl sm:text-2xl font-bold font-serif-editorial text-charcoal m-0">
-                  LibreTranslate စက်ဘာသာပြန် စတူဒီယို
-                </h2>
-                <p class="text-xs text-muted font-sans-ui m-0">
-                  Open Source Neural Machine Translation (Argos Translate Engine) • Offline Hybrid Fallback
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-center space-x-2 flex-wrap gap-2">
-              <a href="translate.html" class="px-3 py-1.5 rounded-xl border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 flex items-center space-x-1.5 text-xs font-semibold cursor-pointer shadow-2xs transition-all">
-                <i class="ri-external-link-line text-sm"></i>
-                <span>မျက်နှာပြည့် စတူဒီယို (Full App)</span>
-              </a>
-              <!-- Settings Button -->
-              <button onclick="window.HtetDict.openLibreTranslateSettings()" class="px-3 py-1.5 rounded-xl border border-hairline bg-cream/60 dark:bg-stone-800 text-charcoal hover:text-indigo-600 flex items-center space-x-1.5 text-xs font-semibold cursor-pointer shadow-2xs transition-all">
-                <i class="ri-settings-3-line text-sm"></i>
-                <span>ဆာဗာလိပ်စာ ပြင်ဆင်ရန်</span>
-              </button>
-            </div>
+    <div id="tab-sentences" class="dict-view-tab space-y-6 hidden">
+      <div class="max-w-4xl mx-auto space-y-4">
+        <!-- Search Bar -->
+        <div class="relative flex items-center shadow-lg rounded-2xl overflow-hidden border-2 border-teal-500/50 focus-within:border-teal-600 bg-card transition-all">
+          <div class="pl-4 pr-2 text-teal-600 dark:text-teal-400">
+            <i class="ri-translate-2 text-xl"></i>
           </div>
-
-          <!-- Language Selector Bar -->
-          <div class="flex items-center justify-between gap-2 p-2 rounded-2xl bg-cream/40 dark:bg-stone-900/40 border border-hairline text-xs font-semibold">
-            <div class="flex items-center space-x-1.5 flex-1 min-w-0">
-              <span class="text-muted text-[10px] uppercase font-mono hidden sm:inline">မူရင်းဘာသာ:</span>
-              <select id="libre-src-lang" class="w-full bg-card text-charcoal border border-hairline rounded-xl px-2.5 py-1.5 text-xs focus:outline-none focus:border-indigo-500 font-sans-ui">
-                <option value="auto">အလိုအလျောက် စစ်ဆေးခြင်း (Auto Detect)</option>
-                <option value="en">English (အင်္ဂလိပ်)</option>
-                <option value="my">မြန်မာ (Burmese)</option>
-                <option value="zh">中文 (Chinese)</option>
-                <option value="th">ภาษาไทย (Thai)</option>
-                <option value="ja">日本語 (Japanese)</option>
-              </select>
-            </div>
-
-            <button onclick="window.HtetDict.swapTranslateLangs()" class="w-8 h-8 rounded-xl bg-card border border-hairline hover:bg-indigo-500 hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-2xs shrink-0" title="ဘာသာစကား နေရာလဲလှယ်ရန်">
-              <i class="ri-arrow-left-right-line text-xs"></i>
-            </button>
-
-            <div class="flex items-center space-x-1.5 flex-1 min-w-0">
-              <span class="text-muted text-[10px] uppercase font-mono hidden sm:inline">ပစ်မှတ်ဘာသာ:</span>
-              <select id="libre-tgt-lang" class="w-full bg-card text-charcoal border border-hairline rounded-xl px-2.5 py-1.5 text-xs focus:outline-none focus:border-indigo-500 font-sans-ui">
-                <option value="my" selected>မြန်မာ (Burmese)</option>
-                <option value="en">English (အင်္ဂလိပ်)</option>
-                <option value="zh">中文 (Chinese)</option>
-                <option value="th">ภาษาไทย (Thai)</option>
-                <option value="ja">日本語 (Japanese)</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Dual Translation Boxes Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            
-            <!-- Source Input Box -->
-            <div class="space-y-2 flex flex-col justify-between p-4 rounded-2xl bg-card border border-hairline shadow-2xs focus-within:border-indigo-500 transition-colors">
-              <div class="space-y-2">
-                <div class="flex items-center justify-between pb-1 border-b border-hairline/60 text-[11px] text-muted">
-                  <span class="font-mono uppercase font-bold">Source Text</span>
-                  <button onclick="document.getElementById('libre-source-text').value = '';" class="hover:text-red-500 text-[11px] cursor-pointer">ရှင်းလင်းမည်</button>
-                </div>
-                <textarea 
-                  id="libre-source-text" 
-                  rows="5" 
-                  placeholder="ဘာသာပြန်လိုသော အင်္ဂလိပ် သို့မဟုတ် မြန်မာစာကြောင်းအား ရိုက်ထည့်ပါ (ဥပမာ: The only real prison is fear, and the only real freedom is Freedom from Fear)..." 
-                  class="w-full bg-transparent text-charcoal placeholder-muted text-sm sm:text-base focus:outline-none resize-none font-sans-ui leading-relaxed"
-                >The only real prison is fear, and the only real freedom is Freedom from Fear.</textarea>
-              </div>
-
-              <div class="flex items-center justify-between pt-2 border-t border-hairline/60 text-xs">
-                <button onclick="window.HtetDict.speak(document.getElementById('libre-source-text').value)" class="p-1.5 rounded-lg hover:bg-cream dark:hover:bg-stone-800 text-muted hover:text-charcoal" title="အသံနားထောင်ရန်">
-                  <i class="ri-volume-up-line text-sm"></i>
-                </button>
-                <span id="libre-char-count" class="font-mono text-[10px] text-muted">Characters</span>
-              </div>
-            </div>
-
-            <!-- Target Translation Box -->
-            <div class="space-y-2 flex flex-col justify-between p-4 rounded-2xl bg-cream/40 dark:bg-stone-900/40 border border-hairline shadow-2xs">
-              <div class="space-y-2">
-                <div class="flex items-center justify-between pb-1 border-b border-hairline/60 text-[11px] text-muted">
-                  <span class="font-mono uppercase font-bold text-indigo-600 dark:text-indigo-400">Translated Result</span>
-                  <span id="libre-engine-badge">
-                    <span class="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-teal-500/10 text-teal-700 dark:text-teal-300 border border-teal-400/30">
-                      <i class="ri-sparkling-fill text-xs text-teal-600"></i>
-                      <span>Hybrid Neural &amp; Offline Ready</span>
-                    </span>
-                  </span>
-                </div>
-                <textarea 
-                  id="libre-target-text" 
-                  rows="5" 
-                  readonly 
-                  placeholder="ဘာသာပြန် ရလဒ် ဤနေရာတွင် ပေါ်လာပါမည်..." 
-                  class="w-full bg-transparent text-charcoal placeholder-muted text-sm sm:text-base focus:outline-none resize-none font-sans-ui leading-relaxed font-medium"
-                >စစ်မှန်သော အကျဉ်းထောင်ဟူသည် ကြောက်ရွံ့ခြင်းသာဖြစ်ပြီး စစ်မှန်သော လွတ်မြောက်ခြင်းဟူသည်မှာလည်း ကြောက်ရွံ့ခြင်းမှ လွတ်ကင်းခြင်းသာ ဖြစ်သည်။</textarea>
-              </div>
-
-              <div class="flex items-center justify-between pt-2 border-t border-hairline/60 text-xs">
-                <button onclick="window.HtetDict.speak(document.getElementById('libre-target-text').value)" class="p-1.5 rounded-lg hover:bg-cream dark:hover:bg-stone-800 text-muted hover:text-charcoal" title="အသံနားထောင်ရန်">
-                  <i class="ri-volume-up-line text-sm"></i>
-                </button>
-                <button onclick="window.HtetDict.copyDef(document.getElementById('libre-target-text').value)" class="p-1.5 rounded-lg hover:bg-cream dark:hover:bg-stone-800 text-indigo-600 font-semibold flex items-center space-x-1 cursor-pointer" title="ကူးယူရန်">
-                  <i class="ri-file-copy-line text-sm"></i>
-                  <span>ရလဒ် ကူးယူမည်</span>
-                </button>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Translate Action Button & Presets -->
-          <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-            <div class="flex flex-wrap items-center gap-1.5 text-xs text-muted">
-              <span class="font-bold">နမူနာ စာကြောင်းများ:</span>
-              <button onclick="document.getElementById('libre-source-text').value = 'The only real prison is fear, and the only real freedom is Freedom from Fear.'; window.HtetDict.runLibreTranslate();" class="px-2.5 py-1 rounded-xl bg-cream/70 dark:bg-stone-800 hover:text-indigo-600 cursor-pointer font-sans-ui">Freedom from Fear</button>
-              <button onclick="document.getElementById('libre-source-text').value = 'Democracy is not just a form of government, but a way of living.'; window.HtetDict.runLibreTranslate();" class="px-2.5 py-1 rounded-xl bg-cream/70 dark:bg-stone-800 hover:text-indigo-600 cursor-pointer font-sans-ui">Democracy</button>
-            </div>
-
-            <button id="libre-translate-btn" onclick="window.HtetDict.runLibreTranslate()" class="w-full sm:w-auto px-7 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition-all cursor-pointer shadow-sm active:scale-95 flex items-center justify-center space-x-2 shrink-0">
-              <i class="ri-translate-2 text-base"></i>
-              <span>ဘာသာပြန်ဆိုမည် (Translate)</span>
-            </button>
-          </div>
+          <input 
+            type="text" 
+            id="sentence-search-input" 
+            placeholder="အင်္ဂလိပ် သို့မဟုတ် မြန်မာစကားစပ်ဝါကျ ရှာဖွေပါ (ဥပမာ: freedom, democracy, peace, လွတ်လပ်ခွင့်, ငြိမ်းချမ်းရေး)..."
+            data-mm-placeholder="အင်္ဂလိပ် သို့မဟုတ် မြန်မာစကားစပ်ဝါကျ ရှာဖွေပါ (ဥပမာ: freedom, democracy, peace, လွတ်လပ်ခွင့်, ငြိမ်းချမ်းရေး)..."
+            data-en-placeholder="Search bilingual parallel sentences (e.g. freedom, democracy, peace, လွတ်လပ်ခွင့်)..."
+            data-zh-placeholder="搜索双语平行例句（如：freedom, democracy, peace, လွတ်လပ်ခွင့်）..."
+            data-th-placeholder="ค้นหาประโยคคู่ขนานสองภาษา (เช่น freedom, democracy, peace)..."
+            data-ja-placeholder="バイリンガル対訳文を検索（例: freedom, democracy, peace, လွတ်လပ်ခွင့်）..."
+            autocomplete="off" 
+            class="w-full py-4 px-2 text-base sm:text-lg bg-transparent text-charcoal placeholder-muted focus:outline-none font-medium"
+          >
+          <button onclick="window.HtetDict.searchSentences(document.getElementById('sentence-search-input').value)" class="mr-2 px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm transition-all cursor-pointer shadow-xs shrink-0" data-mm="ရှာဖွေရန်" data-en="Search" data-zh="搜索" data-th="ค้นหา" data-ja="検索">
+            ရှာဖွေရန်
+          </button>
         </div>
 
-        <!-- Section 2: 12,021 Parallel Sentences Search -->
-        <div class="space-y-4 pt-4 border-t border-hairline">
-          <div class="flex items-center justify-between">
-            <div>
-              <h3 class="text-lg font-bold font-serif-editorial text-charcoal m-0">၁၂,၀၂၁ အပြိုင်ဝါကျစုံတွဲများထဲမှ ရှာဖွေခြင်း</h3>
-              <p class="text-xs text-muted m-0">HuggingFace kalixlouiis Myanmar-English Parallel Corpus Search</p>
-            </div>
-            <span id="sentence-match-count" class="font-mono text-xs font-bold text-teal-700 dark:text-teal-300">
-              ဝါကျ ၁၂,၀၂၁ ခု အသင့်ရှိသည်
-            </span>
-          </div>
-
-          <div class="relative flex items-center shadow-md rounded-2xl overflow-hidden border-2 border-teal-500/40 focus-within:border-teal-600 bg-card transition-all">
-            <div class="pl-4 pr-2 text-teal-600 dark:text-teal-400">
-              <i class="ri-search-2-line text-lg"></i>
-            </div>
-            <input 
-              type="text" 
-              id="sentence-search-input" 
-              placeholder="အင်္ဂလိပ် သို့မဟုတ် မြန်မာစကားစပ်ဝါကျ ရှာဖွေပါ (freedom, peace, country, လွတ်လပ်, လူထု)..." 
-              autocomplete="off" 
-              class="w-full py-3.5 px-2 text-sm sm:text-base bg-transparent text-charcoal placeholder-muted focus:outline-none font-medium"
-            >
-            <button onclick="window.HtetDict.searchSentences(document.getElementById('sentence-search-input').value)" class="mr-2 px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs transition-all cursor-pointer shadow-xs shrink-0">
-              ရှာဖွေရန်
-            </button>
-          </div>
-
-          <!-- Quick Sample Queries -->
-          <div class="flex items-center space-x-1.5 overflow-x-auto pb-1 text-xs text-muted font-medium scrollbar-thin">
-            <span class="shrink-0 text-slate-500 font-bold">နမူနာများ:</span>
-            <button onclick="document.getElementById('sentence-search-input').value = 'freedom'; window.HtetDict.searchSentences('freedom')" class="px-2 py-0.5 rounded-md bg-cream/70 dark:bg-stone-800 hover:text-vermilion cursor-pointer shrink-0 font-mono">freedom</button>
-            <button onclick="document.getElementById('sentence-search-input').value = 'peace'; window.HtetDict.searchSentences('peace')" class="px-2 py-0.5 rounded-md bg-cream/70 dark:bg-stone-800 hover:text-vermilion cursor-pointer shrink-0 font-mono">peace</button>
-            <button onclick="document.getElementById('sentence-search-input').value = 'country'; window.HtetDict.searchSentences('country')" class="px-2 py-0.5 rounded-md bg-cream/70 dark:bg-stone-800 hover:text-vermilion cursor-pointer shrink-0 font-mono">country</button>
-            <button onclick="document.getElementById('sentence-search-input').value = 'လွတ်လပ်'; window.HtetDict.searchSentences('လွတ်လပ်')" class="px-2 py-0.5 rounded-md bg-teal-500/10 text-teal-700 dark:text-teal-300 hover:text-teal-800 cursor-pointer shrink-0 font-sans-ui font-semibold">လွတ်လပ်</button>
-            <button onclick="document.getElementById('sentence-search-input').value = 'လူထု'; window.HtetDict.searchSentences('လူထု')" class="px-2 py-0.5 rounded-md bg-teal-500/10 text-teal-700 dark:text-teal-300 hover:text-teal-800 cursor-pointer shrink-0 font-sans-ui font-semibold">လူထု</button>
-            <button onclick="document.getElementById('sentence-search-input').value = 'မေတ္တာ'; window.HtetDict.searchSentences('မေတ္တာ')" class="px-2 py-0.5 rounded-md bg-teal-500/10 text-teal-700 dark:text-teal-300 hover:text-teal-800 cursor-pointer shrink-0 font-sans-ui font-semibold">မေတ္တာ</button>
-          </div>
-
-          <div id="sentence-results-list" class="space-y-3"></div>
-
-          <div id="sentence-empty-state" class="p-8 text-center rounded-3xl bg-card border border-hairline text-muted space-y-2">
-            <i class="ri-chat-check-line text-3xl text-teal-600"></i>
-            <p class="font-medium text-sm text-charcoal">ရှာဖွေလိုသော စကားစု ရိုက်ထည့်ပါ</p>
-            <p class="text-xs text-muted max-w-md mx-auto">ဝါကျပေါင်း ၁၂,၀၂၁ ခုထဲမှ စကားစပ်ဝါကျများကို စက္ကန့်ပိုင်းအတွင်း ရှာဖွေပေးပါမည်။</p>
-          </div>
+        <!-- Quick Sample Queries -->
+        <div class="flex items-center space-x-1.5 overflow-x-auto pb-1 text-xs text-muted font-medium scrollbar-thin">
+          <span class="shrink-0 text-slate-500 font-bold" data-mm="နမူနာများ:" data-en="Samples:" data-zh="常用示例:" data-th="ตัวอย่าง:" data-ja="用例サンプル:">နမူနာများ:</span>
+          <button onclick="document.getElementById('sentence-search-input').value = 'freedom'; window.HtetDict.searchSentences('freedom')" class="px-2 py-0.5 rounded-md bg-cream/70 dark:bg-stone-800 hover:text-vermilion cursor-pointer shrink-0 font-mono">freedom</button>
+          <button onclick="document.getElementById('sentence-search-input').value = 'peace'; window.HtetDict.searchSentences('peace')" class="px-2 py-0.5 rounded-md bg-cream/70 dark:bg-stone-800 hover:text-vermilion cursor-pointer shrink-0 font-mono">peace</button>
+          <button onclick="document.getElementById('sentence-search-input').value = 'country'; window.HtetDict.searchSentences('country')" class="px-2 py-0.5 rounded-md bg-cream/70 dark:bg-stone-800 hover:text-vermilion cursor-pointer shrink-0 font-mono">country</button>
+          <button onclick="document.getElementById('sentence-search-input').value = 'လွတ်လပ်'; window.HtetDict.searchSentences('လွတ်လပ်')" class="px-2 py-0.5 rounded-md bg-teal-500/10 text-teal-700 dark:text-teal-300 hover:text-teal-800 cursor-pointer shrink-0 font-sans-ui font-semibold">လွတ်လပ်</button>
+          <button onclick="document.getElementById('sentence-search-input').value = 'လူထု'; window.HtetDict.searchSentences('လူထု')" class="px-2 py-0.5 rounded-md bg-teal-500/10 text-teal-700 dark:text-teal-300 hover:text-teal-800 cursor-pointer shrink-0 font-sans-ui font-semibold">လူထု</button>
+          <button onclick="document.getElementById('sentence-search-input').value = 'မေတ္တာ'; window.HtetDict.searchSentences('မေတ္တာ')" class="px-2 py-0.5 rounded-md bg-teal-500/10 text-teal-700 dark:text-teal-300 hover:text-teal-800 cursor-pointer shrink-0 font-sans-ui font-semibold">မေတ္တာ</button>
+          <button onclick="document.getElementById('sentence-search-input').value = 'ပညာရေး'; window.HtetDict.searchSentences('ပညာရေး')" class="px-2 py-0.5 rounded-md bg-teal-500/10 text-teal-700 dark:text-teal-300 hover:text-teal-800 cursor-pointer shrink-0 font-sans-ui font-semibold">ပညာရေး</button>
         </div>
 
+        <!-- Corpus Meta Banner -->
+        <div class="flex items-center justify-between p-3.5 rounded-2xl bg-teal-500/10 border border-teal-500/20 text-xs">
+          <div class="flex items-center space-x-2 text-teal-800 dark:text-teal-200">
+            <i class="ri-database-2-line text-sm"></i>
+            <span class="font-bold">HuggingFace kalixlouiis Myanmar-English Parallel Corpus</span>
+          </div>
+          <span id="sentence-match-count" class="font-mono text-[11px] font-bold text-teal-700 dark:text-teal-300" data-mm="ဝါကျပေါင်း ၁၂,၀၂၁ ခု အသင့်ရှိသည်" data-en="12,021 Parallel Sentences Ready" data-zh="12,021对双语例句已加载" data-th="12,021 ประโยคคู่ขนานพร้อมใช้งาน" data-ja="12,021組の対訳文を準備完了">
+            ဝါကျပေါင်း ၁၂,၀၂၁ ခု အသင့်ရှိသည်
+          </span>
+        </div>
+
+        <!-- Results List -->
+        <div id="sentence-results-list" class="space-y-3"></div>
+
+        <div id="sentence-empty-state" class="p-12 text-center rounded-3xl bg-card border border-hairline text-muted space-y-3">
+          <div class="w-14 h-14 rounded-full bg-teal-50 dark:bg-teal-950/40 text-teal-600 dark:text-teal-400 mx-auto flex items-center justify-center text-2xl">
+            <i class="ri-chat-check-line"></i>
+          </div>
+          <h3 class="text-lg font-bold font-serif-editorial text-charcoal" data-mm="ရှာဖွေလိုသော စကားစု ရိုက်ထည့်ပါ" data-en="Enter Words or Phrases" data-zh="输入要检索的短语或句意" data-th="พิมพ์คำหรือวลีที่ต้องการค้นหา" data-ja="検索する語句を入力">ရှာဖွေလိုသော စကားစု ရိုက်ထည့်ပါ</h3>
+          <p class="text-xs text-muted max-w-md mx-auto" data-mm="HuggingFace kalixlouiis ဒေတာဘေ့စ်မှ လူသုံးအများဆုံး အင်္ဂလိပ်-မြန်မာ ဝါကျစုံတွဲ ၁၂,၀၂၁ ခုထဲမှ စကားစပ်ဝါကျများကို စက္ကန့်ပိုင်းအတွင်း ရှာဖွေပေးပါမည်။" data-en="Instant lookup across 12,021 high-frequency Myanmar-English parallel sentence pairs from the HuggingFace corpus." data-zh="从HuggingFace kalixlouiis语料库的12,021对缅英双语平行例句中实时智能检索。" data-th="ค้นหาประโยคคู่ขนานภาษาพม่า-อังกฤษ 12,021 ประโยคจาก HuggingFace ได้ทันที" data-ja="HuggingFaceの12,021組のミャンマー語・英語並列コーパスから文脈用例を即座に検索します。">
+            HuggingFace kalixlouiis ဒေတာဘေ့စ်မှ လူသုံးအများဆုံး အင်္ဂလိပ်-မြန်မာ ဝါကျစုံတွဲ ၁၂,၀၂၁ ခုထဲမှ စကားစပ်ဝါကျများကို စက္ကန့်ပိုင်းအတွင်း ရှာဖွေပေးပါမည်။
+          </p>
+        </div>
       </div>
     </div>
 
@@ -724,8 +576,8 @@
       <div class="max-w-4xl mx-auto p-6 md:p-8 rounded-3xl bg-card border border-hairline shadow-sm space-y-6">
         <div class="border-b border-hairline pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
-            <h2 class="text-2xl font-bold font-serif-editorial text-charcoal m-0">BurmeseNLP Workbench</h2>
-            <p class="text-xs text-muted font-sans-ui m-0">မြန်မာစာ သရ/ဗျည်းအဖြတ်အတောက် (Sylbreak)၊ စကားလုံးခွဲခြမ်းခြင်း နှင့် သဒ္ဒါခွဲခြားမှု စနစ်</p>
+            <h2 class="text-2xl font-bold font-serif-editorial text-charcoal m-0" data-mm="BurmeseNLP Workbench" data-en="BurmeseNLP Workbench" data-zh="缅甸语自然语言处理工作台" data-th="เวิร์กเบนช์ BurmeseNLP" data-ja="ビルマ語NLPワークベンチ">BurmeseNLP Workbench</h2>
+            <p class="text-xs text-muted font-sans-ui m-0" data-mm="မြန်မာစာ သရ/ဗျည်းအဖြတ်အတောက် (Sylbreak)၊ စကားလုံးခွဲခြမ်းခြင်း နှင့် သဒ္ဒါခွဲခြားမှု စနစ်" data-en="Syllable segmentation (Sylbreak), word tokenization, and Part-of-Speech tagging system." data-zh="音节切分 (Sylbreak)、最长匹配分词以及词性标注 (myPOS) 处理系统。" data-th="ระบบตัดพยางค์ (Sylbreak) ตัดคำ และกำกับหน้าที่ของคำ (myPOS) ภาษาพม่า" data-ja="音節分割 (Sylbreak)、最長一致形態素トークン化、品詞タグ付け (myPOS) システム。">မြန်မာစာ သရ/ဗျည်းအဖြတ်အတောက် (Sylbreak)၊ စကားလုံးခွဲခြမ်းခြင်း နှင့် သဒ္ဒါခွဲခြားမှု စနစ်</p>
           </div>
           <span class="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-teal-500/10 text-teal-700 dark:text-teal-300 border border-teal-400/30 shrink-0">
             burmesenlp Web Engine + Myanmar Dataset Collection
@@ -734,7 +586,7 @@
 
         <!-- Sample Presets -->
         <div class="flex flex-wrap items-center gap-1.5 text-xs text-muted">
-          <span class="font-bold">နမူနာ စာကြောင်းများ:</span>
+          <span class="font-bold" data-mm="နမူနာ စာကြောင်းများ:" data-en="Sample Sentences:" data-zh="测试样句:" data-th="ประโยคตัวอย่าง:" data-ja="サンプル文章:">နမူနာ စာကြောင်းများ:</span>
           <button onclick="window.HtetDict.setWorkbenchSample('ကျွန်တော်ကျောင်းသို့သွားသည်။')" class="px-2.5 py-1 rounded-xl bg-cream/70 dark:bg-stone-800 hover:text-teal-600 cursor-pointer">ကျွန်တော်ကျောင်းသို့သွားသည်။</button>
           <button onclick="window.HtetDict.setWorkbenchSample('စစ်မှန်သော လွတ်မြောက်ခြင်းသည် ကြောက်ရွံ့မှုမှ လွတ်မြောက်ခြင်း ဖြစ်သည်။')" class="px-2.5 py-1 rounded-xl bg-cream/70 dark:bg-stone-800 hover:text-teal-600 cursor-pointer">ကြောက်ရွံ့မှုမှ လွတ်မြောက်ခြင်း</button>
           <button onclick="window.HtetDict.setWorkbenchSample('ဒီမိုကရေစီစနစ်သည် လူ့အခွင့်အရေးနှင့် တန်းတူညီမျှမှုကို အခြေခံသည်။')" class="px-2.5 py-1 rounded-xl bg-cream/70 dark:bg-stone-800 hover:text-teal-600 cursor-pointer">ဒီမိုကရေစီနှင့် လူ့အခွင့်အရေး</button>
@@ -745,13 +597,18 @@
           <textarea 
             id="nlp-workbench-input" 
             rows="4" 
-            placeholder="စစ်ဆေးလိုသော မြန်မာစာကြောင်း သို့မဟုတ် စာပိုဒ်ကို ရိုက်ထည့်ပါ (Zawgyi ရိုက်ထည့်ပါကလည်း အလိုအလျောက် Unicode သို့ ပြောင်းလဲစစ်ဆေးပေးပါသည်)..." 
+            placeholder="စစ်ဆေးလိုသော မြန်မာစာကြောင်း သို့မဟုတ် စာပိုဒ်ကို ရိုက်ထည့်ပါ (Zawgyi ရိုက်ထည့်ပါကလည်း အလိုအလျောက် Unicode သို့ ပြောင်းလဲစစ်ဆေးပေးပါသည်)..."
+            data-mm-placeholder="စစ်ဆေးလိုသော မြန်မာစာကြောင်း သို့မဟုတ် စာပိုဒ်ကို ရိုက်ထည့်ပါ (Zawgyi ရိုက်ထည့်ပါကလည်း အလိုအလျောက် Unicode သို့ ပြောင်းလဲစစ်ဆေးပေးပါသည်)..."
+            data-en-placeholder="Enter Burmese text or sentences to analyze (Zawgyi is automatically converted to Unicode)..."
+            data-zh-placeholder="请输入需要分析的缅文句子或段落（Zawgyi编码将自动转换为Unicode）..."
+            data-th-placeholder="กรอกประโยคหรือข้อความภาษาพม่าที่ต้องการวิเคราะห์ (รองรับการแปลง Zawgyi เป็น Unicode อัตโนมัติ)..."
+            data-ja-placeholder="解析するビルマ語の文章を入力してください（Zawgyiは自動的にUnicodeに変換されます）..."
             class="w-full p-4 rounded-2xl bg-cream/40 dark:bg-stone-900/40 border border-hairline focus:border-teal-500 focus:outline-none text-charcoal font-sans-ui text-base leading-relaxed"
           >စစ်မှန်သော လွတ်မြောက်ခြင်းသည် ကြောက်ရွံ့မှုမှ လွတ်မြောက်ခြင်း ဖြစ်သည်။</textarea>
 
           <div class="flex items-center justify-between">
-            <span class="text-xs text-muted italic">Client-side Offline Execution • Zero Latency</span>
-            <button onclick="window.HtetDict.runNlpWorkbench()" class="px-6 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm transition-all cursor-pointer shadow-xs active:scale-95">
+            <span class="text-xs text-muted italic" data-mm="Client-side အော့ဖ်လိုင်း စစ်ဆေးခြင်း • ကြန့်ကြာမှုမရှိ" data-en="Client-side Offline Execution • Zero Latency" data-zh="客户端完全离线计算 • 零网络延迟" data-th="ประมวลผลออฟไลน์บนเครื่อง • ไม่มีความล่าช้า" data-ja="クライアント側完全オフライン実行 • ゼロ遅延">Client-side Offline Execution • Zero Latency</span>
+            <button onclick="window.HtetDict.runNlpWorkbench()" class="px-6 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm transition-all cursor-pointer shadow-xs active:scale-95" data-mm="စစ်ဆေးခွဲခြမ်းမည်" data-en="Analyze Text" data-zh="开始自然语言分析" data-th="วิเคราะห์ข้อความ" data-ja="自然言語解析を実行">
               စစ်ဆေးခွဲခြမ်းမည်
             </button>
           </div>
@@ -763,7 +620,7 @@
           <div class="space-y-2">
             <h3 class="text-xs font-bold text-muted uppercase tracking-wider font-mono flex items-center space-x-1.5">
               <i class="ri-font-size text-teal-600"></i>
-              <span>၁။ ဖောင့်ကုဒ်စနစ် စစ်ဆေးခြင်း (Font Encoding Detection & Conversion)</span>
+              <span data-mm="၁။ ဖောင့်ကုဒ်စနစ် စစ်ဆေးခြင်း (Font Encoding Detection & Conversion)" data-en="1. Font Encoding Detection & Conversion (Zawgyi ⇄ Unicode)" data-zh="1. 字体编码检测与自动转换 (Zawgyi ⇄ Unicode)" data-th="1. การตรวจจับและแปลงรหัสฟอนต์ (Zawgyi ⇄ Unicode)" data-ja="1. フォントエンコーディング検出と変換 (Zawgyi ⇄ Unicode)">၁။ ဖောင့်ကုဒ်စနစ် စစ်ဆေးခြင်း (Font Encoding Detection & Conversion)</span>
             </h3>
             <div id="nlp-out-zguni"></div>
           </div>
@@ -772,7 +629,7 @@
           <div class="space-y-2">
             <h3 class="text-xs font-bold text-muted uppercase tracking-wider font-mono flex items-center space-x-1.5">
               <i class="ri-scissors-cut-line text-teal-600"></i>
-              <span>၂။ သရ/ဗျည်း အဖြတ်အတောက် (Syllable Segmentation)</span>
+              <span data-mm="၂။ သရ/ဗျည်း အဖြတ်အတောက် (Syllable Segmentation)" data-en="2. Syllable Segmentation (Sylbreak)" data-zh="2. 缅语音节智能切分 (Syllable Segmentation)" data-th="2. การตัดพยางค์ภาษาพม่า (Syllable Segmentation)" data-ja="2. 音節セグメンテーション (Syllable Segmentation)">၂။ သရ/ဗျည်း အဖြတ်အတောက် (Syllable Segmentation)</span>
             </h3>
             <div id="nlp-out-syllables" class="flex flex-wrap gap-1.5 p-4 rounded-2xl bg-cream/40 dark:bg-stone-900/40 border border-hairline min-h-[50px] items-center"></div>
           </div>
@@ -781,7 +638,7 @@
           <div class="space-y-2">
             <h3 class="text-xs font-bold text-muted uppercase tracking-wider font-mono flex items-center space-x-1.5">
               <i class="ri-node-tree text-teal-600"></i>
-              <span>၃။ စကားလုံး ခွဲခြမ်းမှု (Greedy Longest Match Tokenization)</span>
+              <span data-mm="၃။ စကားလုံး ခွဲခြမ်းမှု (Greedy Longest Match Tokenization)" data-en="3. Word Tokenization (Greedy Longest Match)" data-zh="3. 贪婪最长匹配词汇分词 (Word Tokenization)" data-th="3. การตัดคำภาษาพม่า (Word Tokenization)" data-ja="3. 単語トークン化 (最長一致形態素解析)">၃။ စကားလုံး ခွဲခြမ်းမှု (Greedy Longest Match Tokenization)</span>
             </h3>
             <div id="nlp-out-tokens" class="flex flex-wrap gap-1.5 p-4 rounded-2xl bg-cream/40 dark:bg-stone-900/40 border border-hairline min-h-[50px] items-center"></div>
           </div>
@@ -790,7 +647,7 @@
           <div class="space-y-2">
             <h3 class="text-xs font-bold text-muted uppercase tracking-wider font-mono flex items-center space-x-1.5">
               <i class="ri-price-tag-3-line text-teal-600"></i>
-              <span>၄။ သဒ္ဒါခွဲခြားမှု (Part-of-Speech Tagging - myPOS)</span>
+              <span data-mm="၄။ သဒ္ဒါခွဲခြားမှု (Part-of-Speech Tagging - myPOS)" data-en="4. Part-of-Speech Tagging (myPOS)" data-zh="4. 词性标注分类 (Part-of-Speech - myPOS)" data-th="4. การกำกับหน้าที่ของคำ (Part-of-Speech - myPOS)" data-ja="4. 品詞タギング (myPOS分類)">၄။ သဒ္ဒါခွဲခြားမှု (Part-of-Speech Tagging - myPOS)</span>
             </h3>
             <div id="nlp-out-pos" class="flex flex-wrap gap-2 p-4 rounded-2xl bg-cream/40 dark:bg-stone-900/40 border border-hairline min-h-[60px] items-center"></div>
           </div>
@@ -822,29 +679,29 @@
         
         <div class="p-6 rounded-3xl bg-card border border-hairline shadow-xs space-y-4">
           <div>
-            <h2 class="text-xl font-bold font-serif-editorial text-charcoal m-0">Myanmar Tools ဝေါဟာရ စူးစမ်းခန်း (၄၂,၇၈၇ လုံး)</h2>
-            <p class="text-xs text-muted font-sans-ui m-0">မြန်မာစာပေ သဒ္ဒါအမျိုးအစားများနှင့် ဗျည်းအက္ခရာ ၃၃ လုံးအလိုက် အမျိုးအစားခွဲခြားထားသော ဝေါဟာရဘဏ်</p>
+            <h2 class="text-xl font-bold font-serif-editorial text-charcoal m-0" data-mm="Myanmar Tools ဝေါဟာရ စူးစမ်းခန်း (၄၂,၇၈၇ လုံး)" data-en="Myanmar Words Lexicon Explorer (42,787 Words)" data-zh="缅甸语42,787常用词汇探索库" data-th="คลังสำรวจคำศัพท์พม่า 42,787 คำ" data-ja="ミャンマー語42,787語彙エクスプローラー">Myanmar Tools ဝေါဟာရ စူးစမ်းခန်း (၄၂,၇၈၇ လုံး)</h2>
+            <p class="text-xs text-muted font-sans-ui m-0" data-mm="မြန်မာစာပေ သဒ္ဒါအမျိုးအစားများနှင့် ဗျည်းအက္ခရာ ၃၃ လုံးအလိုက် အမျိုးအစားခွဲခြားထားသော ဝေါဟာရဘဏ်" data-en="Lexicon classified across 9 parts-of-speech and 33 consonant categories." data-zh="涵盖9大语法词类与33个辅音字母体系的词汇库。" data-th="คลังคำศัพท์ที่จัดหมวดหมู่ตามหน้าที่ของคำ 9 ชนิดและพยัญชนะ 33 ตัว" data-ja="9つの品詞カテゴリと33の子音分類に整理された包括的語彙データベース。">မြန်မာစာပေ သဒ္ဒါအမျိုးအစားများနှင့် ဗျည်းအက္ခရာ ၃၃ လုံးအလိုက် အမျိုးအစားခွဲခြားထားသော ဝေါဟာရဘဏ်</p>
           </div>
 
           <!-- 9 POS Filter Pills -->
           <div class="space-y-2">
-            <span class="text-xs font-bold text-charcoal font-sans-ui">သဒ္ဒါ အမျိုးအစား ရွေးချယ်ရန်:</span>
+            <span class="text-xs font-bold text-charcoal font-sans-ui" data-mm="သဒ္ဒါ အမျိုးအစား ရွေးချယ်ရန်:" data-en="Select Part-of-Speech:" data-zh="选择词性分类:" data-th="เลือกชนิดของคำ:" data-ja="品詞を選択:">သဒ္ဒါ အမျိုးအစား ရွေးချယ်ရန်:</span>
             <div class="flex flex-wrap gap-1.5">
-              <button onclick="window.HtetDict.setPosFilter('n')" data-pos-filter="n" class="px-3 py-1 rounded-xl bg-teal-600 text-white font-sans-ui text-xs font-semibold cursor-pointer shadow-xs">နာမ် (Noun)</button>
-              <button onclick="window.HtetDict.setPosFilter('v')" data-pos-filter="v" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer">ကြိယာ (Verb)</button>
-              <button onclick="window.HtetDict.setPosFilter('adj')" data-pos-filter="adj" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer">နာမဝိသေသန (Adj)</button>
-              <button onclick="window.HtetDict.setPosFilter('adv')" data-pos-filter="adv" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer">ကြိယာဝိသေသန (Adv)</button>
-              <button onclick="window.HtetDict.setPosFilter('postp')" data-pos-filter="postp" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer">ဝိဘတ် (Postposition)</button>
-              <button onclick="window.HtetDict.setPosFilter('conj')" data-pos-filter="conj" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer">စကားစပ် (Conjunction)</button>
-              <button onclick="window.HtetDict.setPosFilter('part')" data-pos-filter="part" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer">ပစ္စည်း (Particle)</button>
-              <button onclick="window.HtetDict.setPosFilter('interj')" data-pos-filter="interj" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer">အာမေဍိတ် (Interjection)</button>
-              <button onclick="window.HtetDict.setPosFilter('pron')" data-pos-filter="pron" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer">နာမ်စား (Pronoun)</button>
+              <button onclick="window.HtetDict.setPosFilter('n')" data-pos-filter="n" class="px-3 py-1 rounded-xl bg-teal-600 text-white font-sans-ui text-xs font-semibold cursor-pointer shadow-xs" data-mm="နာမ် (Noun)" data-en="Noun" data-zh="名词 (Noun)" data-th="คำนาม (Noun)" data-ja="名詞 (Noun)">နာမ် (Noun)</button>
+              <button onclick="window.HtetDict.setPosFilter('v')" data-pos-filter="v" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer" data-mm="ကြိယာ (Verb)" data-en="Verb" data-zh="动词 (Verb)" data-th="คำกริยา (Verb)" data-ja="動詞 (Verb)">ကြိယာ (Verb)</button>
+              <button onclick="window.HtetDict.setPosFilter('adj')" data-pos-filter="adj" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer" data-mm="နာမဝိသေသန (Adj)" data-en="Adjective" data-zh="形容词 (Adj)" data-th="คำคุณศัพท์ (Adj)" data-ja="形容詞 (Adj)">နာမဝိသေသန (Adj)</button>
+              <button onclick="window.HtetDict.setPosFilter('adv')" data-pos-filter="adv" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer" data-mm="ကြိယာဝိသေသန (Adv)" data-en="Adverb" data-zh="副词 (Adv)" data-th="คำวิเศษณ์ (Adv)" data-ja="副詞 (Adv)">ကြိယာဝိသေသန (Adv)</button>
+              <button onclick="window.HtetDict.setPosFilter('postp')" data-pos-filter="postp" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer" data-mm="ဝိဘတ် (Postposition)" data-en="Postposition" data-zh="后置词 (Postp)" data-th="คำบุพบท (Postp)" data-ja="後置詞 (Postp)">ဝိဘတ် (Postposition)</button>
+              <button onclick="window.HtetDict.setPosFilter('conj')" data-pos-filter="conj" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer" data-mm="စကားစပ် (Conjunction)" data-en="Conjunction" data-zh="连词 (Conj)" data-th="คำสันธาน (Conj)" data-ja="接続詞 (Conj)">စကားစပ် (Conjunction)</button>
+              <button onclick="window.HtetDict.setPosFilter('part')" data-pos-filter="part" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer" data-mm="ပစ္စည်း (Particle)" data-en="Particle" data-zh="助词 (Particle)" data-th="คำอนุภาค (Part)" data-ja="助詞 (Particle)">ပစ္စည်း (Particle)</button>
+              <button onclick="window.HtetDict.setPosFilter('interj')" data-pos-filter="interj" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer" data-mm="အာမေဍိတ် (Interjection)" data-en="Interjection" data-zh="感叹词 (Interj)" data-th="คำอุทาน (Interj)" data-ja="感嘆詞 (Interj)">အာမေဍိတ် (Interjection)</button>
+              <button onclick="window.HtetDict.setPosFilter('pron')" data-pos-filter="pron" class="px-3 py-1 rounded-xl bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-xs font-semibold hover:bg-teal-600 hover:text-white cursor-pointer" data-mm="နာမ်စား (Pronoun)" data-en="Pronoun" data-zh="代词 (Pronoun)" data-th="คำสรรพนาม (Pron)" data-ja="代名詞 (Pronoun)">နာမ်စား (Pronoun)</button>
             </div>
           </div>
 
           <!-- Consonants Bar -->
           <div class="space-y-2 pt-2 border-t border-hairline">
-            <span class="text-xs font-bold text-charcoal font-sans-ui">ဗျည်းအက္ခရာ ရွေးချယ်ရန်:</span>
+            <span class="text-xs font-bold text-charcoal font-sans-ui" data-mm="ဗျည်းအက္ခရာ ရွေးချယ်ရန်:" data-en="Select Consonant:" data-zh="选择辅音字母:" data-th="เลือกพยัญชนะ:" data-ja="子音を選択:">ဗျည်းအက္ခရာ ရွေးချယ်ရန်:</span>
             <div class="flex flex-wrap gap-1">
               <button onclick="window.HtetDict.setConsonantFilter('ka')" data-cons-btn="ka" class="w-8 h-8 rounded-lg bg-teal-600 text-white font-sans-ui text-sm font-bold cursor-pointer">က</button>
               <button onclick="window.HtetDict.setConsonantFilter('kha')" data-cons-btn="kha" class="w-8 h-8 rounded-lg bg-cream/60 dark:bg-stone-800 text-charcoal font-sans-ui text-sm font-bold hover:bg-teal-600 hover:text-white cursor-pointer">ခ</button>
@@ -887,221 +744,6 @@
       </div>
     </div>
 
-    <!-- ======================================================== -->
-    <!-- TAB 5: MOZILLA PDF.JS ACADEMIC READER VIEW                -->
-    <!-- ======================================================== -->
-    <div id="tab-pdf" class="dict-view-tab space-y-6 hidden">
-      <div class="max-w-5xl mx-auto space-y-6">
-        
-        <!-- Header Banner -->
-        <div class="p-6 rounded-3xl bg-card border border-hairline shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div class="space-y-1">
-            <div class="flex items-center space-x-2">
-              <span class="w-8 h-8 rounded-xl bg-vermilion/10 text-vermilion flex items-center justify-center text-lg">
-                <i class="ri-file-pdf-2-line"></i>
-              </span>
-              <h2 class="text-xl sm:text-2xl font-bold font-serif-editorial text-charcoal m-0">
-                သုတေသန စာတမ်းများ ဖတ်ရှုခန်း
-              </h2>
-            </div>
-            <p class="text-xs text-muted font-sans-ui m-0">
-              Mozilla PDF.js Offline Engine ဖြင့် စာတမ်းများကို ဒေါင်းလုဒ်မလိုဘဲ Browser တွင် တိုက်ရိုက် ကြည်လင်ပြတ်သားစွာ ဖတ်ရှုနိုင်ပါသည်။
-            </p>
-          </div>
-
-          <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-400/30 shrink-0">
-            PDF.js v3.11 Offline Engine Active
-          </span>
-        </div>
-
-        <!-- Featured Research Publications Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          
-          <!-- Card 1: Aung San Suu Kyi 81st Birthday Tribute -->
-          <div class="p-5 rounded-3xl bg-card border border-hairline/80 hover:border-vermilion/40 transition-all shadow-xs space-y-4 flex flex-col justify-between group">
-            <div class="space-y-3">
-              <div class="aspect-[16/10] rounded-2xl overflow-hidden bg-stone-100 dark:bg-stone-800 relative">
-                <img src="assets/images/daw-aung-san-suu-kyi-81st-birthday-tribute.jpg" alt="ဒေါ်အောင်ဆန်းစုကြည်" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-vermilion text-white text-[10px] font-bold">၈၁ နှစ်ပြည့် မွေးနေ့</span>
-              </div>
-              <div class="space-y-1">
-                <span class="text-[10px] font-mono text-muted uppercase">Tribute &amp; Historical Study</span>
-                <h3 class="text-base font-bold font-serif-editorial text-charcoal leading-snug group-hover:text-vermilion transition-colors">
-                  ဒေါ်အောင်ဆန်းစုကြည်၏ (၈၁) နှစ်ပြည့် မွေးနေ့ဆုတောင်းနှင့် သမိုင်းဝင်မိန့်ခွန်းများ
-                </h3>
-                <p class="text-xs text-muted leading-relaxed line-clamp-3">
-                  "The only real prison is fear, and the only real freedom is Freedom from Fear" — နိုင်ငံတော်၏ အတိုင်ပင်ခံပုဂ္ဂိုလ်၏ သမိုင်းဝင် အမှာစကားများနှင့် နိုင်ငံရေးအတွေးအခေါ် စာတမ်း။
-                </p>
-              </div>
-            </div>
-
-            <div class="pt-3 border-t border-hairline flex items-center justify-between gap-2">
-              <button data-open-pdf="downloads/daw-aung-san-suu-kyi-81st-birthday-tribute.pdf" data-pdf-title="ဒေါ်အောင်ဆန်းစုကြည် (၈၁) နှစ်ပြည့် မွေးနေ့ဆုတောင်း စာတမ်း" class="flex-1 py-2 px-3 rounded-xl bg-vermilion hover:bg-vermilion/90 text-white font-medium text-xs flex items-center justify-center space-x-1.5 transition-colors cursor-pointer shadow-xs">
-                <i class="ri-book-open-line"></i>
-                <span>PDF ဖတ်ရှုမည်</span>
-              </button>
-              <a href="downloads/daw-aung-san-suu-kyi-81st-birthday-tribute.pdf" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-cream/70 dark:bg-stone-800 text-charcoal hover:text-vermilion border border-hairline transition-colors text-xs" title="Tab အသစ်တွင် ဖွင့်ဖတ်မည်"><i class="ri-external-link-line"></i></a>
-              <a href="downloads/daw-aung-san-suu-kyi-81st-birthday-tribute.pdf" download class="p-2 rounded-xl bg-cream/70 dark:bg-stone-800 text-charcoal hover:text-vermilion border border-hairline transition-colors text-xs" title="မူရင်း PDF ဒေါင်းလုဒ်">
-                <i class="ri-download-2-line"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Card 2: Freedom from Fear (1990) -->
-          <div class="p-5 rounded-3xl bg-card border border-hairline/80 hover:border-vermilion/40 transition-all shadow-xs space-y-4 flex flex-col justify-between group">
-            <div class="space-y-3">
-              <div class="aspect-[16/10] rounded-2xl overflow-hidden bg-stone-100 dark:bg-stone-800 relative">
-                <img src="assets/images/daw-aung-san-suu-kyi-2019-portrait.jpg" alt="Freedom from Fear" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-charcoal text-white text-[10px] font-bold">၁၉၉၀ သမိုင်းဝင် Essay</span>
-              </div>
-              <div class="space-y-1">
-                <span class="text-[10px] font-mono text-muted uppercase">Political Philosophy</span>
-                <h3 class="text-base font-bold font-serif-editorial text-charcoal leading-snug group-hover:text-vermilion transition-colors">
-                  Aung San Suu Kyi — Freedom from Fear (ကြောက်ရွံ့ခြင်းမှ လွတ်ကင်းရေး)
-                </h3>
-                <p class="text-xs text-muted leading-relaxed line-clamp-3">
-                  အာဏာသည် ဖျက်ဆီးတတ်သည် မဟုတ်၊ ကြောက်ရွံ့ခြင်းကသာ အာဏာကိုင်စွဲသူတို့ကို ဖျက်ဆီးခြင်းဖြစ်သည်ဟူသော ဒေါ်အောင်ဆန်းစုကြည်၏ ဂန္ထဝင်စာတမ်း မူရင်းနှင့် မြန်မာပြန်။
-                </p>
-              </div>
-            </div>
-
-            <div class="pt-3 border-t border-hairline flex items-center justify-between gap-2">
-              <button data-open-pdf="downloads/aung-san-suu-kyi-freedom-from-fear-1990-mm.pdf" data-pdf-title="Freedom from Fear — ကြောက်ရွံ့ခြင်းမှ လွတ်ကင်းရေး" class="flex-1 py-2 px-3 rounded-xl bg-vermilion hover:bg-vermilion/90 text-white font-medium text-xs flex items-center justify-center space-x-1.5 transition-colors cursor-pointer shadow-xs">
-                <i class="ri-book-open-line"></i>
-                <span>PDF ဖတ်ရှုမည်</span>
-              </button>
-              <a href="downloads/aung-san-suu-kyi-freedom-from-fear-1990-mm.pdf" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-cream/70 dark:bg-stone-800 text-charcoal hover:text-vermilion border border-hairline transition-colors text-xs" title="Tab အသစ်တွင် ဖွင့်ဖတ်မည်"><i class="ri-external-link-line"></i></a>
-              <a href="downloads/aung-san-suu-kyi-freedom-from-fear-1990-mm.pdf" download class="p-2 rounded-xl bg-cream/70 dark:bg-stone-800 text-charcoal hover:text-vermilion border border-hairline transition-colors text-xs" title="မူရင်း PDF ဒေါင်းလုဒ်">
-                <i class="ri-download-2-line"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Card 3: Nobel Peace Acceptance Speech 1991 -->
-          <div class="p-5 rounded-3xl bg-card border border-hairline/80 hover:border-vermilion/40 transition-all shadow-xs space-y-4 flex flex-col justify-between group">
-            <div class="space-y-3">
-              <div class="aspect-[16/10] rounded-2xl overflow-hidden bg-stone-100 dark:bg-stone-800 relative">
-                <img src="assets/images/daw-aung-san-suu-kyi-1991-nobel-study-cover.svg" alt="Nobel Speech" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-amber-600 text-white text-[10px] font-bold">နိုဘယ်ငြိမ်းချမ်းရေးဆု</span>
-              </div>
-              <div class="space-y-1">
-                <span class="text-[10px] font-mono text-muted uppercase">Nobel Peace Prize 1991</span>
-                <h3 class="text-base font-bold font-serif-editorial text-charcoal leading-snug group-hover:text-vermilion transition-colors">
-                  ဒေါ်အောင်ဆန်းစုကြည် ၁၉၉၁ နိုဘယ်ငြိမ်းချမ်းရေးဆု မိန့်ခွန်း မြန်မာပြန်လေ့လာချက်
-                </h3>
-                <p class="text-xs text-muted leading-relaxed line-clamp-3">
-                  သားဖြစ်သူ အလက်ဇန်းဒါးအဲရစ် ကိုယ်စားဖတ်ကြားခဲ့သော နိုဘယ်မိန့်ခွန်းနှင့် မြန်မာ့ဒီမိုကရေစီလှုပ်ရှားမှု သမိုင်းမှတ်တမ်း။
-                </p>
-              </div>
-            </div>
-
-            <div class="pt-3 border-t border-hairline flex items-center justify-between gap-2">
-              <button data-open-pdf="downloads/aung-san-suu-kyi-1991-nobel-acceptance-speech-mm.pdf" data-pdf-title="၁၉၉၁ နိုဘယ်ငြိမ်းချမ်းရေးဆု မိန့်ခွန်း မြန်မာပြန်" class="flex-1 py-2 px-3 rounded-xl bg-vermilion hover:bg-vermilion/90 text-white font-medium text-xs flex items-center justify-center space-x-1.5 transition-colors cursor-pointer shadow-xs">
-                <i class="ri-book-open-line"></i>
-                <span>PDF ဖတ်ရှုမည်</span>
-              </button>
-              <a href="downloads/aung-san-suu-kyi-1991-nobel-acceptance-speech-mm.pdf" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-cream/70 dark:bg-stone-800 text-charcoal hover:text-vermilion border border-hairline transition-colors text-xs" title="Tab အသစ်တွင် ဖွင့်ဖတ်မည်"><i class="ri-external-link-line"></i></a>
-              <a href="downloads/aung-san-suu-kyi-1991-nobel-acceptance-speech-mm.pdf" download class="p-2 rounded-xl bg-cream/70 dark:bg-stone-800 text-charcoal hover:text-vermilion border border-hairline transition-colors text-xs" title="မူရင်း PDF ဒေါင်းလုဒ်">
-                <i class="ri-download-2-line"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Card 4: Helen Keller Monograph -->
-          <div class="p-5 rounded-3xl bg-card border border-hairline/80 hover:border-vermilion/40 transition-all shadow-xs space-y-4 flex flex-col justify-between group">
-            <div class="space-y-3">
-              <div class="aspect-[16/10] rounded-2xl overflow-hidden bg-stone-100 dark:bg-stone-800 relative">
-                <img src="assets/images/helen-keller-cover.jpg" alt="Helen Keller" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-teal-600 text-white text-[10px] font-bold">လူမှုတော်လှန်ရေး</span>
-              </div>
-              <div class="space-y-1">
-                <span class="text-[10px] font-mono text-muted uppercase">Socialist Activism &amp; Disability Rights</span>
-                <h3 class="text-base font-bold font-serif-editorial text-charcoal leading-snug group-hover:text-vermilion transition-colors">
-                  အမှောင်ထုထဲမှ တွန်းလှန်အသံများ: ဟယ်လင်ကဲလား၏ လူမှုတော်လှန်ရေး သမိုင်း
-                </h3>
-                <p class="text-xs text-muted leading-relaxed line-clamp-3">
-                  စာမျက်နှာ ၄၆ မျက်နှာပါ ဟယ်လင်ကဲလား၏ ဆိုရှယ်လစ်နိုင်ငံရေး အတွေးအခေါ်နှင့် အလုပ်သမားလူတန်းစား တိုက်ပွဲဝင်မှု ပြည့်စုံသော စာတမ်း။
-                </p>
-              </div>
-            </div>
-
-            <div class="pt-3 border-t border-hairline flex items-center justify-between gap-2">
-              <button data-open-pdf="downloads/Helen-Keller-Radical-Monograph-MM.pdf" data-pdf-title="ဟယ်လင်ကဲလား၏ လူမှုတော်လှန်ရေး စာတမ်း" class="flex-1 py-2 px-3 rounded-xl bg-vermilion hover:bg-vermilion/90 text-white font-medium text-xs flex items-center justify-center space-x-1.5 transition-colors cursor-pointer shadow-xs">
-                <i class="ri-book-open-line"></i>
-                <span>PDF ဖတ်ရှုမည်</span>
-              </button>
-              <a href="downloads/Helen-Keller-Radical-Monograph-MM.pdf" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-cream/70 dark:bg-stone-800 text-charcoal hover:text-vermilion border border-hairline transition-colors text-xs" title="Tab အသစ်တွင် ဖွင့်ဖတ်မည်"><i class="ri-external-link-line"></i></a>
-              <a href="downloads/Helen-Keller-Radical-Monograph-MM.pdf" download class="p-2 rounded-xl bg-cream/70 dark:bg-stone-800 text-charcoal hover:text-vermilion border border-hairline transition-colors text-xs" title="မူရင်း PDF ဒေါင်းလုဒ်">
-                <i class="ri-download-2-line"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Card 5: Revolutionary Government Monograph -->
-          <div class="p-5 rounded-3xl bg-card border border-hairline/80 hover:border-vermilion/40 transition-all shadow-xs space-y-4 flex flex-col justify-between group">
-            <div class="space-y-3">
-              <div class="aspect-[16/10] rounded-2xl overflow-hidden bg-stone-100 dark:bg-stone-800 relative">
-                <img src="assets/images/revolutionary-government-cover.jpg" alt="Revolutionary Monograph" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-rose-700 text-white text-[10px] font-bold">မဟာဗျူဟာစာတမ်း</span>
-              </div>
-              <div class="space-y-1">
-                <span class="text-[10px] font-mono text-muted uppercase">Political Science &amp; Warfare</span>
-                <h3 class="text-base font-bold font-serif-editorial text-charcoal leading-snug group-hover:text-vermilion transition-colors">
-                  စစ်ဘုရင်ဗျူရိုကရေစီနှင့် တော်လှန်ရေးအစိုးရ တည်ဆောက်ရေး မိုနိုဂရပ်ဖ်
-                </h3>
-                <p class="text-xs text-muted leading-relaxed line-clamp-3">
-                  ဖက်ဒရယ်ဒီမိုကရေစီနှင့် တော်လှန်ရေးအစိုးရ တည်ဆောက်မှုဆိုင်ရာ နက်နဲသော သုတေသန စာတမ်း။
-                </p>
-              </div>
-            </div>
-
-            <div class="pt-3 border-t border-hairline flex items-center justify-between gap-2">
-              <button data-open-pdf="downloads/Htet-Monograph-Revolutionary-Warfare-MM.pdf" data-pdf-title="စစ်ဘုရင်ဗျူရိုကရေစီနှင့် တော်လှန်ရေးအစိုးရ မိုနိုဂရပ်ဖ်" class="flex-1 py-2 px-3 rounded-xl bg-vermilion hover:bg-vermilion/90 text-white font-medium text-xs flex items-center justify-center space-x-1.5 transition-colors cursor-pointer shadow-xs">
-                <i class="ri-book-open-line"></i>
-                <span>PDF ဖတ်ရှုမည်</span>
-              </button>
-              <a href="downloads/Htet-Monograph-Revolutionary-Warfare-MM.pdf" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-cream/70 dark:bg-stone-800 text-charcoal hover:text-vermilion border border-hairline transition-colors text-xs" title="Tab အသစ်တွင် ဖွင့်ဖတ်မည်"><i class="ri-external-link-line"></i></a>
-              <a href="downloads/Htet-Monograph-Revolutionary-Warfare-MM.pdf" download class="p-2 rounded-xl bg-cream/70 dark:bg-stone-800 text-charcoal hover:text-vermilion border border-hairline transition-colors text-xs" title="မူရင်း PDF ဒေါင်းလုဒ်">
-                <i class="ri-download-2-line"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Card 6: Toxic Positivity Article -->
-          <div class="p-5 rounded-3xl bg-card border border-hairline/80 hover:border-vermilion/40 transition-all shadow-xs space-y-4 flex flex-col justify-between group">
-            <div class="space-y-3">
-              <div class="aspect-[16/10] rounded-2xl overflow-hidden bg-stone-100 dark:bg-stone-800 relative">
-                <img src="assets/images/toxic-positivity-cover.svg" alt="Toxic Positivity" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-indigo-600 text-white text-[10px] font-bold">စိတ်ပညာနှင့် ဒဿန</span>
-              </div>
-              <div class="space-y-1">
-                <span class="text-[10px] font-mono text-muted uppercase">Psychology &amp; Critical Thinking</span>
-                <h3 class="text-base font-bold font-serif-editorial text-charcoal leading-snug group-hover:text-vermilion transition-colors">
-                  အကောင်းမြင်လွန်းရင် ဘာဖြစ်မလဲ? (Toxic Positivity) သုတေသနစာတမ်း
-                </h3>
-                <p class="text-xs text-muted leading-relaxed line-clamp-3">
-                  Positive Thinking ၏ နောက်ကွယ်က မမြင်နိုင်သော အန္တရာယ်များနှင့် စိတ်ခံစားမှု သဘာဝကို ဝေဖန်ဆန်းစစ်ချက်။
-                </p>
-              </div>
-            </div>
-
-            <div class="pt-3 border-t border-hairline flex items-center justify-between gap-2">
-              <button data-open-pdf="downloads/toxic-positivity.pdf" data-pdf-title="Toxic Positivity သုတေသနစာတမ်း" class="flex-1 py-2 px-3 rounded-xl bg-vermilion hover:bg-vermilion/90 text-white font-medium text-xs flex items-center justify-center space-x-1.5 transition-colors cursor-pointer shadow-xs">
-                <i class="ri-book-open-line"></i>
-                <span>PDF ဖတ်ရှုမည်</span>
-              </button>
-              <a href="downloads/toxic-positivity.pdf" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-cream/70 dark:bg-stone-800 text-charcoal hover:text-vermilion border border-hairline transition-colors text-xs" title="Tab အသစ်တွင် ဖွင့်ဖတ်မည်"><i class="ri-external-link-line"></i></a>
-              <a href="downloads/toxic-positivity.pdf" download class="p-2 rounded-xl bg-cream/70 dark:bg-stone-800 text-charcoal hover:text-vermilion border border-hairline transition-colors text-xs" title="မူရင်း PDF ဒေါင်းလုဒ်">
-                <i class="ri-download-2-line"></i>
-              </a>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </div>
-
   </main>
 
   <!-- Editorial Master 4-Column Footer -->
@@ -1114,29 +756,27 @@
           </div>
           <span class="font-serif-editorial text-lg font-semibold text-charcoal">Htet Official</span>
         </div>
-        <p class="leading-relaxed" data-mm="မြန်မာ Transgirl စာရေးဆရာမ၊ နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် လူမှုတက်ကြွလှုပ်ရှားသူ ထက်၏ တရားဝင် ဝက်ဘ်စာမျက်နှာ။" data-en="Official platform of Htet — Burmese trans writer, political philosophy researcher, and activist.">
+        <p class="leading-relaxed" data-mm="မြန်မာ Transgirl စာရေးဆရာမ၊ နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် လူမှုတက်ကြွလှုပ်ရှားသူ ထက်၏ တရားဝင် ဝက်ဘ်စာမျက်နှာ။" data-en="Official platform of Htet — Burmese trans writer, political philosophy researcher, and activist." data-zh="缅甸跨性别女性作家、政治哲学研究者及社会活动家 Htet 的官方平台。" data-th="แพลตฟอร์มอย่างเป็นทางการของ Htet — นักเขียนทรานส์เกิร์ลพม่า นักวิจัยปรัชญาการเมือง และนักกิจกรรม" data-ja="ミャンマーのトランス女性作家・政治哲学研究者・アクティビスト Htet（テッ）の公式プラットフォーム。">
           မြန်မာ Transgirl စာရေးဆရာမ၊ နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် လူမှုတက်ကြွလှုပ်ရှားသူ ထက်၏ တရားဝင် ဝက်ဘ်စာမျက်နှာ။
         </p>
       </div>
 
       <div>
-        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]" data-mm="စာမျက်နှာများ" data-en="Navigation">စာမျက်နှာများ</h4>
+        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]" data-mm="စာမျက်နှာများ" data-en="Navigation" data-zh="页面导航" data-th="การนำทาง" data-ja="ナビゲーション">စာမျက်နှာများ</h4>
         <ul class="space-y-2">
-          <li><a href="index.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-home-5-line text-vermilion/70 group-hover:text-vermilion"></i> <span>ပင်မ</span></a></li>
-          <li><a href="articles.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-article-line text-vermilion/70 group-hover:text-vermilion"></i> <span>ဆောင်းပါးများ</span></a></li>
-          <li><a href="publications.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-file-paper-2-line text-vermilion/70 group-hover:text-vermilion"></i> <span>ထုတ်ဝေမှုများ</span></a></li>
-          <li><a href="journal.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-booklet-line text-vermilion/70 group-hover:text-vermilion"></i> <span>မှတ်စုနှင့် ပို့စ်များ</span></a></li>
-          <li><a href="glossary.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-book-read-line text-vermilion/70 group-hover:text-vermilion"></i> <span>ဝေါဟာရအဘိဓာန်</span></a></li>
-          <li><a href="dictionary.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group text-vermilion font-semibold"><i class="ri-book-2-fill text-vermilion"></i> <span>အဘိဓာန်</span></a></li>
-          <li><a href="translate.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-translate-2 group-hover:text-vermilion"></i> <span>ဘာသာပြန်</span></a></li>
-          <li><a href="about.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-user-smile-line text-vermilion/70 group-hover:text-vermilion"></i> <span>စာရေးသူအကြောင်း</span></a></li>
-          <li><a href="technology.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="နည်းပညာနှင့် ဖန်တီးသူများ" data-en="Technology Colophon" data-zh="技术架构与作者" data-th="เทคโนโลยีและผู้สร้าง" data-ja="技術構成と開発者"><i class="ri-cpu-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>နည်းပညာနှင့် ဖန်တီးသူများ</span></a></li>
-          <li><a href="contact.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-mail-send-line text-vermilion/70 group-hover:text-vermilion"></i> <span>ဆက်သွယ်ရန်</span></a></li>
+          <li><a href="index.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-home-5-line text-vermilion/70 group-hover:text-vermilion"></i> <span data-mm="ပင်မ" data-en="Home" data-zh="首页" data-th="หน้าแรก" data-ja="ホーム">ပင်မ</span></a></li>
+          <li><a href="articles.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-article-line text-vermilion/70 group-hover:text-vermilion"></i> <span data-mm="ဆောင်းပါးများ" data-en="Articles" data-zh="学术文章" data-th="บทความ" data-ja="論考・論文">ဆောင်းပါးများ</span></a></li>
+          <li><a href="publications.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-file-paper-2-line text-vermilion/70 group-hover:text-vermilion"></i> <span data-mm="ထုတ်ဝေမှုများ" data-en="Publications" data-zh="出版专著" data-th="ผลงานตีพิมพ์" data-ja="出版物・著作">ထုတ်ဝေမှုများ</span></a></li>
+          <li><a href="journal.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-booklet-line text-vermilion/70 group-hover:text-vermilion"></i> <span data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌">မှတ်စုနှင့် ပို့စ်များ</span></a></li>
+          <li><a href="glossary.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-book-read-line text-vermilion/70 group-hover:text-vermilion"></i> <span data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典">ဝေါဟာရအဘိဓာန်</span></a></li>
+          <li><a href="dictionary.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group text-vermilion font-semibold"><i class="ri-book-2-fill text-vermilion"></i> <span data-mm="အဘိဓာန်" data-en="Dictionary" data-zh="英语词典" data-th="พจนานุกรม" data-ja="英緬辞典">အဘိဓာန်</span></a></li>
+          <li><a href="about.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-user-smile-line text-vermilion/70 group-hover:text-vermilion"></i> <span data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について">စာရေးသူအကြောင်း</span></a></li>
+          <li><a href="contact.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group"><i class="ri-mail-send-line text-vermilion/70 group-hover:text-vermilion"></i> <span data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系作者" data-th="ติดต่อ" data-ja="お問い合わせ">ဆက်သွယ်ရန်</span></a></li>
         </ul>
       </div>
 
       <div>
-        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]" data-mm="တိုက်ရိုက်လိုင်းများ" data-en="Direct Channels">တိုက်ရိုက်လိုင်းများ</h4>
+        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]" data-mm="တိုက်ရိုက်လိုင်းများ" data-en="Direct Channels" data-zh="官方频道" data-th="ช่องทางติดต่อ" data-ja="公式チャンネル">တိုက်ရိုက်လိုင်းများ</h4>
         <ul class="space-y-2">
           <li><a href="https://github.com/htetofficial/htetofficial.github.io/releases/tag/v1.2.0-beta" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-android-line text-emerald-600"></i> <span class="font-medium text-emerald-700 dark:text-emerald-400">Android App (v1.2.0-beta APK)</span></a></li>
           <li><a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-telegram-fill text-[#2AABEE]"></i> <span>Telegram: @htetmmofficial</span></a></li>
@@ -1149,8 +789,8 @@
       </div>
 
       <div class="space-y-3">
-        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]" data-mm="တန်ဖိုးထားမှု" data-en="Commitment">တန်ဖိုးထားမှု</h4>
-        <p class="leading-relaxed" data-mm="ခွဲခြားဆက်ဆံမှု ကင်းမဲ့သော၊ ကျား၊ မ တန်းတူညီမျှပြီး တရားမျှတသော လူ့ဘောင် တည်ဆောက်ရေး။" data-en="Committed to an egalitarian, anti-oppressive society rooted in absolute justice.">
+        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]" data-mm="တန်ဖိုးထားမှု" data-en="Commitment" data-zh="核心价值" data-th="พันธกิจ" data-ja="理念と使命">တန်ဖိုးထားမှု</h4>
+        <p class="leading-relaxed" data-mm="ခွဲခြားဆက်ဆံမှု ကင်းမဲ့သော၊ ကျား၊ မ တန်းတူညီမျှပြီး တရားမျှတသော လူ့ဘောင် တည်ဆောက်ရေး။" data-en="Committed to an egalitarian, anti-oppressive society rooted in absolute justice." data-zh="致力于建设一个消除一切歧视、性别平等且崇尚正义的社会。" data-th="มุ่งมั่นสร้างสังคมที่ปราศจากการเลือกปฏิบัติ มีความเท่าเทียมทางเพศและความยุติธรรม" data-ja="あらゆる差別を撤廃し、ジェンダー平等と正義に基づく共生社会の構築を目指して。">
           ခွဲခြားဆက်ဆံမှု ကင်းမဲ့သော၊ ကျား၊ မ တန်းတူညီမျှပြီး တရားမျှတသော လူ့ဘောင် တည်ဆောက်ရေး။
         </p>
         <div class="pt-2">
@@ -1171,9 +811,8 @@
   <!-- BurmeseNLP Engine -->
   <script src="js/burmesenlp.js"></script>
 
-  <!-- Mozilla PDF.js & Viewer Engine -->
-  <script src="js/pdf/pdf.min.js"></script>
-  <script src="js/pdf-viewer.js"></script>
+  <!-- Mobile Tap-to-Define & Interactive Vocabulary Popover Engine -->
+  <script defer src="js/vocab-lookup.js"></script>
 
   <!-- Parallel Sentences Corpus (12,021 Pairs) -->
   <script src="js/data/translations/pairs.js"></script>
@@ -1187,20 +826,20 @@
   <script src="js/data/myanmar-words/pos_index.js"></script>
 
   <!-- Dictionary & NLP Workbench Controller -->
-  <script src="js/libretranslate.js"></script>
   <script src="js/dictionary.js"></script>
 
   <!-- Master Site Framework (Flyout Menu, Spotlight Search Modal ⌘K, Theme Sync) -->
   <script src="js/main.js"></script>
+
   <!-- LibreTranslate Server Settings Modal -->
   <div id="libre-settings-modal" class="fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="w-full max-w-md p-6 rounded-3xl bg-card border border-hairline shadow-2xl space-y-4">
       <div class="flex items-center justify-between pb-3 border-b border-hairline">
         <div class="flex items-center space-x-2">
           <i class="ri-server-line text-indigo-600 text-xl"></i>
-          <h3 class="text-lg font-bold font-serif-editorial text-charcoal m-0">LibreTranslate ဆာဗာ သတ်မှတ်ချက်</h3>
+          <h3 class="text-lg font-bold font-serif-editorial text-charcoal m-0" data-mm="LibreTranslate ဆာဗာ သတ်မှတ်ချက်" data-en="LibreTranslate Server Settings" data-zh="LibreTranslate 服务器设置" data-th="การตั้งค่าเซิร์ฟเวอร์ LibreTranslate" data-ja="LibreTranslate サーバー設定">LibreTranslate ဆာဗာ သတ်မှတ်ချက်</h3>
         </div>
-        <button onclick="window.HtetDict.closeLibreTranslateSettings()" class="w-8 h-8 rounded-full hover:bg-cream dark:hover:bg-stone-800 flex items-center justify-center text-muted hover:text-charcoal cursor-pointer">
+        <button onclick="window.HtetDict.closeLibreTranslateSettings()" class="w-8 h-8 rounded-full hover:bg-cream dark:hover:bg-stone-800 flex items-center justify-center text-muted hover:text-charcoal cursor-pointer" aria-label="Close">
           <i class="ri-close-line text-lg"></i>
         </button>
       </div>
@@ -1234,10 +873,10 @@
       </div>
 
       <div class="flex items-center justify-end space-x-2 pt-2 border-t border-hairline">
-        <button onclick="window.HtetDict.closeLibreTranslateSettings()" class="px-4 py-2 rounded-xl text-muted hover:text-charcoal cursor-pointer font-medium text-xs">
+        <button onclick="window.HtetDict.closeLibreTranslateSettings()" class="px-4 py-2 rounded-xl text-muted hover:text-charcoal cursor-pointer font-medium text-xs" data-mm="မလုပ်ဆောင်ပါ" data-en="Cancel" data-zh="取消" data-th="ยกเลิก" data-ja="キャンセル">
           မလုပ်ဆောင်ပါ
         </button>
-        <button onclick="window.HtetDict.saveLibreTranslateSettings()" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs cursor-pointer shadow-xs transition-colors">
+        <button onclick="window.HtetDict.saveLibreTranslateSettings()" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs cursor-pointer shadow-xs transition-colors" data-mm="သိမ်းဆည်းမည်" data-en="Save Settings" data-zh="保存设置" data-th="บันทึกการตั้งค่า" data-ja="設定を保存">
           သိမ်းဆည်းမည်
         </button>
       </div>

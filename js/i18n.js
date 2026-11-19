@@ -151,7 +151,7 @@
       });
 
       // 2. Placeholders
-      const inputs = document.querySelectorAll('[data-mm-placeholder], [data-en-placeholder], [data-zh-placeholder]');
+      const inputs = document.querySelectorAll('[data-mm-placeholder], [data-en-placeholder], [data-zh-placeholder], [data-th-placeholder], [data-ja-placeholder]');
       inputs.forEach(input => {
         let ph = input.getAttribute('data-' + lang + '-placeholder') || input.getAttribute('data-en-placeholder') || input.getAttribute('data-mm-placeholder');
         if (ph !== null) input.placeholder = ph;

@@ -35,7 +35,7 @@
 
       this.createPopoverElement();
       this.loadGlossaryData();
-      this.bindSelectionEvents(containerSelector || '#article-content-body, #journal-modal-body, .article-prose');
+      this.bindSelectionEvents(containerSelector || '#article-content-body, #journal-modal-body, .article-prose, #dict-def-card, #sentence-results-list, .dict-view-tab, .dict-entry-card, .reading-prose, main p, article');
       this.bindGlobalDismissEvents();
 
       console.log('[Htet VocabLookup] Interactive Reading Vocabulary Pop-up initialized.');
@@ -178,7 +178,7 @@
     },
 
     /**
-     * Bind text selection and touch tap events
+     * Bind text selection and touch tap events (Optimized for Mobile Touch & Tap-to-Define)
      */
     bindSelectionEvents: function(selector) {
       // 1. Click on highlighted glossary terms
@@ -195,7 +195,7 @@
 
       // 2. Mouse selection release (Desktop)
       document.addEventListener('mouseup', function(e) {
-        if (e.target.closest('#reader-vocab-popover') || e.target.closest('.reader-glossary-term')) {
+        if (e.target.closest('#reader-vocab-popover') || e.target.closest('.reader-glossary-term') || e.target.closest('button, a, input, textarea, select')) {
           return;
         }
 
@@ -207,7 +207,6 @@
           if (!sel || sel.isCollapsed) return;
 
           var text = sel.toString().trim();
-          // Look up if 1 to 6 words
           if (text.length >= 2 && text.length <= 80 && text.split(/\s+/).length <= 6) {
             var range = sel.getRangeAt(0);
             var rect = range.getBoundingClientRect();
@@ -216,38 +215,152 @@
         }, 120);
       });
 
-      // 3. Touch Selection (Mobile & Tablets)
+      // 3. Desktop double-click to look up single word
+      document.addEventListener('dblclick', function(e) {
+        if (e.target.closest('#reader-vocab-popover') || e.target.closest('.reader-glossary-term') || e.target.closest('button, a, input, textarea, select')) {
+          return;
+        }
+        var container = document.querySelector(selector);
+        if (!container || !container.contains(e.target)) return;
+
+        var sel = window.getSelection();
+        if (sel && !sel.isCollapsed) {
+          var text = sel.toString().trim();
+          if (text.length >= 2 && text.length <= 60) {
+            var range = sel.getRangeAt(0);
+            VocabLookup.lookupAndShow(text, range.getBoundingClientRect());
+          }
+        }
+      });
+
+      // 4. Mobile & Touch: Instant Tap-to-Define & Selection Handlers
+      var touchStartX = 0, touchStartY = 0, touchStartTime = 0;
+      document.addEventListener('touchstart', function(e) {
+        if (e.touches && e.touches.length === 1) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          touchStartTime = Date.now();
+        }
+      }, { passive: true });
+
       document.addEventListener('touchend', function(e) {
-        if (e.target.closest('#reader-vocab-popover') || e.target.closest('.reader-glossary-term')) {
+        if (e.target.closest('#reader-vocab-popover') || e.target.closest('.reader-glossary-term') || e.target.closest('button, a, input, textarea, select, label')) {
           return;
         }
 
         var container = document.querySelector(selector);
         if (!container || !container.contains(e.target)) return;
 
-        setTimeout(function() {
-          var sel = window.getSelection();
-          if (!sel || sel.isCollapsed) return;
+        var elapsed = Date.now() - touchStartTime;
+        var touch = e.changedTouches && e.changedTouches[0];
+        if (!touch) return;
+        var dist = Math.hypot(touch.clientX - touchStartX, touch.clientY - touchStartY);
 
-          var text = sel.toString().trim();
-          if (text.length >= 2 && text.length <= 80 && text.split(/\s+/).length <= 6) {
-            var range = sel.getRangeAt(0);
-            var rect = range.getBoundingClientRect();
-            VocabLookup.lookupAndShow(text, rect);
+        setTimeout(function() {
+          // 4a. If user selected a range with touch handles
+          var sel = window.getSelection();
+          if (sel && !sel.isCollapsed) {
+            var text = sel.toString().trim();
+            if (text.length >= 2 && text.length <= 80 && text.split(/\s+/).length <= 6) {
+              var range = sel.getRangeAt(0);
+              var rect = range.getBoundingClientRect();
+              VocabLookup.lookupAndShow(text, rect);
+              return;
+            }
           }
-        }, 180);
+
+          // 4b. Instant Tap: Single tap on any word on mobile phone (< 450ms, < 15px movement)
+          if (elapsed < 450 && dist < 15) {
+            var wordInfo = VocabLookup.getWordAtPoint(touch.clientX, touch.clientY);
+            if (wordInfo && wordInfo.word) {
+              VocabLookup.lookupAndShow(wordInfo.word, wordInfo.rect);
+            }
+          }
+        }, 140);
       });
+    },
+
+    /**
+     * Helper: Extract exact word and its bounding rect at touch/click coordinates
+     */
+    getWordAtPoint: function(x, y) {
+      var range = null, textNode = null, offset = 0;
+      if (document.caretRangeFromPoint) {
+        range = document.caretRangeFromPoint(x, y);
+        if (range) {
+          textNode = range.startContainer;
+          offset = range.startOffset;
+        }
+      } else if (document.caretPositionFromPoint) {
+        var pos = document.caretPositionFromPoint(x, y);
+        if (pos) {
+          textNode = pos.offsetNode;
+          offset = pos.offset;
+        }
+      }
+
+      if (!textNode || textNode.nodeType !== Node.TEXT_NODE) return null;
+      var parent = textNode.parentElement;
+      if (parent && (parent.closest('button, a, input, textarea, select, #reader-vocab-popover') || parent.tagName === 'BUTTON' || parent.tagName === 'A')) {
+        return null;
+      }
+
+      var text = textNode.nodeValue;
+      if (!text) return null;
+
+      // Unicode Word Boundary Matcher: English, Digits, and Burmese Unicode (U+1000 - U+109F, U+AA60 - U+AA7F, U+A9E0 - U+A9FF)
+      var isWordChar = function(ch) {
+        return /[\w\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF]/.test(ch);
+      };
+
+      if (offset >= text.length) offset = text.length - 1;
+      if (offset < 0) return null;
+      if (!isWordChar(text[offset])) {
+        if (offset > 0 && isWordChar(text[offset - 1])) {
+          offset--;
+        } else {
+          return null;
+        }
+      }
+
+      var start = offset;
+      while (start > 0 && isWordChar(text[start - 1])) {
+        start--;
+      }
+      var end = offset;
+      while (end < text.length && isWordChar(text[end])) {
+        end++;
+      }
+
+      var word = text.substring(start, end).trim();
+      if (word.length >= 2) {
+        try {
+          var wordRange = document.createRange();
+          wordRange.setStart(textNode, start);
+          wordRange.setEnd(textNode, end);
+          return { word: word, rect: wordRange.getBoundingClientRect() };
+        } catch (err) {
+          return { word: word, rect: { top: y - 10, bottom: y + 10, left: x - 20, right: x + 20, width: 40, height: 20 } };
+        }
+      }
+      return null;
     },
 
     /**
      * Bind global clicks to dismiss popover
      */
     bindGlobalDismissEvents: function() {
-      document.addEventListener('mousedown', function(e) {
-        if (popoverEl && !popoverEl.contains(e.target) && !e.target.closest('.reader-glossary-term')) {
+      var dismissFn = function(e) {
+        if (popoverEl && popoverEl.classList.contains('popover-visible') && !popoverEl.contains(e.target) && !e.target.closest('.reader-glossary-term')) {
           VocabLookup.hide();
         }
-      });
+      };
+      document.addEventListener('mousedown', dismissFn);
+      document.addEventListener('touchstart', function(e) {
+        if (popoverEl && popoverEl.classList.contains('popover-visible') && !popoverEl.contains(e.target) && !e.target.closest('.reader-glossary-term')) {
+          VocabLookup.hide();
+        }
+      }, { passive: true });
 
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
@@ -424,6 +537,7 @@
       if (!popoverEl) this.createPopoverElement();
 
       popoverEl.innerHTML = [
+        '<div class="sm:hidden w-10 h-1.5 rounded-full bg-charcoal/20 dark:bg-white/20 mx-auto -mt-1 mb-2.5 cursor-grab"></div>',
         '<div class="flex items-center justify-between pb-2 mb-2 border-b border-hairline/60">',
         '  <div class="flex items-center space-x-2">',
         '    <span class="hanko-stamp px-2 py-0.5 text-[10px] font-bold">ဝေါဟာရ</span>',
@@ -455,6 +569,8 @@
 
       var html = [
         '<div class="vocab-popover-content space-y-3">',
+'  <div class="sm:hidden w-10 h-1.5 rounded-full bg-charcoal/20 dark:bg-white/20 mx-auto -mt-1 mb-2.5 cursor-grab"></div>',
+
         '  <div class="flex items-center justify-between pb-2 border-b border-hairline/60">',
         '    <div class="flex items-center space-x-2 min-w-0">',
         '      <span class="hanko-stamp px-2 py-0.5 text-[10px] font-bold shrink-0">ဒဿန ဝေါဟာရ</span>',
@@ -499,14 +615,17 @@
      */
     renderDictionaryMatch: function(word, dictEntries, rect) {
       var entry = Array.isArray(dictEntries) ? dictEntries[0] : dictEntries;
-      var pos = entry.p || '';
-      var ipa = entry.i || '';
+      if (!entry) return;
+      var pos = entry.p || entry.pos || '';
+      var ipa = entry.i || entry.ipa || '';
       var pronMm = entry.m || '';
-      var def = entry.d || '';
-      var examples = entry.e || [];
+      var def = entry.d || entry.def || (typeof entry === 'string' ? entry : '');
+      var examples = entry.e || entry.examples || [];
 
       var html = [
         '<div class="vocab-popover-content space-y-3">',
+'  <div class="sm:hidden w-10 h-1.5 rounded-full bg-charcoal/20 dark:bg-white/20 mx-auto -mt-1 mb-2.5 cursor-grab"></div>',
+
         '  <div class="flex items-center justify-between pb-2 border-b border-hairline/60">',
         '    <div class="flex items-center space-x-2 min-w-0">',
         '      <span class="hanko-stamp px-2 py-0.5 text-[10px] font-bold shrink-0">အဘိဓာန်</span>',
@@ -558,6 +677,8 @@
 
       var html = [
         '<div class="vocab-popover-content space-y-3">',
+'  <div class="sm:hidden w-10 h-1.5 rounded-full bg-charcoal/20 dark:bg-white/20 mx-auto -mt-1 mb-2.5 cursor-grab"></div>',
+
         '  <div class="flex items-center justify-between pb-2 border-b border-hairline/60">',
         '    <div class="flex items-center space-x-2 min-w-0">',
         '      <span class="hanko-stamp px-2 py-0.5 text-[10px] font-bold shrink-0">Corpus Match</span>',
@@ -597,6 +718,8 @@
 
       var html = [
         '<div class="vocab-popover-content space-y-3">',
+'  <div class="sm:hidden w-10 h-1.5 rounded-full bg-charcoal/20 dark:bg-white/20 mx-auto -mt-1 mb-2.5 cursor-grab"></div>',
+
         '  <div class="flex items-center justify-between pb-2 border-b border-hairline/60">',
         '    <div class="flex items-center space-x-2 min-w-0">',
         '      <span class="hanko-stamp px-2 py-0.5 text-[10px] font-bold shrink-0">ဘာသာပြန်</span>',
@@ -650,10 +773,37 @@
     positionPopover: function(rect) {
       if (!popoverEl) return;
 
+      popoverEl.classList.add('popover-visible');
+      var isMobile = (window.innerWidth < 640);
+
+      if (isMobile) {
+        // Mobile Mode: Render as fixed bottom floating sheet for perfect thumb reachability without covering text
+        popoverEl.classList.add('popover-mobile-sheet');
+        popoverEl.classList.remove('popover-flipped');
+        popoverEl.style.position = 'fixed';
+        popoverEl.style.bottom = '12px';
+        popoverEl.style.left = '12px';
+        popoverEl.style.right = '12px';
+        popoverEl.style.top = 'auto';
+        popoverEl.style.width = 'auto';
+        popoverEl.style.maxWidth = 'calc(100vw - 24px)';
+        popoverEl.style.maxHeight = '75vh';
+        popoverEl.style.zIndex = '9999';
+        return;
+      }
+
+      // Desktop Mode: Floating relative to selection
+      popoverEl.classList.remove('popover-mobile-sheet');
+      popoverEl.style.position = 'absolute';
+      popoverEl.style.bottom = 'auto';
+      popoverEl.style.right = 'auto';
+      popoverEl.style.maxHeight = 'none';
+      popoverEl.style.zIndex = '1050';
+
       var scrollX = window.pageXOffset || document.documentElement.scrollLeft;
       var scrollY = window.pageYOffset || document.documentElement.scrollTop;
 
-      var popWidth = Math.min(380, window.innerWidth - 24);
+      var popWidth = Math.min(390, window.innerWidth - 24);
       var popHeight = popoverEl.offsetHeight || 220;
 
       // Vertical positioning: default to placing above selection
@@ -743,10 +893,11 @@
 
   // Export to global scope
   window.VocabLookup = VocabLookup;
+  window.HtetVocabLookup = VocabLookup;
 
   // Auto initialize on idle if reading container exists
   document.addEventListener('DOMContentLoaded', function() {
-    var hasReadingContainer = !!document.querySelector('#article-content-body, #journal-modal-body, .article-prose');
+    var hasReadingContainer = !!document.querySelector('#article-content-body, #journal-modal-body, .article-prose, #dict-def-card, #sentence-results-list, .dict-view-tab, .reading-prose, main');
     if (hasReadingContainer) {
       if ('requestIdleCallback' in window) {
         requestIdleCallback(function() { VocabLookup.init(); }, { timeout: 2500 });

@@ -3851,6 +3851,10 @@ html[data-theme="dark"] .glass-3d-card:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  max-width: 2.25rem;
+  max-height: 2.25rem;
   border-radius: 11px;
   animation: navBrandFloat 4.8s ease-in-out infinite;
   cursor: pointer;
@@ -7333,6 +7337,32 @@ html[data-theme="amoled"] .reader-vocab-popover-card {
   visibility: visible;
   transform: translateY(0) scale(1);
   pointer-events: auto;
+}
+
+/* Mobile Bottom Sheet Mode (< 640px) */
+.reader-vocab-popover-card.popover-mobile-sheet {
+  position: fixed !important;
+  bottom: 16px !important;
+  left: 12px !important;
+  right: 12px !important;
+  top: auto !important;
+  width: auto !important;
+  max-width: calc(100vw - 24px) !important;
+  max-height: 75vh !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  z-index: 9999 !important;
+  border-radius: 1.25rem !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1) inset !important;
+  transform: translateY(24px) scale(0.97);
+}
+
+.reader-vocab-popover-card.popover-mobile-sheet.popover-visible {
+  transform: translateY(0) scale(1) !important;
+}
+
+.reader-vocab-popover-card.popover-mobile-sheet::before {
+  display: none !important;
 }
 
 /* Floating Caret Arrow indicator */
