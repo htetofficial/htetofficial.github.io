@@ -11,3 +11,7 @@ telegram_bot/config.json
 # Python cache
 __pycache__/
 *.pyc
+
+# Large archive bundles (Hosted on Cloudflare R2 CDN)
+*.zip
+downloads/*.zip
