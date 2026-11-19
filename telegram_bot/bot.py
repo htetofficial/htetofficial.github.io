@@ -303,6 +303,12 @@ def handle_start(api, msg):
             ],
             [
                 {
+                    "text": "🌐 တရားဝင် Mirror လင့်ခ်များ (VPN မလို Vercel အပါအဝင်)",
+                    "url": "https://htetofficialgithubio.vercel.app"
+                }
+            ],
+            [
+                {
                     "text": "📢 Telegram Channel: @htetmmofficial",
                     "url": "https://t.me/htetmmofficial"
                 },
@@ -557,12 +563,66 @@ def handle_audio(api, msg):
     }
     api.send_message(chat_id, text, reply_markup=keyboard)
 
+def handle_mirrors(api, msg):
+    chat_id = msg['chat']['id']
+    text = (
+        "🌐 <b>Htet Official — တရားဝင် ဝက်ဘ်ဆိုက်နှင့် Mirror လင့်ခ်များ</b>\n\n"
+        "မြန်မာနိုင်ငံတွင်းမှ စာဖတ်သူများ အဆင်ပြေချောမွေ့စွာ ဝင်ရောက်ဖတ်ရှုနိုင်ရန် Mirror အများအပြားဖြင့် လွှင့်တင်ထားပါသည်ရှင်။\n\n"
+        "🟢 <b>၁။ Vercel Mirror (VPN မလို)</b>\n"
+        "👉 https://htetofficialgithubio.vercel.app\n"
+        "<i>(မြန်မာနိုင်ငံတွင်းမှ VPN မလိုဘဲ တိုက်ရိုက် ဝင်ရောက်ဖတ်ရှုနိုင်ပါသည်)</i>\n\n"
+        "⚡ <b>၂။ Cloudflare Workers Edge (အလွန်မြန်ဆန်သော Engine)</b>\n"
+        "👉 https://web.htetofficial.workers.dev\n"
+        "👉 https://app.htetofficial.workers.dev\n"
+        "<i>(ကမ္ဘာတစ်ဝှမ်း Edge CDN နှင့် Telegram Mini App အတွက် အကောင်းဆုံးဖြစ်ပါသည်)</i>\n\n"
+        "🐙 <b>၃။ GitHub Pages (မူရင်း Platform)</b>\n"
+        "👉 https://htetofficial.github.io\n\n"
+        "━━━━━━━━━━━━━━━━━━━━━\n"
+        "🛡️ <b>ဒီဂျစ်တယ် လုံခြုံရေး အကြံပြုချက်:</b>\n"
+        "Vercel လင့်ခ်သည် မြန်မာနိုင်ငံတွင်းမှ VPN မလိုဘဲ ဝင်ရောက်နိုင်သော်လည်း၊ "
+        "မိမိတို့၏ ကိုယ်ရေးကိုယ်တာလုံခြုံရေး (Privacy & Digital Safety) အတွက် "
+        "<b>မည်သည့်လင့်ခ်ကိုမဆို VPN ချိတ်ဆက်၍ ဝင်ရောက်ဖတ်ရှုရန်</b> အလေးအနက် အကြံပြုအပ်ပါသည်။"
+    )
+
+    keyboard = {
+        "inline_keyboard": [
+            [
+                {
+                    "text": "🟢 Vercel (VPN မလို)",
+                    "url": "https://htetofficialgithubio.vercel.app"
+                },
+                {
+                    "text": "⚡ Workers (Web)",
+                    "url": "https://web.htetofficial.workers.dev"
+                }
+            ],
+            [
+                {
+                    "text": "⚡ Workers (App)",
+                    "url": "https://app.htetofficial.workers.dev"
+                },
+                {
+                    "text": "🐙 GitHub Pages",
+                    "url": "https://htetofficial.github.io"
+                }
+            ],
+            [
+                {
+                    "text": "📖 Telegram Mini App ဖွင့်ရန်",
+                    "web_app": {"url": WEBAPP_URL}
+                }
+            ]
+        ]
+    }
+    api.send_message(chat_id, text, reply_markup=keyboard)
+
 def handle_help(api, msg):
     chat_id = msg['chat']['id']
     text = (
         "📖 <b>Htet Official Bot — အသုံးပြုနိုင်သော Commands များ</b>\n\n"
         "• <code>/start</code> - နှုတ်ခွန်းဆက်နှင့် Mini App ဖွင့်ရန်\n"
         "• <code>/app</code> - Telegram Mini App မျက်နှာပြည့် ဖွင့်ရန်\n"
+        "• <code>/mirrors</code> - တရားဝင် Mirror လင့်ခ်များနှင့် VPN အကြံပြုချက် (VPN မလို Vercel အပါအဝင်)\n"
         "• <code>/suukyi</code> သို့မဟုတ် <code>/birthday</code> - ဒေါ်အောင်ဆန်းစုကြည် ၈၁ နှစ်ပြည့် မွေးနေ့နှင့် Freedom from Fear စာတမ်း\n"
         "• <code>/dict &lt;word&gt;</code> - အင်္ဂလိပ်-မြန်မာ အဘိဓာန် ရှာဖွေရန်\n"
         "• <code>/translate &lt;text&gt;</code> - မြန်မာ ↔ အင်္ဂလိပ် စက်ဘာသာပြန်ဆိုရန်\n"
@@ -673,6 +733,8 @@ def process_message(api, msg):
         handle_start(api, msg)
     elif text.startswith('/app') or text.startswith('/mini'):
         handle_app(api, msg)
+    elif text.startswith('/mirrors') or text.startswith('/mirror') or text.startswith('/links') or text.startswith('/vpn'):
+        handle_mirrors(api, msg)
     elif text.startswith('/suukyi') or text.startswith('/birthday'):
         handle_suukyi(api, msg)
     elif text.startswith('/articles'):
@@ -734,6 +796,7 @@ def main():
     commands = [
         {"command": "start", "description": "မင်္ဂလာပါ နှုတ်ခွန်းဆက်နှင့် Mini App ဖွင့်ရန်"},
         {"command": "app", "description": "Htet Mini App မျက်နှာပြည့် ဖွင့်ရန်"},
+        {"command": "mirrors", "description": "တရားဝင် Mirror လင့်ခ်များနှင့် VPN အကြံပြုချက်"},
         {"command": "translate", "description": "မြန်မာ ↔ အင်္ဂလိပ် စက်ဘာသာပြန်ဆိုရန်"},
         {"command": "dict", "description": "Ornagai အင်္ဂလိပ်-မြန်မာ အဘိဓာန် ရှာရန်"},
         {"command": "articles", "description": "နောက်ဆုံးထုတ်ဝေထားသော ဆောင်းပါးများ"},
