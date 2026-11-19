@@ -12,6 +12,7 @@
 ?path: /article\.html.*
 ?path: /articles/.*
 ?path: /publications/.*
+?path: /aung-san-suu-kyi-freedom-from-fear-1990-mm\.html
 
 # Telegram Channel integration (displays "Join Channel" pill in Instant View)
 channel: "@htetmmofficial"
