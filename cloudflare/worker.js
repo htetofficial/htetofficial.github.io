@@ -21,9 +21,7 @@ const SECURITY_CSP = [
   "frame-src 'self' https://drive.google.com https://www.youtube.com",
   "worker-src 'self' blob:",
   "manifest-src 'self'",
-  "form-action 'self'",
-  "require-trusted-types-for 'script'",
-  "trusted-types default"
+  "form-action 'self'"
 ].join('; ');
 
 export default {
@@ -175,7 +173,9 @@ export default {
         }
 
         // Optimize Cache Lifetimes for Static Edge Delivery
-        if (/\.(woff2?|ttf|otf|eot|svg|png|jpe?g|webp|gif|ico|css|js)$/i.test(url.pathname)) {
+        if (url.pathname === '/sw.js' || url.pathname === '/js/theme-init.js') {
+          newH.set('cache-control', 'public, max-age=0, must-revalidate');
+        } else if (/\.(woff2?|ttf|otf|eot|svg|png|jpe?g|webp|gif|ico|css|js)$/i.test(url.pathname)) {
           newH.set('cache-control', 'public, max-age=31536000, immutable');
         } else if (url.pathname.endsWith('.json')) {
           newH.set('cache-control', 'public, max-age=3600, stale-while-revalidate=86400');

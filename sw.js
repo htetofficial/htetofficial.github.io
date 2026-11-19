@@ -4,7 +4,7 @@
  * Supports Android, iOS, iPadOS, macOS, and Windows
  */
 
-const CACHE_NAME = 'htet-pwa-v6.9';
+const CACHE_NAME = 'htet-pwa-v7.0';
 const CORE_SHELL_ASSETS = [
   './',
   './index.html',
@@ -32,6 +32,7 @@ const CORE_SHELL_ASSETS = [
   './css/remixicon.css',
   './css/aos.css',
   './js/theme-init.js',
+  './js/theme-init.js?v=2.1',
   './js/tailwind-config.js',
   './js/tailwind.min.js',
   './js/main.js',
@@ -173,6 +174,20 @@ self.addEventListener('fetch', (event) => {
         // Fallback to offline page
         return caches.match('./offline.html');
       })
+    );
+    return;
+  }
+
+  // 1.5. Critical Boot Scripts: Always Network-First to immediately propagate security & rendering updates
+  if (url.pathname.includes('theme-init.js')) {
+    event.respondWith(
+      fetch(req).then((networkRes) => {
+        if (networkRes && networkRes.status === 200) {
+          const resClone = networkRes.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
+        }
+        return networkRes;
+      }).catch(() => caches.match(req))
     );
     return;
   }
