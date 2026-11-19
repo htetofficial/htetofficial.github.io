@@ -26,7 +26,7 @@ from datetime import datetime
 BOT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(BOT_DIR, '..'))
 
-DEFAULT_WEBAPP_URL = "https://htetofficial.github.io"
+DEFAULT_WEBAPP_URL = "https://web.htetofficial.workers.dev"
 TELEGRAM_API_BASE = "https://api.telegram.org/bot"
 
 # Load Configuration
