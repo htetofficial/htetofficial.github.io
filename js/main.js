@@ -979,32 +979,131 @@
     });
   }
 
+  // 10. Intelligent Global Article & Page Share Engine
+  window.HtetShare = {
+    getShareData: function() {
+      var baseUrl = 'https://htetofficial.github.io';
+      var currentHref = window.location.href;
+      var cleanUrl = currentHref;
+      var title = document.title;
+      var excerpt = '';
+      var author = 'ထက်မြတ်ဧကရီ';
+
+      // 1. If inside Reader, get rich article metadata
+      if (window.Reader && window.Reader.articleData) {
+        var a = window.Reader.articleData;
+        var slug = a.id || a.slug;
+        cleanUrl = baseUrl + '/articles/' + slug + '.html';
+        title = a.title_mm || a.title_en || title;
+        excerpt = a.excerpt_mm || a.excerpt_en || '';
+        author = a.author_mm || a.author || author;
+      } else {
+        var p = new URLSearchParams(window.location.search);
+        var id = p.get('id') || p.get('slug');
+        if (id) {
+          cleanUrl = baseUrl + '/articles/' + id + '.html';
+        } else {
+          var m = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/i) ||
+                  window.location.pathname.match(/\/([^\/\.]+)\.html$/i);
+          if (m && m[1] && m[1] !== 'article' && m[1] !== 'articles' && m[1] !== 'index') {
+            cleanUrl = baseUrl + '/articles/' + m[1] + '.html';
+          }
+        }
+      }
+
+      // Telegram Instant View URL
+      var ivUrl = 'https://t.me/iv?url=' + encodeURIComponent(cleanUrl) + '&rhash=c3ae18b005432f';
+
+      return {
+        url: cleanUrl,
+        ivUrl: ivUrl,
+        title: title,
+        excerpt: excerpt,
+        author: author
+      };
+    },
+
+    shareTelegramIV: function() {
+      var d = this.getShareData();
+      var text = '📖 ' + d.title;
+      if (d.excerpt) text += '\n\n❝ ' + d.excerpt + ' ❞';
+      text += '\n\n✍️ ' + d.author + '\n⚡ Telegram Instant View ဖြင့် ဖတ်ရှုရန် -';
+
+      var shareUrl = 'https://t.me/share/url?url=' + encodeURIComponent(d.ivUrl) + '&text=' + encodeURIComponent(text);
+      if (window.TelegramMiniApp && window.TelegramMiniApp.openLink) {
+        window.TelegramMiniApp.openLink(shareUrl);
+      } else {
+        window.open(shareUrl, '_blank');
+      }
+    },
+
+    shareTelegram: function() {
+      var d = this.getShareData();
+      var text = '📖 ' + d.title;
+      if (d.excerpt) text += '\n\n❝ ' + d.excerpt + ' ❞';
+      text += '\n\n✍️ ' + d.author;
+
+      var shareUrl = 'https://t.me/share/url?url=' + encodeURIComponent(d.url) + '&text=' + encodeURIComponent(text);
+      if (window.TelegramMiniApp && window.TelegramMiniApp.openLink) {
+        window.TelegramMiniApp.openLink(shareUrl);
+      } else {
+        window.open(shareUrl, '_blank');
+      }
+    },
+
+    shareFacebook: function() {
+      var d = this.getShareData();
+      var shareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(d.url);
+      window.open(shareUrl, '_blank');
+    },
+
+    copyLink: function() {
+      var d = this.getShareData();
+      var msg = 'ဆောင်းပါးလင့်ခ် (Clean Static Link) အား ကူးယူပြီးပါပြီ။';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(d.url).then(function() {
+          showToast(msg);
+        }).catch(function() {
+          showToast('ဆောင်းပါးလင့်ခ်: ' + d.url);
+        });
+      } else {
+        showToast(msg);
+      }
+    },
+
+    shareNative: function() {
+      var d = this.getShareData();
+      if (navigator.share) {
+        navigator.share({
+          title: d.title,
+          text: d.excerpt ? ('❝ ' + d.excerpt + ' ❞ — ' + d.author) : d.title,
+          url: d.url
+        }).catch(function() {});
+      } else {
+        this.copyLink();
+      }
+    }
+  };
+
   // 10. Global Share Buttons with Rich Remix Icons
   function initShareButtons() {
     document.addEventListener('click', (e) => {
       const copyBtn = e.target.closest('[data-share="copy"]');
       if (copyBtn) {
         e.preventDefault();
-        navigator.clipboard.writeText(window.location.href).then(() => {
-          const lang = window.I18n ? window.I18n.getLang() : 'mm';
-          const msg = (lang === 'mm') ? 'လင့်ခ် ကူးယူပြီးပါပြီ။' : 'Link copied to clipboard!';
-          showToast(msg);
-        });
+        window.HtetShare.copyLink();
       }
 
       const teleBtn = e.target.closest('[data-share="telegram"]');
       if (teleBtn) {
         e.preventDefault();
-        const url = encodeURIComponent(window.location.href);
-        const text = encodeURIComponent(document.title);
-        window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
+        window.HtetShare.shareTelegram();
       }
 
       const fbBtn = e.target.closest('[data-share="facebook"]');
       if (fbBtn) {
         e.preventDefault();
-        const url = encodeURIComponent(window.location.href);
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+        window.HtetShare.shareFacebook();
       }
 
       // Bookmark Button Handler

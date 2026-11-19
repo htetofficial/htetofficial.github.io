@@ -238,7 +238,21 @@
       if (!contentContainer) return; // Not on article detail page
 
       const urlParams = new URLSearchParams(window.location.search);
-      const rawParam = urlParams.get('id') || urlParams.get('slug') || 'myanmar-on-the-tightrope';
+      let rawParam = urlParams.get('id') || urlParams.get('slug');
+      if (!rawParam) {
+        const metaId = document.querySelector('meta[name="article-id"]');
+        if (metaId && metaId.getAttribute('content')) {
+          rawParam = metaId.getAttribute('content');
+        }
+      }
+      if (!rawParam) {
+        const pathMatches = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/i)
+                         || window.location.pathname.match(/\/([^\/\.]+)\.html$/i);
+        if (pathMatches && pathMatches[1] && pathMatches[1] !== 'article' && pathMatches[1] !== 'articles' && pathMatches[1] !== 'index') {
+          rawParam = pathMatches[1];
+        }
+      }
+      if (!rawParam) rawParam = 'aung-san-suu-kyi-freedom-from-fear-1990-mm';
       let articleId = rawParam;
       try {
         articleId = decodeURIComponent(rawParam);
@@ -526,7 +540,8 @@
       if (!article) return;
       const baseUrl = 'https://htetofficial.github.io/';
       const slug = article.id || article.slug || '';
-      const pageUrl = `${baseUrl}article.html?id=${encodeURIComponent(slug)}`;
+      const cleanArticleUrl = `${baseUrl}articles/${encodeURIComponent(slug)}.html`;
+      const pageUrl = cleanArticleUrl;
       const title = ((lang === 'mm' ? (article.title_mm || article.title_en) : (article.title_en || article.title_mm)) || 'Htet Official') + ' | Htet Official';
       const desc = ((lang === 'mm' ? (article.excerpt_mm || article.excerpt_en) : (article.excerpt_en || article.excerpt_mm)) || '').trim();
       const rawImg = article.image || article.cover_image || 'assets/images/phoenix-from-ashes-cover.jpg';
@@ -1676,15 +1691,19 @@
       const flyoutShare = document.getElementById('article-flyout-share-btn');
       if (flyoutShare) {
         flyoutShare.addEventListener('click', () => {
-          if (navigator.share && this.articleData) {
+          if (window.HtetShare) {
+            window.HtetShare.shareNative();
+          } else if (navigator.share && this.articleData) {
+            const cleanUrl = 'https://htetofficial.github.io/articles/' + (this.articleData.id || this.articleData.slug) + '.html';
             navigator.share({
               title: this.articleData.title_mm || this.articleData.title_en,
-              url: window.location.href
+              url: cleanUrl
             }).catch(() => {});
           } else {
-            navigator.clipboard.writeText(window.location.href);
+            const cleanUrl = 'https://htetofficial.github.io/articles/' + (this.articleData ? (this.articleData.id || this.articleData.slug) : '') + '.html';
+            navigator.clipboard.writeText(cleanUrl);
             if (window.HtetUI && window.HtetUI.showToast) {
-              window.HtetUI.showToast('စာမူ လင့်ခ်ကို ကူးယူပြီးပါပြီ (Copied to clipboard)');
+              window.HtetUI.showToast('စာမူ လင့်ခ် (Clean Link) ကို ကူးယူပြီးပါပြီ။');
             }
           }
         });

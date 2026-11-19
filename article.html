@@ -889,7 +889,7 @@
             </a>
 
             <!-- Telegram Share / Instant View Button -->
-            <button id="article-telegram-share-btn" onclick="window.TelegramMiniApp ? window.TelegramMiniApp.shareArticle(document.getElementById('article-title').textContent.trim(), window.location.href) : window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href), '_blank')" title="Telegram တွင် မျှဝေမည် (Instant View)" class="article-action-btn-glass btn-3d-tactile no-print flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl border border-[#2AABEE]/40 bg-[#2AABEE]/10 text-[#2AABEE] hover:bg-[#2AABEE]/20 transition-all cursor-pointer shadow-2xs">
+            <button id="article-telegram-share-btn" onclick="window.HtetShare ? window.HtetShare.shareTelegramIV() : (window.TelegramMiniApp ? window.TelegramMiniApp.shareArticle(document.getElementById('article-title').textContent.trim(), window.location.href) : window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href), '_blank'))" title="Telegram တွင် Instant View ဖြင့် မျှဝေမည်" class="article-action-btn-glass btn-3d-tactile no-print flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl border border-[#2AABEE]/40 bg-[#2AABEE]/10 text-[#2AABEE] hover:bg-[#2AABEE]/20 transition-all cursor-pointer shadow-2xs">
               <i class="ri-telegram-fill text-sm text-[#2AABEE]"></i>
               <span class="text-xs font-semibold">Telegram IV</span>
             </button>

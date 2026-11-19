@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="my" data-lang="mm">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Critical Anti-FOUC & Anti-Flash Engine (Instant Theme & Language Initialization - 0ms Delay) -->
+  <script>
+    (function() {
+      // 1. Instant Theme Restore (Supports 14 curated themes across 4 categories)
+      try {
+        var validThemes = [
+          'light', 'sepia', 'dark', 'amoled',
+          'green', 'green-forest',
+          'blue', 'blue-sapphire',
+          'red', 'red-crimson', 'red-rosewood',
+          'purple', 'purple-lavender', 'purple-plum', 'purple-indigo',
+          'pink', 'pink-peach', 'pink-rose'
+        ];
+        var savedTheme = null;
+        try { savedTheme = localStorage.getItem('site_theme'); } catch(e) {}
+        var theme = (savedTheme && validThemes.indexOf(savedTheme) !== -1) ? savedTheme : 'light';
+        
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark' || theme === 'amoled') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+
+        var themeBgs = {
+          light: '#FAF8F5',
+          sepia: '#F5EEDB',
+          dark: '#121110',
+          amoled: '#000000',
+          green: '#F5FAF6',
+          'green-forest': '#F4F8F5',
+          blue: '#F4F8FD',
+          'blue-sapphire': '#F3F7FC',
+          red: '#FAF5F5',
+          'red-crimson': '#FAF4F5',
+          'red-rosewood': '#FAF6F3',
+          purple: '#F8F6FD',
+          'purple-lavender': '#F8F7FD',
+          'purple-plum': '#F9F5FA',
+          'purple-indigo': '#F5F6FC',
+          pink: '#FDF6F8',
+          'pink-peach': '#FDF7F4',
+          'pink-rose': '#FDF5F7'
+        };
+        if (themeBgs[theme]) {
+          document.documentElement.style.backgroundColor = themeBgs[theme];
+        }
+      } catch (e) {}
+
+      // 2. Instant Language Restore & Anti-Flicker Cloak
+      try {
+        var validLangs = ['mm', 'en', 'zh', 'th', 'ja'];
+        var savedLang = localStorage.getItem('site_lang');
+        var lang = (validLangs.indexOf(savedLang) !== -1) ? savedLang : 'mm';
+        
+        document.documentElement.setAttribute('data-lang', lang);
+        var htmlLangMap = { mm: 'my', en: 'en', zh: 'zh-Hans', th: 'th', ja: 'ja' };
+        document.documentElement.lang = htmlLangMap[lang] || 'my';
+
+        // If the user preferred a language other than Burmese, apply instant anti-flicker
+        if (lang !== 'mm') {
+          document.documentElement.classList.add('i18n-cloaked');
+          // Failsafe timer: guarantee reveal in under 300ms even if script hangs
+          setTimeout(function() {
+            document.documentElement.classList.remove('i18n-cloaked');
+          }, 300);
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    /* Critical zero-latency base paint to completely eliminate theme and language flash */
+    html { color-scheme: light dark; }
+    html[data-theme="amoled"], html[data-theme="amoled"].dark { background-color: #000000 !important; }
+    html[data-theme="amoled"] body, html[data-theme="amoled"].dark body { background-color: #000000 !important; color: #FFFFFF !important; }
+    html[data-theme="amoled"] header.sticky { background-color: rgba(0, 0, 0, 0.95) !important; }
+    html[data-theme="dark"], html.dark { background-color: #121110 !important; }
+    html[data-theme="dark"] body, html.dark body { background-color: #121110 !important; color: #F5EFE6 !important; }
+    html[data-theme="dark"] .bg-cream, html.dark .bg-cream { background-color: #221F1C !important; }
+    html[data-theme="dark"] header.sticky, html.dark header.sticky { background-color: rgba(18, 17, 16, 0.85) !important; }
+    html[data-theme="sepia"] { background-color: #F5EEDB !important; }
+    html[data-theme="sepia"] body, html.sepia body { background-color: #F5EEDB !important; color: #342A1E !important; }
+    html[data-theme="light"] { background-color: #FAF8F5; }
+    html[data-theme="light"] body { background-color: #FAF8F5; color: #252321; }
+
+    /* Red Themes (3) */
+    html[data-theme="red"] { background-color: #FAF5F5 !important; }
+    html[data-theme="red"] body { background-color: #FAF5F5 !important; color: #2A1717 !important; }
+    html[data-theme="red-crimson"] { background-color: #FAF4F5 !important; }
+    html[data-theme="red-crimson"] body { background-color: #FAF4F5 !important; color: #2E1218 !important; }
+    html[data-theme="red-rosewood"] { background-color: #FAF6F3 !important; }
+    html[data-theme="red-rosewood"] body { background-color: #FAF6F3 !important; color: #2C1A14 !important; }
+
+    /* Purple Themes (4) */
+    html[data-theme="purple"] { background-color: #F8F6FD !important; }
+    html[data-theme="purple"] body { background-color: #F8F6FD !important; color: #211B33 !important; }
+    html[data-theme="purple-lavender"] { background-color: #F8F7FD !important; }
+    html[data-theme="purple-lavender"] body { background-color: #F8F7FD !important; color: #1E1830 !important; }
+    html[data-theme="purple-plum"] { background-color: #F9F5FA !important; }
+    html[data-theme="purple-plum"] body { background-color: #F9F5FA !important; color: #28112C !important; }
+    html[data-theme="purple-indigo"] { background-color: #F5F6FC !important; }
+    html[data-theme="purple-indigo"] body { background-color: #F5F6FC !important; color: #131B36 !important; }
+
+    /* Pink Themes (3) */
+    html[data-theme="pink"] { background-color: #FDF6F8 !important; }
+    html[data-theme="pink"] body { background-color: #FDF6F8 !important; color: #2D1A24 !important; }
+    html[data-theme="pink-peach"] { background-color: #FDF7F4 !important; }
+    html[data-theme="pink-peach"] body { background-color: #FDF7F4 !important; color: #2E1C15 !important; }
+    html[data-theme="pink-rose"] { background-color: #FDF5F7 !important; }
+    html[data-theme="pink-rose"] body { background-color: #FDF5F7 !important; color: #2E151E !important; }
+
+    /* Green Themes (2) */
+    html[data-theme="green"] { background-color: #F5FAF6 !important; }
+    html[data-theme="green"] body { background-color: #F5FAF6 !important; color: #12281D !important; }
+    html[data-theme="green-forest"] { background-color: #F4F8F5 !important; }
+    html[data-theme="green-forest"] body { background-color: #F4F8F5 !important; color: #0F241A !important; }
+
+    /* Blue Themes (2) */
+    html[data-theme="blue"] { background-color: #F4F8FD !important; }
+    html[data-theme="blue"] body { background-color: #F4F8FD !important; color: #102138 !important; }
+    html[data-theme="blue-sapphire"] { background-color: #F3F7FC !important; }
+    html[data-theme="blue-sapphire"] body { background-color: #F3F7FC !important; color: #0B1E36 !important; }
+
+    /* Zero-Latency Sidebar & Element Cloaking: Prevent drawer, overlays, modals and menus from flashing during navigation */
+    #mobile-menu-drawer {
+      visibility: hidden !important;
+      transform: translateX(-100%) !important;
+      -webkit-transform: translateX(-100%) !important;
+      pointer-events: none !important;
+    }
+    #mobile-menu-drawer.is-open {
+      visibility: visible !important;
+      transform: translateX(0) !important;
+      -webkit-transform: translateX(0) !important;
+      pointer-events: auto !important;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s !important;
+      -webkit-transition: -webkit-transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s !important;
+    }
+    #mobile-menu-overlay {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    #mobile-menu-overlay.is-open {
+      display: block !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      transition: opacity 0.25s ease !important;
+    }
+    [hidden],
+    #lang-dropdown-menu:not(.is-open),
+    #journal-reader-modal:not(.is-open),
+    #reading-list-badge.hidden,
+    #article-download-dropdown.hidden,
+    #article-scroll-flyout.hidden,
+    .category-drawer:not(.open) {
+      display: none !important;
+    }
+    #lang-dropdown-menu.is-open {
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      z-index: 9999 !important;
+    }
+
+    /* Instant language transition cloaking - hides Burmese text until translated to chosen language */
+    html.i18n-cloaked body {
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }</style>
+
+  <title data-mm="ပြာပုံထဲက ဖီးနစ်ငှက်၊ မျက်ရည်စက်တွေနဲ့ ရေးတဲ့ သမိုင်း" data-en="The Phoenix from Ashes: History Written in Tears">ပြာပုံထဲက ဖီးနစ်ငှက်၊ မျက်ရည်စက်တွေနဲ့ ရေးတဲ့ သမိုင်း — ထက် (Htet)</title>
+  <!-- SEO, Open Graph (Facebook/Telegram) & Structured Data -->
+  <meta name="description" content="ခေတ်တစ်ခေတ်ရဲ့ လူငယ်ထူးချွန်သူဆိုတာ အငိုသန်တဲ့သူ ဖြစ်နိုင်တယ်။ စိတ်ခံစားမှုများတဲ့သူ ဖြစ်နိုင်တယ်။ ခေတ်တစ်ခေတ်ရဲ့ ထူးချွန်သူဟာ ပြာပုံထဲက မွေးဖွားတယ်၊ လူ့အဖွဲ့အစည်းရဲ့ နှိမ်ချမှုတွေထဲကနေ မွေးဖွားတယ်။ အငိုသန်ခြင်းသည် အားနည်းချက် မဟုတ်ဘဲ မတရားမှုများကို တုံ့ပြန်သည့် အာရုံခံစားမှု အင်တင်နာ ဖြစ်သည်။">
+  <meta name="keywords" content="Htet Article Reader, Burmese Academic Essay, Political Philosophy Monograph, Citations">
+  <meta name="author" content="Htet Myat Ekri (ထက်မြတ်ဧကရီ)">
+  <meta name="article-id" content="phoenix-from-ashes-history-written-in-tears">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://htetofficial.github.io/articles/phoenix-from-ashes-history-written-in-tears.html">
+
+  <!-- Open Graph (Facebook, Telegram, LinkedIn) -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Htet Official (ထက်)">
+  <meta property="og:title" content="ပြာပုံထဲက ဖီးနစ်ငှက်၊ မျက်ရည်စက်တွေနဲ့ ရေးတဲ့ သမိုင်း">
+  <meta property="og:description" content="ခေတ်တစ်ခေတ်ရဲ့ လူငယ်ထူးချွန်သူဆိုတာ အငိုသန်တဲ့သူ ဖြစ်နိုင်တယ်။ စိတ်ခံစားမှုများတဲ့သူ ဖြစ်နိုင်တယ်။ ခေတ်တစ်ခေတ်ရဲ့ ထူးချွန်သူဟာ ပြာပုံထဲက မွေးဖွားတယ်၊ လူ့အဖွဲ့အစည်းရဲ့ နှိမ်ချမှုတွေထဲကနေ မွေးဖွားတယ်။ အငိုသန်ခြင်းသည် အားနည်းချက် မဟုတ်ဘဲ မတရားမှုများကို တုံ့ပြန်သည့် အာရုံခံစားမှု အင်တင်နာ ဖြစ်သည်။">
+  <meta property="og:url" content="https://htetofficial.github.io/articles/phoenix-from-ashes-history-written-in-tears.html">
+  <meta property="og:image" content="https://htetofficial.github.io/assets/images/phoenix-from-ashes-cover.jpg">
+  <meta property="og:image:secure_url" content="https://htetofficial.github.io/assets/images/phoenix-from-ashes-cover.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="683">
+  <meta property="og:image:alt" content="ပြာပုံထဲက ဖီးနစ်ငှက်၊ မျက်ရည်စက်တွေနဲ့ ရေးတဲ့ သမိုင်း">
+  <meta property="telegram:channel" content="@htetmmofficial">
+  <meta property="article:published_time" content="2025-11-30">
+  <meta property="article:author" content="ထက် (Htet)">
+  <meta property="og:locale" content="my_MM">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:locale:alternate" content="th_TH">
+  <meta property="og:locale:alternate" content="ja_JP">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ပြာပုံထဲက ဖီးနစ်ငှက်၊ မျက်ရည်စက်တွေနဲ့ ရေးတဲ့ သမိုင်း">
+  <meta name="twitter:description" content="ခေတ်တစ်ခေတ်ရဲ့ လူငယ်ထူးချွန်သူဆိုတာ အငိုသန်တဲ့သူ ဖြစ်နိုင်တယ်။ စိတ်ခံစားမှုများတဲ့သူ ဖြစ်နိုင်တယ်။ ခေတ်တစ်ခေတ်ရဲ့ ထူးချွန်သူဟာ ပြာပုံထဲက မွေးဖွားတယ်၊ လူ့အဖွဲ့အစည်းရဲ့ နှိမ်ချမှုတွေထဲကနေ မွေးဖွားတယ်။ အငိုသန်ခြင်းသည် အားနည်းချက် မဟုတ်ဘဲ မတရားမှုများကို တုံ့ပြန်သည့် အာရုံခံစားမှု အင်တင်နာ ဖြစ်သည်။">
+  <meta name="twitter:image" content="https://htetofficial.github.io/assets/images/phoenix-from-ashes-cover.jpg">
+  <meta name="twitter:image:alt" content="ပြာပုံထဲက ဖီးနစ်ငှက်၊ မျက်ရည်စက်တွေနဲ့ ရေးတဲ့ သမိုင်း">
+  <script id="article-jsonld" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://htetofficial.github.io/articles/phoenix-from-ashes-history-written-in-tears.html#article",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://htetofficial.github.io/#website",
+        "name": "Htet Official (ထက်)",
+        "url": "https://htetofficial.github.io/"
+      },
+      "headline": "ပြာပုံထဲက ဖီးနစ်ငှက်၊ မျက်ရည်စက်တွေနဲ့ ရေးတဲ့ သမိုင်း",
+      "description": "ခေတ်တစ်ခေတ်ရဲ့ လူငယ်ထူးချွန်သူဆိုတာ အငိုသန်တဲ့သူ ဖြစ်နိုင်တယ်။ စိတ်ခံစားမှုများတဲ့သူ ဖြစ်နိုင်တယ်။ ခေတ်တစ်ခေတ်ရဲ့ ထူးချွန်သူဟာ ပြာပုံထဲက မွေးဖွားတယ်၊ လူ့အဖွဲ့အစည်းရဲ့ နှိမ်ချမှုတွေထဲကနေ မွေးဖွားတယ်။ အငိုသန်ခြင်းသည် အားနည်းချက် မဟုတ်ဘဲ မတရားမှုများကို တုံ့ပြန်သည့် အာရုံခံစားမှု အင်တင်နာ ဖြစ်သည်။",
+      "url": "https://htetofficial.github.io/articles/phoenix-from-ashes-history-written-in-tears.html",
+      "inLanguage": [
+        "my",
+        "en"
+      ],
+      "datePublished": "2025-11-30",
+      "image": "https://htetofficial.github.io/assets/images/phoenix-from-ashes-cover.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "ထက် (Htet)",
+        "url": "https://htetofficial.github.io/about.html"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Htet Myat Ekri (ထက်မြတ်ဧကရီ)",
+        "url": "https://htetofficial.github.io/about.html"
+      }
+    }
+  ]
+}
+  </script>
+  <!-- /SEO -->
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16x16.png">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+  <link rel="mask-icon" href="../assets/seal-stamp.svg" color="#B83A2D">
+  <script>
+    if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+      var _ml = document.createElement('link');
+      _ml.rel = 'manifest';
+      _ml.href = 'manifest.webmanifest';
+      document.head.appendChild(_ml);
+    }
+  </script>
+  <noscript><link rel="manifest" href="manifest.webmanifest"></noscript>
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ထက် (Htet)">
+  <meta name="application-name" content="ထက် (Htet)">
+  <meta name="msapplication-TileColor" content="#B83A2D">
+  <meta name="msapplication-TileImage" content="assets/mstile-150x150.png">
+  <meta name="msapplication-config" content="browserconfig.xml">
+  <meta name="theme-color" content="#FAF8F5">
+  <meta name="google-site-verification" content="googleb4199b7805a59fbf" />
+
+  <!-- Google Fonts Preconnect & High-Performance Asynchronous Loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap">
+  </noscript>
+
+  <!-- Local Downloaded Bootstrap 5.3 & Bootstrap Icons (Non-blocking) -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/bootstrap-icons\.min\.css">
+
+  <!-- Local Downloaded Remix Icon v4.5.0 -->
+  <link rel="stylesheet" href="../css/remixicon.css">
+  <!-- Local Downloaded AOS CSS (Non-blocking) -->
+  <link rel="stylesheet" href="../css/aos\.css">
+
+  <!-- Local KaTeX CSS for Academic & Logic Notation (100% Offline with Local Fonts) -->
+  <link rel="stylesheet" href="../css/katex.min.css">
+  <!-- Local Leaflet CSS for Interactive Geographic & Seismic Maps -->
+  <link rel="stylesheet" href="../css/leaflet.css">
+
+  <!-- Tailwind CSS Configuration Defined Before Deferred Script -->
+  <script>
+    window.tailwind = {
+      config: {
+        darkMode: ['class', '[data-theme="dark"]'],
+        theme: {
+          extend: {
+            screens: {
+              'xs': '400px'
+            },
+            colors: {
+              ivory: 'var(--bg-ivory)',
+              cream: 'var(--bg-cream)',
+              card: 'var(--bg-card)',
+              taupe: 'var(--border-taupe)',
+              charcoal: 'var(--text-charcoal)',
+              muted: 'var(--text-muted)',
+              faint: 'var(--text-faint)',
+              vermilion: {
+                DEFAULT: 'var(--accent-vermilion)',
+                light: '#E25B52',
+                dark: '#8A2B1D',
+                soft: 'var(--accent-vermilion-soft)'
+              }
+            },
+            fontFamily: {
+              serif: ['Cormorant Garamond', 'Pyidaungsu', 'Georgia', 'serif'],
+              sans: ['Pyidaungsu', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+              burmese: ['Pyidaungsu', 'sans-serif']
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <script src="../js/tailwind.min.js"></script>
+
+  <!-- Custom Editorial CSS (Highest Priority) -->
+  <link rel="stylesheet" href="../css/custom.css">
+  <script src="../js/theme.js"></script>
+  <!-- Telegram WebApp SDK & Mini App Controller -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="../js/telegram-webapp.js"></script>
+</head>
+<body class="bg-ivory text-charcoal min-h-screen flex flex-col font-sans">
+
+
+
+  <!-- Top Sticky Reading Progress Bar (Starts invisible until reading scroll begins) -->
+  <div id="reading-progress" class="opacity-0 pointer-events-none" style="width: 0%;"></div>
+
+  <!-- Top Announcement Bar / Solidarity Note -->
+  <div class="bg-cream border-b border-hairline py-2 px-4 text-center text-xs text-muted flex flex-wrap items-center justify-center gap-1.5 font-sans-ui">
+    <span class="inline-block w-2 h-2 rounded-full bg-vermilion animate-pulse"></span>
+    <i class="ri-shield-star-line text-vermilion text-sm"></i>
+    <span data-mm="ကျား၊ မ တရားမျှတမှု၊ လူမှုတန်းတူညီမျှရေးနှင့် လွတ်လပ်မှုအတွက် ရပ်တည်ချက်" data-en="Standing for gender justice, social equality, and collective liberation." data-zh="坚守性别正义、社会平等与集体解放的学术与实践立场。" data-th="ยืนหยัดเพื่อความยุติธรรมทางเพศ ความเท่าเทียมทางสังคม และการปลดปล่อยร่วมกัน" data-ja="ジェンダー正義、社会の平等、そして連帯による解放を希求する学術的実践。">ကျား၊ မ တရားမျှတမှု၊ လူမှုတန်းတူညီမျှရေးနှင့် လွတ်လပ်မှုအတွက် ရပ်တည်ချက်</span>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <!-- Master Minimalist Header (Pinned horizontally to 100vw, overflow-free) -->
+  <header class="sticky top-0 z-40 bg-ivory/85 dark:bg-[#121110]/85 backdrop-blur-md border-b border-hairline transition-colors duration-300 w-full max-w-full overflow-x-clip left-0 right-0">
+    <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-4 xl:px-6 2xl:px-8 h-16 flex items-center justify-between gap-1.5 sm:gap-3 w-full">
+      
+      <!-- Minimalist Brand Identity (Calibrated for 360px - 1920px+) -->
+      <a href="../index.html" class="flex items-center space-x-2 sm:space-x-2.5 group shrink-0" aria-label="Htet — Home">
+        <div class="nav-brand-glass-icon w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0" title="ထက် (Htet)">
+          <img src="../assets/favicon.png" alt="ထက်" class="w-full h-full object-contain">
+        </div>
+        <div class="flex flex-col">
+          <span class="font-serif-editorial text-lg sm:text-xl font-bold tracking-tight text-charcoal group-hover:text-vermilion transition-colors leading-none">HTET</span>
+          <span class="nav-brand-subtitle text-[9px] tracking-wider text-muted uppercase font-sans-ui mt-0.5 leading-none hidden xs:inline sm:inline truncate max-w-[130px]" data-mm="စာရေးဆရာမ • သုတေသီ" data-en="WRITER • RESEARCHER" data-zh="作家 • 政治哲学研究者" data-th="นักเขียน • นักวิจัยปรัชญา" data-ja="作家・政治哲学研究者">စာရေးဆရာမ • သုတေသီ</span>
+        </div>
+      </a>
+
+      <!-- Floating Minimalist Navigation Capsule (Desktop & Laptop Viewports) -->
+      <div class="hidden lg:flex flex-1 justify-center items-center min-w-0 px-1 sm:px-2">
+        <nav class="flex items-center p-1 rounded-full border border-hairline/80 bg-cream/70 dark:bg-stone-900/60 nav-capsule font-sans-ui text-xs 2xl:text-[13px] shadow-xs shrink-0">
+          <a href="../index.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ပင်မ" data-en="Home" data-zh="首页" data-th="หน้าแรก" data-ja="ホーム">ပင်မ</a>
+          <a href="../articles.html" class="nav-link-pill px-2.5 2xl:px-3.5 py-1 2xl:py-1.5 rounded-full active bg-vermilion text-white font-medium shadow-xs" data-mm="ဆောင်းပါးများ" data-en="Articles" data-zh="学术文章" data-th="บทความ" data-ja="論考・論文">ဆောင်းပါးများ</a>
+          <a href="../publications.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ထုတ်ဝေမှုများ" data-en="Publications" data-zh="出版专著" data-th="ผลงานตีพิมพ์" data-ja="出版物・著作">ထုတ်ဝေမှုများ</a>
+          <a href="../journal.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌">မှတ်စုနှင့် ပို့စ်များ</a>
+          <a href="../glossary.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典">ဝေါဟာရအဘိဓာန်</a>
+          <a href="../dictionary.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="အဘိဓာန်" data-en="Dictionary" data-zh="英语词典" data-th="พจนานุกรม" data-ja="英緬辞典">အဘိဓာန်</a>
+          <a href="../translate.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဘာသာပြန်" data-en="Translate" data-zh="智能翻译" data-th="แปลภาษา" data-ja="翻訳">ဘာသာပြန်</a>
+          <a href="../about.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について">စာရေးသူအကြောင်း</a>
+          <a href="../contact.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系交流" data-th="ติดต่อเรา" data-ja="お問い合わせ">ဆက်သွယ်ရန်</a>
+        </nav>
+      </div>
+
+      <!-- Action Utilities Capsule (Adaptive for Phone, Tablet & Desktop) -->
+      <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+        <!-- Spotlight Search Trigger (Cmd+K) -->
+        <button id="spotlight-search-trigger" class="nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-charcoal hover:text-vermilion hover:border-vermilion/50 transition-all flex items-center justify-center shadow-xs" title="Global Search (⌘K)" aria-label="Search">
+          <i class="ri-search-2-line text-sm"></i>
+        </button>
+
+        <!-- Bookmarks Reading List Trigger with Live Badge -->
+        <button id="reading-list-trigger" class="nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-charcoal hover:text-vermilion hover:border-vermilion/50 transition-all flex items-center justify-center shadow-xs relative" title="Saved Reading List" aria-label="Reading List">
+          <i class="ri-bookmark-3-line text-sm"></i>
+          <span id="reading-list-badge" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-vermilion text-white text-[9px] font-bold flex items-center justify-center hidden">0</span>
+        </button>
+
+        <!-- Reading Theme Segmented Controller (Tablet & Desktop Visible) -->
+        <div class="hidden lg:flex items-center p-0.5 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 shadow-xs theme-segmented-glass">
+          <div class="theme-quick-buttons hidden 2xl:flex items-center">
+            <button data-set-theme="light" data-theme-btn="light" title="Light / စာရွက်ဖြူ" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90">
+              <i class="ri-sun-cloudy-line text-xs"></i>
+            </button>
+            <button data-set-theme="sepia" data-theme-btn="sepia" title="Sepia / စာအုပ်ညို" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90">
+              <i class="ri-book-open-line text-xs"></i>
+            </button>
+            <button data-set-theme="dark" data-theme-btn="dark" title="Dark / မှောင်ရိပ်" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90">
+              <i class="ri-moon-clear-line text-xs"></i>
+            </button>
+            <button data-set-theme="amoled" data-theme-btn="amoled" title="AMOLED / အနက်စစ်" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90">
+              <i class="ri-contrast-drop-2-line text-xs"></i>
+            </button>
+            <span class="w-px h-3.5 bg-hairline/60 mx-0.5"></span>
+          </div>
+          <button data-set-theme="palette" title="စာဖတ်ရောင်စဉ် စတူဒီယို (18 Themes Studio)" class="w-7 h-7 rounded-full flex items-center justify-center text-xs text-charcoal hover:text-vermilion hover:bg-vermilion/10 transition-all cursor-pointer btn-palette-glow active:scale-90 relative" aria-label="Open Theme Palette Studio">
+            <i class="ri-palette-line text-xs"></i>
+            <span class="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full theme-active-dot ring-1 ring-white/60"></span>
+          </button>
+        </div>
+
+
+
+        <!-- International Multi-Language Selector (5 Languages: MM, EN, ZH, TH, JA) -->
+        <div class="relative lang-switcher-container">
+          <button id="lang-dropdown-btn" class="nav-lang-btn flex items-center space-x-1 sm:space-x-1.5 px-2 sm:px-2.5 py-1 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 hover:border-vermilion/50 text-charcoal text-xs font-semibold shadow-xs transition-all cursor-pointer active:scale-95" aria-label="Select Language" aria-haspopup="true" aria-expanded="false" title="ဘာသာစကား ရွေးချယ်ရန် (Choose Language)">
+            <span id="current-lang-flag" class="text-sm">🇲🇲</span>
+            <span id="current-lang-label" class="font-mono text-xs font-bold">MM</span>
+            <i class="ri-arrow-down-s-line text-[11px] opacity-60 lang-chevron transition-transform duration-200"></i>
+          </button>
+          <div id="lang-dropdown-menu" class="absolute right-0 mt-2 w-52 py-2 rounded-2xl shadow-2xl z-50 hidden transition-all font-sans-ui text-xs border border-hairline lang-dropdown-glass" role="menu" aria-orientation="vertical">
+            <div class="px-3 py-1 mb-1 border-b border-hairline/60 flex items-center justify-between text-[10px] text-muted font-mono uppercase tracking-wider">
+              <span data-mm="ဘာသာစကား ရွေးရန်" data-en="Select Language" data-zh="选择语言" data-th="เลือกภาษา" data-ja="言語を選択">ဘာသာစကား ရွေးရန်</span>
+              <span class="text-vermilion font-bold">5 LANGS</span>
+            </div>
+            <button data-switch-lang="mm" class="w-full text-left px-3 py-2 hover:bg-vermilion/10 dark:hover:bg-white/10 flex items-center justify-between transition-all rounded-xl mx-auto my-0.5 group/item cursor-pointer" role="menuitem">
+              <span class="flex items-center space-x-2.5">
+                <span class="w-6 h-6 rounded-full flex items-center justify-center text-sm shadow-2xs border border-hairline/60 bg-card">🇲🇲</span>
+                <span class="font-semibold text-charcoal">မြန်မာ</span>
+              </span>
+              <div class="flex items-center space-x-1.5">
+                <span class="text-[10px] font-mono opacity-50">MM</span>
+                <i class="ri-check-line text-xs text-vermilion opacity-0 lang-check-mm"></i>
+              </div>
+            </button>
+            <button data-switch-lang="en" class="w-full text-left px-3 py-2 hover:bg-vermilion/10 dark:hover:bg-white/10 flex items-center justify-between transition-all rounded-xl mx-auto my-0.5 group/item cursor-pointer" role="menuitem">
+              <span class="flex items-center space-x-2.5">
+                <span class="w-6 h-6 rounded-full flex items-center justify-center text-sm shadow-2xs border border-hairline/60 bg-card">🇬🇧</span>
+                <span class="font-semibold text-charcoal">English</span>
+              </span>
+              <div class="flex items-center space-x-1.5">
+                <span class="text-[10px] font-mono opacity-50">EN</span>
+                <i class="ri-check-line text-xs text-vermilion opacity-0 lang-check-en"></i>
+              </div>
+            </button>
+            <button data-switch-lang="zh" class="w-full text-left px-3 py-2 hover:bg-vermilion/10 dark:hover:bg-white/10 flex items-center justify-between transition-all rounded-xl mx-auto my-0.5 group/item cursor-pointer" role="menuitem">
+              <span class="flex items-center space-x-2.5">
+                <span class="w-6 h-6 rounded-full flex items-center justify-center text-sm shadow-2xs border border-hairline/60 bg-card">🇨🇳</span>
+                <span class="font-semibold text-charcoal">中文</span>
+              </span>
+              <div class="flex items-center space-x-1.5">
+                <span class="text-[10px] font-mono opacity-50">ZH</span>
+                <i class="ri-check-line text-xs text-vermilion opacity-0 lang-check-zh"></i>
+              </div>
+            </button>
+            <button data-switch-lang="th" class="w-full text-left px-3 py-2 hover:bg-vermilion/10 dark:hover:bg-white/10 flex items-center justify-between transition-all rounded-xl mx-auto my-0.5 group/item cursor-pointer" role="menuitem">
+              <span class="flex items-center space-x-2.5">
+                <span class="w-6 h-6 rounded-full flex items-center justify-center text-sm shadow-2xs border border-hairline/60 bg-card">🇹🇭</span>
+                <span class="font-semibold text-charcoal">ภาษาไทย</span>
+              </span>
+              <div class="flex items-center space-x-1.5">
+                <span class="text-[10px] font-mono opacity-50">TH</span>
+                <i class="ri-check-line text-xs text-vermilion opacity-0 lang-check-th"></i>
+              </div>
+            </button>
+            <button data-switch-lang="ja" class="w-full text-left px-3 py-2 hover:bg-vermilion/10 dark:hover:bg-white/10 flex items-center justify-between transition-all rounded-xl mx-auto my-0.5 group/item cursor-pointer" role="menuitem">
+              <span class="flex items-center space-x-2.5">
+                <span class="w-6 h-6 rounded-full flex items-center justify-center text-sm shadow-2xs border border-hairline/60 bg-card">🇯🇵</span>
+                <span class="font-semibold text-charcoal">日本語</span>
+              </span>
+              <div class="flex items-center space-x-1.5">
+                <span class="text-[10px] font-mono opacity-50">JA</span>
+                <i class="ri-check-line text-xs text-vermilion opacity-0 lang-check-ja"></i>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Direct Telegram Channel Quick Link (Large Desktop Viewports) -->
+        <a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="hidden 2xl:flex nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-[#2AABEE] hover:bg-[#2AABEE] hover:text-white hover:border-[#2AABEE] transition-all items-center justify-center shadow-xs" title="Official Telegram Channel (@htetmmofficial)" aria-label="Telegram Channel">
+          <i class="ri-telegram-fill text-sm"></i>
+        </a>
+
+        <!-- Mobile & Tablet Hamburger Toggle -->
+        <button id="mobile-menu-toggle" class="lg:hidden nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 flex items-center justify-center text-charcoal hover:text-vermilion focus:outline-none transition-colors" aria-label="Open Navigation">
+          <i class="ri-menu-3-line text-base"></i>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay Backdrop -->
+  <div id="mobile-menu-overlay" style="display: none;" class="fixed inset-0 bg-charcoal/40 dark:bg-black/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
+
+  <!-- Mobile Drawer Sidebar (Calibrated for 360px - 820px) -->
+  <div id="mobile-menu-drawer" style="visibility: hidden; transform: translateX(-100%); -webkit-transform: translateX(-100%); pointer-events: none;" class="fixed top-0 left-0 bottom-0 w-80 sm:w-88 max-w-[88vw] bg-ivory dark:bg-[#141312] z-50 border-r border-hairline p-4 sm:p-5 flex flex-col justify-between shadow-2xl overflow-y-auto overscroll-contain">
+    <div>
+      <!-- Drawer Header: Deluxe Scholar Profile -->
+      <div class="flex items-center justify-between pb-4 border-b border-hairline">
+        <a href="../index.html" class="flex items-center space-x-3 group">
+          <div class="relative shrink-0">
+            <div class="nav-brand-glass-icon w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 shadow-sm border border-hairline/80 group-hover:scale-105 transition-transform" title="ထက် (Htet)">
+              <img src="../assets/favicon.png" alt="ထက်" class="w-6 h-6 object-contain">
+            </div>
+            <!-- Live Scholar Status Dot -->
+            <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-card shadow-xs" title="Open Scholar Hub • အွန်လိုင်း"></span>
+          </div>
+          <div class="flex flex-col">
+            <div class="flex items-center space-x-1.5">
+              <span class="font-serif-editorial text-xl font-bold tracking-tight text-charcoal leading-none">HTET</span>
+              <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-vermilion/10 text-vermilion font-mono font-bold tracking-wide">HUB</span>
+            </div>
+            <span class="text-[10px] tracking-wider text-muted uppercase font-sans-ui mt-1" data-mm="စာရေးဆရာမ • သုတေသီ" data-en="WRITER • RESEARCHER" data-zh="作家 • 政治哲学研究者" data-th="นักเขียน • นักวิจัยปรัชญา" data-ja="作家・政治哲学研究者">စာရေးဆရာမ • သုတေသီ</span>
+          </div>
+        </a>
+        <button id="mobile-menu-close" class="w-8 h-8 rounded-full border border-hairline/80 bg-cream/50 dark:bg-stone-900/50 flex items-center justify-center text-muted hover:text-charcoal hover:border-charcoal/30 active:scale-90 transition-all cursor-pointer" aria-label="Close Navigation">
+          <i class="ri-close-line text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Live Reading Context Card (Exclusive for Article Reader) -->
+      <div class="my-4 p-3.5 rounded-2xl border border-hairline bg-cream/70 dark:bg-stone-900/60 shadow-xs space-y-2.5">
+        <div class="flex items-center justify-between text-xs font-sans-ui">
+          <span class="flex items-center space-x-1.5 text-muted font-medium">
+            <i class="ri-book-read-line text-vermilion"></i>
+            <span data-mm="စာဖတ်နှုန်း" data-en="Reading Progress">စာဖတ်နှုန်း</span>
+          </span>
+          <span id="drawer-scroll-percent" class="font-mono font-bold text-vermilion text-xs">0%</span>
+        </div>
+        <!-- Live Progress Bar -->
+        <div class="w-full bg-hairline/60 rounded-full h-1.5 overflow-hidden">
+          <div id="drawer-progress-bar" class="bg-vermilion h-full rounded-full transition-all duration-150" style="width: 0%;"></div>
+        </div>
+        <!-- Quick Navigation Actions -->
+        <div class="grid grid-cols-2 gap-2 pt-0.5 font-sans-ui text-xs">
+          <button onclick="document.getElementById('mobile-menu-close').click(); const toc = document.getElementById('table-of-contents') || document.querySelector('.article-toc'); if(toc) toc.scrollIntoView({behavior: 'smooth'});" class="py-1.5 px-2 rounded-xl border border-hairline/80 bg-card hover:bg-vermilion/10 hover:text-vermilion transition-all flex items-center justify-center space-x-1 text-muted text-[11px] font-medium cursor-pointer active:scale-95">
+            <i class="ri-list-check-2 text-xs text-vermilion"></i>
+            <span data-mm="မာတိကာ" data-en="Contents">မာတိကာ</span>
+          </button>
+          <button onclick="document.getElementById('mobile-menu-close').click(); window.scrollTo({top: 0, behavior: 'smooth'});" class="py-1.5 px-2 rounded-xl border border-hairline/80 bg-card hover:bg-vermilion/10 hover:text-vermilion transition-all flex items-center justify-center space-x-1 text-muted text-[11px] font-medium cursor-pointer active:scale-95">
+            <i class="ri-arrow-up-line text-xs text-vermilion"></i>
+            <span data-mm="ထိပ်ဆုံးသို့" data-en="Top">ထိပ်ဆုံးသို့</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Links: Deluxe Glass Items -->
+      <nav class="flex flex-col space-y-1 py-1 font-sans-ui text-sm">
+        <a href="../index.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-home-5-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ပင်မ" data-en="Home" data-zh="首页" data-th="หน้าแรก" data-ja="ホーム">ပင်မ</span>
+          </span>
+          <i class="ri-arrow-right-s-line text-sm text-muted/50 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i>
+        </a>
+
+        <a href="../articles.html" class="drawer-nav-item active flex items-center justify-between px-3 py-2 rounded-2xl font-semibold transition-all text-vermilion bg-vermilion/10 dark:bg-vermilion/20 border border-vermilion/30 shadow-2xs group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-vermilion text-white flex items-center justify-center shadow-xs shrink-0">
+              <i class="ri-article-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ဆောင်းပါးများ" data-en="Articles" data-zh="学术文章" data-th="บทความ" data-ja="論考・論文">ဆောင်းပါးများ</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-vermilion/20 text-vermilion font-mono font-bold shrink-0">25</span>
+        </a>
+
+        <a href="../publications.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-book-2-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ထုတ်ဝေမှုများ" data-en="Publications" data-zh="出版专著" data-th="ผลงานตีพิมพ์" data-ja="出版物・著作">ထုတ်ဝေမှုများ</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">4</span>
+        </a>
+
+        <a href="../journal.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-booklet-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌">မှတ်စုနှင့် ပို့စ်များ</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">71</span>
+        </a>
+
+        <a href="../glossary.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-book-read-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典">ဝေါဟာရအဘိဓာန်</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">115</span>
+        </a>
+
+        <a href="../dictionary.html" class="drawer-nav-item flex items-center justify-between px-3 py-2.5 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-book-2-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="အဘိဓာန်" data-en="Dictionary" data-zh="英语词典" data-th="พจนานุกรม" data-ja="英緬辞典">အဘိဓာန်</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">111K+</span>
+        </a>
+
+        <a href="../translate.html" class="drawer-nav-item flex items-center justify-between px-3 py-2.5 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-translate-2 text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ဘာသာပြန်စတူဒီယို" data-en="Translate">ဘာသာပြန်စတူဒီယို</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">Neural</span>
+        </a>
+
+        <a href="../about.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-user-star-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について">စာရေးသူအကြောင်း</span>
+          </span>
+          <i class="ri-arrow-right-s-line text-sm text-muted/50 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i>
+        </a>
+
+        <a href="../contact.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-mail-send-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系交流" data-th="ติดต่อเรา" data-ja="お問い合わせ">ဆက်သွယ်ရန်</span>
+          </span>
+          <i class="ri-arrow-right-s-line text-sm text-muted/50 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Mobile Drawer Footer Options -->
+    <div class="pt-3.5 border-t border-hairline space-y-2.5 font-sans-ui">
+      <!-- Device-Adaptive Font Size Scaler Control -->
+      <div class="flex items-center justify-between text-xs text-muted">
+        <span class="flex items-center space-x-1.5 font-medium text-charcoal">
+          <i class="ri-font-size-2 text-sm text-vermilion"></i>
+          <span data-mm="ဖောင့်အရွယ်အစား" data-en="Font Size" data-zh="字体大小" data-th="ขนาดตัวอักษร" data-ja="フォントサイズ">ဖောင့်အရွယ်အစား</span>
+        </span>
+        <div class="flex items-center p-0.5 rounded-full border border-hairline bg-cream/80 dark:bg-stone-900/80 shadow-inner text-xs">
+          <button data-font-action="decrease" title="Smaller Font (ဖောင့်သေး)" class="px-2.5 py-1 rounded-full text-xs font-medium hover:text-vermilion active:scale-95 transition-all cursor-pointer">A-</button>
+          <button data-font-action="reset" title="Standard Font (ဖောင့်ပုံမှန်)" class="px-2.5 py-1 rounded-full text-xs font-semibold hover:text-vermilion active:scale-95 transition-all cursor-pointer">A</button>
+          <button data-font-action="increase" title="Larger Font (ဖောင့်ကြီး)" class="px-2.5 py-1 rounded-full text-xs font-medium hover:text-vermilion active:scale-95 transition-all cursor-pointer">A+</button>
+        </div>
+      </div>
+
+      <!-- Download Monograph Link -->
+      <button id="mobile-download-btn" class="w-full py-2 px-3 rounded-xl border border-red-300 dark:border-red-900/60 bg-red-50/80 dark:bg-red-950/40 text-xs flex items-center justify-center space-x-2 text-red-700 dark:text-red-300 font-semibold hover:bg-red-100 transition-colors shadow-2xs cursor-pointer active:scale-98">
+        <i class="ri-file-pdf-2-line text-base text-red-500"></i>
+        <span class="whitespace-nowrap" data-mm="Full PDF ဒေါင်းလုဒ်" data-en="Download Full PDF">Full PDF ဒေါင်းလုဒ်</span>
+      </button>
+
+      <!-- Multi-Language Switcher Section (Wrap-Free Compact Layout) -->
+      <div class="flex flex-col space-y-1.5 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="flex items-center space-x-1.5 font-medium text-charcoal shrink-0">
+            <i class="ri-translate-2 text-sm text-vermilion"></i>
+            <span data-mm="ဘာသာစကား" data-en="Language" data-zh="语言" data-th="ภาษา" data-ja="言語">ဘာသာစကား</span>
+          </span>
+          <button id="drawer-lang-modal-btn" class="shrink-0 text-[11px] text-vermilion hover:underline font-semibold flex items-center space-x-0.5 cursor-pointer active:scale-95" title="Open Full Sheet">
+            <span data-mm="၅ မျိုးစုံ" data-en="5 Langs" data-zh="全部5种" data-th="ทั้ง 5 ภาษา" data-ja="全5言語">၅ မျိုးစုံ</span>
+            <i class="ri-arrow-right-s-line text-xs"></i>
+          </button>
+        </div>
+        <div class="grid grid-cols-5 gap-1.5 p-1 rounded-2xl border border-hairline bg-cream/60 dark:bg-stone-900/60 shadow-inner">
+          <button data-switch-lang="mm" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="mm" title="မြန်မာဘာသာ">
+            <span class="text-sm">🇲🇲</span>
+            <span class="text-[10px] font-mono leading-none">MM</span>
+          </button>
+          <button data-switch-lang="en" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="en" title="English">
+            <span class="text-sm">🇬🇧</span>
+            <span class="text-[10px] font-mono leading-none">EN</span>
+          </button>
+          <button data-switch-lang="zh" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="zh" title="简体中文">
+            <span class="text-sm">🇨🇳</span>
+            <span class="text-[10px] font-mono leading-none">ZH</span>
+          </button>
+          <button data-switch-lang="th" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="th" title="ภาษาไทย">
+            <span class="text-sm">🇹🇭</span>
+            <span class="text-[10px] font-mono leading-none">TH</span>
+          </button>
+          <button data-switch-lang="ja" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="ja" title="日本語">
+            <span class="text-sm">🇯🇵</span>
+            <span class="text-[10px] font-mono leading-none">JA</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Reading Theme Switcher Section (Spacious 4-Grid + Studio Button) -->
+      <div class="flex flex-col space-y-1.5 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="flex items-center space-x-1.5 font-medium text-charcoal shrink-0">
+            <i class="ri-palette-line text-sm text-vermilion"></i>
+            <span data-mm="စာဖတ်ရောင်စဉ်" data-en="Reading Themes" data-zh="阅读主题" data-th="ธีมการอ่าน" data-ja="読書テーマ">စာဖတ်ရောင်စဉ်</span>
+          </span>
+        </div>
+        <!-- 4 Primary Quick Themes -->
+        <div class="grid grid-cols-4 gap-1 p-1 rounded-2xl border border-hairline bg-cream/60 dark:bg-stone-900/60 shadow-inner">
+          <button data-set-theme="light" data-theme-btn="light" title="Light / စာရွက်ဖြူ" class="py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-xs transition-all cursor-pointer active:scale-95 hover:bg-card">
+            <i class="ri-sun-cloudy-line text-sm"></i>
+            <span class="text-[9px] font-mono font-medium">LIGHT</span>
+          </button>
+          <button data-set-theme="sepia" data-theme-btn="sepia" title="Sepia / စာအုပ်ညို" class="py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-xs transition-all cursor-pointer active:scale-95 hover:bg-card">
+            <i class="ri-book-open-line text-sm"></i>
+            <span class="text-[9px] font-mono font-medium">SEPIA</span>
+          </button>
+          <button data-set-theme="dark" data-theme-btn="dark" title="Dark / မှောင်ရိပ်" class="py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-xs transition-all cursor-pointer active:scale-95 hover:bg-card">
+            <i class="ri-moon-clear-line text-sm"></i>
+            <span class="text-[9px] font-mono font-medium">DARK</span>
+          </button>
+          <button data-set-theme="amoled" data-theme-btn="amoled" title="AMOLED / အနက်စစ်" class="py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-xs transition-all cursor-pointer active:scale-95 hover:bg-card">
+            <i class="ri-contrast-drop-2-line text-sm"></i>
+            <span class="text-[9px] font-mono font-medium">OLED</span>
+          </button>
+        </div>
+        <!-- Full 18 Themes Studio Button -->
+        <button data-set-theme="palette" class="w-full py-2 px-3 rounded-xl border border-hairline/80 bg-cream/70 dark:bg-stone-900/60 hover:border-vermilion/50 hover:text-vermilion text-charcoal transition-all flex items-center justify-between text-xs font-medium cursor-pointer shadow-2xs group active:scale-98">
+          <span class="flex items-center space-x-2">
+            <i class="ri-palette-fill text-sm text-vermilion group-hover:scale-110 transition-transform"></i>
+            <span data-mm="စာဖတ်ရောင်စဉ် စတူဒီယို (18 Themes)" data-en="Theme Studio (18 Themes)" data-zh="18种主题调色盘" data-th="18 ธีม" data-ja="18テーマ">စာဖတ်ရောင်စဉ် စတူဒီယို (18 Themes)</span>
+          </span>
+          <span class="w-2 h-2 rounded-full theme-active-dot ring-1 ring-white/60"></span>
+        </button>
+      </div>
+
+      <!-- Join Telegram Channel Link -->
+      <a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 rounded-xl border border-sky-300/40 dark:border-sky-900/40 bg-sky-50/50 dark:bg-sky-950/20 text-xs flex items-center justify-between text-[#24A1DE] hover:bg-sky-100/50 transition-colors group">
+        <span class="flex items-center space-x-2">
+          <i class="ri-telegram-fill text-base group-hover:scale-110 transition-transform"></i>
+          <span class="whitespace-nowrap" data-mm="Telegram ချန်နယ်" data-en="Telegram Channel" data-zh="Telegram 频道" data-th="ช่อง Telegram" data-ja="Telegramチャンネル">Telegram ချန်နယ်</span>
+        </span>
+        <span class="text-[10px] font-mono opacity-70">@htetmmofficial ↗</span>
+      </a>
+
+      <!-- PWA Native Install Button -->
+      <div>
+        <button data-pwa-install class="w-full py-2 px-3 rounded-xl border border-hairline/80 bg-cream/70 dark:bg-stone-900/60 hover:border-vermilion/50 text-charcoal hover:text-vermilion transition-all flex items-center justify-between text-xs font-medium cursor-pointer shadow-2xs group active:scale-98">
+          <span class="flex items-center space-x-2">
+            <i class="ri-download-cloud-2-line text-base text-vermilion group-hover:scale-110 transition-transform"></i>
+            <span class="whitespace-nowrap" data-mm="အက်ပ်သွင်းယူရန် (Install PWA)" data-en="Install App (PWA)">အက်ပ်သွင်းယူရန် (Install PWA)</span>
+          </span>
+          <span class="text-[9px] px-1.5 py-0.5 rounded-md bg-vermilion/15 text-vermilion font-mono font-bold">PWA</span>
+        </button>
+      </div>
+
+      <!-- Android App APK Release -->
+      <div>
+        <a href="https://github.com/htetofficial/htetofficial.github.io/releases/tag/v1.2.0-beta" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 rounded-xl border border-emerald-500/30 bg-emerald-50/50 dark:bg-emerald-950/20 hover:border-emerald-500/60 text-emerald-800 dark:text-emerald-300 transition-all flex items-center justify-between text-xs font-medium shadow-2xs group">
+          <span class="flex items-center space-x-2">
+            <i class="ri-android-line text-base text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform"></i>
+            <span class="whitespace-nowrap" data-mm="Android App (v1.2.0 APK)" data-en="Android App (v1.2.0 APK)">Android App (v1.2.0 APK)</span>
+          </span>
+          <span class="text-[9px] px-1.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 font-mono font-bold">APK</span>
+        </a>
+      </div>
+    </div>
+  </div><main class="flex-grow">
+    
+    <!-- Breadcrumb & Back Navigation -->
+    <div class="max-w-4xl mx-auto px-3.5 sm:px-6 pt-6 sm:pt-8 pb-3 sm:pb-4">
+      <a href="../articles.html" class="inline-flex items-center space-x-2 text-xs text-muted hover:text-vermilion transition-colors font-sans-ui">
+        <i class="ri-arrow-left-line text-base"></i>
+        <span data-mm="ဆောင်းပါးများအားလုံးသို့ ပြန်သွားရန်" data-en="Back to all essays">ဆောင်းပါးများအားလုံးသို့ ပြန်သွားရန်</span>
+      </a>
+    </div>
+
+    <!-- Article Content Screen -->
+    <article class="max-w-4xl mx-auto px-3.5 sm:px-6 pb-20">
+      
+      <!-- Article Header -->
+      <header class="border-b border-hairline pb-8 mb-8 space-y-4">
+        <!-- Top Info & Action Toolbar Bar (Fully Wrap-Safe & Responsive across all font scales) -->
+        <div class="flex flex-wrap items-center justify-between gap-3 text-xs text-faint font-sans-ui">
+          <!-- Metadata Chips -->
+          <div class="flex flex-wrap items-center gap-2">
+            <div id="article-category" class="flex flex-wrap items-center gap-1.5">
+              <span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-cream dark:bg-stone-900 text-charcoal font-medium border border-hairline text-xs font-sans-ui shadow-2xs">
+                <i class="ri-quill-pen-line text-vermilion"></i>
+                <span>ဆောင်းပါး</span>
+              </span>
+            </div>
+            <span class="text-faint hidden xs:inline">•</span>
+            <span class="flex items-center space-x-1 text-muted">
+              <i class="ri-calendar-line"></i>
+              <span id="article-date">2025-11-30</span>
+            </span>
+            <span class="text-faint">•</span>
+            <span class="flex items-center space-x-1 text-muted">
+              <i class="ri-time-line text-vermilion"></i>
+              <span id="article-read-time">၇ မိနစ် ဖတ်ရှုရန်</span>
+            </span>
+            <span id="reading-time-remaining" class="text-vermilion font-medium text-xs flex items-center space-x-1"></span>
+          </div>
+
+          <!-- Reader Interactive Action Toolbar -->
+          <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+            <!-- Article Download Dropdown -->
+            <div class="relative inline-block text-left no-print" id="article-download-menu-container">
+              <button id="article-download-trigger" class="article-action-btn-glass btn-3d-tactile flex items-center space-x-1.5 px-3 py-1.5 rounded-xl border border-hairline text-charcoal text-xs font-sans-ui font-medium transition-colors shadow-2xs cursor-pointer" title="Download Paper / စာတမ်း ဒေါင်းလုဒ် ရယူရန်">
+                <i class="ri-download-2-line text-vermilion"></i>
+                <span class="text-xs" data-mm="ဒေါင်းလုဒ်" data-en="Download">ဒေါင်းလုဒ်</span>
+                <i class="ri-arrow-down-s-line text-[10px]"></i>
+              </button>
+              <div id="article-download-dropdown" class="liquid-glass-panel absolute right-0 mt-2 w-52 rounded-xl border border-taupe-light shadow-xl py-1 z-30 hidden font-sans-ui text-xs">
+                <a href="#" id="download-action-pdf" class="flex items-center space-x-2 px-3 py-2 text-red-600 dark:text-red-400 bg-red-50/60 dark:bg-red-950/30 hover:bg-red-100 hover:text-red-700 transition-colors font-semibold">
+                  <i class="ri-file-pdf-2-line text-red-600 text-sm"></i>
+                  <span data-mm="Full Version PDF (.pdf)" data-en="Full Version PDF (.pdf)">Full Version PDF (.pdf)</span>
+                </a>
+                <a href="#" id="download-action-md" class="flex items-center space-x-2 px-3 py-2 text-charcoal hover:bg-cream/70 hover:text-vermilion transition-colors">
+                  <i class="ri-markdown-line text-vermilion"></i>
+                  <span>Markdown (.md)</span>
+                </a>
+                <a href="#" id="download-action-txt" class="flex items-center space-x-2 px-3 py-2 text-charcoal hover:bg-cream/70 hover:text-vermilion transition-colors">
+                  <i class="ri-file-text-line text-vermilion"></i>
+                  <span>Plain Text (.txt)</span>
+                </a>
+                <a href="#" id="download-action-bib" class="flex items-center space-x-2 px-3 py-2 text-charcoal hover:bg-cream/70 hover:text-vermilion transition-colors">
+                  <i class="ri-double-quotes-l text-vermilion"></i>
+                  <span>BibTeX Citation (.bib)</span>
+                </a>
+                <div class="border-t border-hairline my-1"></div>
+                <button onclick="window.print()" class="w-full text-left flex items-center space-x-2 px-3 py-2 text-charcoal hover:bg-cream/70 hover:text-vermilion transition-colors cursor-pointer">
+                  <i class="ri-printer-line text-vermilion"></i>
+                  <span data-mm="PDF / ပုံနှိပ်ထုတ်ရန်" data-en="Print / Save PDF">PDF / ပုံနှိပ်ထုတ်ရန်</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Article Bookmark Toggle Button: စာမူကို မှတ်တမ်းထဲ သိမ်းဆည်းရန် -->
+            <button id="article-header-bookmark-btn" class="article-action-btn-glass btn-3d-tactile flex items-center space-x-1.5 px-3 py-1.5 rounded-xl border border-hairline text-charcoal text-xs font-sans-ui font-medium transition-all shadow-2xs cursor-pointer no-print" title="စာမူကို မှတ်တမ်းထဲ သိမ်းဆည်းရန် (Bookmark Article)">
+              <i class="ri-bookmark-line text-vermilion"></i>
+              <span id="article-header-bookmark-text" class="text-xs" data-mm="မှတ်ထားရန်" data-en="Bookmark">မှတ်ထားရန်</span>
+            </button>
+
+            <!-- Original Language (Burmese) Toggle: မူရင်းဘာသာစကားဖြင့် ဖတ်ရှုခြင်း -->
+            <button id="article-lang-toggle-btn" class="article-action-btn-glass btn-3d-tactile flex items-center space-x-1.5 px-3 py-1.5 rounded-xl border border-hairline text-charcoal text-xs font-sans-ui font-medium transition-all shadow-2xs cursor-pointer no-print" title="မူရင်းဘာသာစကား (မြန်မာ) / ဘာသာပြန်ချက် ပြောင်းလဲဖတ်ရှုရန်">
+              <span id="article-lang-flag" class="text-xs">🇲🇲</span>
+              <span id="article-lang-text" class="text-xs">မူရင်းစာမူ</span>
+            </button>
+
+            <!-- Zen Focus Mode: အာရုံစူးစိုက် ဖတ်ရှုခြင်းစနစ် -->
+            <button id="article-zen-focus-btn" class="article-action-btn-glass btn-3d-tactile flex items-center space-x-1.5 px-3 py-1.5 rounded-xl border border-hairline text-charcoal text-xs font-sans-ui font-medium transition-all shadow-2xs cursor-pointer no-print" title="အာရုံစူးစိုက် ဖတ်ရှုခြင်းစနစ် (Zen Focus Reading Mode)">
+              <i class="ri-focus-2-line text-vermilion"></i>
+              <span class="text-xs" data-mm="Zen Focus" data-en="Zen Focus">Zen Focus</span>
+            </button>
+
+            <!-- External Original Source Link (If available) -->
+            <a href="#" id="article-original-source-btn" target="_blank" rel="noopener noreferrer" class="hidden items-center space-x-1.5 px-3 py-1.5 rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-200 text-xs font-sans-ui font-medium transition-all shadow-2xs no-print btn-3d-tactile" title="မူရင်း Blogpost / အရင်းအမြစ်သို့">
+              <i class="ri-external-link-line text-amber-600"></i>
+              <span class="text-xs" data-mm="မူရင်း Blogpost" data-en="Original Blog">မူရင်း Blogpost</span>
+            </a>
+
+            <!-- Telegram Share / Instant View Button -->
+            <button id="article-telegram-share-btn" onclick="window.TelegramMiniApp ? window.TelegramMiniApp.shareArticle(document.getElementById('article-title').textContent.trim(), window.location.href) : window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href), '_blank')" title="Telegram တွင် မျှဝေမည် (Instant View)" class="article-action-btn-glass btn-3d-tactile no-print flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl border border-[#2AABEE]/40 bg-[#2AABEE]/10 text-[#2AABEE] hover:bg-[#2AABEE]/20 transition-all cursor-pointer shadow-2xs">
+              <i class="ri-telegram-fill text-sm text-[#2AABEE]"></i>
+              <span class="text-xs font-semibold">Telegram IV</span>
+            </button>
+
+            <button onclick="window.print()" title="Print (စာတမ်းပုံနှိပ်ရန်)" class="article-action-btn-glass btn-3d-tactile no-print hover:text-charcoal px-2.5 py-1.5 rounded-xl border border-hairline text-charcoal transition-colors shadow-2xs cursor-pointer">
+              <i class="ri-printer-line text-sm"></i>
+            </button>
+          </div>
+        </div>
+
+        <h1 id="article-title" class="font-serif-editorial text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-charcoal leading-tight break-words">
+          ပြာပုံထဲက ဖီးနစ်ငှက်၊ မျက်ရည်စက်တွေနဲ့ ရေးတဲ့ သမိုင်း
+        </h1>
+
+        <!-- Lead Excerpt Callout -->
+        <div class="glass-3d-card card-3d-interactive p-3.5 sm:p-6 border-l-4 border-vermilion shadow-sm">
+          <p id="article-lead-excerpt" class="text-sm sm:text-base text-muted font-sans-ui italic leading-relaxed">
+            ခေတ်တစ်ခေတ်ရဲ့ လူငယ်ထူးချွန်သူဆိုတာ အငိုသန်တဲ့သူ ဖြစ်နိုင်တယ်။ စိတ်ခံစားမှုများတဲ့သူ ဖြစ်နိုင်တယ်။ ခေတ်တစ်ခေတ်ရဲ့ ထူးချွန်သူဟာ ပြာပုံထဲက မွေးဖွားတယ်၊ လူ့အဖွဲ့အစည်းရဲ့ နှိမ်ချမှုတွေထဲကနေ မွေးဖွားတယ်။ အငိုသန်ခြင်းသည် အားနည်းချက် မဟုတ်ဘဲ မတရားမှုများကို တုံ့ပြန်သည့် အာရုံခံစားမှု အင်တင်နာ ဖြစ်သည်။
+          </p>
+        </div>
+
+        <!-- Sharing & Actions Toolbar with Rich Icons -->
+        <div class="flex items-center justify-between pt-2 text-xs text-muted font-sans-ui no-print">
+          <div class="flex items-center space-x-3">
+            <span class="text-faint flex items-center space-x-1"><i class="ri-share-forward-2-line"></i> <span data-mm="မျှဝေရန်:" data-en="Share:">မျှဝေရန်:</span></span>
+            <button data-share="telegram" class="p-1.5 rounded-lg hover:bg-cream text-[#2AABEE] transition-colors" title="Telegram Share">
+              <i class="ri-telegram-fill text-lg"></i>
+            </button>
+            <button data-share="facebook" class="p-1.5 rounded-lg hover:bg-cream text-[#1877F2] transition-colors" title="Facebook Share">
+              <i class="ri-facebook-circle-fill text-lg"></i>
+            </button>
+            <button data-share="copy" class="p-1.5 rounded-lg hover:bg-cream text-charcoal hover:text-vermilion transition-colors" title="Copy Link">
+              <i class="ri-links-line text-lg"></i>
+            </button>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <span class="text-faint text-[11px] hidden sm:flex items-center space-x-1" data-mm="ဖြတ်လမ်းများ: [T] စာရောင် [L] ဘာသာ" data-en="Shortcuts: [T] Theme [L] Lang">
+              <i class="ri-keyboard-line"></i>
+              <span>ဖြတ်လမ်းများ: [T] စာရောင် [L] ဘာသာ</span>
+            </span>
+            <span class="hanko-stamp px-2 py-0.5 text-[10px]">ထက် ရေးသားသည်</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Full Version PDF Action Bar (Shown dynamically if article.pdf_file exists) -->
+      <div id="article-pdf-banner" class="hidden mb-8 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-red-600/10 via-rose-500/10 to-red-600/5 border border-red-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+            <i class="ri-file-pdf-2-line text-2xl"></i>
+          </div>
+          <div>
+            <h4 class="font-sans-ui text-sm sm:text-base font-bold text-charcoal flex items-center space-x-2">
+              <span id="article-pdf-banner-title">Full Version PDF စာတမ်းအပြည့်အစုံ</span>
+              <span id="article-pdf-banner-badge" class="px-2 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-bold">PDF</span>
+            </h4>
+            <p class="text-xs text-muted font-sans-ui" id="article-pdf-banner-desc">
+              အော့ဖ်လိုင်းဖတ်ရှုရန် သို့မဟုတ် ပုံနှိပ်ထုတ်ယူရန် တရားဝင် မူရင်း PDF ဖိုင်ကို တိုက်ရိုက် ရယူနိုင်ပါသည်။
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 shrink-0">
+          <a id="article-pdf-banner-download-btn" href="#" download class="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold text-xs sm:text-sm flex items-center space-x-1.5 transition-all shadow-sm hover:shadow-md">
+            <i class="ri-download-2-line text-base"></i>
+            <span id="article-pdf-banner-btn-text">Full Version PDF ဒေါင်းလုဒ် ရယူရန်</span>
+          </a>
+          <a id="article-pdf-banner-view-btn" href="#" target="_blank" class="px-3.5 py-2.5 rounded-xl bg-card hover:bg-cream text-charcoal border border-hairline font-medium text-xs sm:text-sm flex items-center space-x-1.5 transition-colors">
+            <i class="ri-external-link-line text-base"></i>
+            <span data-mm="PDF ဖွင့်ဖတ်ရန် ↗" data-en="Open PDF ↗">PDF ဖွင့်ဖတ်ရန် ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Featured Cover Graphic (Rendered dynamically if article.image exists) -->
+      <div id="article-featured-image-wrapper" class="mb-10 rounded-2xl sm:rounded-3xl overflow-hidden border border-taupe-light shadow-md bg-stone-900/5 dark:bg-stone-950/70">
+        <img id="article-featured-image" src="../assets/images/phoenix-from-ashes-cover.jpg" alt="ပြာပုံထဲက ဖီးနစ်ငှက်၊ မျက်ရည်စက်တွေနဲ့ ရေးတဲ့ သမိုင်း" class="w-full h-auto object-contain max-h-[600px] mx-auto" loading="eager" fetchpriority="high">
+        <div id="article-featured-image-caption" class="py-2.5 px-4 bg-cream/80 dark:bg-stone-900/80 text-xs text-muted font-sans-ui text-center border-t border-hairline">ပြာပုံထဲက ဖီးနစ်ငှက်၊ မျက်ရည်စက်တွေနဲ့ ရေးတဲ့ သမိုင်း</div>
+      </div>
+
+      <!-- Table of Contents (Generated Dynamically) -->
+      <section id="table-of-contents" class="liquid-glass-card mb-10 p-3.5 sm:p-6 sm:p-7 border border-taupe-light shadow-sm hidden">
+        <div class="flex items-center justify-between mb-3 border-b border-hairline/60 pb-2.5">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-faint font-sans-ui flex items-center space-x-2">
+            <i class="ri-list-check-2 text-vermilion text-base"></i>
+            <span data-mm="မာတိကာ (Table of Contents)" data-en="Table of Contents">မာတိကာ (Table of Contents)</span>
+          </h3>
+          <button id="toc-toggle-btn" class="text-xs text-muted hover:text-vermilion transition-colors font-sans-ui flex items-center space-x-1 cursor-pointer" title="Toggle Table of Contents">
+            <span id="toc-toggle-text" data-mm="ဝှက်ရန်" data-en="Hide">ဝှက်ရန်</span>
+            <i id="toc-toggle-icon" class="ri-arrow-up-s-line text-sm"></i>
+          </button>
+        </div>
+        <ul id="table-of-contents-list" class="space-y-1.5 font-sans-ui text-sm"></ul>
+      </section>
+
+      <!-- Hybrid Nara Mini v1 Audio Reader (Method 1 Pre-generated + Method 3 Opt-In On-Device AI Voice) -->
+      <section id="nara-tts-player" class="nara-tts-card mb-8 p-4 sm:p-5 rounded-2xl border border-taupe-light bg-cream shadow-2xs space-y-3.5" aria-label="Nara Mini v1 Audio Reader">
+        <div class="flex flex-wrap items-center justify-between gap-2.5 pb-3 border-b border-hairline">
+          <div class="flex items-center gap-2.5">
+            <span class="w-9 h-9 rounded-xl bg-vermilion text-white flex items-center justify-center shrink-0 shadow-xs">
+              <i class="ri-headphone-line text-lg" aria-hidden="true"></i>
+            </span>
+            <div>
+              <h3 class="font-serif-editorial text-sm sm:text-base font-bold text-charcoal leading-tight" data-mm="အသံဖြင့် နားထောင်ရန် (Nara Mini v1 Burmese AI Voice)" data-en="Listen to This Article (Nara Mini v1 AI Voice)">
+                အသံဖြင့် နားထောင်ရန် (Nara Mini v1 Burmese AI Voice)
+              </h3>
+              <p id="nara-mode-badge" class="text-[11px] font-sans-ui text-muted m-0">On-Device AI Voice — User ခွင့်ပြုမှသာ Download ဆွဲမည် (~181 MB)</p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-1.5 font-sans-ui text-xs">
+            <button type="button" id="nara-switch-pre" class="nara-mode-pill px-2.5 py-1.5 rounded-lg font-medium cursor-pointer" hidden aria-pressed="false">
+              ⚡ အသင့်အသံဖိုင်
+            </button>
+            <button type="button" id="nara-switch-ai" class="nara-mode-pill px-2.5 py-1.5 rounded-lg font-medium cursor-pointer" aria-pressed="true">
+              🎙️ On-Device AI
+            </button>
+            <label class="sr-only" for="nara-speed-select">Playback speed</label>
+            <select id="nara-speed-select" class="px-2 py-1.5 rounded-lg bg-white dark:bg-stone-900 border border-hairline text-charcoal text-xs font-mono cursor-pointer" title="Playback Speed">
+              <option value="0.8">0.8x</option>
+              <option value="0.9">0.9x</option>
+              <option value="1" selected>1.0x</option>
+              <option value="1.15">1.15x</option>
+              <option value="1.3">1.3x</option>
+              <option value="1.5">1.5x</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Method 1: Studio Instant Pre-generated Audio Pane (0s Latency, Works Offline & file://) -->
+        <div id="nara-pregenerated-pane" class="space-y-3" hidden>
+          <audio id="nara-pre-audio" src="../assets/audio/phoenix-from-ashes-history-written-in-tears.mp3" preload="metadata" class="sr-only"></audio>
+          <div class="p-3 sm:p-4 rounded-xl bg-white dark:bg-stone-900 border border-hairline shadow-3xs space-y-3">
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" id="nara-pre-play-btn" class="nara-btn-primary px-4 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-1.5 cursor-pointer">
+                <i class="ri-play-fill text-base" aria-hidden="true"></i>
+                <span>ချက်ချင်းနားထောင်ရန် (Play)</span>
+              </button>
+              <button type="button" id="nara-pre-back15" class="nara-btn-secondary px-2.5 py-2.5 min-h-[44px] rounded-xl text-xs font-mono font-semibold cursor-pointer" title="Rewind 15 seconds" aria-label="Rewind 15 seconds">-15s</button>
+              <button type="button" id="nara-pre-fwd15" class="nara-btn-secondary px-2.5 py-2.5 min-h-[44px] rounded-xl text-xs font-mono font-semibold cursor-pointer" title="Forward 15 seconds" aria-label="Forward 15 seconds">+15s</button>
+              <a id="nara-pre-download-btn" href="#" download class="nara-btn-secondary px-3 py-2.5 min-h-[44px] rounded-xl text-xs font-semibold inline-flex items-center gap-1.5 ml-auto">
+                <i class="ri-download-2-line text-vermilion" aria-hidden="true"></i>
+                <span>MP3 ဒေါင်းလုဒ်</span>
+              </a>
+            </div>
+            <!-- Interactive Seek Bar -->
+            <div class="flex items-center gap-3 text-xs font-mono text-muted">
+              <span id="nara-pre-cur-time" class="min-w-[38px]">0:00</span>
+              <input type="range" id="nara-pre-seek" min="0" max="100" value="0" step="0.1" aria-label="Seek audio position" class="nara-seek-slider flex-1 cursor-pointer">
+              <span id="nara-pre-dur-time" class="min-w-[38px] text-right">0:00</span>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] text-muted font-sans-ui">
+            <span id="nara-pre-meta" class="font-medium text-charcoal">⚡ Instant Audio • Nara Mini v1</span>
+            <span>ထစ်ငေါ့မှုမရှိဘဲ ချက်ချင်းနားထောင်နိုင်သော MP3 အသံဖိုင်</span>
+          </div>
+        </div>
+
+        <!-- Method 3: Opt-In On-Device AI Voice Pane -->
+        <div id="nara-ondevice-pane" class="space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-2.5">
+            <div class="flex-1 min-w-0">
+              <label for="nara-voice-select" class="sr-only">Choose Nara Voice</label>
+              <select id="nara-voice-select" class="w-full px-3 py-2.5 min-h-[44px] rounded-xl bg-white dark:bg-stone-900 border border-hairline text-charcoal text-xs sm:text-sm font-sans-ui cursor-pointer">
+                <option value="htet-myat">ထက်မြတ် (Htet Myat) [Download ~181 MB]</option>
+                <option value="shoon">ရွှန်း (Shoon) [Download ~181 MB]</option>
+                <option value="thazin">သဇင် (Thazin) [Download ~181 MB]</option>
+                <option value="ko-banyar">ကိုဗညား (Ko Banyar) [Download ~181 MB]</option>
+              </select>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" id="nara-play-btn" class="nara-btn-primary px-4 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 cursor-pointer">
+                <i class="ri-download-cloud-2-line text-base" aria-hidden="true"></i>
+                <span>AI အသံစနစ် သွင်း၍ နားထောင်ရန်</span>
+              </button>
+              <button type="button" id="nara-pause-btn" class="nara-btn-secondary px-3 py-2.5 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-1 cursor-pointer" hidden>
+                <i class="ri-pause-line" aria-hidden="true"></i><span>ခေတ္တရပ်</span>
+              </button>
+              <button type="button" id="nara-stop-btn" class="nara-btn-secondary px-3 py-2.5 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-1 cursor-pointer" hidden>
+                <i class="ri-stop-line" aria-hidden="true"></i><span>ရပ်</span>
+              </button>
+              <button type="button" id="nara-prev-btn" class="nara-btn-secondary px-2.5 py-2.5 min-h-[44px] rounded-xl text-xs cursor-pointer" title="Previous Sentence" aria-label="Previous Sentence" disabled>
+                <i class="ri-skip-back-mini-line text-base" aria-hidden="true"></i>
+              </button>
+              <button type="button" id="nara-next-btn" class="nara-btn-secondary px-2.5 py-2.5 min-h-[44px] rounded-xl text-xs cursor-pointer" title="Next Sentence" aria-label="Next Sentence" disabled>
+                <i class="ri-skip-forward-mini-line text-base" aria-hidden="true"></i>
+              </button>
+              <button type="button" id="nara-export-wav-btn" class="nara-btn-secondary px-3 py-2.5 min-h-[44px] rounded-xl text-xs font-medium flex items-center gap-1 cursor-pointer" hidden title="Download Synthesized WAV">
+                <i class="ri-download-line text-vermilion" aria-hidden="true"></i><span>WAV</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Status + Currently Spoken Excerpt -->
+          <div class="space-y-1.5">
+            <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] font-sans-ui text-muted">
+              <span id="nara-tts-status" role="status">User ခွင့်ပြုမှသာ အသံမော်ဒယ်ကို ဖုန်းထဲသို့ Download ဆွဲသွင်းပါမည်။</span>
+              <button type="button" id="nara-manage-models-btn" class="text-vermilion hover:underline font-semibold cursor-pointer">
+                AI Voice ရွေး / Download ဆွဲရန်
+              </button>
+            </div>
+            <p id="nara-tts-excerpt" class="p-2.5 rounded-xl bg-white/80 dark:bg-stone-900/70 border border-hairline text-xs text-charcoal italic leading-relaxed m-0" hidden></p>
+          </div>
+        </div>
+
+        <!-- Required Apache 2.0 Attribution Footer -->
+        <div class="pt-2 border-t border-hairline/70 flex flex-wrap items-center justify-between gap-2 text-[10px] text-faint font-sans-ui">
+          <span>Powered by <a href="https://naraaudio.app" target="_blank" rel="noopener noreferrer" class="underline hover:text-vermilion">Nara Mini v1</a> (<a href="https://huggingface.co/YeeNyunn/nara-mini-v1" target="_blank" rel="noopener noreferrer" class="underline hover:text-vermilion">YeeNyunn/nara-mini-v1</a> • Kokoro &amp; VoxCPM2)</span>
+          <a href="NOTICE-NARA.txt" target="_blank" class="underline hover:text-vermilion font-mono">Apache-2.0 NOTICE</a>
+        </div>
+      </section>
+
+      <!-- Article Rich Body Container -->
+      <div id="article-content-body" class="article-prose leading-relaxed space-y-6 text-charcoal text-base sm:text-lg">
+<div class="prose max-w-none space-y-8 text-charcoal leading-relaxed font-sans-ui text-base md:text-lg">
+  <!-- Hero Card with Cover & Downloads -->
+  <div class="p-6 md:p-8 rounded-3xl bg-gradient-to-br from-rose-500/15 via-amber-500/10 to-transparent border border-rose-500/40 shadow-sm mb-8">
+    <div class="flex flex-wrap items-center gap-2 mb-4">
+      <span class="hanko-stamp px-2.5 py-0.5 text-xs font-semibold text-rose-600 border-rose-600">ဒဿနနှင့် အတွေးအခေါ်</span>
+      <span class="px-3 py-1 rounded-full bg-rose-600 text-white text-xs font-bold tracking-wide">QUEER RESILIENCE & GEN Z</span>
+      <span class="text-xs text-muted font-sans-ui">နိုဝင်ဘာ ၃၀၊ ၂၀၂၅ • ရေးသားသူ ထက် (Htet)</span>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center my-4">
+      <div class="md:col-span-5 flex justify-center">
+        <div class="relative group">
+          <img src="assets/images/phoenix-from-ashes-cover.jpg" alt="ပြာပုံထဲက ဖီးနစ်ငှက်၊ မျက်ရည်စက်တွေနဲ့ ရေးတဲ့ သမိုင်း - မျက်နှာဖုံး" class="w-full max-w-sm rounded-2xl shadow-lg border border-hairline transform group-hover:scale-[1.02] transition-transform duration-300">
+        </div>
+      </div>
+      <div class="md:col-span-7">
+        <h2 class="font-serif-editorial text-2xl md:text-3xl lg:text-4xl font-bold text-charcoal mb-3 leading-snug">
+          ပြာပုံထဲက ဖီးနစ်ငှက်၊<br>မျက်ရည်စက်တွေနဲ့ ရေးတဲ့ သမိုင်း
+        </h2>
+        <div class="text-base md:text-lg text-amber-600 dark:text-amber-400 font-medium mb-3">
+          The Phoenix from Ashes: History Written in Tears
+        </div>
+        <div class="p-4 rounded-2xl bg-white/80 dark:bg-stone-900/80 border border-hairline my-3 shadow-2xs font-serif italic text-charcoal text-sm md:text-base leading-relaxed">
+          “ခေတ်တစ်ခေတ်ရဲ့ လူငယ်ထူးချွန်သူဆိုတာ အငိုသန်တဲ့သူ ဖြစ်နိုင်တယ်။ စိတ်ခံစားမှုများတဲ့သူ ဖြစ်နိုင်တယ်။ ခေတ်တစ်ခေတ်ရဲ့ ထူးချွန်သူဟာ ပြာပုံထဲက မွေးဖွားတယ်။ လူ့အဖွဲ့အစည်းရဲ့ နှိမ်ချမှုတွေထဲကနေ မွေးဖွားတယ်။”
+        </div>
+        <div class="text-xs text-muted font-sans-ui flex flex-wrap gap-2 items-center mt-2">
+          <span class="font-semibold text-charcoal">ရေးသားသူ:</span> ထက် (Htet) | Public Intellectual, Interdisciplinary Strategist & Feminist Writer
+        </div>
+      </div>
+    </div>
+  
+    <!-- Action Buttons inside Hero Card -->
+    <div class="flex flex-wrap items-center gap-3 mt-4 pt-4 border-t border-rose-200 dark:border-rose-900/40">
+      <a href="downloads/phoenix-from-ashes-history-written-in-tears.pdf" download class="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs md:text-sm flex items-center space-x-1.5 shadow-sm hover:shadow-md transition-all">
+        <i class="ri-file-pdf-2-line text-lg shrink-0"></i>
+        <span>Full Version PDF ဒေါင်းလုဒ်</span>
+      </a>
+      <a href="downloads/phoenix-from-ashes-history-written-in-tears.pdf" target="_blank" class="px-4 py-2.5 rounded-xl bg-card hover:bg-cream dark:hover:bg-stone-800 text-charcoal border border-hairline font-semibold text-xs md:text-sm flex items-center space-x-1.5 transition-all">
+        <i class="ri-external-link-line text-lg text-rose-600 shrink-0"></i>
+        <span>PDF တိုက်ရိုက်ဖတ်ရှုရန်</span>
+      </a>
+      <a href="downloads/phoenix-from-ashes-history-written-in-tears.md" download class="px-3 py-2.5 rounded-xl bg-cream hover:bg-taupe-light text-charcoal border border-hairline font-medium text-xs flex items-center space-x-1 transition-all">
+        <i class="ri-markdown-line text-rose-600 shrink-0"></i>
+        <span>.md Source</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Opening Reflection -->
+  <p>
+    ဒီစကားကို ထက် စဉ်းစားမိတိုင်း ရင်ထဲမှာ ဆို့နင့်သွားရတယ်။ လူတွေက ထင်ကြတယ်.. &ldquo;ထူးချွန်သူ&rdquo; (Genius) ဆိုတာ ခံစားချက်ကင်းမဲ့တဲ့ စက်ရုပ်တွေ၊ ကျောက်ခဲလို မာကျောတဲ့ ယောက်ျားသားတွေ၊ ဒါမှမဟုတ် စာအုပ်ပုံကြားမှာ ခေါင်းနှစ်ပြီး လောကကြီးကို ကျောခိုင်းထားသူတွေလို့လေ။ မှားတယ်။ လုံးဝ မှားပါတယ်။
+  </p>
+
+  <p>
+    ထက်ကတော့ ဒီလိုမမြင်ဘူး။ ထက်တို့ခေတ်ရဲ့ ဂျီးနီးယပ်စ်တွေဟာ ညဘက်တွေမှာ ခေါင်းအုံး စိုရွဲအောင် ငိုကြွေးတဲ့သူတွေ ဖြစ်နိုင်တယ်။ သူတို့ဟာ ကိုယ့်ကိုယ်ကိုယ် သတ်သေချင်လောက်အောင် စိတ်ဒဏ်ရာ (Trauma) ရနေသူတွေ ဖြစ်နိုင်တယ်။ ဒါပေမဲ့ အဲဒီ <strong>&ldquo;အငိုသန်ခြင်း&rdquo; (Vulnerability)</strong> ဟာ အားနည်းချက် မဟုတ်ဘဲ ဒီကမ္ဘာကြီးရဲ့ မတရားမှုတွေကို တုံ့ပြန်တဲ့ <strong>အာရုံခံစားမှု အင်တင်နာ (Antenna)</strong> တစ်ခု ဖြစ်နေတာပါပဲ။
+  </p>
+
+  <p>
+    ထက်ဟာ အသက်ငယ်ငယ် ရှိပါသေးတယ်။ မိန်းကလေးတစ်ယောက် ဖြစ်ချင်တဲ့ စိတ်ဆန္ဒနဲ့ မွေးဖွားလာတဲ့ Transwoman တစ်ယောက်အနေနဲ့ ထက် ပြောပြချင်တယ်။ ပြာပုံဆိုတာ ထက်တို့ရဲ့ နေရပ်လိပ်စာပါ။ နှိမ်ချဆက်ဆံခံရမှုဆိုတာ ထက်တို့ရဲ့ နေ့စဉ်အစားအစာပါ။ ဒါပေမဲ့ သမိုင်းကို ပြန်ကြည့်ပါ။ စိန်ဆိုတာ ဖိအားအများဆုံး မြေအောက်အနက်ရှိုင်းဆုံးမှာ ဖြစ်တည်လာတာ မဟုတ်လား။
+  </p>
+
+  <!-- Section 1 -->
+  <section class="space-y-4 pt-4">
+    <h2 class="font-serif-editorial text-2xl md:text-3xl font-semibold text-charcoal border-b border-hairline pb-2 flex items-center space-x-2">
+      <span class="px-2.5 py-0.5 rounded-lg bg-rose-600 text-white text-sm font-bold">အပိုင်း (၁)</span>
+      <span>မျက်ရည်သည် နိုင်ငံရေးဖြစ်သည် (The Politics of Tears)</span>
+    </h2>
+    <p>
+      သမိုင်းပညာရှင်တွေနဲ့ ဖိုဝါဒီ (Patriarchal) အသိုင်းအဝိုင်းက &ldquo;ငိုကြွေးခြင်း&rdquo; ကို မိန်းမဆန်ခြင်း၊ အားနည်းခြင်းလို့ သတ်မှတ်ကြတယ်။ &ldquo;ယောက်ျားလေး မငိုရဘူး&rdquo; ဆိုတဲ့ စကားဟာ လူသားဆန်မှုကို သတ်ဖြတ်တဲ့ ပထမဆုံး လက်နက်ပါပဲ။
+    </p>
+    <p>
+      ဒါပေမဲ့ ထက် မေးချင်တယ်။ Oscar Wilde ဟာ ထောင်ထဲမှာ မငိုခဲ့ဘူးလား။ Alan Turing ဟာ မငိုခဲ့ဘူးလား။ သူတို့ဟာ ခေတ်တစ်ခေတ်ရဲ့ အထူးချွန်ဆုံး ဉာဏ်ကြီးရှင်တွေလေ။ သူတို့ရဲ့ မျက်ရည်တွေဟာ သူတို့ရဲ့ ဉာဏ်ပညာကို လျော့ကျသွားစေသလား။ မလျော့စေပါဘူး။
+    </p>
+
+    <blockquote class="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/30 border-l-4 border-rose-600 text-rose-900 dark:text-rose-200 font-serif italic my-3">
+      &ldquo;To love oneself is the beginning of a lifelong romance.&rdquo; — Oscar Wilde
+    </blockquote>
+
+    <p>
+      ကိုယ့်ကိုယ်ကိုယ် ချစ်ဖို့ဆိုတာ ကိုယ့်ရဲ့ နာကျင်မှုတွေကို လက်ခံဖို့ပါပဲ။ ထက်တို့လို လူငယ်တွေ၊ Gen Z တွေ၊ Queer တွေဟာ အငိုသန်ကြတယ်။ ဟုတ်တယ်။ ထက်တို့ ဝမ်းနည်းလွယ်တယ်။ ဘာလို့လဲဆိုတော့ ထက်တို့က ကမ္ဘာကြီးရဲ့ ပျက်စီးယိုယွင်းမှုတွေကို မျက်ကွယ်မပြုနိုင်ကြလို့ပါ။ ရာသီဥတုဖောက်ပြန်မှု၊ စစ်ပွဲတွေ၊ လူတန်းစား ခွဲခြားမှုတွေ၊ Gender ခွဲခြားမှုတွေ... ဒီအရာတွေကို မြင်ပြီး မနာကျင်တတ်တဲ့သူဟာ တကယ်တော့ &ldquo;ထူးချွန်သူ&rdquo; မဟုတ်ပါဘူး။ <strong>&ldquo;ထုံထိုင်းသူ&rdquo; (The Numb)</strong> သာ ဖြစ်ပါတယ်။
+    </p>
+
+    <div class="p-5 rounded-2xl bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-900/40 my-4">
+      <div class="font-bold text-purple-800 dark:text-purple-300 text-sm md:text-base mb-1">Simone de Beauvoir မှသည် ထက်၏ အတွေးအခေါ်ဆီသို့</div>
+      <p class="text-xs md:text-sm text-charcoal/90 mb-1">
+        ပြင်သစ်ဒဿနပညာရှင် Simone de Beauvoir ပြောခဲ့ဖူးတယ် — <em>&ldquo;One is not born, but rather becomes, a woman.&rdquo;</em> (မိန်းမတစ်ယောက်အဖြစ် မွေးဖွားလာတာ မဟုတ်ဘူး၊ ဖြစ်လာတာပါ)။
+      </p>
+      <p class="text-xs md:text-sm font-semibold text-purple-700 dark:text-purple-300">
+        ထက် ဖြည့်စွက်ပြီး ပြောချင်တယ် — <strong>&ldquo;One is not born a genius, but rather forged in the fire of oppression.&rdquo;</strong> (ဂျီးနီးယပ်စ်တစ်ယောက်အဖြစ် မွေးဖွားလာတာ မဟုတ်ဘူး၊ ဖိနှိပ်မှု မီးတောက်တွေထဲကနေ သွန်းလုပ်ခံလိုက်ရတာပါ)။
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section class="space-y-4 pt-4">
+    <h2 class="font-serif-editorial text-2xl md:text-3xl font-semibold text-charcoal border-b border-hairline pb-2 flex items-center space-x-2">
+      <span class="px-2.5 py-0.5 rounded-lg bg-rose-600 text-white text-sm font-bold">အပိုင်း (၂)</span>
+      <span>ပြာပုံထဲက မွေးဖွားခြင်း (Born from the Ashes)</span>
+    </h2>
+    <p>
+      &ldquo;ပြာပုံ&rdquo; ဆိုတာ ဘာလဲ။ ထက်တို့ မြန်မာ့လူ့အဖွဲ့အစည်းမှာ ဘေးဖယ်ထုတ်ခံထားရတဲ့ နေရာတွေပါ။ ဆင်းရဲသား ရပ်ကွက်တွေ၊ LGBTQ အသိုင်းအဝိုင်းတွေ၊ ဖခင်မဲ့ သားသမီးတွေ၊ နိုင်ငံရေးကြောင့် ထောင်ကျဖူးတဲ့ မိသားစုတွေ... အဲဒါတွေက ပြာပုံတွေပါပဲ။ ဒါပေမဲ့ သမိုင်းတစ်လျှောက် အကြီးမားဆုံး တော်လှန်ရေးတွေက အဲဒီ ပြာပုံတွေထဲကပဲ စခဲ့တာပါ။ ပြာပုံဆိုတာ ပူလောင်တယ်။ ညစ်ပေတယ်။ ဒါပေမဲ့ အဲဒီ အပူဒဏ်ကပဲ ထက်တို့ရဲ့ စိတ်ဓာတ်ကို ခိုင်မာစေခဲ့တယ်။
+    </p>
+    <p>
+      ထက် ကိုယ်တိုင်လည်း ကျောင်းမှာ အနိုင်ကျင့်ခံခဲ့ရဖူးတယ်။ &ldquo;အခြောက်&rdquo; လို့ ခေါ်တဲ့ အသံတွေ၊ ရေအိမ်ထဲမှာ ပိတ်လှောင်ခံရတဲ့ အချိန်တွေ၊ မိသားစုရဲ့ လက်မခံနိုင်မှုတွေ... ဒါတွေဟာ ထက်ကို လောင်မြိုက်စေတဲ့ မီးတွေပေါ့။ ဒါပေမဲ့ အဲဒီမီးတွေကပဲ ထက်ကို စာဖတ်ဖို့ တွန်းအားပေးခဲ့တယ်။ Michel Foucault ကို ဖတ်တယ်။ Judith Butler ကို ဖတ်တယ်။ မြန်မာ့သမိုင်းက ခွပ်ဒေါင်းတွေကို လေ့လာတယ်။
+    </p>
+    <p>
+      အဲဒီအခါ ထက် နားလည်လာတယ်။ ထက်ဟာ &ldquo;သားကောင်&rdquo; (Victim) မဟုတ်ဘူး။ ထက်ဟာ <strong>&ldquo;အသက်ရှင် ကျန်ရစ်သူ&rdquo; (Survivor)</strong> ဖြစ်တယ်။ ပြီးတော့ အနာဂတ်ကို ပုံဖော်မယ့် <strong>Architect</strong> တစ်ယောက် ဖြစ်လာတယ်။
+    </p>
+    <p>
+      လူ့အဖွဲ့အစည်းရဲ့ နှိမ်ချမှုတွေ (Social Oppression) ဟာ တကယ်တော့ ဓာတ်ဆီတွေပါပဲ။ ထက်တို့လို လူငယ်တွေရဲ့ ရင်ထဲက မီးကို ပိုတောက်စေတယ်။ ၁၉၈၈ အရေးအခင်းတုန်းက ကျောင်းသားတွေ၊ ၂၀၂၁ နွေဦးတော်လှန်ရေးက ဂျင်ဇီ (Gen Z) တွေ... သူတို့အားလုံးဟာ နှိမ်ချခံရမှု၊ မတရားမှုဆိုတဲ့ ပြာပုံထဲကနေ ရုန်းထွက်လာတဲ့ ဖီးနစ်ငှက်တွေ မဟုတ်လို့ ဘာလဲရှင်။
+    </p>
+  </section>
+
+  <!-- Section 3 -->
+  <section class="space-y-4 pt-4">
+    <h2 class="font-serif-editorial text-2xl md:text-3xl font-semibold text-charcoal border-b border-hairline pb-2 flex items-center space-x-2">
+      <span class="px-2.5 py-0.5 rounded-lg bg-rose-600 text-white text-sm font-bold">အပိုင်း (၃)</span>
+      <span>ငယ်ရွယ်တဲ့သမီးပျို၏ ဖော်မြူလာ (The Young Girl's Formula)</span>
+    </h2>
+    <p>
+      ထက် အသက်ငယ်ငယ်သာ ရှိပါသေးတယ်။ ဒါပေမဲ့ ထက်ရဲ့ မျက်လုံးတွေက နှစ်ပေါင်း ၁၀၀ စာလောက် ပင်ပန်းနေပြီ။ လူကြီးတွေက ပြောကြတယ်.. &ldquo;နင်တို့ ကလေးတွေက စိတ်မရှည်ဘူး&rdquo; တဲ့။ မဟုတ်ဘူးရှင်.. ထက်တို့က စိတ်မရှည်တာ မဟုတ်ဘူး။ ထက်တို့က အချိန်မရှိတော့တာ။
+    </p>
+
+    <!-- Formula Highlight -->
+    <div class="p-5 rounded-2xl bg-gradient-to-r from-amber-500/15 via-rose-500/15 to-amber-500/10 border-2 border-amber-500/40 text-center font-bold text-base md:text-xl text-rose-700 dark:text-rose-300 my-4 shadow-sm">
+      Pain (နာကျင်မှု) + Awareness (အသိတရား) + Action (လှုပ်ရှားမှု) = Revolution (တော်လှန်ရေး)
+    </div>
+
+    <p>
+      အငိုသန်တဲ့ ကောင်မလေးတစ်ယောက်အနေနဲ့ ထက် ယုံကြည်တာက မျက်ရည်ကျတာဟာ ရှက်စရာ မဟုတ်ဘူး။ မျက်ရည်သုတ်ပြီး ပြန်မထနိုင်တာကသာ ရှက်စရာပါ။ Sylvia Plath ရေးခဲ့သလိုပေါ့...
+    </p>
+
+    <blockquote class="p-4 rounded-2xl bg-cream dark:bg-stone-900 border-l-4 border-amber-500 font-serif italic text-charcoal my-3">
+      &ldquo;I took a deep breath and listened to the old brag of my heart. I am, I am, I am.&rdquo;<br>
+      <span class="text-xs text-muted">(ကျွန်မ အသက်ပြင်းပြင်း တစ်ချက် ရှူလိုက်ပြီး ကိုယ့်နှလုံးသားရဲ့ ဟစ်ကြွေးသံဟောင်းကို နားထောင်လိုက်တယ်။ ငါ ရှိတယ်၊ ငါ ရှိတယ်၊ ငါ ရှိတယ်။)</span>
+    </blockquote>
+
+    <p>
+      ထက်တို့ရဲ့ &ldquo;ရှိခြင်း&rdquo; (Existence) ကိုက တော်လှန်ရေး တစ်ခုပါပဲ။ ထက် နှုတ်ခမ်းနီ ဆိုးတာဟာ အလှအပ သက်သက် မဟုတ်ဘူး။ ထက် ဝတ်စားဆင်ယင်တာဟာ ဖက်ရှင် သက်သက် မဟုတ်ဘူး။ ဒါဟာ Patriarchal Norms (ဖိုဝါဒ စံနှုန်းတွေ) ကို စိန်ခေါ်နေတဲ့ စစ်ကြေညာချက်တွေပါ။
+    </p>
+  </section>
+
+  <!-- Section 4 -->
+  <section class="space-y-4 pt-4">
+    <h2 class="font-serif-editorial text-2xl md:text-3xl font-semibold text-charcoal border-b border-hairline pb-2 flex items-center space-x-2">
+      <span class="px-2.5 py-0.5 rounded-lg bg-rose-600 text-white text-sm font-bold">အပိုင်း (၄)</span>
+      <span>စာနာမှုဖြင့် တည်ဆောက်သော ဉာဏ်ပညာ (Empathy as Intelligence)</span>
+    </h2>
+    <p>
+      ခေတ်ဟောင်းက &ldquo;ထူးချွန်သူ&rdquo; ဆိုတာ IQ မြင့်မားမှုကိုပဲ ပြောတာ။ သင်္ချာပုစ္ဆာတွေ ဖြေနိုင်မယ်၊ စာတွေ အလွတ်ရမယ်။ ဒါပေမဲ့ ခေတ်သစ်ရဲ့ ထူးချွန်သူ (Public Intellectual) ဆိုတာ EQ (Emotional Intelligence) နဲ့ SQ (Social Intelligence) ပါ မြင့်မားရမယ်။ ကိုယ့်ဘေးနားက လူတစ်ယောက် ငတ်နေတာကို မြင်ရဲ့သားနဲ့ လျစ်လျူရှုနိုင်တဲ့ သိပ္ပံပညာရှင်တစ်ယောက်ဟာ ဂျီးနီးယပ်စ် မဟုတ်ဘူး။ သူဟာ စက်ရုပ်တစ်ရုပ်ပဲ။
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 my-4">
+      <div class="p-4 rounded-xl bg-card border border-hairline">
+        <div class="font-bold text-rose-600 text-sm mb-1"><i class="ri-heart-line"></i> စာနာနားလည်နိုင်စွမ်း</div>
+        <p class="text-xs text-muted">သူတစ်ပါးရဲ့ နာကျင်မှုကို ကိုယ်ချင်းစာနိုင်သူတွေ။</p>
+      </div>
+      <div class="p-4 rounded-xl bg-card border border-hairline">
+        <div class="font-bold text-amber-600 text-sm mb-1"><i class="ri-fire-line"></i> မတရားမှုကို ရွံမုန်းဒေါသထွက်မှု</div>
+        <p class="text-xs text-muted">မတရားမှုကို မြင်ရင် ဒေါသထွက်နိုင်သူတွေ (Rage is a valid emotion)။</p>
+      </div>
+      <div class="p-4 rounded-xl bg-card border border-hairline">
+        <div class="font-bold text-blue-600 text-sm mb-1"><i class="ri-checkbox-circle-line"></i> သစ္စာရှိစွာ ဝန်ခံရဲမှု</div>
+        <p class="text-xs text-muted">ကိုယ့်အမှားကို ဝန်ခံရဲသူတွေ။</p>
+      </div>
+      <div class="p-4 rounded-xl bg-card border border-hairline">
+        <div class="font-bold text-purple-600 text-sm mb-1"><i class="ri-global-line"></i> အားလုံးပါဝင်နိုင်စွမ်း</div>
+        <p class="text-xs text-muted">အားလုံးပါဝင်နိုင်တဲ့ (Inclusive) ကမ္ဘာတစ်ခုကို စိတ်ကူးယဉ်ရဲသူတွေ။</p>
+      </div>
+    </div>
+
+    <div class="p-5 rounded-2xl bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/40 my-4">
+      <p class="text-xs md:text-sm text-charcoal/90 mb-1">
+        Virginia Woolf ပြောခဲ့တယ် — <em>&ldquo;A woman must have money and a room of her own if she is to write fiction.&rdquo;</em>
+      </p>
+      <p class="text-xs md:text-sm font-semibold text-rose-700 dark:text-rose-300">
+        ထက်ကတော့ ပြင်ပြောချင်တယ် — <strong>&ldquo;A transwoman must have courage and a community of her own if she is to rewrite history.&rdquo;</strong> (Transwoman တစ်ယောက် သမိုင်းကို ပြန်ရေးဖို့ဆိုရင် သတ္တိနဲ့ ကိုယ်ပိုင် အသိုင်းအဝိုင်းတစ်ခု လိုအပ်တယ်)။
+      </p>
+    </div>
+  </section>
+
+  <!-- Conclusion -->
+  <section class="space-y-4 pt-4">
+    <h2 class="font-serif-editorial text-2xl md:text-3xl font-semibold text-charcoal border-b border-hairline pb-2 flex items-center space-x-2">
+      <span class="px-2.5 py-0.5 rounded-lg bg-rose-600 text-white text-sm font-bold">နိဂုံး</span>
+      <span>ပြာပုံထက်က ပန်းများ (Flowers on the Ashes)</span>
+    </h2>
+    <p>
+      နိဂုံးချုပ်အနေနဲ့ ထက် ပြောချင်တာကတော့... သင်ဟာ အငိုသန်တဲ့ ကောင်လေးတစ်ယောက် ဖြစ်နေလား။ ဒါမှမဟုတ် စိတ်ဆတ်တဲ့ ကောင်မလေးတစ်ယောက်လား။ လူတွေက သင့်ကို &ldquo;နင်က အရမ်း ဒရာမာခင်းတာပဲ&rdquo; လို့ ပြောကြလား။ ဂုဏ်ယူလိုက်ပါရှင်။ အဲဒါ သင်ဟာ သာမန်လူ မဟုတ်ဘူးဆိုတဲ့ လက္ခဏာပါပဲ။ သင့်ရဲ့ စိတ်ခံစားမှု ပြင်းထန်ခြင်းဟာ သင့်ရဲ့ လက်နက်ပါပဲ။
+    </p>
+    <p>
+      ခေတ်တစ်ခေတ်ရဲ့ ထူးချွန်သူတွေဟာ နန်းတော်ထဲက မွေးဖွားလာတာ ရှားပါတယ်။ သူတို့ဟာ စစ်မြေပြင်တွေ၊ ထောင်တွေ၊ ဆင်းရဲသားရပ်ကွက်တွေနဲ့ ခွဲခြားဆက်ဆံခံရတဲ့ နေရာတွေကနေ မွေးဖွားလာကြတာပါ။ ထက်တို့ဟာ ပြာပုံထဲက မွေးဖွားပေမဲ့ ပြာပုံအတိုင်း ဆက်မနေဘူး။ ပြာပုံကို မြေသြဇာ အဖြစ်ပြောင်းပြီး ပန်းခင်းတွေ စိုက်ပျိုးကြမယ်။
+    </p>
+
+    <div class="p-6 md:p-8 rounded-3xl bg-gradient-to-br from-rose-900 to-stone-900 text-white shadow-lg space-y-4 my-6">
+      <div class="font-serif-editorial text-xl md:text-2xl font-bold text-amber-300 leading-snug">
+        &ldquo;ငါ ငိုမယ်။ ပြီးရင် ငါ တိုက်ပွဲဝင်မယ်။ ငါ့ရဲ့ မျက်ရည်တွေက ငါ့ရဲ့ မှင်တွေပဲ။ ငါ့ဘဝကို ငါ့မျက်ရည်နဲ့ ငါရေးမယ်။&rdquo;
+      </div>
+      <p class="text-stone-300 text-sm md:text-base leading-relaxed">
+        ဒီတော့... ငိုပါ။ အော်ဟစ်ပါ။ ပြီးရင် ထူးချွန်အောင် ကြိုးစားပါ။ ပြာပုံဆိုတာ အဆုံးသတ် မဟုတ်ဘူး။ အစပြုရာ နေရာ (Starting Point) ဖြစ်ကြောင်း သက်သေပြလိုက်ကြပါစို့။
+      </p>
+      <div class="pt-4 border-t border-rose-800/60 flex justify-between items-center text-xs text-rose-300">
+        <span>ထက် (Htet) • Public Intellectual, Interdisciplinary Strategist & Feminist Writer</span>
+        <span>နိုဝင်ဘာ ၃၀၊ ၂၀၂၅</span>
+      </div>
+    </div>
+  </section>
+</div>
+      </div>
+
+      <!-- Tags -->
+      <div class="mt-12 pt-6 border-t border-hairline">
+        <div id="article-tags" class="flex flex-wrap gap-1.5 sm:gap-2"></div>
+      </div>
+
+      <!-- Academic Citations & References -->
+      <section id="article-citations" class="mt-10 p-3.5 sm:p-6 sm:p-7 rounded-2xl border border-taupe-light bg-cream hidden">
+        <h3 class="font-serif-editorial text-lg sm:text-xl font-medium text-charcoal mb-4 flex items-center space-x-2">
+          <i class="ri-book-read-line text-vermilion text-lg"></i>
+          <span data-mm="ကျမ်းကိုး စာရင်းများနှင့် ကိုးကားချက်များ (Academic Citations)" data-en="Academic Citations & References">ကျမ်းကိုး စာရင်းများနှင့် ကိုးကားချက်များ (Academic Citations)</span>
+        </h3>
+        <ol id="citations-list" class="list-none space-y-2.5 font-sans-ui text-xs"></ol>
+      </section>
+
+      <!-- Author Attribution Card -->
+      <div class="glass-3d-card card-3d-interactive mt-12 p-3.5 sm:p-6 lg:p-8 flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+        <div class="hanko-seal-3d float-3d-levitate w-16 h-16 rounded-2xl flex-shrink-0 flex items-center justify-center p-0.5 overflow-hidden" title="ထက် (Htet) Hanko Seal">
+          <img src="../assets/favicon.png" alt="ထက်" class="w-full h-full object-contain pointer-events-none drop-shadow-xs">
+        </div>
+        <div class="space-y-2 text-center sm:text-left">
+          <div class="flex items-center justify-center sm:justify-start space-x-2">
+            <h4 class="font-serif-editorial text-2xl font-semibold text-charcoal">Htet (ထက်)</h4>
+            <span class="hanko-seal-3d px-2.5 py-0.5 text-[10px] rounded-full">စာရေးဆရာမ</span>
+          </div>
+          <p class="text-xs text-muted font-sans-ui leading-relaxed" data-mm="လူငယ် မြန်မာ Transgirl စာရေးဆရာမ၊ နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် လူမှုတက်ကြွလှုပ်ရှားသူ။ ကျား၊ မ တရားမျှတမှုနှင့် လွတ်လပ်မှုအတွက် ရေးသားရပ်တည်လျက်ရှိသည်။" data-en="Burmese trans writer, political philosophy researcher, and activist advocating for gender justice and collective emancipation.">
+            လူငယ် မြန်မာ Transgirl စာရေးဆရာမ၊ နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် လူမှုတက်ကြွလှုပ်ရှားသူ။ ကျား၊ မ တရားမျှတမှုနှင့် လွတ်လပ်မှုအတွက် ရေးသားရပ်တည်လျက်ရှိသည်။
+          </p>
+          <div class="pt-2 flex flex-wrap justify-center sm:justify-start gap-3 text-xs font-sans-ui">
+            <a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="btn-3d-tactile text-vermilion font-medium hover:underline flex items-center space-x-1">
+              <i class="ri-telegram-fill text-[#2AABEE]"></i> <span>Telegram: @htetmmofficial</span>
+            </a>
+            <span class="text-faint">•</span>
+            <a href="https://facebook.com/htetmyatekri" target="_blank" rel="noopener noreferrer" class="btn-3d-tactile text-vermilion font-medium hover:underline flex items-center space-x-1">
+              <i class="ri-facebook-circle-fill text-[#1877F2]"></i> <span>Facebook</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Adjacent Articles Navigation (Previous & Next Articles) -->
+      <nav id="article-prev-next-nav" class="mt-12 pt-8 border-t border-hairline grid grid-cols-1 sm:grid-cols-2 gap-4 hidden no-print" aria-label="Adjacent Articles Navigation"></nav>
+
+      <!-- Related Articles -->
+      <section class="mt-16 pt-8 border-t border-hairline">
+        <h3 class="font-serif-editorial text-2xl text-charcoal font-medium mb-6 flex items-center space-x-2" data-mm="ဆက်စပ် သုတေသန ဆောင်းပါးများ" data-en="Related Essays">
+          <i class="ri-git-branch-line text-vermilion text-xl"></i>
+          <span>ဆက်စပ် သုတေသန ဆောင်းပါးများ</span>
+        </h3>
+        <div id="related-articles-list" class="grid grid-cols-1 sm:grid-cols-2 gap-6"></div>
+      </section>
+
+    </article>
+
+  </main>
+
+  <!-- Editorial Footer -->
+  <footer class="border-t border-hairline bg-cream py-12 text-xs text-muted font-sans-ui transition-colors">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="space-y-3">
+        <div class="flex items-center space-x-2">
+          <div class="nav-brand-glass-icon w-8 h-8 rounded-xl flex items-center justify-center shrink-0" title="ထက် (Htet)">
+            <img src="../assets/favicon.png" alt="ထက်" class="w-full h-full object-contain">
+          </div>
+          <span class="font-serif-editorial text-lg font-semibold text-charcoal">Htet Official</span>
+        </div>
+        <p class="leading-relaxed text-muted" data-mm="မြန်မာ Transgirl စာရေးဆရာမ၊ နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် လူမှုတက်ကြွလှုပ်ရှားသူ ထက်၏ တရားဝင် ဝက်ဘ်စာမျက်နှာ။" data-en="Official platform of Htet — Burmese trans writer, political philosophy researcher, and activist.">
+          မြန်မာ Transgirl စာရေးဆရာမ၊ နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် လူမှုတက်ကြွလှုပ်ရှားသူ ထက်၏ တရားဝင် ဝက်ဘ်စာမျက်နှာ။
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]" data-mm="စာမျက်နှာများ" data-en="Navigation" data-zh="全站导航" data-th="การนำทาง" data-ja="ナビゲーション">စာမျက်နှာများ</h4>
+        <ul class="space-y-2">
+          <li><a href="../index.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ပင်မ" data-en="Home" data-zh="首页" data-th="หน้าแรก" data-ja="ホーム"><i class="ri-home-5-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ပင်မ</span></a></li>
+          <li><a href="../articles.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ဆောင်းပါးများ" data-en="Articles" data-zh="学术文章" data-th="บทความ" data-ja="論考・論文"><i class="ri-article-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ဆောင်းပါးများ</span></a></li>
+          <li><a href="../publications.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ထုတ်ဝေမှုများ" data-en="Publications" data-zh="出版专著" data-th="ผลงานตีพิมพ์" data-ja="出版物・著作"><i class="ri-file-paper-2-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ထုတ်ဝေမှုများ</span></a></li>
+          <li><a href="../journal.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌"><i class="ri-booklet-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>မှတ်စုနှင့် ပို့စ်များ</span></a></li>
+          <li><a href="../glossary.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典"><i class="ri-book-read-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ဝေါဟာရအဘိဓာန်</span></a></li>
+          <li><a href="../dictionary.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="အဘိဓာန်" data-en="Dictionary" data-zh="英语词典" data-th="พจนานุกรม" data-ja="英緬辞典"><i class="ri-book-2-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>အဘိဓာန်</span></a></li>
+          <li><a href="../translate.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ဘာသာပြန်" data-en="Translate"><i class="ri-translate-2 text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ဘာသာပြန်စတူဒီယို</span></a></li>
+          <li><a href="../about.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について"><i class="ri-user-star-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>စာရေးသူအကြောင်း</span></a></li>
+          <li><a href="../contact.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系交流" data-th="ติดต่อเรา" data-ja="お問い合わせ"><i class="ri-send-plane-2-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ဆက်သွယ်ရန်</span></a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]" data-mm="တိုက်ရိုက်လိုင်းများ" data-en="Direct Channels">တိုက်ရိုက်လိုင်းများ</h4>
+        <ul class="space-y-2">
+          <li><a href="https://github.com/htetofficial/htetofficial.github.io/releases/tag/v1.2.0-beta" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-android-line text-emerald-600"></i> <span class="font-medium text-emerald-700 dark:text-emerald-400">Android App (v1.2.0-beta APK)</span></a></li>
+          <li><a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-telegram-fill text-[#2AABEE]"></i> <span>Telegram: @htetmmofficial</span></a></li>
+          <li><a href="https://t.me/womennationwomenkingdom" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-telegram-fill text-[#2AABEE]"></i> <span>@womennationwomenkingdom</span></a></li>
+          <li><a href="https://t.me/ideahubmyanmar" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-telegram-fill text-[#2AABEE]"></i> <span>@ideahubmyanmar</span></a></li>
+          <li><a href="https://t.me/ideahublibrary" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-book-open-fill text-amber-600"></i> <span>Library: @ideahublibrary (1,522+ PDFs)</span></a></li>
+          <li><a href="https://t.me/For_The_Future_Myanmar" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-team-fill text-blue-500"></i> <span>For The Future Myanmar (@For_The_Future_Myanmar)</span></a></li>
+          <li><a href="https://facebook.com/htetmyatekri" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-facebook-circle-fill text-[#1877F2]"></i> <span>Facebook: htetmyatekri</span></a></li>
+          <li><a href="https://htetofficial.wordpress.com" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-wordpress-fill text-[#21759B]"></i> <span>htetofficial.wordpress.com</span></a></li>
+          <li><a href="mailto:htethtet2025ideahub@gmail.com" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-mail-line text-vermilion"></i> <span>htethtet2025ideahub@gmail.com</span></a></li>
+          <li><a href="mailto:htetmyatekri@icloud.com" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-mail-send-line text-vermilion"></i> <span>htetmyatekri@icloud.com</span></a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-3">
+        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]" data-mm="တန်ဖိုးထားမှု" data-en="Commitment">တန်ဖိုးထားမှု</h4>
+        <p class="leading-relaxed text-muted" data-mm="ခွဲခြားဆက်ဆံမှု ကင်းမဲ့သော၊ ကျား၊ မ တန်းတူညီမျှပြီး တရားမျှတသော လူ့ဘောင် တည်ဆောက်ရေး။" data-en="Committed to an egalitarian, anti-oppressive society rooted in absolute justice.">
+          ခွဲခြားဆက်ဆံမှု ကင်းမဲ့သော၊ ကျား၊ မ တန်းတူညီမျှပြီး တရားမျှတသော လူ့ဘောင် တည်ဆောက်ရေး။
+        </p>
+        <div class="pt-2">
+          <span class="text-[11px] text-faint">© 2026 Htet (ထက်). All Rights Reserved.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Unified Floating Reading Companion & Master Combined Icon Navigation Hub (Bottom-Right) -->
+  <aside id="floating-reading-companion" class="fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-40 flex items-center space-x-2 transition-all duration-300 no-print" aria-label="Reading Controls & Navigation Hub">
+    <!-- Quick Font Scaling & Zen Mode Capsule Pill (Visible on sm+ screens) -->
+    <div id="floating-reader-toolbar" class="hidden sm:flex items-center p-1 rounded-full bg-card/95 dark:bg-stone-900/95 backdrop-blur-md border border-hairline shadow-xl space-x-1 font-sans-ui text-xs glass-3d-pill">
+      <button data-font-action="decrease" title="Decrease Font Size (A-)" class="btn-3d-tactile w-7 h-7 rounded-full flex items-center justify-center hover:text-vermilion hover:bg-cream dark:hover:bg-stone-800 transition-colors font-bold text-xs cursor-pointer">A-</button>
+      <button data-font-action="reset" title="Normal Font Size (A)" class="btn-3d-tactile w-7 h-7 rounded-full flex items-center justify-center hover:text-vermilion hover:bg-cream dark:hover:bg-stone-800 transition-colors font-bold text-xs cursor-pointer">A</button>
+      <button data-font-action="increase" title="Increase Font Size (A+)" class="btn-3d-tactile w-7 h-7 rounded-full flex items-center justify-center hover:text-vermilion hover:bg-cream dark:hover:bg-stone-800 transition-colors font-bold text-xs cursor-pointer">A+</button>
+      <div class="h-4 w-px bg-hairline"></div>
+      <button id="floating-zen-btn" title="Zen Focus Mode (အာရုံစူးစိုက် ဖတ်ရှုခြင်း)" class="btn-3d-tactile w-7 h-7 rounded-full flex items-center justify-center text-charcoal hover:text-vermilion hover:bg-cream dark:hover:bg-stone-800 transition-colors cursor-pointer">
+        <i class="ri-focus-2-line text-xs"></i>
+      </button>
+    </div>
+
+    <!-- Master Combined Icon Floating Navigation Hub -->
+    <div id="back-to-top-progress-btn" class="smart-scroll-pill relative flex flex-col items-center p-1 rounded-full bg-card/95 dark:bg-stone-900/95 backdrop-blur-md border border-hairline shadow-2xl font-sans-ui text-xs glass-3d-pill" role="toolbar" aria-label="Scroll Navigation Hub">
+      <!-- Dismiss / Hide 'X' Action (အမှားခြစ် ခလုတ်) -->
+      <button id="article-scroll-hide-btn" class="btn-3d-tactile w-6 h-6 rounded-full flex items-center justify-center text-muted/60 hover:text-rose-500 hover:bg-rose-500/10 transition-colors cursor-pointer mb-0.5" title="All-in-One ဖျောက်ထားရန် (Dismiss / Hide)" aria-label="Dismiss Navigation Hub">
+        <i class="ri-close-line text-xs font-bold"></i>
+      </button>
+
+      <!-- Scroll to Top Action -->
+      <button id="article-scroll-top-btn" class="btn-3d-tactile w-8 h-8 rounded-full flex items-center justify-center text-charcoal hover:text-vermilion hover:bg-vermilion/10 dark:hover:bg-vermilion/20 transition-all cursor-pointer group" title="ထိပ်ဆုံးသို့ ပြန်သွားရန် (Scroll to Top)" aria-label="Scroll to top">
+        <i class="ri-arrow-up-line text-xs sm:text-sm font-bold group-hover:-translate-y-0.5 transition-transform"></i>
+      </button>
+
+      <!-- Circular Progress Ring & Percentage Indicator -->
+      <div id="article-scroll-progress-badge" class="relative w-8 h-8 flex items-center justify-center my-0.5 cursor-pointer group" title="စာဖတ်ပြီးမြောက်မှု ရာခိုင်နှုန်း (Reading Progress)" aria-label="Reading progress">
+        <svg class="w-8 h-8 -rotate-90 pointer-events-none absolute inset-0" viewBox="0 0 32 32">
+          <circle cx="16" cy="16" r="12.5" class="stroke-taupe-light/40 dark:stroke-stone-700/50 fill-none" stroke-width="2.2"></circle>
+          <circle id="reading-progress-circle" cx="16" cy="16" r="12.5" class="stroke-vermilion fill-none transition-all duration-100" stroke-width="2.2" stroke-dasharray="78.54" stroke-dashoffset="78.54" stroke-linecap="round"></circle>
+        </svg>
+        <span id="article-scroll-percent" class="text-[9px] font-mono font-bold text-charcoal group-hover:text-vermilion transition-colors leading-none">0%</span>
+      </div>
+
+      <!-- Scroll to Bottom Action -->
+      <button id="article-scroll-bottom-btn" class="btn-3d-tactile w-8 h-8 rounded-full flex items-center justify-center text-charcoal hover:text-vermilion hover:bg-vermilion/10 dark:hover:bg-vermilion/20 transition-all cursor-pointer group" title="အောက်ခြေသို့ ဆင်းရန် (Scroll to Bottom)" aria-label="Scroll to bottom">
+        <i class="ri-arrow-down-line text-xs sm:text-sm font-bold group-hover:translate-y-0.5 transition-transform"></i>
+      </button>
+
+      <!-- Quick Actions Toggle Menu (3-dots with indicator badge) -->
+      <div class="h-px w-5 bg-hairline my-0.5 opacity-60"></div>
+      <button id="article-scroll-menu-btn" class="btn-3d-tactile relative w-7 h-7 rounded-full flex items-center justify-center text-muted hover:text-vermilion hover:bg-vermilion/10 transition-colors cursor-pointer" title="အမြန်ခလုတ်များနှင့် ကိရိယာများ (Quick Tools & Menu)" aria-label="Quick Shortcuts">
+        <i class="ri-more-fill text-sm"></i>
+        <span class="w-1.5 h-1.5 rounded-full bg-vermilion absolute top-1 right-1 pointer-events-none"></span>
+      </button>
+
+      <!-- Upgraded Master Command Flyout Menu (Rises upwards to avoid toolbar/mobile screen clipping) -->
+      <div id="article-scroll-flyout" class="hidden absolute right-0 bottom-full mb-2.5 bg-card/95 dark:bg-stone-900/95 backdrop-blur-xl border border-hairline/80 shadow-2xl rounded-2xl p-2.5 flex flex-col space-y-1.5 z-50 min-w-[210px] text-xs font-sans-ui glass-3d-card">
+        <!-- Flyout Header -->
+        <div class="px-2 py-1 text-[10px] font-semibold text-faint uppercase tracking-wider border-b border-hairline/60 flex items-center justify-between">
+          <span data-mm="အမြန်ကိရိယာများ" data-en="Quick Tools">အမြန်ကိရိယာများ</span>
+          <span class="text-[9px] font-mono text-vermilion font-bold">HUB</span>
+        </div>
+
+        <!-- Inline Font Scaler for Mobile / Quick Access -->
+        <div class="flex items-center justify-between p-1.5 rounded-xl bg-cream/70 dark:bg-stone-800/70 border border-hairline/60">
+          <span class="text-[11px] font-medium text-muted pl-1" data-mm="စာလုံးအရွယ်" data-en="Font Size">စာလုံးအရွယ်</span>
+          <div class="flex items-center space-x-1">
+            <button data-font-action="decrease" title="Smaller Font (A-)" class="btn-3d-tactile w-6 h-6 rounded-lg flex items-center justify-center font-bold text-[10px] hover:bg-card hover:text-vermilion transition-colors cursor-pointer">A-</button>
+            <button data-font-action="reset" title="Normal Font (A)" class="btn-3d-tactile w-6 h-6 rounded-lg flex items-center justify-center font-bold text-[10px] hover:bg-card hover:text-vermilion transition-colors cursor-pointer">A</button>
+            <button data-font-action="increase" title="Larger Font (A+)" class="btn-3d-tactile w-6 h-6 rounded-lg flex items-center justify-center font-bold text-[10px] hover:bg-card hover:text-vermilion transition-colors cursor-pointer">A+</button>
+          </div>
+        </div>
+
+        <!-- Zen Focus Mode -->
+        <button id="article-flyout-zen-btn" class="btn-3d-tactile w-full px-2.5 py-1.5 rounded-xl flex items-center space-x-2 text-charcoal hover:text-vermilion hover:bg-cream dark:hover:bg-stone-800 transition-colors cursor-pointer text-left">
+          <i class="ri-focus-2-line text-vermilion text-sm"></i>
+          <span data-mm="အာရုံစူးစိုက် ဖတ်ရှုခြင်း" data-en="Zen Focus Mode">အာရုံစူးစိုက် ဖတ်ရှုခြင်း</span>
+        </button>
+
+        <!-- Bookmark Current Essay -->
+        <button id="article-flyout-bookmark-btn" class="btn-3d-tactile w-full px-2.5 py-1.5 rounded-xl flex items-center space-x-2 text-charcoal hover:text-vermilion hover:bg-cream dark:hover:bg-stone-800 transition-colors cursor-pointer text-left">
+          <i id="article-flyout-bookmark-icon" class="ri-bookmark-line text-vermilion text-sm"></i>
+          <span id="article-flyout-bookmark-text" data-mm="ဤစာမူ သိမ်းရန်" data-en="Bookmark Essay">ဤစာမူ သိမ်းရန်</span>
+        </button>
+
+        <!-- Saved Articles Drawer -->
+        <button id="article-flyout-readinglist-btn" class="btn-3d-tactile w-full px-2.5 py-1.5 rounded-xl flex items-center space-x-2 text-charcoal hover:text-vermilion hover:bg-cream dark:hover:bg-stone-800 transition-colors cursor-pointer text-left">
+          <i class="ri-book-mark-line text-vermilion text-sm"></i>
+          <span data-mm="သိမ်းထားသော စာမူများ" data-en="Saved Articles">သိမ်းထားသော စာမူများ</span>
+        </button>
+
+        <!-- Language / Translation Toggle -->
+        <button id="article-flyout-lang-btn" class="btn-3d-tactile w-full px-2.5 py-1.5 rounded-xl flex items-center space-x-2 text-charcoal hover:text-vermilion hover:bg-cream dark:hover:bg-stone-800 transition-colors cursor-pointer text-left">
+          <i class="ri-global-line text-vermilion text-sm"></i>
+          <span data-mm="မူရင်းစာမူ / ဘာသာပြန်" data-en="Original / Translation">မူရင်းစာမူ / ဘာသာပြန်</span>
+        </button>
+
+        <!-- Switch Theme -->
+        <button id="article-flyout-theme-btn" class="btn-3d-tactile w-full px-2.5 py-1.5 rounded-xl flex items-center space-x-2 text-charcoal hover:text-vermilion hover:bg-cream dark:hover:bg-stone-800 transition-colors cursor-pointer text-left">
+          <i class="ri-palette-line text-vermilion text-sm"></i>
+          <span data-mm="ရောင်စဉ်ပြောင်းရန်" data-en="Switch Theme">ရောင်စဉ်ပြောင်းရန်</span>
+        </button>
+
+        <!-- Spotlight Search -->
+        <button id="article-flyout-search-btn" class="btn-3d-tactile w-full px-2.5 py-1.5 rounded-xl flex items-center space-x-2 text-charcoal hover:text-vermilion hover:bg-cream dark:hover:bg-stone-800 transition-colors cursor-pointer text-left">
+          <i class="ri-search-2-line text-vermilion text-sm"></i>
+          <span data-mm="အမြန်ရှာဖွေရန် (⌘K)" data-en="Search (⌘K)">အမြန်ရှာဖွေရန် (⌘K)</span>
+        </button>
+
+        <!-- Share Article Link -->
+        <button id="article-flyout-share-btn" class="btn-3d-tactile w-full px-2.5 py-1.5 rounded-xl flex items-center space-x-2 text-charcoal hover:text-vermilion hover:bg-cream dark:hover:bg-stone-800 transition-colors cursor-pointer text-left">
+          <i class="ri-share-forward-line text-vermilion text-sm"></i>
+          <span data-mm="စာမူမျှဝေရန်" data-en="Share Link">စာမူမျှဝေရန်</span>
+        </button>
+
+        <!-- Print Friendly -->
+        <button onclick="window.print()" class="w-full px-2.5 py-1.5 rounded-xl flex items-center space-x-2 text-charcoal hover:text-vermilion hover:bg-cream dark:hover:bg-stone-800 transition-colors cursor-pointer text-left">
+          <i class="ri-printer-line text-vermilion text-sm"></i>
+          <span data-mm="ပုံနှိပ်ထုတ်ရန် (Print)" data-en="Print Essay">ပုံနှိပ်ထုတ်ရန် (Print)</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Native Modal Dialog: Explicit User Consent & Live Download Progress for Nara Mini v1 On-Device AI Voice -->
+  <dialog id="nara-tts-consent-dialog" class="nara-consent-dialog rounded-2xl border border-taupe-light bg-card text-charcoal shadow-2xl p-0 max-w-lg w-[calc(100%-2rem)]" aria-labelledby="nara-consent-title">
+    <div class="p-5 sm:p-6 space-y-4 font-sans-ui">
+      <!-- Header -->
+      <div class="flex items-start justify-between gap-3 pb-3 border-b border-hairline">
+        <div class="flex items-center gap-2.5">
+          <span class="w-10 h-10 rounded-xl bg-vermilion text-white flex items-center justify-center shrink-0 shadow-sm">
+            <i class="ri-download-cloud-2-line text-xl" aria-hidden="true"></i>
+          </span>
+          <div>
+            <h2 id="nara-consent-title" class="font-serif-editorial text-lg font-bold text-charcoal m-0">
+              AI အသံစနစ် (Nara Mini v1) ကို Download ဆွဲမလား?
+            </h2>
+            <p class="text-xs text-muted m-0">Offline Burmese &amp; English On-Device Text-to-Speech</p>
+          </div>
+        </div>
+        <form method="dialog">
+          <button type="submit" value="cancel" class="w-8 h-8 rounded-lg hover:bg-cream text-muted hover:text-charcoal flex items-center justify-center cursor-pointer" aria-label="Close dialog">
+            <i class="ri-close-line text-lg" aria-hidden="true"></i>
+          </button>
+        </form>
+      </div>
+
+      <!-- Clear Size & Wi-Fi Explanation -->
+      <div class="p-3.5 rounded-xl bg-amber-50/70 dark:bg-amber-950/25 border border-amber-500/30 text-xs text-charcoal leading-relaxed space-y-1.5">
+        <p class="m-0 font-semibold text-amber-900 dark:text-amber-200 flex items-center gap-1.5">
+          <i class="ri-wifi-line text-sm" aria-hidden="true"></i>
+          <span>ဖုန်းထဲသို့ တစ်ကြိမ်တည်း Download ဆွဲသွင်းရန် (~181.2 MB)</span>
+        </p>
+        <p class="m-0 text-muted">
+          သင်ခွင့်ပြုမှသာ အသံမော်ဒယ်ဖိုင် (၃) ခု (<code>voice.json</code> 40 KB + <code>encoder.onnx</code> 74.6 MB + <code>decoder.onnx</code> 106.5 MB) ကို ဖုန်း/Browser ထဲသို့ သိမ်းဆည်းပါမည်။ တစ်ကြိမ်သွင်းပြီးပါက နောက်ပိုင်းတွင် <strong>Offline အခမဲ့</strong> ပြန်လည်နားထောင်နိုင်ပါသည်။ (Wi-Fi ဖြင့် ဆွဲရန် အကြံပြုပါသည်)
+        </p>
+      </div>
+
+      <!-- 4-Voice Radio Selector -->
+      <fieldset class="space-y-2 border-0 p-0 m-0">
+        <legend class="text-xs font-semibold text-charcoal mb-1.5">အသံအမျိုးအစား ရွေးချယ်ပါ (Nara Mini v1 — 4 Voices)</legend>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <label class="nara-voice-opt flex items-center justify-between gap-2 p-2.5 rounded-xl border border-hairline bg-cream/60 hover:border-vermilion cursor-pointer">
+            <span class="flex items-center gap-2 text-xs font-semibold text-charcoal">
+              <input type="radio" name="nara-consent-voice" value="htet-myat" checked class="accent-red-600">
+              <span>ထက်မြတ် (Htet Myat)</span>
+            </span>
+            <span class="nara-voice-status-badge text-[10px] font-mono px-2 py-0.5 rounded-full bg-stone-200/80 dark:bg-stone-700 text-muted">~181 MB</span>
+          </label>
+          <label class="nara-voice-opt flex items-center justify-between gap-2 p-2.5 rounded-xl border border-hairline bg-cream/60 hover:border-vermilion cursor-pointer">
+            <span class="flex items-center gap-2 text-xs font-semibold text-charcoal">
+              <input type="radio" name="nara-consent-voice" value="shoon" class="accent-red-600">
+              <span>ရွှန်း (Shoon)</span>
+            </span>
+            <span class="nara-voice-status-badge text-[10px] font-mono px-2 py-0.5 rounded-full bg-stone-200/80 dark:bg-stone-700 text-muted">~181 MB</span>
+          </label>
+          <label class="nara-voice-opt flex items-center justify-between gap-2 p-2.5 rounded-xl border border-hairline bg-cream/60 hover:border-vermilion cursor-pointer">
+            <span class="flex items-center gap-2 text-xs font-semibold text-charcoal">
+              <input type="radio" name="nara-consent-voice" value="thazin" class="accent-red-600">
+              <span>သဇင် (Thazin)</span>
+            </span>
+            <span class="nara-voice-status-badge text-[10px] font-mono px-2 py-0.5 rounded-full bg-stone-200/80 dark:bg-stone-700 text-muted">~181 MB</span>
+          </label>
+          <label class="nara-voice-opt flex items-center justify-between gap-2 p-2.5 rounded-xl border border-hairline bg-cream/60 hover:border-vermilion cursor-pointer">
+            <span class="flex items-center gap-2 text-xs font-semibold text-charcoal">
+              <input type="radio" name="nara-consent-voice" value="ko-banyar" class="accent-red-600">
+              <span>ကိုဗညား (Ko Banyar)</span>
+            </span>
+            <span class="nara-voice-status-badge text-[10px] font-mono px-2 py-0.5 rounded-full bg-stone-200/80 dark:bg-stone-700 text-muted">~181 MB</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- Live Streaming Download Progress Box (Shown ONLY while downloading) -->
+      <div id="nara-download-progress-box" class="p-4 rounded-xl bg-cream border border-vermilion/30 space-y-2.5" hidden>
+        <div class="flex items-center justify-between text-xs font-semibold text-charcoal">
+          <span id="nara-dl-file">Download စတင်နေပါသည်...</span>
+          <span id="nara-dl-pct" class="font-mono text-vermilion">0.0%</span>
+        </div>
+        <progress id="nara-dl-bar" value="0" max="100" class="sr-only"></progress>
+        <div class="w-full h-3 rounded-full bg-stone-200 dark:bg-stone-800 overflow-hidden" aria-hidden="true">
+          <div id="nara-dl-fill" class="nara-dl-fill h-full rounded-full" style="width: 0%;"></div>
+        </div>
+        <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-muted">
+          <span id="nara-dl-bytes">0.0 MB / 181.2 MB</span>
+          <span id="nara-dl-speed">ချိတ်ဆက်နေသည်...</span>
+        </div>
+        <div class="pt-1 flex justify-end">
+          <button type="button" id="nara-dl-cancel-btn" class="px-3.5 py-2 rounded-lg border border-red-500/40 text-red-700 dark:text-red-300 hover:bg-red-500/10 text-xs font-semibold cursor-pointer">
+            Download ရပ်တန့်မည် (Cancel)
+          </button>
+        </div>
+      </div>
+
+      <!-- Error Notice -->
+      <p id="nara-dl-error" class="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-xs text-red-700 dark:text-red-300 m-0" role="alert" hidden></p>
+
+      <!-- Consent Action Buttons (Safe Cancel gets autofocus per dialog guidelines) -->
+      <div id="nara-consent-action-row" class="flex flex-col-reverse sm:flex-row sm:justify-end gap-2.5 pt-2">
+        <form method="dialog" class="sm:w-auto w-full">
+          <button type="submit" value="cancel" autofocus class="nara-btn-secondary w-full sm:w-auto px-4 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-semibold cursor-pointer">
+            မဆွဲသေးပါ (Cancel)
+          </button>
+        </form>
+        <button type="button" id="nara-consent-download-btn" class="nara-btn-primary w-full sm:w-auto px-4 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 cursor-pointer">
+          <i class="ri-download-cloud-2-line text-base" aria-hidden="true"></i>
+          <span>ဖုန်းထဲသို့ Download ဆွဲပြီး သွင်းမည် (~181 MB)</span>
+        </button>
+      </div>
+
+      <!-- Optional Cache Clear Row (Shown only when at least 1 voice is installed) -->
+      <div id="nara-consent-clear-row" class="pt-2 border-t border-hairline flex items-center justify-between text-xs" hidden>
+        <span class="text-muted">ဖုန်းနေရာ ပြန်လည်ရှင်းလင်းလိုပါက —</span>
+        <button type="button" id="nara-clear-cache-btn" class="text-red-600 dark:text-red-400 hover:underline font-semibold cursor-pointer">
+          သိမ်းထားသော AI Models ဖျက်မည်
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Core UI Engines First (Zero Latency Execution) -->
+  <script src="../js/i18n.js"></script>
+  <script src="../js/pwa.js"></script>
+
+  <!-- Local Downloaded Bootstrap 5.3 & AOS Scripts -->
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/aos.js"></script>
+  <script src="../js/confetti.browser.min.js"></script>
+
+  <!-- KaTeX Scripts for Formula & Notation Auto-Rendering -->
+  <script src="../js/katex.min.js"></script>
+  <script src="../js/katex-auto-render.min.js"></script>
+
+  <script src="../js/data-loader.js"></script>
+  <!-- Local Scientific Visualization Engines (Chart.js & Leaflet.js) -->
+  <script src="../js/chart.min.js"></script>
+  <script src="../js/leaflet.js"></script>
+  <script src="../js/reader.js"></script>
+  <script src="../js/vocab-lookup.js"></script>
+  <script src="../js/burmesenlp.js"></script>
+  <script src="../js/pdf/pdf.min.js"></script>
+  <script src="../js/pdf-viewer.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/data/nara-lexicon-backup.js"></script>
+  <script src="../js/data/audio-manifest-backup.js"></script>
+  <script src="../js/nara-g2p.js"></script>
+  <script src="../js/nara-tts.js"></script>
+</body>
+</html>
