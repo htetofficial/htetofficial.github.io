@@ -8,35 +8,20 @@
 ###          articles, monographs, and public essays.
 ### ====================================================================
 
-# Target paths: matches reader articles and essay pages
+# Target paths: matches reader articles, clean static pages, and monographs
 ?path: /article\.html.*
 ?path: /articles/.*
 ?path: /publications/.*
 ?path: /aung-san-suu-kyi-freedom-from-fear-1990-mm\.html
 
-# Telegram Channel integration (displays "Join Channel" pill in Instant View)
+# Telegram Channel & Site Integration
 channel: "@htetmmofficial"
+site_name: "Htet Official (ထက်)"
 
 # Page container definition
 body: //article
 
-# Article Title
-title: //h1[@id="article-title"] | //h1[has-class("font-serif-editorial")] | //meta[@property="og:title"]/@content
-
-# Article Subtitle
-subtitle: //p[@id="article-subtitle"] | //p[has-class("article-subtitle")] | //p[has-class("text-muted") and preceding-sibling::h1]
-
-# Author
-author: //span[has-class("article-author")] | //meta[@name="author"]/@content
-author_url: "https://htetofficial.github.io/about.html"
-
-# Published Date & Reading Time
-published_date: //time/@datetime | //meta[@property="article:published_time"]/@content
-
-# Cover / Hero Image
-cover: //div[has-class("article-cover")]//img | //div[@id="article-cover-wrap"]//img | //meta[@property="og:image"]/@content
-
-# Clean up web navigation, floating UI elements, and interactive modals
+# Clean up web navigation, floating UI elements, interactive modals, and toolbars
 @remove: //nav
 @remove: //header[has-class("nav-header")]
 @remove: //header[has-class("sticky")]
@@ -45,15 +30,49 @@ cover: //div[has-class("article-cover")]//img | //div[@id="article-cover-wrap"]/
 @remove: //div[@id="mobile-menu-overlay"]
 @remove: //div[@id="spotlight-modal"]
 @remove: //div[@id="reading-settings-modal"]
+@remove: //div[@id="citations-modal"]
+@remove: //div[@id="reader-vocab-popover"]
+@remove: //div[@id="reader-vocab-backdrop"]
+@remove: //div[@id="article-download-menu-container"]
 @remove: //div[@id="article-download-dropdown"]
+@remove: //div[@id="article-pdf-banner"]
+@remove: //div[@id="nara-tts-player"]
+@remove: //div[@id="table-of-contents"]
 @remove: //div[has-class("article-action-bar")]
 @remove: //div[has-class("audio-player-bar")]
 @remove: //div[@id="citation-popover"]
+@remove: //div[has-class("hanko-seal-3d")]
+@remove: //div[has-class("nav-brand-glass-icon")]
+@remove: //div[has-class("glass-3d-card") and not(.//p[@id="article-lead-excerpt"])]
+@remove: //nav[@id="article-prev-next-nav"]
+@remove: //section[.//h3[contains(., "ဆက်စပ်")]]
+@remove: //div[@id="related-articles-list"]
+@remove: //ol[@id="citations-list"]
 @remove: //button
 @remove: //footer
 @remove: //script
 @remove: //style
 @remove: //iframe[not(@src)]
+
+# Remove empty or client-side audio elements
+@remove: //audio[not(@src)]
+@remove: //audio[@src=""]
+@remove: //audio
+
+# Remove images without src or SVG format (Telegram IV rejects SVGs and empty img tags)
+@remove: //img[not(@src)]
+@remove: //img[@src=""]
+@remove: //img[contains(@src, ".svg")]
+@remove: //img[ends-with(@src, ".svg")]
+@remove: //div[@id="article-featured-image-wrapper"][not(.//img/@src)]
+
+# Article Metadata
+title: //h1[@id="article-title"] | //h1[has-class("font-serif-editorial")] | //meta[@property="og:title"]/@content
+subtitle: //p[@id="article-lead-excerpt"] | //p[@id="article-subtitle"] | //p[has-class("article-subtitle")]
+author: //span[has-class("article-author")] | //meta[@name="author"]/@content
+author_url: "https://htetofficial.github.io/about.html"
+published_date: //span[@id="article-date"] | //time/@datetime | //meta[@property="article:published_time"]/@content
+cover: //meta[@property="og:image"]/@content | //figure//img
 
 # Handle Blockquotes and Pull Quotes
 blockquote: //blockquote
@@ -67,10 +86,3 @@ blockquote: //blockquote
 @wrap(<figure>): //div[has-class("article-image-container")]//img
 @append_to(//figure): //div[has-class("image-caption")]
 @inline: //figure//figcaption
-
-# Paragraph and Text formatting
-@wrap(<p>): //div[@id="article-content-body"]/text()
-
-# Instant View site metadata
-site_name: "Htet Official (ထက်)"
-description: //meta[@property="og:description"]/@content | //meta[@name="description"]/@content
