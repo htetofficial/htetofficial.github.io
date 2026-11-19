@@ -12,14 +12,15 @@
       try {
         var validThemes = [
           'light', 'sepia', 'dark', 'amoled',
+          'green', 'green-forest',
+          'blue', 'blue-sapphire',
           'red', 'red-crimson', 'red-rosewood',
           'purple', 'purple-lavender', 'purple-plum', 'purple-indigo',
           'pink', 'pink-peach', 'pink-rose'
         ];
         var savedTheme = null;
         try { savedTheme = localStorage.getItem('site_theme'); } catch(e) {}
-        var theme = (savedTheme && validThemes.indexOf(savedTheme) !== -1) ? savedTheme : 
-          ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light');
+        var theme = (savedTheme && validThemes.indexOf(savedTheme) !== -1) ? savedTheme : 'light';
         
         document.documentElement.setAttribute('data-theme', theme);
         if (theme === 'dark' || theme === 'amoled') {
@@ -33,6 +34,10 @@
           sepia: '#F5EEDB',
           dark: '#121110',
           amoled: '#000000',
+          green: '#F5FAF6',
+          'green-forest': '#F4F8F5',
+          blue: '#F4F8FD',
+          'blue-sapphire': '#F3F7FC',
           red: '#FAF5F5',
           'red-crimson': '#FAF4F5',
           'red-rosewood': '#FAF6F3',
@@ -75,28 +80,102 @@
     html { color-scheme: light dark; }
     html[data-theme="amoled"], html[data-theme="amoled"].dark { background-color: #000000 !important; }
     html[data-theme="amoled"] body, html[data-theme="amoled"].dark body { background-color: #000000 !important; color: #FFFFFF !important; }
-    html[data-theme="amoled"] header.sticky { background-color: rgba(0, 0, 0, 0.9) !important; }
+    html[data-theme="amoled"] header.sticky { background-color: rgba(0, 0, 0, 0.95) !important; }
     html[data-theme="dark"], html.dark { background-color: #121110 !important; }
     html[data-theme="dark"] body, html.dark body { background-color: #121110 !important; color: #F5EFE6 !important; }
     html[data-theme="dark"] .bg-cream, html.dark .bg-cream { background-color: #221F1C !important; }
     html[data-theme="dark"] header.sticky, html.dark header.sticky { background-color: rgba(18, 17, 16, 0.85) !important; }
-    html[data-theme="pink"] { background-color: #FDF6F8 !important; }
-    html[data-theme="pink"] body { background-color: #FDF6F8 !important; color: #2D1A24 !important; }
-    html[data-theme="purple"] { background-color: #F8F6FD !important; }
-    html[data-theme="purple"] body { background-color: #F8F6FD !important; color: #211B33 !important; }
-    html[data-theme="red"] { background-color: #FAF5F5 !important; }
-    html[data-theme="red"] body { background-color: #FAF5F5 !important; color: #2A1717 !important; }
     html[data-theme="sepia"] { background-color: #F5EEDB !important; }
-    html[data-theme="sepia"] body, html.sepia body { background-color: #F5EEDB !important; color: #383024 !important; }
+    html[data-theme="sepia"] body, html.sepia body { background-color: #F5EEDB !important; color: #342A1E !important; }
     html[data-theme="light"] { background-color: #FAF8F5; }
     html[data-theme="light"] body { background-color: #FAF8F5; color: #252321; }
+
+    /* Red Themes (3) */
+    html[data-theme="red"] { background-color: #FAF5F5 !important; }
+    html[data-theme="red"] body { background-color: #FAF5F5 !important; color: #2A1717 !important; }
+    html[data-theme="red-crimson"] { background-color: #FAF4F5 !important; }
+    html[data-theme="red-crimson"] body { background-color: #FAF4F5 !important; color: #2E1218 !important; }
+    html[data-theme="red-rosewood"] { background-color: #FAF6F3 !important; }
+    html[data-theme="red-rosewood"] body { background-color: #FAF6F3 !important; color: #2C1A14 !important; }
+
+    /* Purple Themes (4) */
+    html[data-theme="purple"] { background-color: #F8F6FD !important; }
+    html[data-theme="purple"] body { background-color: #F8F6FD !important; color: #211B33 !important; }
+    html[data-theme="purple-lavender"] { background-color: #F8F7FD !important; }
+    html[data-theme="purple-lavender"] body { background-color: #F8F7FD !important; color: #1E1830 !important; }
+    html[data-theme="purple-plum"] { background-color: #F9F5FA !important; }
+    html[data-theme="purple-plum"] body { background-color: #F9F5FA !important; color: #28112C !important; }
+    html[data-theme="purple-indigo"] { background-color: #F5F6FC !important; }
+    html[data-theme="purple-indigo"] body { background-color: #F5F6FC !important; color: #131B36 !important; }
+
+    /* Pink Themes (3) */
+    html[data-theme="pink"] { background-color: #FDF6F8 !important; }
+    html[data-theme="pink"] body { background-color: #FDF6F8 !important; color: #2D1A24 !important; }
+    html[data-theme="pink-peach"] { background-color: #FDF7F4 !important; }
+    html[data-theme="pink-peach"] body { background-color: #FDF7F4 !important; color: #2E1C15 !important; }
+    html[data-theme="pink-rose"] { background-color: #FDF5F7 !important; }
+    html[data-theme="pink-rose"] body { background-color: #FDF5F7 !important; color: #2E151E !important; }
+
+    /* Green Themes (2) */
+    html[data-theme="green"] { background-color: #F5FAF6 !important; }
+    html[data-theme="green"] body { background-color: #F5FAF6 !important; color: #12281D !important; }
+    html[data-theme="green-forest"] { background-color: #F4F8F5 !important; }
+    html[data-theme="green-forest"] body { background-color: #F4F8F5 !important; color: #0F241A !important; }
+
+    /* Blue Themes (2) */
+    html[data-theme="blue"] { background-color: #F4F8FD !important; }
+    html[data-theme="blue"] body { background-color: #F4F8FD !important; color: #102138 !important; }
+    html[data-theme="blue-sapphire"] { background-color: #F3F7FC !important; }
+    html[data-theme="blue-sapphire"] body { background-color: #F3F7FC !important; color: #0B1E36 !important; }
+
+    /* Zero-Latency Sidebar & Element Cloaking: Prevent drawer, overlays, modals and menus from flashing during navigation */
+    #mobile-menu-drawer {
+      visibility: hidden !important;
+      transform: translateX(-100%) !important;
+      -webkit-transform: translateX(-100%) !important;
+      pointer-events: none !important;
+    }
+    #mobile-menu-drawer.is-open {
+      visibility: visible !important;
+      transform: translateX(0) !important;
+      -webkit-transform: translateX(0) !important;
+      pointer-events: auto !important;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s !important;
+      -webkit-transition: -webkit-transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s !important;
+    }
+    #mobile-menu-overlay {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    #mobile-menu-overlay.is-open {
+      display: block !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      transition: opacity 0.25s ease !important;
+    }
+    [hidden],
+    #lang-dropdown-menu:not(.is-open),
+    #journal-reader-modal:not(.is-open),
+    #reading-list-badge.hidden,
+    #article-download-dropdown.hidden,
+    #article-scroll-flyout.hidden,
+    .category-drawer:not(.open) {
+      display: none !important;
+    }
+    #lang-dropdown-menu.is-open {
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      z-index: 9999 !important;
+    }
 
     /* Instant language transition cloaking - hides Burmese text until translated to chosen language */
     html.i18n-cloaked body {
       opacity: 0 !important;
       visibility: hidden !important;
-    }
-  </style>
+    }</style>
 
   <title data-mm="စာမူဖတ်ရှုခန်း — ထက် (Htet Official)" data-en="Reader — Htet Official">စာမူဖတ်ရှုခန်း — ထက် (Htet Official)</title>
   <!-- SEO, Open Graph (Facebook/Telegram) & Structured Data -->
@@ -114,9 +193,11 @@
   <meta property="og:url" content="https://htetofficial.github.io/article.html">
   <meta property="og:image" content="https://htetofficial.github.io/assets/images/phoenix-from-ashes-cover.jpg">
   <meta property="og:image:secure_url" content="https://htetofficial.github.io/assets/images/phoenix-from-ashes-cover.jpg">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="675">
   <meta property="og:image:alt" content="Htet Official Academic Reader">
+  <meta property="telegram:channel" content="@htetmmofficial">
   <meta property="og:locale" content="my_MM">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
@@ -186,7 +267,15 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <link rel="mask-icon" href="assets/seal-stamp.svg" color="#B83A2D">
-  <link rel="manifest" href="manifest.webmanifest">
+  <script>
+    if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+      var _ml = document.createElement('link');
+      _ml.rel = 'manifest';
+      _ml.href = 'manifest.webmanifest';
+      document.head.appendChild(_ml);
+    }
+  </script>
+  <noscript><link rel="manifest" href="manifest.webmanifest"></noscript>
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -196,61 +285,77 @@
   <meta name="msapplication-TileImage" content="assets/mstile-150x150.png">
   <meta name="msapplication-config" content="browserconfig.xml">
   <meta name="theme-color" content="#FAF8F5">
+  <meta name="google-site-verification" content="googleb4199b7805a59fbf" />
 
-  <!-- Local Downloaded Bootstrap 5.3 & Bootstrap Icons -->
+  <!-- Google Fonts Preconnect & High-Performance Asynchronous Loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap">
+  </noscript>
+
+  <!-- Local Downloaded Bootstrap 5.3 & Bootstrap Icons (Non-blocking) -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/bootstrap-icons\.min\.css">
 
   <!-- Local Downloaded Remix Icon v4.5.0 -->
   <link rel="stylesheet" href="css/remixicon.css">
-  <!-- Local Downloaded AOS CSS -->
-  <link rel="stylesheet" href="css/aos.css">
+  <!-- Local Downloaded AOS CSS (Non-blocking) -->
+  <link rel="stylesheet" href="css/aos\.css">
 
   <!-- Local KaTeX CSS for Academic & Logic Notation (100% Offline with Local Fonts) -->
   <link rel="stylesheet" href="css/katex.min.css">
   <!-- Local Leaflet CSS for Interactive Geographic & Seismic Maps -->
   <link rel="stylesheet" href="css/leaflet.css">
 
-  <!-- Tailwind CSS CDN Configured with Dynamic CSS Variables -->
-  <script src="js/tailwind.min.js"></script>
+  <!-- Tailwind CSS Configuration Defined Before Deferred Script -->
   <script>
-    tailwind.config = {
-      darkMode: ['class', '[data-theme="dark"]'],
-      theme: {
-        extend: {
-          screens: {
-            'xs': '400px'
-          },
-          colors: {
-            ivory: 'var(--bg-ivory)',
-            cream: 'var(--bg-cream)',
-            card: 'var(--bg-card)',
-            taupe: 'var(--border-taupe)',
-            charcoal: 'var(--text-charcoal)',
-            muted: 'var(--text-muted)',
-            faint: 'var(--text-faint)',
-            vermilion: {
-              DEFAULT: 'var(--accent-vermilion)',
-              light: '#E25B52',
-              dark: '#8A2B1D',
-              soft: 'var(--accent-vermilion-soft)'
+    window.tailwind = {
+      config: {
+        darkMode: ['class', '[data-theme="dark"]'],
+        theme: {
+          extend: {
+            screens: {
+              'xs': '400px'
+            },
+            colors: {
+              ivory: 'var(--bg-ivory)',
+              cream: 'var(--bg-cream)',
+              card: 'var(--bg-card)',
+              taupe: 'var(--border-taupe)',
+              charcoal: 'var(--text-charcoal)',
+              muted: 'var(--text-muted)',
+              faint: 'var(--text-faint)',
+              vermilion: {
+                DEFAULT: 'var(--accent-vermilion)',
+                light: '#E25B52',
+                dark: '#8A2B1D',
+                soft: 'var(--accent-vermilion-soft)'
+              }
+            },
+            fontFamily: {
+              serif: ['Cormorant Garamond', 'Pyidaungsu', 'Georgia', 'serif'],
+              sans: ['Pyidaungsu', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+              burmese: ['Pyidaungsu', 'sans-serif']
             }
-          },
-          fontFamily: {
-            serif: ['Cormorant Garamond', 'Pyidaungsu', 'Georgia', 'serif'],
-            sans: ['Pyidaungsu', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-            burmese: ['Pyidaungsu', 'sans-serif']
           }
         }
       }
-    }
+    };
   </script>
+  <script src="js/tailwind.min.js"></script>
 
   <!-- Custom Editorial CSS (Highest Priority) -->
   <link rel="stylesheet" href="css/custom.css">
   <script src="js/theme.js"></script>
+  <!-- Telegram WebApp SDK & Mini App Controller -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="js/telegram-webapp.js"></script>
 </head>
 <body class="bg-ivory text-charcoal min-h-screen flex flex-col font-sans">
+
+
 
   <!-- Top Sticky Reading Progress Bar (Starts invisible until reading scroll begins) -->
   <div id="reading-progress" class="opacity-0 pointer-events-none" style="width: 0%;"></div>
@@ -265,7 +370,7 @@
   <!-- Main Navigation Header -->
   <!-- Master Minimalist Header (Pinned horizontally to 100vw, overflow-free) -->
   <header class="sticky top-0 z-40 bg-ivory/85 dark:bg-[#121110]/85 backdrop-blur-md border-b border-hairline transition-colors duration-300 w-full max-w-full overflow-x-clip left-0 right-0">
-    <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-4 w-full">
+    <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-4 xl:px-6 2xl:px-8 h-16 flex items-center justify-between gap-1.5 sm:gap-3 w-full">
       
       <!-- Minimalist Brand Identity (Calibrated for 360px - 1920px+) -->
       <a href="index.html" class="flex items-center space-x-2 sm:space-x-2.5 group shrink-0" aria-label="Htet — Home">
@@ -278,16 +383,20 @@
         </div>
       </a>
 
-      <!-- Floating Minimalist Navigation Capsule (Desktop Viewports: xl 1280px+) -->
-      <nav class="hidden xl:flex items-center p-1 rounded-full border border-hairline/80 bg-cream/70 dark:bg-stone-900/60 nav-capsule font-sans-ui text-xs xl:text-[13px] shadow-xs">
-        <a href="index.html" class="nav-link-pill px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ပင်မ" data-en="Home" data-zh="首页" data-th="หน้าแรก" data-ja="ホーム">ပင်မ</a>
-        <a href="articles.html" class="nav-link-pill px-3 xl:px-3.5 py-1 xl:py-1.5 rounded-full active bg-vermilion text-white font-medium shadow-xs" data-mm="ဆောင်းပါးများ" data-en="Articles" data-zh="学术文章" data-th="บทความ" data-ja="論考・論文">ဆောင်းပါးများ</a>
-        <a href="publications.html" class="nav-link-pill px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ထုတ်ဝေမှုများ" data-en="Publications" data-zh="出版专著" data-th="ผลงานตีพิมพ์" data-ja="出版物・著作">ထုတ်ဝေမှုများ</a>
-        <a href="journal.html" class="nav-link-pill px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌">မှတ်စုနှင့် ပို့စ်များ</a>
-        <a href="glossary.html" class="nav-link-pill px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典">ဝေါဟာရအဘိဓာန်</a>
-        <a href="about.html" class="nav-link-pill px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について">စာရေးသူအကြောင်း</a>
-        <a href="contact.html" class="nav-link-pill px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系交流" data-th="ติดต่อเรา" data-ja="お問い合わせ">ဆက်သွယ်ရန်</a>
-      </nav>
+      <!-- Floating Minimalist Navigation Capsule (Desktop & Laptop Viewports) -->
+      <div class="hidden lg:flex flex-1 justify-center items-center min-w-0 px-1 sm:px-2">
+        <nav class="flex items-center p-1 rounded-full border border-hairline/80 bg-cream/70 dark:bg-stone-900/60 nav-capsule font-sans-ui text-xs 2xl:text-[13px] shadow-xs shrink-0">
+          <a href="index.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ပင်မ" data-en="Home" data-zh="首页" data-th="หน้าแรก" data-ja="ホーム">ပင်မ</a>
+          <a href="articles.html" class="nav-link-pill px-2.5 2xl:px-3.5 py-1 2xl:py-1.5 rounded-full active bg-vermilion text-white font-medium shadow-xs" data-mm="ဆောင်းပါးများ" data-en="Articles" data-zh="学术文章" data-th="บทความ" data-ja="論考・論文">ဆောင်းပါးများ</a>
+          <a href="publications.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ထုတ်ဝေမှုများ" data-en="Publications" data-zh="出版专著" data-th="ผลงานตีพิมพ์" data-ja="出版物・著作">ထုတ်ဝေမှုများ</a>
+          <a href="journal.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌">မှတ်စုနှင့် ပို့စ်များ</a>
+          <a href="glossary.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典">ဝေါဟာရအဘိဓာန်</a>
+          <a href="dictionary.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="အဘိဓာန်" data-en="Dictionary" data-zh="英语词典" data-th="พจนานุกรม" data-ja="英緬辞典">အဘိဓာန်</a>
+          <a href="translate.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဘာသာပြန်" data-en="Translate" data-zh="智能翻译" data-th="แปลภาษา" data-ja="翻訳">ဘာသာပြန်</a>
+          <a href="about.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について">စာရေးသူအကြောင်း</a>
+          <a href="contact.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系交流" data-th="ติดต่อเรา" data-ja="お問い合わせ">ဆက်သွယ်ရန်</a>
+        </nav>
+      </div>
 
       <!-- Action Utilities Capsule (Adaptive for Phone, Tablet & Desktop) -->
       <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
@@ -302,35 +411,30 @@
           <span id="reading-list-badge" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-vermilion text-white text-[9px] font-bold flex items-center justify-center hidden">0</span>
         </button>
 
-        <!-- Reader Font Scaler (Visible on Large Screens) -->
-        <div class="hidden xl:flex items-center p-0.5 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 shadow-xs font-sans-ui text-xs">
-          <button data-font-action="decrease" id="font-decrease" title="Decrease Font Size (-)" class="w-6 h-6 rounded-full flex items-center justify-center hover:text-vermilion transition-colors text-[11px] font-bold">A-</button>
-          <button data-font-action="reset" id="font-reset" title="Reset Font Size" class="w-6 h-6 rounded-full flex items-center justify-center hover:text-vermilion transition-colors text-[11px] font-bold">A</button>
-          <button data-font-action="increase" id="font-increase" title="Increase Font Size (+)" class="w-6 h-6 rounded-full flex items-center justify-center hover:text-vermilion transition-colors text-[11px] font-bold">A+</button>
-        </div>
-
         <!-- Reading Theme Segmented Controller (Tablet & Desktop Visible) -->
-        <div class="hidden md:flex items-center p-0.5 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 shadow-xs theme-segmented-glass">
-          <button data-set-theme="light" data-theme-btn="light" title="Light / စာရွက်ဖြူ" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90">
-            <i class="ri-sun-cloudy-line text-xs"></i>
-          </button>
-          <button data-set-theme="sepia" data-theme-btn="sepia" title="Sepia / စာအုပ်ညို" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90">
-            <i class="ri-book-open-line text-xs"></i>
-          </button>
-          <button data-set-theme="dark" data-theme-btn="dark" title="Dark / မှောင်ရိပ်" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90">
-            <i class="ri-moon-clear-line text-xs"></i>
-          </button>
-          <button data-set-theme="palette" title="စာဖတ်ရောင်စဉ် စတူဒီယို (14 Themes Studio)" class="w-7 h-7 rounded-full flex items-center justify-center text-xs text-charcoal hover:text-vermilion hover:bg-vermilion/10 transition-all cursor-pointer btn-palette-glow active:scale-90 relative" aria-label="Open Theme Palette Studio">
+        <div class="hidden lg:flex items-center p-0.5 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 shadow-xs theme-segmented-glass">
+          <div class="theme-quick-buttons hidden 2xl:flex items-center">
+            <button data-set-theme="light" data-theme-btn="light" title="Light / စာရွက်ဖြူ" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90">
+              <i class="ri-sun-cloudy-line text-xs"></i>
+            </button>
+            <button data-set-theme="sepia" data-theme-btn="sepia" title="Sepia / စာအုပ်ညို" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90">
+              <i class="ri-book-open-line text-xs"></i>
+            </button>
+            <button data-set-theme="dark" data-theme-btn="dark" title="Dark / မှောင်ရိပ်" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90">
+              <i class="ri-moon-clear-line text-xs"></i>
+            </button>
+            <button data-set-theme="amoled" data-theme-btn="amoled" title="AMOLED / အနက်စစ်" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90">
+              <i class="ri-contrast-drop-2-line text-xs"></i>
+            </button>
+            <span class="w-px h-3.5 bg-hairline/60 mx-0.5"></span>
+          </div>
+          <button data-set-theme="palette" title="စာဖတ်ရောင်စဉ် စတူဒီယို (18 Themes Studio)" class="w-7 h-7 rounded-full flex items-center justify-center text-xs text-charcoal hover:text-vermilion hover:bg-vermilion/10 transition-all cursor-pointer btn-palette-glow active:scale-90 relative" aria-label="Open Theme Palette Studio">
             <i class="ri-palette-line text-xs"></i>
             <span class="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full theme-active-dot ring-1 ring-white/60"></span>
           </button>
         </div>
 
-        <!-- Mobile Dedicated Theme Studio Button (Mobile & Tablet Visible) -->
-        <button data-set-theme="palette" class="md:hidden nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 flex items-center justify-center text-charcoal hover:text-vermilion transition-all shadow-xs relative cursor-pointer active:scale-95 btn-palette-glow" title="စာဖတ်ရောင်စဉ် စတူဒီယို (14 Themes Studio)" aria-label="Reading Themes">
-          <i class="ri-palette-line text-sm"></i>
-          <span class="absolute top-1 right-1 w-2 h-2 rounded-full theme-active-dot ring-1 ring-white/60"></span>
-        </button>
+
 
         <!-- International Multi-Language Selector (5 Languages: MM, EN, ZH, TH, JA) -->
         <div class="relative lang-switcher-container">
@@ -397,13 +501,13 @@
           </div>
         </div>
 
-        <!-- Direct Telegram Channel Quick Link (Wide Desktop Visible) -->
-        <a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="hidden 2xl:flex nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-charcoal hover:bg-vermilion hover:text-white hover:border-vermilion transition-all items-center justify-center shadow-xs" title="Official Telegram Channel" aria-label="Telegram">
+        <!-- Direct Telegram Channel Quick Link (Large Desktop Viewports) -->
+        <a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="hidden 2xl:flex nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-[#2AABEE] hover:bg-[#2AABEE] hover:text-white hover:border-[#2AABEE] transition-all items-center justify-center shadow-xs" title="Official Telegram Channel (@htetmmofficial)" aria-label="Telegram Channel">
           <i class="ri-telegram-fill text-sm"></i>
         </a>
 
         <!-- Mobile & Tablet Hamburger Toggle -->
-        <button id="mobile-menu-toggle" class="xl:hidden nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 flex items-center justify-center text-charcoal hover:text-vermilion focus:outline-none transition-colors" aria-label="Open Navigation">
+        <button id="mobile-menu-toggle" class="lg:hidden nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 flex items-center justify-center text-charcoal hover:text-vermilion focus:outline-none transition-colors" aria-label="Open Navigation">
           <i class="ri-menu-3-line text-base"></i>
         </button>
 
@@ -412,169 +516,283 @@
   </header>
 
   <!-- Mobile Menu Overlay Backdrop -->
-  <div id="mobile-menu-overlay" class="fixed inset-0 bg-charcoal/40 dark:bg-black/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
+  <div id="mobile-menu-overlay" style="display: none;" class="fixed inset-0 bg-charcoal/40 dark:bg-black/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
 
   <!-- Mobile Drawer Sidebar (Calibrated for 360px - 820px) -->
-  <div id="mobile-menu-drawer" class="fixed top-0 left-0 bottom-0 w-72 sm:w-80 max-w-[85vw] bg-ivory dark:bg-[#141312] z-50 transform -translate-x-full transition-transform duration-300 ease-in-out border-r border-hairline p-5 sm:p-6 flex flex-col justify-between shadow-2xl overflow-y-auto overscroll-contain">
+  <div id="mobile-menu-drawer" style="visibility: hidden; transform: translateX(-100%); -webkit-transform: translateX(-100%); pointer-events: none;" class="fixed top-0 left-0 bottom-0 w-80 sm:w-88 max-w-[88vw] bg-ivory dark:bg-[#141312] z-50 border-r border-hairline p-4 sm:p-5 flex flex-col justify-between shadow-2xl overflow-y-auto overscroll-contain">
     <div>
-      <!-- Drawer Header -->
-      <div class="flex items-center justify-between pb-5 border-b border-hairline">
-        <a href="index.html" class="flex items-center space-x-2.5">
-          <div class="nav-brand-glass-icon w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0" title="ထက် (Htet)">
-            <img src="assets/favicon.svg" alt="ထက်" class="w-full h-full object-contain">
+      <!-- Drawer Header: Deluxe Scholar Profile -->
+      <div class="flex items-center justify-between pb-4 border-b border-hairline">
+        <a href="index.html" class="flex items-center space-x-3 group">
+          <div class="relative shrink-0">
+            <div class="nav-brand-glass-icon w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 shadow-sm border border-hairline/80 group-hover:scale-105 transition-transform" title="ထက် (Htet)">
+              <img src="assets/favicon.svg" alt="ထက်" class="w-6 h-6 object-contain">
+            </div>
+            <!-- Live Scholar Status Dot -->
+            <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-card shadow-xs" title="Open Scholar Hub • အွန်လိုင်း"></span>
           </div>
           <div class="flex flex-col">
-            <span class="font-serif-editorial text-xl font-bold tracking-tight text-charcoal leading-none">HTET</span>
-            <span class="text-[9px] tracking-wider text-muted uppercase font-sans-ui mt-0.5" data-mm="စာရေးဆရာမ • သုတေသီ" data-en="WRITER • RESEARCHER" data-zh="作家 • 政治哲学研究者" data-th="นักเขียน • นักวิจัยปรัชญา" data-ja="作家・政治哲学研究者">စာရေးဆရာမ • သုတေသီ</span>
+            <div class="flex items-center space-x-1.5">
+              <span class="font-serif-editorial text-xl font-bold tracking-tight text-charcoal leading-none">HTET</span>
+              <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-vermilion/10 text-vermilion font-mono font-bold tracking-wide">HUB</span>
+            </div>
+            <span class="text-[10px] tracking-wider text-muted uppercase font-sans-ui mt-1" data-mm="စာရေးဆရာမ • သုတေသီ" data-en="WRITER • RESEARCHER" data-zh="作家 • 政治哲学研究者" data-th="นักเขียน • นักวิจัยปรัชญา" data-ja="作家・政治哲学研究者">စာရေးဆရာမ • သုတေသီ</span>
           </div>
         </a>
-        <button id="mobile-menu-close" class="w-8 h-8 rounded-full border border-hairline/80 flex items-center justify-center text-muted hover:text-charcoal hover:border-charcoal/30 transition-colors" aria-label="Close Navigation">
+        <button id="mobile-menu-close" class="w-8 h-8 rounded-full border border-hairline/80 bg-cream/50 dark:bg-stone-900/50 flex items-center justify-center text-muted hover:text-charcoal hover:border-charcoal/30 active:scale-90 transition-all cursor-pointer" aria-label="Close Navigation">
           <i class="ri-close-line text-lg"></i>
         </button>
       </div>
 
-      <!-- Mobile Navigation Links -->
-      <nav class="flex flex-col space-y-1.5 py-5 font-sans-ui text-sm">
-        <a href="index.html" class="mobile-nav-link flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/60 dark:hover:bg-stone-800/60 group" data-mm="ပင်မ" data-en="Home" data-zh="首页" data-th="หน้าแรก" data-ja="ホーム">
-          <i class="ri-home-5-line text-lg text-muted group-hover:text-vermilion transition-colors"></i>
-          <span>ပင်မ</span>
+      <!-- Live Reading Context Card (Exclusive for Article Reader) -->
+      <div class="my-4 p-3.5 rounded-2xl border border-hairline bg-cream/70 dark:bg-stone-900/60 shadow-xs space-y-2.5">
+        <div class="flex items-center justify-between text-xs font-sans-ui">
+          <span class="flex items-center space-x-1.5 text-muted font-medium">
+            <i class="ri-book-read-line text-vermilion"></i>
+            <span data-mm="စာဖတ်နှုန်း" data-en="Reading Progress">စာဖတ်နှုန်း</span>
+          </span>
+          <span id="drawer-scroll-percent" class="font-mono font-bold text-vermilion text-xs">0%</span>
+        </div>
+        <!-- Live Progress Bar -->
+        <div class="w-full bg-hairline/60 rounded-full h-1.5 overflow-hidden">
+          <div id="drawer-progress-bar" class="bg-vermilion h-full rounded-full transition-all duration-150" style="width: 0%;"></div>
+        </div>
+        <!-- Quick Navigation Actions -->
+        <div class="grid grid-cols-2 gap-2 pt-0.5 font-sans-ui text-xs">
+          <button onclick="document.getElementById('mobile-menu-close').click(); const toc = document.getElementById('table-of-contents') || document.querySelector('.article-toc'); if(toc) toc.scrollIntoView({behavior: 'smooth'});" class="py-1.5 px-2 rounded-xl border border-hairline/80 bg-card hover:bg-vermilion/10 hover:text-vermilion transition-all flex items-center justify-center space-x-1 text-muted text-[11px] font-medium cursor-pointer active:scale-95">
+            <i class="ri-list-check-2 text-xs text-vermilion"></i>
+            <span data-mm="မာတိကာ" data-en="Contents">မာတိကာ</span>
+          </button>
+          <button onclick="document.getElementById('mobile-menu-close').click(); window.scrollTo({top: 0, behavior: 'smooth'});" class="py-1.5 px-2 rounded-xl border border-hairline/80 bg-card hover:bg-vermilion/10 hover:text-vermilion transition-all flex items-center justify-center space-x-1 text-muted text-[11px] font-medium cursor-pointer active:scale-95">
+            <i class="ri-arrow-up-line text-xs text-vermilion"></i>
+            <span data-mm="ထိပ်ဆုံးသို့" data-en="Top">ထိပ်ဆုံးသို့</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Links: Deluxe Glass Items -->
+      <nav class="flex flex-col space-y-1 py-1 font-sans-ui text-sm">
+        <a href="index.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-home-5-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ပင်မ" data-en="Home" data-zh="首页" data-th="หน้าแรก" data-ja="ホーム">ပင်မ</span>
+          </span>
+          <i class="ri-arrow-right-s-line text-sm text-muted/50 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i>
         </a>
-        <a href="articles.html" class="mobile-nav-link active flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-semibold transition-all text-vermilion bg-vermilion/10 dark:bg-vermilion/20 border-l-4 border-vermilion shadow-xs" data-mm="ဆောင်းပါးများ" data-en="Articles" data-zh="学术文章" data-th="บทความ" data-ja="論考・論文">
-          <i class="ri-article-line text-lg text-vermilion"></i>
-          <span>ဆောင်းပါးများ</span>
+
+        <a href="articles.html" class="drawer-nav-item active flex items-center justify-between px-3 py-2 rounded-2xl font-semibold transition-all text-vermilion bg-vermilion/10 dark:bg-vermilion/20 border border-vermilion/30 shadow-2xs group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-vermilion text-white flex items-center justify-center shadow-xs shrink-0">
+              <i class="ri-article-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ဆောင်းပါးများ" data-en="Articles" data-zh="学术文章" data-th="บทความ" data-ja="論考・論文">ဆောင်းပါးများ</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-vermilion/20 text-vermilion font-mono font-bold shrink-0">25</span>
         </a>
-        <a href="publications.html" class="mobile-nav-link flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/60 dark:hover:bg-stone-800/60 group" data-mm="ထုတ်ဝေမှုများ" data-en="Publications" data-zh="出版专著" data-th="ผลงานตีพิมพ์" data-ja="出版物・著作">
-          <i class="ri-file-paper-2-line text-lg text-muted group-hover:text-vermilion transition-colors"></i>
-          <span>ထုတ်ဝေမှုများ</span>
+
+        <a href="publications.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-book-2-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ထုတ်ဝေမှုများ" data-en="Publications" data-zh="出版专著" data-th="ผลงานตีพิมพ์" data-ja="出版物・著作">ထုတ်ဝေမှုများ</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">4</span>
         </a>
-        <a href="journal.html" class="mobile-nav-link flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/60 dark:hover:bg-stone-800/60 group" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌">
-          <i class="ri-booklet-line text-lg text-muted group-hover:text-vermilion transition-colors"></i>
-          <span>မှတ်စုနှင့် ပို့စ်များ</span>
+
+        <a href="journal.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-booklet-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌">မှတ်စုနှင့် ပို့စ်များ</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">71</span>
         </a>
-        <a href="glossary.html" class="mobile-nav-link flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/60 dark:hover:bg-stone-800/60 group" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典">
-          <i class="ri-book-read-line text-lg text-muted group-hover:text-vermilion transition-colors"></i>
-          <span>ဝေါဟာရအဘိဓာန်</span>
+
+        <a href="glossary.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-book-read-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典">ဝေါဟာရအဘိဓာန်</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">115</span>
         </a>
-        <a href="about.html" class="mobile-nav-link flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/60 dark:hover:bg-stone-800/60 group" data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について">
-          <i class="ri-user-star-line text-lg text-muted group-hover:text-vermilion transition-colors"></i>
-          <span>စာရေးသူအကြောင်း</span>
+
+        <a href="dictionary.html" class="drawer-nav-item flex items-center justify-between px-3 py-2.5 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-book-2-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="အဘိဓာန်" data-en="Dictionary" data-zh="英语词典" data-th="พจนานุกรม" data-ja="英緬辞典">အဘိဓာန်</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">111K+</span>
         </a>
-        <a href="contact.html" class="mobile-nav-link flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/60 dark:hover:bg-stone-800/60 group" data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系交流" data-th="ติดต่อเรา" data-ja="お問い合わせ">
-          <i class="ri-send-plane-2-line text-lg text-muted group-hover:text-vermilion transition-colors"></i>
-          <span>ဆက်သွယ်ရန်</span>
+
+        <a href="translate.html" class="drawer-nav-item flex items-center justify-between px-3 py-2.5 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-translate-2 text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ဘာသာပြန်စတူဒီယို" data-en="Translate">ဘာသာပြန်စတူဒီယို</span>
+          </span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold shrink-0">Neural</span>
+        </a>
+
+        <a href="about.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-user-star-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について">စာရေးသူအကြောင်း</span>
+          </span>
+          <i class="ri-arrow-right-s-line text-sm text-muted/50 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i>
+        </a>
+
+        <a href="contact.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium transition-all text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/70 dark:hover:bg-stone-800/60 group">
+          <span class="flex items-center space-x-2.5 min-w-0">
+            <span class="w-7 h-7 rounded-lg bg-cream dark:bg-stone-800/80 border border-hairline/70 flex items-center justify-center text-muted group-hover:text-vermilion group-hover:bg-vermilion/10 transition-colors shrink-0">
+              <i class="ri-mail-send-line text-sm"></i>
+            </span>
+            <span class="whitespace-nowrap text-[13px]" data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系交流" data-th="ติดต่อเรา" data-ja="お問い合わせ">ဆက်သွယ်ရန်</span>
+          </span>
+          <i class="ri-arrow-right-s-line text-sm text-muted/50 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i>
         </a>
       </nav>
     </div>
 
     <!-- Mobile Drawer Footer Options -->
-    <div class="pt-4 border-t border-hairline space-y-3">
-      <!-- Device-Adaptive Font Size Scaler Control (Available across all devices) -->
-      <div class="flex items-center justify-between text-xs text-muted font-sans-ui">
-        <span class="flex items-center space-x-1.5">
+    <div class="pt-3.5 border-t border-hairline space-y-2.5 font-sans-ui">
+      <!-- Device-Adaptive Font Size Scaler Control -->
+      <div class="flex items-center justify-between text-xs text-muted">
+        <span class="flex items-center space-x-1.5 font-medium text-charcoal">
           <i class="ri-font-size-2 text-sm text-vermilion"></i>
           <span data-mm="ဖောင့်အရွယ်အစား" data-en="Font Size" data-zh="字体大小" data-th="ขนาดตัวอักษร" data-ja="フォントサイズ">ဖောင့်အရွယ်အစား</span>
         </span>
-        <div class="flex items-center p-0.5 rounded-full border border-hairline bg-cream dark:bg-stone-900 shadow-inner font-sans-ui text-xs">
-          <button data-font-action="decrease" title="Smaller Font (ဖောင့်သေး)" class="px-2.5 py-0.5 rounded-full text-xs font-medium hover:text-vermilion transition-all">A-</button>
-          <button data-font-action="reset" title="Standard Font (ဖောင့်ပုံမှန်)" class="px-2 py-0.5 rounded-full text-xs font-semibold hover:text-vermilion transition-all">A</button>
-          <button data-font-action="increase" title="Larger Font (ဖောင့်ကြီး)" class="px-2.5 py-0.5 rounded-full text-xs font-medium hover:text-vermilion transition-all">A+</button>
+        <div class="flex items-center p-0.5 rounded-full border border-hairline bg-cream/80 dark:bg-stone-900/80 shadow-inner text-xs">
+          <button data-font-action="decrease" title="Smaller Font (ဖောင့်သေး)" class="px-2.5 py-1 rounded-full text-xs font-medium hover:text-vermilion active:scale-95 transition-all cursor-pointer">A-</button>
+          <button data-font-action="reset" title="Standard Font (ဖောင့်ပုံမှန်)" class="px-2.5 py-1 rounded-full text-xs font-semibold hover:text-vermilion active:scale-95 transition-all cursor-pointer">A</button>
+          <button data-font-action="increase" title="Larger Font (ဖောင့်ကြီး)" class="px-2.5 py-1 rounded-full text-xs font-medium hover:text-vermilion active:scale-95 transition-all cursor-pointer">A+</button>
         </div>
       </div>
 
       <!-- Download Monograph Link -->
-      <button id="mobile-download-btn" class="w-full py-2.5 px-3 rounded-xl border border-red-300 dark:border-red-900/60 bg-red-50/80 dark:bg-red-950/40 text-xs font-sans-ui flex items-center justify-center space-x-1.5 text-red-700 dark:text-red-300 font-semibold hover:bg-red-100 transition-colors shadow-2xs">
-        <i class="ri-file-pdf-2-line text-sm text-red-500"></i>
-        <span data-mm="Full Version PDF ဒေါင်းလုဒ်" data-en="Download Full Version PDF">Full Version PDF ဒေါင်းလုဒ်</span>
+      <button id="mobile-download-btn" class="w-full py-2 px-3 rounded-xl border border-red-300 dark:border-red-900/60 bg-red-50/80 dark:bg-red-950/40 text-xs flex items-center justify-center space-x-2 text-red-700 dark:text-red-300 font-semibold hover:bg-red-100 transition-colors shadow-2xs cursor-pointer active:scale-98">
+        <i class="ri-file-pdf-2-line text-base text-red-500"></i>
+        <span class="whitespace-nowrap" data-mm="Full PDF ဒေါင်းလုဒ်" data-en="Download Full PDF">Full PDF ဒေါင်းလုဒ်</span>
       </button>
 
-      <!-- Join Telegram Channel Link -->
-      <a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 rounded-xl border border-hairline bg-cream/60 dark:bg-stone-900/60 text-xs font-sans-ui flex items-center justify-center space-x-1.5 text-charcoal hover:text-vermilion transition-colors">
-        <i class="ri-telegram-fill text-sm text-[#24A1DE]"></i>
-        <span data-mm="တယ်လီဂရမ် ချန်နယ်သို့" data-en="Join Telegram Channel" data-zh="加入 Telegram 频道" data-th="เข้าร่วมช่อง Telegram" data-ja="Telegramチャンネルに参加">တယ်လီဂရမ် ချန်နယ်သို့</span>
-      </a>
-
-      <!-- Multi-Language Switcher Section -->
-      <div class="flex flex-col space-y-2 text-xs text-muted font-sans-ui">
+      <!-- Multi-Language Switcher Section (Wrap-Free Compact Layout) -->
+      <div class="flex flex-col space-y-1.5 text-xs">
         <div class="flex items-center justify-between">
-          <span class="flex items-center space-x-1.5">
+          <span class="flex items-center space-x-1.5 font-medium text-charcoal shrink-0">
             <i class="ri-translate-2 text-sm text-vermilion"></i>
-            <span data-mm="ဘာသာစကား ရွေးချယ်ရန်" data-en="Language Selector" data-zh="语言切换" data-th="เลือกภาษา" data-ja="言語設定">ဘာသာစကား ရွေးချယ်ရန်</span>
+            <span data-mm="ဘာသာစကား" data-en="Language" data-zh="语言" data-th="ภาษา" data-ja="言語">ဘာသာစကား</span>
           </span>
-          <button id="drawer-lang-modal-btn" class="text-[11px] text-vermilion hover:underline font-semibold flex items-center space-x-0.5 cursor-pointer active:scale-95" title="Open Full Sheet">
-            <span data-mm="အားလုံး (၅ မျိုး)" data-en="All 5 Langs" data-zh="全部5种" data-th="ทั้ง 5 ภาษา" data-ja="全5言語">အားလုံး (၅ မျိုး)</span>
+          <button id="drawer-lang-modal-btn" class="shrink-0 text-[11px] text-vermilion hover:underline font-semibold flex items-center space-x-0.5 cursor-pointer active:scale-95" title="Open Full Sheet">
+            <span data-mm="၅ မျိုးစုံ" data-en="5 Langs" data-zh="全部5种" data-th="ทั้ง 5 ภาษา" data-ja="全5言語">၅ မျိုးစုံ</span>
             <i class="ri-arrow-right-s-line text-xs"></i>
           </button>
         </div>
-        <div class="grid grid-cols-5 gap-1.5 p-1.5 rounded-2xl border border-hairline bg-cream/70 dark:bg-stone-900/70 shadow-inner">
-          <button data-switch-lang="mm" class="lang-toggle-btn py-2 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="mm" title="မြန်မာဘာသာ">
+        <div class="grid grid-cols-5 gap-1.5 p-1 rounded-2xl border border-hairline bg-cream/60 dark:bg-stone-900/60 shadow-inner">
+          <button data-switch-lang="mm" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="mm" title="မြန်မာဘာသာ">
             <span class="text-sm">🇲🇲</span>
             <span class="text-[10px] font-mono leading-none">MM</span>
           </button>
-          <button data-switch-lang="en" class="lang-toggle-btn py-2 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="en" title="English">
+          <button data-switch-lang="en" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="en" title="English">
             <span class="text-sm">🇬🇧</span>
             <span class="text-[10px] font-mono leading-none">EN</span>
           </button>
-          <button data-switch-lang="zh" class="lang-toggle-btn py-2 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="zh" title="简体中文">
+          <button data-switch-lang="zh" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="zh" title="简体中文">
             <span class="text-sm">🇨🇳</span>
             <span class="text-[10px] font-mono leading-none">ZH</span>
           </button>
-          <button data-switch-lang="th" class="lang-toggle-btn py-2 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="th" title="ภาษาไทย">
+          <button data-switch-lang="th" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="th" title="ภาษาไทย">
             <span class="text-sm">🇹🇭</span>
             <span class="text-[10px] font-mono leading-none">TH</span>
           </button>
-          <button data-switch-lang="ja" class="lang-toggle-btn py-2 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="ja" title="日本語">
+          <button data-switch-lang="ja" class="lang-toggle-btn py-1.5 px-1 text-center rounded-xl text-xs font-medium transition-all flex flex-col items-center justify-center space-y-0.5 cursor-pointer active:scale-95" data-target-lang="ja" title="日本語">
             <span class="text-sm">🇯🇵</span>
             <span class="text-[10px] font-mono leading-none">JA</span>
           </button>
         </div>
       </div>
 
-      <!-- Reading Theme Switcher Section (14 Themes) -->
-      <div class="flex flex-col space-y-2 text-xs text-muted font-sans-ui">
+      <!-- Reading Theme Switcher Section (Spacious 4-Grid + Studio Button) -->
+      <div class="flex flex-col space-y-1.5 text-xs">
         <div class="flex items-center justify-between">
-          <span class="flex items-center space-x-1.5">
+          <span class="flex items-center space-x-1.5 font-medium text-charcoal shrink-0">
             <i class="ri-palette-line text-sm text-vermilion"></i>
             <span data-mm="စာဖတ်ရောင်စဉ်" data-en="Reading Themes" data-zh="阅读主题" data-th="ธีมการอ่าน" data-ja="読書テーマ">စာဖတ်ရောင်စဉ်</span>
           </span>
-          <button data-set-theme="palette" class="text-[11px] text-vermilion hover:underline font-semibold flex items-center space-x-1 cursor-pointer active:scale-95" title="Open Theme Studio">
-            <span data-mm="စတူဒီယို (၁၄ မျိုး)" data-en="Studio (14 Themes)" data-zh="14种调色盘" data-th="14 ธีม" data-ja="14テーマ">စတူဒီယို (၁၄ မျိုး)</span>
-            <i class="ri-arrow-right-s-line text-xs"></i>
+        </div>
+        <!-- 4 Primary Quick Themes -->
+        <div class="grid grid-cols-4 gap-1 p-1 rounded-2xl border border-hairline bg-cream/60 dark:bg-stone-900/60 shadow-inner">
+          <button data-set-theme="light" data-theme-btn="light" title="Light / စာရွက်ဖြူ" class="py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-xs transition-all cursor-pointer active:scale-95 hover:bg-card">
+            <i class="ri-sun-cloudy-line text-sm"></i>
+            <span class="text-[9px] font-mono font-medium">LIGHT</span>
+          </button>
+          <button data-set-theme="sepia" data-theme-btn="sepia" title="Sepia / စာအုပ်ညို" class="py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-xs transition-all cursor-pointer active:scale-95 hover:bg-card">
+            <i class="ri-book-open-line text-sm"></i>
+            <span class="text-[9px] font-mono font-medium">SEPIA</span>
+          </button>
+          <button data-set-theme="dark" data-theme-btn="dark" title="Dark / မှောင်ရိပ်" class="py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-xs transition-all cursor-pointer active:scale-95 hover:bg-card">
+            <i class="ri-moon-clear-line text-sm"></i>
+            <span class="text-[9px] font-mono font-medium">DARK</span>
+          </button>
+          <button data-set-theme="amoled" data-theme-btn="amoled" title="AMOLED / အနက်စစ်" class="py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-xs transition-all cursor-pointer active:scale-95 hover:bg-card">
+            <i class="ri-contrast-drop-2-line text-sm"></i>
+            <span class="text-[9px] font-mono font-medium">OLED</span>
           </button>
         </div>
-        <div class="flex items-center justify-between p-1 rounded-2xl border border-hairline bg-cream/70 dark:bg-stone-900/70 shadow-inner">
-          <button data-set-theme="light" data-theme-btn="light" title="Light / စာရွက်ဖြူ" class="flex-1 py-1.5 rounded-xl flex items-center justify-center text-xs transition-all cursor-pointer active:scale-95" aria-label="Light Theme">
-            <i class="ri-sun-cloudy-line text-xs mr-1"></i>
-            <span class="text-[10px] font-mono">LIGHT</span>
-          </button>
-          <button data-set-theme="sepia" data-theme-btn="sepia" title="Sepia / စာအုပ်ညို" class="flex-1 py-1.5 rounded-xl flex items-center justify-center text-xs transition-all cursor-pointer active:scale-95" aria-label="Sepia Theme">
-            <i class="ri-book-open-line text-xs mr-1"></i>
-            <span class="text-[10px] font-mono">SEPIA</span>
-          </button>
-          <button data-set-theme="dark" data-theme-btn="dark" title="Dark / မှောင်ရိပ်" class="flex-1 py-1.5 rounded-xl flex items-center justify-center text-xs transition-all cursor-pointer active:scale-95" aria-label="Dark Theme">
-            <i class="ri-moon-clear-line text-xs mr-1"></i>
-            <span class="text-[10px] font-mono">DARK</span>
-          </button>
-          <button data-set-theme="palette" title="စာဖတ်ရောင်စဉ် ၁၄ မျိုး စတူဒီယို" class="px-2.5 py-1.5 rounded-xl flex items-center justify-center text-xs transition-all text-vermilion hover:bg-vermilion/10 cursor-pointer active:scale-95 relative" aria-label="Theme Studio">
-            <i class="ri-palette-line text-xs"></i>
-            <span class="w-1.5 h-1.5 rounded-full theme-active-dot ml-1 ring-1 ring-white/60"></span>
-          </button>
-        </div>
+        <!-- Full 18 Themes Studio Button -->
+        <button data-set-theme="palette" class="w-full py-2 px-3 rounded-xl border border-hairline/80 bg-cream/70 dark:bg-stone-900/60 hover:border-vermilion/50 hover:text-vermilion text-charcoal transition-all flex items-center justify-between text-xs font-medium cursor-pointer shadow-2xs group active:scale-98">
+          <span class="flex items-center space-x-2">
+            <i class="ri-palette-fill text-sm text-vermilion group-hover:scale-110 transition-transform"></i>
+            <span data-mm="စာဖတ်ရောင်စဉ် စတူဒီယို (18 Themes)" data-en="Theme Studio (18 Themes)" data-zh="18种主题调色盘" data-th="18 ธีม" data-ja="18テーマ">စာဖတ်ရောင်စဉ် စတူဒီယို (18 Themes)</span>
+          </span>
+          <span class="w-2 h-2 rounded-full theme-active-dot ring-1 ring-white/60"></span>
+        </button>
       </div>
+
+      <!-- Join Telegram Channel Link -->
+      <a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 rounded-xl border border-sky-300/40 dark:border-sky-900/40 bg-sky-50/50 dark:bg-sky-950/20 text-xs flex items-center justify-between text-[#24A1DE] hover:bg-sky-100/50 transition-colors group">
+        <span class="flex items-center space-x-2">
+          <i class="ri-telegram-fill text-base group-hover:scale-110 transition-transform"></i>
+          <span class="whitespace-nowrap" data-mm="Telegram ချန်နယ်" data-en="Telegram Channel" data-zh="Telegram 频道" data-th="ช่อง Telegram" data-ja="Telegramチャンネル">Telegram ချန်နယ်</span>
+        </span>
+        <span class="text-[10px] font-mono opacity-70">@htetmmofficial ↗</span>
+      </a>
+
       <!-- PWA Native Install Button -->
-      <div class="pt-2">
-        <button data-pwa-install class="w-full py-2 px-3 rounded-xl border border-hairline/80 bg-cream/70 dark:bg-stone-900/60 hover:border-vermilion/50 text-charcoal hover:text-vermilion transition-all flex items-center justify-between text-xs font-medium cursor-pointer shadow-2xs group">
+      <div>
+        <button data-pwa-install class="w-full py-2 px-3 rounded-xl border border-hairline/80 bg-cream/70 dark:bg-stone-900/60 hover:border-vermilion/50 text-charcoal hover:text-vermilion transition-all flex items-center justify-between text-xs font-medium cursor-pointer shadow-2xs group active:scale-98">
           <span class="flex items-center space-x-2">
             <i class="ri-download-cloud-2-line text-base text-vermilion group-hover:scale-110 transition-transform"></i>
-            <span data-mm="အက်ပ်သွင်းယူရန် (Install App)" data-en="Install App">အက်ပ်သွင်းယူရန် (Install App)</span>
+            <span class="whitespace-nowrap" data-mm="အက်ပ်သွင်းယူရန် (Install PWA)" data-en="Install App (PWA)">အက်ပ်သွင်းယူရန် (Install PWA)</span>
           </span>
-          <span class="text-[9px] px-1.5 py-0.2 rounded-md bg-vermilion/15 text-vermilion font-mono font-bold">PWA</span>
+          <span class="text-[9px] px-1.5 py-0.5 rounded-md bg-vermilion/15 text-vermilion font-mono font-bold">PWA</span>
         </button>
+      </div>
+
+      <!-- Android App APK Release -->
+      <div>
+        <a href="https://github.com/htetofficial/htetofficial.github.io/releases/tag/v1.2.0-beta" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 rounded-xl border border-emerald-500/30 bg-emerald-50/50 dark:bg-emerald-950/20 hover:border-emerald-500/60 text-emerald-800 dark:text-emerald-300 transition-all flex items-center justify-between text-xs font-medium shadow-2xs group">
+          <span class="flex items-center space-x-2">
+            <i class="ri-android-line text-base text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform"></i>
+            <span class="whitespace-nowrap" data-mm="Android App (v1.2.0 APK)" data-en="Android App (v1.2.0 APK)">Android App (v1.2.0 APK)</span>
+          </span>
+          <span class="text-[9px] px-1.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 font-mono font-bold">APK</span>
+        </a>
       </div>
     </div>
   </div><main class="flex-grow">
     
     <!-- Breadcrumb & Back Navigation -->
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 pt-8 pb-4">
+    <div class="max-w-4xl mx-auto px-3.5 sm:px-6 pt-6 sm:pt-8 pb-3 sm:pb-4">
       <a href="articles.html" class="inline-flex items-center space-x-2 text-xs text-muted hover:text-vermilion transition-colors font-sans-ui">
         <i class="ri-arrow-left-line text-base"></i>
         <span data-mm="ဆောင်းပါးများအားလုံးသို့ ပြန်သွားရန်" data-en="Back to all essays">ဆောင်းပါးများအားလုံးသို့ ပြန်သွားရန်</span>
@@ -582,7 +800,7 @@
     </div>
 
     <!-- Article Content Screen -->
-    <article class="max-w-4xl mx-auto px-4 sm:px-6 pb-20">
+    <article class="max-w-4xl mx-auto px-3.5 sm:px-6 pb-20">
       
       <!-- Article Header -->
       <header class="border-b border-hairline pb-8 mb-8 space-y-4">
@@ -667,6 +885,12 @@
               <span class="text-xs" data-mm="မူရင်း Blogpost" data-en="Original Blog">မူရင်း Blogpost</span>
             </a>
 
+            <!-- Telegram Share / Instant View Button -->
+            <button id="article-telegram-share-btn" onclick="window.TelegramMiniApp ? window.TelegramMiniApp.shareArticle(document.getElementById('article-title').textContent.trim(), window.location.href) : window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href), '_blank')" title="Telegram တွင် မျှဝေမည် (Instant View)" class="article-action-btn-glass btn-3d-tactile no-print flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl border border-[#2AABEE]/40 bg-[#2AABEE]/10 text-[#2AABEE] hover:bg-[#2AABEE]/20 transition-all cursor-pointer shadow-2xs">
+              <i class="ri-telegram-fill text-sm text-[#2AABEE]"></i>
+              <span class="text-xs font-semibold">Telegram IV</span>
+            </button>
+
             <button onclick="window.print()" title="Print (စာတမ်းပုံနှိပ်ရန်)" class="article-action-btn-glass btn-3d-tactile no-print hover:text-charcoal px-2.5 py-1.5 rounded-xl border border-hairline text-charcoal transition-colors shadow-2xs cursor-pointer">
               <i class="ri-printer-line text-sm"></i>
             </button>
@@ -678,7 +902,7 @@
         </h1>
 
         <!-- Lead Excerpt Callout -->
-        <div class="glass-3d-card card-3d-interactive p-4 sm:p-6 border-l-4 border-vermilion shadow-sm">
+        <div class="glass-3d-card card-3d-interactive p-3.5 sm:p-6 border-l-4 border-vermilion shadow-sm">
           <p id="article-lead-excerpt" class="text-sm sm:text-base text-muted font-sans-ui italic leading-relaxed">
             စာမူအကျဉ်း ဖော်ပြချက်...
           </p>
@@ -738,13 +962,13 @@
       </div>
 
       <!-- Featured Cover Graphic (Rendered dynamically if article.image exists) -->
-      <div id="article-featured-image-wrapper" class="hidden mb-10 rounded-2xl sm:rounded-3xl overflow-hidden border border-taupe-light shadow-md bg-stone-900/5 dark:bg-stone-900/40">
-        <img id="article-featured-image" alt="Article Cover Graphic" class="w-full h-auto object-cover max-h-[550px]" loading="lazy">
+      <div id="article-featured-image-wrapper" class="hidden mb-10 rounded-2xl sm:rounded-3xl overflow-hidden border border-taupe-light shadow-md bg-stone-900/5 dark:bg-stone-950/70">
+        <img id="article-featured-image" alt="Article Cover Graphic" class="w-full h-auto object-contain max-h-[600px] mx-auto" loading="eager" fetchpriority="high">
         <div id="article-featured-image-caption" class="py-2.5 px-4 bg-cream/80 dark:bg-stone-900/80 text-xs text-muted font-sans-ui text-center border-t border-hairline"></div>
       </div>
 
       <!-- Table of Contents (Generated Dynamically) -->
-      <section id="table-of-contents" class="liquid-glass-card mb-10 p-4 sm:p-6 sm:p-7 border border-taupe-light shadow-sm hidden">
+      <section id="table-of-contents" class="liquid-glass-card mb-10 p-3.5 sm:p-6 sm:p-7 border border-taupe-light shadow-sm hidden">
         <div class="flex items-center justify-between mb-3 border-b border-hairline/60 pb-2.5">
           <h3 class="text-xs font-semibold uppercase tracking-wider text-faint font-sans-ui flex items-center space-x-2">
             <i class="ri-list-check-2 text-vermilion text-base"></i>
@@ -758,6 +982,124 @@
         <ul id="table-of-contents-list" class="space-y-1.5 font-sans-ui text-sm"></ul>
       </section>
 
+      <!-- Hybrid Nara Mini v1 Audio Reader (Method 1 Pre-generated + Method 3 Opt-In On-Device AI Voice) -->
+      <section id="nara-tts-player" class="nara-tts-card mb-8 p-4 sm:p-5 rounded-2xl border border-taupe-light bg-cream shadow-2xs space-y-3.5" aria-label="Nara Mini v1 Audio Reader">
+        <div class="flex flex-wrap items-center justify-between gap-2.5 pb-3 border-b border-hairline">
+          <div class="flex items-center gap-2.5">
+            <span class="w-9 h-9 rounded-xl bg-vermilion text-white flex items-center justify-center shrink-0 shadow-xs">
+              <i class="ri-headphone-line text-lg" aria-hidden="true"></i>
+            </span>
+            <div>
+              <h3 class="font-serif-editorial text-sm sm:text-base font-bold text-charcoal leading-tight" data-mm="အသံဖြင့် နားထောင်ရန် (Nara Mini v1 Burmese AI Voice)" data-en="Listen to This Article (Nara Mini v1 AI Voice)">
+                အသံဖြင့် နားထောင်ရန် (Nara Mini v1 Burmese AI Voice)
+              </h3>
+              <p id="nara-mode-badge" class="text-[11px] font-sans-ui text-muted m-0">On-Device AI Voice — User ခွင့်ပြုမှသာ Download ဆွဲမည် (~181 MB)</p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-1.5 font-sans-ui text-xs">
+            <button type="button" id="nara-switch-pre" class="nara-mode-pill px-2.5 py-1.5 rounded-lg font-medium cursor-pointer" hidden aria-pressed="false">
+              ⚡ အသင့်အသံဖိုင်
+            </button>
+            <button type="button" id="nara-switch-ai" class="nara-mode-pill px-2.5 py-1.5 rounded-lg font-medium cursor-pointer" aria-pressed="true">
+              🎙️ On-Device AI
+            </button>
+            <label class="sr-only" for="nara-speed-select">Playback speed</label>
+            <select id="nara-speed-select" class="px-2 py-1.5 rounded-lg bg-white dark:bg-stone-900 border border-hairline text-charcoal text-xs font-mono cursor-pointer" title="Playback Speed">
+              <option value="0.8">0.8x</option>
+              <option value="0.9">0.9x</option>
+              <option value="1" selected>1.0x</option>
+              <option value="1.15">1.15x</option>
+              <option value="1.3">1.3x</option>
+              <option value="1.5">1.5x</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Method 1: Studio Instant Pre-generated Audio Pane (0s Latency, Works Offline & file://) -->
+        <div id="nara-pregenerated-pane" class="space-y-3" hidden>
+          <audio id="nara-pre-audio" preload="metadata" class="sr-only"></audio>
+          <div class="p-3 sm:p-4 rounded-xl bg-white dark:bg-stone-900 border border-hairline shadow-3xs space-y-3">
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" id="nara-pre-play-btn" class="nara-btn-primary px-4 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-1.5 cursor-pointer">
+                <i class="ri-play-fill text-base" aria-hidden="true"></i>
+                <span>ချက်ချင်းနားထောင်ရန် (Play)</span>
+              </button>
+              <button type="button" id="nara-pre-back15" class="nara-btn-secondary px-2.5 py-2.5 min-h-[44px] rounded-xl text-xs font-mono font-semibold cursor-pointer" title="Rewind 15 seconds" aria-label="Rewind 15 seconds">-15s</button>
+              <button type="button" id="nara-pre-fwd15" class="nara-btn-secondary px-2.5 py-2.5 min-h-[44px] rounded-xl text-xs font-mono font-semibold cursor-pointer" title="Forward 15 seconds" aria-label="Forward 15 seconds">+15s</button>
+              <a id="nara-pre-download-btn" href="#" download class="nara-btn-secondary px-3 py-2.5 min-h-[44px] rounded-xl text-xs font-semibold inline-flex items-center gap-1.5 ml-auto">
+                <i class="ri-download-2-line text-vermilion" aria-hidden="true"></i>
+                <span>MP3 ဒေါင်းလုဒ်</span>
+              </a>
+            </div>
+            <!-- Interactive Seek Bar -->
+            <div class="flex items-center gap-3 text-xs font-mono text-muted">
+              <span id="nara-pre-cur-time" class="min-w-[38px]">0:00</span>
+              <input type="range" id="nara-pre-seek" min="0" max="100" value="0" step="0.1" aria-label="Seek audio position" class="nara-seek-slider flex-1 cursor-pointer">
+              <span id="nara-pre-dur-time" class="min-w-[38px] text-right">0:00</span>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] text-muted font-sans-ui">
+            <span id="nara-pre-meta" class="font-medium text-charcoal">⚡ Instant Audio • Nara Mini v1</span>
+            <span>ထစ်ငေါ့မှုမရှိဘဲ ချက်ချင်းနားထောင်နိုင်သော MP3 အသံဖိုင်</span>
+          </div>
+        </div>
+
+        <!-- Method 3: Opt-In On-Device AI Voice Pane -->
+        <div id="nara-ondevice-pane" class="space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-2.5">
+            <div class="flex-1 min-w-0">
+              <label for="nara-voice-select" class="sr-only">Choose Nara Voice</label>
+              <select id="nara-voice-select" class="w-full px-3 py-2.5 min-h-[44px] rounded-xl bg-white dark:bg-stone-900 border border-hairline text-charcoal text-xs sm:text-sm font-sans-ui cursor-pointer">
+                <option value="htet-myat">ထက်မြတ် (Htet Myat) [Download ~181 MB]</option>
+                <option value="shoon">ရွှန်း (Shoon) [Download ~181 MB]</option>
+                <option value="thazin">သဇင် (Thazin) [Download ~181 MB]</option>
+                <option value="ko-banyar">ကိုဗညား (Ko Banyar) [Download ~181 MB]</option>
+              </select>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" id="nara-play-btn" class="nara-btn-primary px-4 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 cursor-pointer">
+                <i class="ri-download-cloud-2-line text-base" aria-hidden="true"></i>
+                <span>AI အသံစနစ် သွင်း၍ နားထောင်ရန်</span>
+              </button>
+              <button type="button" id="nara-pause-btn" class="nara-btn-secondary px-3 py-2.5 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-1 cursor-pointer" hidden>
+                <i class="ri-pause-line" aria-hidden="true"></i><span>ခေတ္တရပ်</span>
+              </button>
+              <button type="button" id="nara-stop-btn" class="nara-btn-secondary px-3 py-2.5 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-1 cursor-pointer" hidden>
+                <i class="ri-stop-line" aria-hidden="true"></i><span>ရပ်</span>
+              </button>
+              <button type="button" id="nara-prev-btn" class="nara-btn-secondary px-2.5 py-2.5 min-h-[44px] rounded-xl text-xs cursor-pointer" title="Previous Sentence" aria-label="Previous Sentence" disabled>
+                <i class="ri-skip-back-mini-line text-base" aria-hidden="true"></i>
+              </button>
+              <button type="button" id="nara-next-btn" class="nara-btn-secondary px-2.5 py-2.5 min-h-[44px] rounded-xl text-xs cursor-pointer" title="Next Sentence" aria-label="Next Sentence" disabled>
+                <i class="ri-skip-forward-mini-line text-base" aria-hidden="true"></i>
+              </button>
+              <button type="button" id="nara-export-wav-btn" class="nara-btn-secondary px-3 py-2.5 min-h-[44px] rounded-xl text-xs font-medium flex items-center gap-1 cursor-pointer" hidden title="Download Synthesized WAV">
+                <i class="ri-download-line text-vermilion" aria-hidden="true"></i><span>WAV</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Status + Currently Spoken Excerpt -->
+          <div class="space-y-1.5">
+            <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] font-sans-ui text-muted">
+              <span id="nara-tts-status" role="status">User ခွင့်ပြုမှသာ အသံမော်ဒယ်ကို ဖုန်းထဲသို့ Download ဆွဲသွင်းပါမည်။</span>
+              <button type="button" id="nara-manage-models-btn" class="text-vermilion hover:underline font-semibold cursor-pointer">
+                AI Voice ရွေး / Download ဆွဲရန်
+              </button>
+            </div>
+            <p id="nara-tts-excerpt" class="p-2.5 rounded-xl bg-white/80 dark:bg-stone-900/70 border border-hairline text-xs text-charcoal italic leading-relaxed m-0" hidden></p>
+          </div>
+        </div>
+
+        <!-- Required Apache 2.0 Attribution Footer -->
+        <div class="pt-2 border-t border-hairline/70 flex flex-wrap items-center justify-between gap-2 text-[10px] text-faint font-sans-ui">
+          <span>Powered by <a href="https://naraaudio.app" target="_blank" rel="noopener noreferrer" class="underline hover:text-vermilion">Nara Mini v1</a> (<a href="https://huggingface.co/YeeNyunn/nara-mini-v1" target="_blank" rel="noopener noreferrer" class="underline hover:text-vermilion">YeeNyunn/nara-mini-v1</a> • Kokoro &amp; VoxCPM2)</span>
+          <a href="NOTICE-NARA.txt" target="_blank" class="underline hover:text-vermilion font-mono">Apache-2.0 NOTICE</a>
+        </div>
+      </section>
+
       <!-- Article Rich Body Container -->
       <div id="article-content-body" class="article-prose leading-relaxed space-y-6 text-charcoal text-base sm:text-lg">
         <p class="text-muted">စာမူ ဖတ်ရှုရန် ပြင်ဆင်နေပါသည်...</p>
@@ -769,7 +1111,7 @@
       </div>
 
       <!-- Academic Citations & References -->
-      <section id="article-citations" class="mt-10 p-4 sm:p-6 sm:p-7 rounded-2xl border border-taupe-light bg-cream hidden">
+      <section id="article-citations" class="mt-10 p-3.5 sm:p-6 sm:p-7 rounded-2xl border border-taupe-light bg-cream hidden">
         <h3 class="font-serif-editorial text-lg sm:text-xl font-medium text-charcoal mb-4 flex items-center space-x-2">
           <i class="ri-book-read-line text-vermilion text-lg"></i>
           <span data-mm="ကျမ်းကိုး စာရင်းများနှင့် ကိုးကားချက်များ (Academic Citations)" data-en="Academic Citations & References">ကျမ်းကိုး စာရင်းများနှင့် ကိုးကားချက်များ (Academic Citations)</span>
@@ -778,7 +1120,7 @@
       </section>
 
       <!-- Author Attribution Card -->
-      <div class="glass-3d-card card-3d-interactive mt-12 p-5 sm:p-7 lg:p-8 flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+      <div class="glass-3d-card card-3d-interactive mt-12 p-3.5 sm:p-6 lg:p-8 flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
         <div class="hanko-seal-3d float-3d-levitate w-16 h-16 rounded-2xl flex-shrink-0 flex items-center justify-center p-0.5 overflow-hidden" title="ထက် (Htet) Hanko Seal">
           <img src="assets/favicon.svg" alt="ထက်" class="w-full h-full object-contain pointer-events-none drop-shadow-xs">
         </div>
@@ -841,6 +1183,8 @@
           <li><a href="publications.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ထုတ်ဝေမှုများ" data-en="Publications" data-zh="出版专著" data-th="ผลงานตีพิมพ์" data-ja="出版物・著作"><i class="ri-file-paper-2-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ထုတ်ဝေမှုများ</span></a></li>
           <li><a href="journal.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts" data-zh="随笔日志" data-th="บันทึกและข้อคิด" data-ja="ジャーナル・日誌"><i class="ri-booklet-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>မှတ်စုနှင့် ပို့စ်များ</span></a></li>
           <li><a href="glossary.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary" data-zh="术语辞典" data-th="พจนานุกรมศัพท์" data-ja="用語辞典"><i class="ri-book-read-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ဝေါဟာရအဘိဓာန်</span></a></li>
+          <li><a href="dictionary.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="အဘိဓာန်" data-en="Dictionary" data-zh="英语词典" data-th="พจนานุกรม" data-ja="英緬辞典"><i class="ri-book-2-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>အဘိဓာန်</span></a></li>
+          <li><a href="translate.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ဘာသာပြန်" data-en="Translate"><i class="ri-translate-2 text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ဘာသာပြန်စတူဒီယို</span></a></li>
           <li><a href="about.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="စာရေးသူအကြောင်း" data-en="About" data-zh="关于作者" data-th="เกี่ยวกับผู้เขียน" data-ja="著者について"><i class="ri-user-star-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>စာရေးသူအကြောင်း</span></a></li>
           <li><a href="contact.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 group" data-mm="ဆက်သွယ်ရန်" data-en="Contact" data-zh="联系交流" data-th="ติดต่อเรา" data-ja="お問い合わせ"><i class="ri-send-plane-2-line text-vermilion/70 group-hover:text-vermilion group-hover:translate-x-0.5 transition-all"></i> <span>ဆက်သွယ်ရန်</span></a></li>
         </ul>
@@ -849,6 +1193,7 @@
       <div>
         <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]" data-mm="တိုက်ရိုက်လိုင်းများ" data-en="Direct Channels">တိုက်ရိုက်လိုင်းများ</h4>
         <ul class="space-y-2">
+          <li><a href="https://github.com/htetofficial/htetofficial.github.io/releases/tag/v1.2.0-beta" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-android-line text-emerald-600"></i> <span class="font-medium text-emerald-700 dark:text-emerald-400">Android App (v1.2.0-beta APK)</span></a></li>
           <li><a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-telegram-fill text-[#2AABEE]"></i> <span>Telegram: @htetmmofficial</span></a></li>
           <li><a href="https://t.me/womennationwomenkingdom" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-telegram-fill text-[#2AABEE]"></i> <span>@womennationwomenkingdom</span></a></li>
           <li><a href="https://t.me/ideahubmyanmar" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-telegram-fill text-[#2AABEE]"></i> <span>@ideahubmyanmar</span></a></li>
@@ -857,6 +1202,7 @@
           <li><a href="https://facebook.com/htetmyatekri" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-facebook-circle-fill text-[#1877F2]"></i> <span>Facebook: htetmyatekri</span></a></li>
           <li><a href="https://htetofficial.wordpress.com" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-wordpress-fill text-[#21759B]"></i> <span>htetofficial.wordpress.com</span></a></li>
           <li><a href="mailto:htethtet2025ideahub@gmail.com" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-mail-line text-vermilion"></i> <span>htethtet2025ideahub@gmail.com</span></a></li>
+          <li><a href="mailto:htetmyatekri@icloud.com" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-mail-send-line text-vermilion"></i> <span>htetmyatekri@icloud.com</span></a></li>
         </ul>
       </div>
 
@@ -887,6 +1233,11 @@
 
     <!-- Master Combined Icon Floating Navigation Hub -->
     <div id="back-to-top-progress-btn" class="smart-scroll-pill relative flex flex-col items-center p-1 rounded-full bg-card/95 dark:bg-stone-900/95 backdrop-blur-md border border-hairline shadow-2xl font-sans-ui text-xs glass-3d-pill" role="toolbar" aria-label="Scroll Navigation Hub">
+      <!-- Dismiss / Hide 'X' Action (အမှားခြစ် ခလုတ်) -->
+      <button id="article-scroll-hide-btn" class="btn-3d-tactile w-6 h-6 rounded-full flex items-center justify-center text-muted/60 hover:text-rose-500 hover:bg-rose-500/10 transition-colors cursor-pointer mb-0.5" title="All-in-One ဖျောက်ထားရန် (Dismiss / Hide)" aria-label="Dismiss Navigation Hub">
+        <i class="ri-close-line text-xs font-bold"></i>
+      </button>
+
       <!-- Scroll to Top Action -->
       <button id="article-scroll-top-btn" class="btn-3d-tactile w-8 h-8 rounded-full flex items-center justify-center text-charcoal hover:text-vermilion hover:bg-vermilion/10 dark:hover:bg-vermilion/20 transition-all cursor-pointer group" title="ထိပ်ဆုံးသို့ ပြန်သွားရန် (Scroll to Top)" aria-label="Scroll to top">
         <i class="ri-arrow-up-line text-xs sm:text-sm font-bold group-hover:-translate-y-0.5 transition-transform"></i>
@@ -982,6 +1333,122 @@
     </div>
   </aside>
 
+  <!-- Native Modal Dialog: Explicit User Consent & Live Download Progress for Nara Mini v1 On-Device AI Voice -->
+  <dialog id="nara-tts-consent-dialog" class="nara-consent-dialog rounded-2xl border border-taupe-light bg-card text-charcoal shadow-2xl p-0 max-w-lg w-[calc(100%-2rem)]" aria-labelledby="nara-consent-title">
+    <div class="p-5 sm:p-6 space-y-4 font-sans-ui">
+      <!-- Header -->
+      <div class="flex items-start justify-between gap-3 pb-3 border-b border-hairline">
+        <div class="flex items-center gap-2.5">
+          <span class="w-10 h-10 rounded-xl bg-vermilion text-white flex items-center justify-center shrink-0 shadow-sm">
+            <i class="ri-download-cloud-2-line text-xl" aria-hidden="true"></i>
+          </span>
+          <div>
+            <h2 id="nara-consent-title" class="font-serif-editorial text-lg font-bold text-charcoal m-0">
+              AI အသံစနစ် (Nara Mini v1) ကို Download ဆွဲမလား?
+            </h2>
+            <p class="text-xs text-muted m-0">Offline Burmese &amp; English On-Device Text-to-Speech</p>
+          </div>
+        </div>
+        <form method="dialog">
+          <button type="submit" value="cancel" class="w-8 h-8 rounded-lg hover:bg-cream text-muted hover:text-charcoal flex items-center justify-center cursor-pointer" aria-label="Close dialog">
+            <i class="ri-close-line text-lg" aria-hidden="true"></i>
+          </button>
+        </form>
+      </div>
+
+      <!-- Clear Size & Wi-Fi Explanation -->
+      <div class="p-3.5 rounded-xl bg-amber-50/70 dark:bg-amber-950/25 border border-amber-500/30 text-xs text-charcoal leading-relaxed space-y-1.5">
+        <p class="m-0 font-semibold text-amber-900 dark:text-amber-200 flex items-center gap-1.5">
+          <i class="ri-wifi-line text-sm" aria-hidden="true"></i>
+          <span>ဖုန်းထဲသို့ တစ်ကြိမ်တည်း Download ဆွဲသွင်းရန် (~181.2 MB)</span>
+        </p>
+        <p class="m-0 text-muted">
+          သင်ခွင့်ပြုမှသာ အသံမော်ဒယ်ဖိုင် (၃) ခု (<code>voice.json</code> 40 KB + <code>encoder.onnx</code> 74.6 MB + <code>decoder.onnx</code> 106.5 MB) ကို ဖုန်း/Browser ထဲသို့ သိမ်းဆည်းပါမည်။ တစ်ကြိမ်သွင်းပြီးပါက နောက်ပိုင်းတွင် <strong>Offline အခမဲ့</strong> ပြန်လည်နားထောင်နိုင်ပါသည်။ (Wi-Fi ဖြင့် ဆွဲရန် အကြံပြုပါသည်)
+        </p>
+      </div>
+
+      <!-- 4-Voice Radio Selector -->
+      <fieldset class="space-y-2 border-0 p-0 m-0">
+        <legend class="text-xs font-semibold text-charcoal mb-1.5">အသံအမျိုးအစား ရွေးချယ်ပါ (Nara Mini v1 — 4 Voices)</legend>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <label class="nara-voice-opt flex items-center justify-between gap-2 p-2.5 rounded-xl border border-hairline bg-cream/60 hover:border-vermilion cursor-pointer">
+            <span class="flex items-center gap-2 text-xs font-semibold text-charcoal">
+              <input type="radio" name="nara-consent-voice" value="htet-myat" checked class="accent-red-600">
+              <span>ထက်မြတ် (Htet Myat)</span>
+            </span>
+            <span class="nara-voice-status-badge text-[10px] font-mono px-2 py-0.5 rounded-full bg-stone-200/80 dark:bg-stone-700 text-muted">~181 MB</span>
+          </label>
+          <label class="nara-voice-opt flex items-center justify-between gap-2 p-2.5 rounded-xl border border-hairline bg-cream/60 hover:border-vermilion cursor-pointer">
+            <span class="flex items-center gap-2 text-xs font-semibold text-charcoal">
+              <input type="radio" name="nara-consent-voice" value="shoon" class="accent-red-600">
+              <span>ရွှန်း (Shoon)</span>
+            </span>
+            <span class="nara-voice-status-badge text-[10px] font-mono px-2 py-0.5 rounded-full bg-stone-200/80 dark:bg-stone-700 text-muted">~181 MB</span>
+          </label>
+          <label class="nara-voice-opt flex items-center justify-between gap-2 p-2.5 rounded-xl border border-hairline bg-cream/60 hover:border-vermilion cursor-pointer">
+            <span class="flex items-center gap-2 text-xs font-semibold text-charcoal">
+              <input type="radio" name="nara-consent-voice" value="thazin" class="accent-red-600">
+              <span>သဇင် (Thazin)</span>
+            </span>
+            <span class="nara-voice-status-badge text-[10px] font-mono px-2 py-0.5 rounded-full bg-stone-200/80 dark:bg-stone-700 text-muted">~181 MB</span>
+          </label>
+          <label class="nara-voice-opt flex items-center justify-between gap-2 p-2.5 rounded-xl border border-hairline bg-cream/60 hover:border-vermilion cursor-pointer">
+            <span class="flex items-center gap-2 text-xs font-semibold text-charcoal">
+              <input type="radio" name="nara-consent-voice" value="ko-banyar" class="accent-red-600">
+              <span>ကိုဗညား (Ko Banyar)</span>
+            </span>
+            <span class="nara-voice-status-badge text-[10px] font-mono px-2 py-0.5 rounded-full bg-stone-200/80 dark:bg-stone-700 text-muted">~181 MB</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- Live Streaming Download Progress Box (Shown ONLY while downloading) -->
+      <div id="nara-download-progress-box" class="p-4 rounded-xl bg-cream border border-vermilion/30 space-y-2.5" hidden>
+        <div class="flex items-center justify-between text-xs font-semibold text-charcoal">
+          <span id="nara-dl-file">Download စတင်နေပါသည်...</span>
+          <span id="nara-dl-pct" class="font-mono text-vermilion">0.0%</span>
+        </div>
+        <progress id="nara-dl-bar" value="0" max="100" class="sr-only"></progress>
+        <div class="w-full h-3 rounded-full bg-stone-200 dark:bg-stone-800 overflow-hidden" aria-hidden="true">
+          <div id="nara-dl-fill" class="nara-dl-fill h-full rounded-full" style="width: 0%;"></div>
+        </div>
+        <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-muted">
+          <span id="nara-dl-bytes">0.0 MB / 181.2 MB</span>
+          <span id="nara-dl-speed">ချိတ်ဆက်နေသည်...</span>
+        </div>
+        <div class="pt-1 flex justify-end">
+          <button type="button" id="nara-dl-cancel-btn" class="px-3.5 py-2 rounded-lg border border-red-500/40 text-red-700 dark:text-red-300 hover:bg-red-500/10 text-xs font-semibold cursor-pointer">
+            Download ရပ်တန့်မည် (Cancel)
+          </button>
+        </div>
+      </div>
+
+      <!-- Error Notice -->
+      <p id="nara-dl-error" class="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-xs text-red-700 dark:text-red-300 m-0" role="alert" hidden></p>
+
+      <!-- Consent Action Buttons (Safe Cancel gets autofocus per dialog guidelines) -->
+      <div id="nara-consent-action-row" class="flex flex-col-reverse sm:flex-row sm:justify-end gap-2.5 pt-2">
+        <form method="dialog" class="sm:w-auto w-full">
+          <button type="submit" value="cancel" autofocus class="nara-btn-secondary w-full sm:w-auto px-4 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-semibold cursor-pointer">
+            မဆွဲသေးပါ (Cancel)
+          </button>
+        </form>
+        <button type="button" id="nara-consent-download-btn" class="nara-btn-primary w-full sm:w-auto px-4 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 cursor-pointer">
+          <i class="ri-download-cloud-2-line text-base" aria-hidden="true"></i>
+          <span>ဖုန်းထဲသို့ Download ဆွဲပြီး သွင်းမည် (~181 MB)</span>
+        </button>
+      </div>
+
+      <!-- Optional Cache Clear Row (Shown only when at least 1 voice is installed) -->
+      <div id="nara-consent-clear-row" class="pt-2 border-t border-hairline flex items-center justify-between text-xs" hidden>
+        <span class="text-muted">ဖုန်းနေရာ ပြန်လည်ရှင်းလင်းလိုပါက —</span>
+        <button type="button" id="nara-clear-cache-btn" class="text-red-600 dark:text-red-400 hover:underline font-semibold cursor-pointer">
+          သိမ်းထားသော AI Models ဖျက်မည်
+        </button>
+      </div>
+    </div>
+  </dialog>
+
   <!-- Core UI Engines First (Zero Latency Execution) -->
   <script src="js/i18n.js"></script>
   <script src="js/pwa.js"></script>
@@ -995,17 +1462,19 @@
   <script src="js/katex.min.js"></script>
   <script src="js/katex-auto-render.min.js"></script>
 
-  <script src="js/data/articles-backup.js"></script>
-  <script src="js/data/posts-backup.js"></script>
-  <script src="js/data/glossary-backup.js"></script>
-  <script src="js/data/publications-backup.js"></script>
-  <script src="js/data/books-backup.js"></script>
-  <script src="js/data/quotes-backup.js"></script>
   <script src="js/data-loader.js"></script>
   <!-- Local Scientific Visualization Engines (Chart.js & Leaflet.js) -->
   <script src="js/chart.min.js"></script>
   <script src="js/leaflet.js"></script>
   <script src="js/reader.js"></script>
+  <script src="js/vocab-lookup.js"></script>
+  <script src="js/burmesenlp.js"></script>
+  <script src="js/pdf/pdf.min.js"></script>
+  <script src="js/pdf-viewer.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/data/nara-lexicon-backup.js"></script>
+  <script src="js/data/audio-manifest-backup.js"></script>
+  <script src="js/nara-g2p.js"></script>
+  <script src="js/nara-tts.js"></script>
 </body>
 </html>

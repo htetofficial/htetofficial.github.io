@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="title desc">
+  <title id="title">IdeaHub Myanmar: Our Bookshelf — 5 Transformative Books</title>
+  <desc id="desc">Editorial illustration showcasing IdeaHub Myanmar's curated bookshelf featuring five essential works on feminism, history, data bias, philosophy, and education.</desc>
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="libBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d"/>
+      <stop offset="50%" stop-color="#141a29"/>
+      <stop offset="100%" stop-color="#1b1528"/>
+    </linearGradient>
+
+    <!-- Warm Reading Lamp Radial -->
+    <radialGradient id="lampGlow" cx="72%" cy="38%" r="52%">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="0.32"/>
+      <stop offset="45%" stop-color="#f59e0b" stop-opacity="0.16"/>
+      <stop offset="85%" stop-color="#0a0f1d" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Wooden Shelf Gradient -->
+    <linearGradient id="woodShelf" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="50%" stop-color="#451a03"/>
+      <stop offset="100%" stop-color="#270e02"/>
+    </linearGradient>
+
+    <!-- Gold Accent -->
+    <linearGradient id="goldCol" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#libBg)"/>
+  <rect width="1200" height="675" fill="url(#lampGlow)"/>
+
+  <!-- Editorial Double Border -->
+  <rect x="28" y="28" width="1144" height="619" rx="16" fill="none" stroke="#f59e0b" stroke-opacity="0.35" stroke-width="1.2"/>
+  <rect x="36" y="36" width="1128" height="603" rx="12" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="0.8"/>
+
+  <!-- Right Visual: The 5 Featured Book Spines on IdeaHub Bookshelf -->
+  <g transform="translate(660, 95)">
+    <!-- Wooden Shelf Plank -->
+    <rect x="20" y="380" width="460" height="24" rx="4" fill="url(#woodShelf)" filter="url(#softGlow)"/>
+    <rect x="15" y="376" width="470" height="6" rx="2" fill="#92400e"/>
+    <rect x="30" y="404" width="440" height="12" rx="2" fill="#1c0a00" opacity="0.8"/>
+
+    <!-- Reading Lamp Silhouette (Top Right) -->
+    <g transform="translate(420, 60)">
+      <path d="M 0,0 L 25,50 L -25,50 Z" fill="#d97706" opacity="0.85"/>
+      <ellipse cx="0" cy="50" rx="25" ry="8" fill="#fef08a" opacity="0.9"/>
+      <line x1="0" y1="0" x2="0" y2="-50" stroke="#78350f" stroke-width="3"/>
+    </g>
+
+    <!-- Book 1: We Should All Be Feminists (Rose/Crimson) -->
+    <g transform="translate(45, 120)">
+      <rect x="0" y="0" width="56" height="256" rx="5" fill="#e11d48" filter="url(#softGlow)"/>
+      <rect x="4" y="0" width="6" height="256" fill="#be123c"/>
+      <rect x="18" y="15" width="28" height="226" fill="#881337" rx="3" opacity="0.3"/>
+      <!-- Gold Spine Bands -->
+      <line x1="0" y1="35" x2="56" y2="35" stroke="#fef08a" stroke-width="1.5"/>
+      <line x1="0" y1="220" x2="56" y2="220" stroke="#fef08a" stroke-width="1.5"/>
+      <!-- Vertical Spine Title -->
+      <text x="32" y="130" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle" transform="rotate(-90 32 130)">
+        WE SHOULD ALL BE FEMINISTS
+      </text>
+      <text x="32" y="240" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="8" font-weight="600" fill="#fecdd3" text-anchor="middle">ADICHIE</text>
+    </g>
+
+    <!-- Book 2: Sapiens (Lapis Blue) -->
+    <g transform="translate(115, 80)">
+      <rect x="0" y="0" width="68" height="296" rx="5" fill="#1e3a8a" filter="url(#softGlow)"/>
+      <rect x="4" y="0" width="6" height="296" fill="#172554"/>
+      <!-- Gold Spine Bands -->
+      <line x1="0" y1="40" x2="68" y2="40" stroke="#f59e0b" stroke-width="2"/>
+      <line x1="0" y1="255" x2="68" y2="255" stroke="#f59e0b" stroke-width="2"/>
+      <!-- Vertical Spine Title -->
+      <text x="38" y="145" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="800" fill="#fef08a" text-anchor="middle" letter-spacing="1.5" transform="rotate(-90 38 145)">
+        SAPIENS
+      </text>
+      <text x="38" y="278" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9" font-weight="600" fill="#93c5fd" text-anchor="middle">HARARI</text>
+    </g>
+
+    <!-- Book 3: Invisible Women (Teal/Emerald) -->
+    <g transform="translate(198, 110)">
+      <rect x="0" y="0" width="60" height="266" rx="5" fill="#0d9488" filter="url(#softGlow)"/>
+      <rect x="4" y="0" width="6" height="266" fill="#115e59"/>
+      <!-- Silver/White Spine Bands -->
+      <line x1="0" y1="32" x2="60" y2="32" stroke="#ffffff" stroke-width="1.5" opacity="0.6"/>
+      <line x1="0" y1="230" x2="60" y2="230" stroke="#ffffff" stroke-width="1.5" opacity="0.6"/>
+      <!-- Vertical Spine Title -->
+      <text x="34" y="132" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle" transform="rotate(-90 34 132)">
+        INVISIBLE WOMEN
+      </text>
+      <text x="34" y="250" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="8" font-weight="600" fill="#ccfbf1" text-anchor="middle">PEREZ</text>
+    </g>
+
+    <!-- Book 4: The Second Sex (Imperial Purple / Amethyst) -->
+    <g transform="translate(272, 70)">
+      <rect x="0" y="0" width="74" height="306" rx="5" fill="#581c87" filter="url(#softGlow)"/>
+      <rect x="5" y="0" width="7" height="306" fill="#3b0764"/>
+      <!-- Intricate Gold Bands -->
+      <line x1="0" y1="45" x2="74" y2="45" stroke="#fde047" stroke-width="2"/>
+      <line x1="0" y1="265" x2="74" y2="265" stroke="#fde047" stroke-width="2"/>
+      <!-- Vertical Spine Title -->
+      <text x="42" y="155" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="800" fill="#fef08a" text-anchor="middle" letter-spacing="1" transform="rotate(-90 42 155)">
+        THE SECOND SEX
+      </text>
+      <text x="42" y="288" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="8.5" font-weight="600" fill="#e9d5ff" text-anchor="middle">DE BEAUVOIR</text>
+    </g>
+
+    <!-- Book 5: Educated (Warm Amber/Ochre, slightly leaned) -->
+    <g transform="translate(368, 140) rotate(10)">
+      <rect x="0" y="0" width="52" height="236" rx="5" fill="#d97706" filter="url(#softGlow)"/>
+      <rect x="4" y="0" width="5" height="236" fill="#92400e"/>
+      <line x1="0" y1="28" x2="52" y2="28" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+      <line x1="0" y1="205" x2="52" y2="205" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+      <!-- Vertical Spine Title -->
+      <text x="29" y="118" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle" transform="rotate(-90 29 118)">
+        EDUCATED
+      </text>
+      <text x="29" y="222" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="8" font-weight="600" fill="#fef3c7" text-anchor="middle">WESTOVER</text>
+    </g>
+
+    <!-- Digital Library Access Banner -->
+    <g transform="translate(30, 430)">
+      <rect x="0" y="0" width="440" height="42" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-width="1.2" filter="url(#softGlow)"/>
+      <text x="220" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="12" font-weight="600" fill="#fde68a" text-anchor="middle">
+        📚 IdeaHub Open Digital Library (1,522+ Volumes) • t.me/ideahublibrary
+      </text>
+    </g>
+  </g>
+
+  <!-- Left Editorial Typography & Overview -->
+  <g transform="translate(70, 75)">
+    <!-- Header Pill -->
+    <rect x="0" y="0" width="220" height="28" rx="6" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-opacity="0.4"/>
+    <text x="14" y="19" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#fde68a" letter-spacing="1">IDEAHUB MYANMAR • BOOKSHELF</text>
+
+    <!-- Main Title -->
+    <text x="0" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="700" fill="#ffffff" letter-spacing="-0.5">
+      ကျွန်မတို့ရဲ့ စာအုပ်စင် (Our Bookshelf)
+    </text>
+    <text x="0" y="104" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="19" font-weight="500" fill="url(#goldCol)">
+      5 Transformative Books on Equality, Human Nature &amp; Critical Thought
+    </text>
+
+    <!-- Quote Box -->
+    <g transform="translate(0, 130)">
+      <rect x="0" y="0" width="520" height="85" rx="10" fill="#1e293b" fill-opacity="0.75" stroke="#334155" stroke-width="1"/>
+      <line x1="0" y1="0" x2="0" y2="85" stroke="#f59e0b" stroke-width="4"/>
+      <text x="20" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="12.5" font-weight="600" fill="#fde68a">
+        “စာအုပ်တွေဆိုတာ ဖျော်ဖြေရေးသက်သက် မဟုတ်ပါဘူး။
+      </text>
+      <text x="20" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="12" fill="#cbd5e1">
+        လူမှုရေးပြဿနာတွေကို နားလည်ဖို့၊ ဝေဖန်ပိုင်းခြားတွေးခေါ်တတ်ဖို့နဲ့
+      </text>
+      <text x="20" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="12" fill="#cbd5e1">
+        ကမ္ဘာကြီးကို ပိုပြီးတရားမျှတအောင် ဘယ်လိုဖန်တီးမလဲဆိုတဲ့ အရေးပါတဲ့ လမ်းပြမြေပုံတွေဖြစ်ပါတယ်”
+      </text>
+    </g>
+
+    <!-- 5 Curated Books List -->
+    <g transform="translate(0, 235)">
+      <!-- 1 -->
+      <g transform="translate(0, 0)">
+        <circle cx="12" cy="12" r="10" fill="#e11d48" fill-opacity="0.25" stroke="#e11d48" stroke-width="1.2"/>
+        <text x="12" y="16" font-family="sans-serif" font-size="10" font-weight="bold" fill="#fda4af" text-anchor="middle">၁</text>
+        <text x="32" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="13.5" font-weight="600" fill="#ffffff">We Should All Be Feminists (Chimamanda Ngozi Adichie)</text>
+        <text x="32" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" fill="#94a3b8">ကျား/မ ခွဲခြားမှုက အမျိုးသမီးသာမက အမျိုးသားတွေကိုပါ ထိခိုက်စေပုံကို မီးမောင်းထိုးပြချက်</text>
+      </g>
+
+      <!-- 2 -->
+      <g transform="translate(0, 48)">
+        <circle cx="12" cy="12" r="10" fill="#1e3a8a" fill-opacity="0.3" stroke="#3b82f6" stroke-width="1.2"/>
+        <text x="12" y="16" font-family="sans-serif" font-size="10" font-weight="bold" fill="#93c5fd" text-anchor="middle">၂</text>
+        <text x="32" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="13.5" font-weight="600" fill="#ffffff">Sapiens: A Brief History of Humankind (Yuval Noah Harari)</text>
+        <text x="32" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" fill="#94a3b8">လူသားဆင့်ကဲဖြစ်စဉ်၊ ဘာသာရေးနှင့် စီးပွားရေးစနစ်များ၏ စုပေါင်းယုံကြည်မှုပုံပြင်များ</text>
+      </g>
+
+      <!-- 3 -->
+      <g transform="translate(0, 96)">
+        <circle cx="12" cy="12" r="10" fill="#0d9488" fill-opacity="0.25" stroke="#14b8a6" stroke-width="1.2"/>
+        <text x="12" y="16" font-family="sans-serif" font-size="10" font-weight="bold" fill="#5eead4" text-anchor="middle">၃</text>
+        <text x="32" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="13.5" font-weight="600" fill="#ffffff">Invisible Women: Data Bias in a World Designed for Men (Perez)</text>
+        <text x="32" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" fill="#94a3b8">နည်းပညာနှင့် မူဝါဒများတွင် အမျိုးသမီးများကို ပျောက်ကွယ်စေသော Data Bias များ</text>
+      </g>
+
+      <!-- 4 -->
+      <g transform="translate(0, 144)">
+        <circle cx="12" cy="12" r="10" fill="#581c87" fill-opacity="0.25" stroke="#a855f7" stroke-width="1.2"/>
+        <text x="12" y="16" font-family="sans-serif" font-size="10" font-weight="bold" fill="#d8b4fe" text-anchor="middle">၄</text>
+        <text x="32" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="13.5" font-weight="600" fill="#ffffff">The Second Sex (Simone de Beauvoir)</text>
+        <text x="32" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" fill="#94a3b8">“အမျိုးသမီးတစ်ယောက်ဟာ မွေးဖွားလာတာမဟုတ်ဘဲ ဖန်တီးခံလိုက်ရတာ” ခေတ်သစ်ဖီမင်နစ်ဒဿန</text>
+      </g>
+
+      <!-- 5 -->
+      <g transform="translate(0, 192)">
+        <circle cx="12" cy="12" r="10" fill="#d97706" fill-opacity="0.25" stroke="#f59e0b" stroke-width="1.2"/>
+        <text x="12" y="16" font-family="sans-serif" font-size="10" font-weight="bold" fill="#fde68a" text-anchor="middle">၅</text>
+        <text x="32" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="13.5" font-weight="600" fill="#ffffff">Educated (Tara Westover)</text>
+        <text x="32" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" fill="#94a3b8">လွတ်လပ်စွာတွေးခေါ်နိုင်ရေးနှင့် ကိုယ့်ယုံကြည်ချက်ကို ပြန်မေးခွန်းထုတ်နိုင်စေသည့် ပညာရေး</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom Metadata Footer -->
+  <g transform="translate(70, 600)">
+    <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">
+      Htet Official Journal • IdeaHub Myanmar Bookshelf (2026-08-01) • Curated by IdeaHub Team
+    </text>
+    <text x="1060" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#f59e0b" text-anchor="end" font-weight="600">
+      t.me/ideahubmyanmarv2
+    </text>
+  </g>
+</svg>

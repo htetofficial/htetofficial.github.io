@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="title desc">
+  <title id="title">ယိုရှီ ရင်ရာဒါ — ကမ္ဘာနှစ်ခုမှ ကိုယ်ပိုင်ဖြစ်တည်မှုဆီသို့ (Club Friday Show Interview Burmese Translation)</title>
+  <desc id="desc">Editorial cover artwork depicting Yoshi Rinrada's journey from living in two worlds to authentic self-acceptance, featuring a classical Thai chada and lotus silhouette bridging twilight indigo into warm rose gold light.</desc>
+  <defs>
+    <!-- Split-world luminous gradient: twilight indigo (concealed world) to warm rose-ivory (authentic light) -->
+    <linearGradient id="bgWorld" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#19162e"/>
+      <stop offset="44%" stop-color="#2c1d42"/>
+      <stop offset="72%" stop-color="#6b2b55"/>
+      <stop offset="100%" stop-color="#b85b74"/>
+    </linearGradient>
+
+    <radialGradient id="lotusAura" cx="76%" cy="48%" r="48%">
+      <stop offset="0%" stop-color="#fde4c8" stop-opacity="0.42"/>
+      <stop offset="45%" stop-color="#f497b6" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#19162e" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="indigoMist" cx="22%" cy="78%" r="50%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#19162e" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="goldSilk" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="50%" stop-color="#f5c67d"/>
+      <stop offset="100%" stop-color="#d49348"/>
+    </linearGradient>
+
+    <linearGradient id="roseRibbon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.75"/>
+      <stop offset="50%" stop-color="#f472b6" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#fde68a" stop-opacity="0.95"/>
+    </linearGradient>
+
+    <linearGradient id="cardGlass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.11"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
+    </linearGradient>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Base Canvas -->
+  <rect width="1200" height="675" fill="url(#bgWorld)"/>
+  <rect width="1200" height="675" fill="url(#lotusAura)"/>
+  <rect width="1200" height="675" fill="url(#indigoMist)"/>
+
+  <!-- Subtle Geometric Grid & Two-Worlds Horizon Arcs -->
+  <g opacity="0.16" stroke="#fde68a" fill="none">
+    <circle cx="910" cy="330" r="245" stroke-width="1"/>
+    <circle cx="910" cy="330" r="195" stroke-width="0.9" stroke-dasharray="6 8"/>
+    <circle cx="910" cy="330" r="145" stroke-width="0.8"/>
+    <!-- Left shadowed orbit ("Two Worlds" duality) -->
+    <circle cx="775" cy="330" r="195" stroke="#a5b4fc" stroke-width="0.9" stroke-dasharray="4 7"/>
+  </g>
+
+  <!-- Flowing Silk Light Wave connecting Left World -> Right Authentic Light -->
+  <path d="M 0 545 C 230 500, 420 595, 650 475 C 830 380, 995 430, 1200 320" fill="none" stroke="url(#roseRibbon)" stroke-width="2.5" opacity="0.7"/>
+  <path d="M 0 568 C 250 530, 455 612, 685 495 C 865 405, 1020 455, 1200 355" fill="none" stroke="#fde68a" stroke-width="1.2" opacity="0.45"/>
+
+  <!-- Outer Editorial Border Frame -->
+  <rect x="26" y="26" width="1148" height="623" rx="18" fill="none" stroke="#f8d8a8" stroke-opacity="0.28" stroke-width="1.2"/>
+  <rect x="34" y="34" width="1132" height="607" rx="14" fill="none" stroke="#ffffff" stroke-opacity="0.1" stroke-width="0.8"/>
+
+  <!-- Right Emblem: Classical Thai Chada Spire, Mirror & Blooming Lotus (Symbolizing Classical Dance Club & Authentic Self) -->
+  <g transform="translate(910, 326)">
+    <!-- Soft outer glow halo -->
+    <circle cx="0" cy="0" r="126" fill="#fde4c8" fill-opacity="0.08" filter="url(#softGlow)"/>
+
+    <!-- Dual Crescent Mirror: Left Shadowed Mask / Right Illuminated Profile -->
+    <path d="M -112 0 A 112 112 0 0 1 0 -112 A 84 112 0 0 0 0 112 A 112 112 0 0 1 -112 0 Z" fill="#312e81" fill-opacity="0.52" stroke="#a5b4fc" stroke-opacity="0.45" stroke-width="1.2"/>
+    <path d="M 0 -112 A 112 112 0 1 1 0 112 A 84 112 0 0 1 0 -112 Z" fill="#fbcfe8" fill-opacity="0.16" stroke="url(#goldSilk)" stroke-width="1.5"/>
+
+    <!-- Stylized Thai Classical Chada Crown Spire (ชมรมนาฏศิลป์ / Thai Classical Dance Motif) -->
+    <g fill="none" stroke="url(#goldSilk)" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Spire tip -->
+      <path d="M 0 -158 L 8 -106 L 18 -72 L 38 -52 L -38 -52 L -18 -72 L -8 -106 Z" fill="url(#goldSilk)" fill-opacity="0.18" stroke-width="2"/>
+      <!-- Tiered Chada rings -->
+      <path d="M -10 -106 Q 0 -113 10 -106" stroke-width="1.8"/>
+      <path d="M -17 -82 Q 0 -91 17 -82" stroke-width="1.8"/>
+      <path d="M -29 -62 Q 0 -72 29 -62" stroke-width="2"/>
+      <!-- Graceful Flame-Petal Crown Arch -->
+      <path d="M -46 -46 C -34 -72, -14 -72, 0 -58 C 14 -72, 34 -72, 46 -46" stroke-width="2.2"/>
+      <!-- Ear filigree curves (Kannikarn / Thai classical ornament) -->
+      <path d="M -46 -46 C -64 -26, -62 6, -44 26" stroke-width="1.6" stroke-opacity="0.85"/>
+      <path d="M 46 -46 C 64 -26, 62 6, 44 26" stroke-width="1.6" stroke-opacity="0.85"/>
+    </g>
+
+    <!-- Radiant Blooming Lotus at Center Heart ("Unlocking the Heart") -->
+    <g transform="translate(0, 32)">
+      <!-- Outer Petals -->
+      <path d="M 0 -46 C 24 -22, 30 14, 0 42 C -30 14, -24 -22, 0 -46 Z" fill="#f9a8d4" fill-opacity="0.32" stroke="#fde68a" stroke-width="1.6"/>
+      <path d="M 0 38 C -46 32, -74 2, -62 -34 C -32 -24, -12 4, 0 38 Z" fill="#f472b6" fill-opacity="0.24" stroke="#fbcfe8" stroke-width="1.4"/>
+      <path d="M 0 38 C 46 32, 74 2, 62 -34 C 32 -24, 12 4, 0 38 Z" fill="#f472b6" fill-opacity="0.24" stroke="#fbcfe8" stroke-width="1.4"/>
+      <path d="M 0 40 C -68 46, -98 22, -88 -8 C -54 -4, -24 14, 0 40 Z" fill="#c084fc" fill-opacity="0.2" stroke="#e9d5ff" stroke-width="1.1"/>
+      <path d="M 0 40 C 68 46, 98 22, 88 -8 C 54 -4, 24 14, 0 40 Z" fill="#fde68a" fill-opacity="0.22" stroke="#fef3c7" stroke-width="1.1"/>
+      <!-- Inner Luminous Seed -->
+      <circle cx="0" cy="4" r="10" fill="url(#goldSilk)" opacity="0.92"/>
+      <circle cx="0" cy="4" r="18" fill="none" stroke="#fef3c7" stroke-opacity="0.65" stroke-width="1.2" stroke-dasharray="3 3"/>
+    </g>
+
+    <!-- Floating Sparkles -->
+    <g fill="#fef3c7">
+      <circle cx="-132" cy="-78" r="2.5" opacity="0.7"/>
+      <circle cx="128" cy="-86" r="3" opacity="0.85"/>
+      <circle cx="146" cy="52" r="2.2" opacity="0.75"/>
+      <circle cx="-118" cy="96" r="2" opacity="0.6"/>
+      <path d="M 0 -174 L 3 -166 L 11 -163 L 3 -160 L 0 -152 L -3 -160 L -11 -163 L -3 -166 Z" opacity="0.9"/>
+    </g>
+
+    <!-- Bottom Caption under Emblem -->
+    <text x="0" y="168" text-anchor="middle" fill="#fde68a" font-family="Georgia, serif" font-size="13" letter-spacing="3.2" opacity="0.9">TWO WORLDS  &#8594;  AUTHENTIC SELF</text>
+    <text x="0" y="191" text-anchor="middle" fill="#f9d5e5" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="14" opacity="0.88">ကမ္ဘာနှစ်ခုမှ ကိုယ်ပိုင်ဖြစ်တည်မှုဆီသို့</text>
+  </g>
+
+  <!-- Left Editorial Typography Column -->
+  <g transform="translate(76, 86)">
+    <!-- Top Category Badge -->
+    <rect x="0" y="0" width="376" height="34" rx="17" fill="#ffffff" fill-opacity="0.1" stroke="#f8d8a8" stroke-opacity="0.45" stroke-width="1"/>
+    <circle cx="20" cy="17" r="4.5" fill="#f472b6"/>
+    <text x="34" y="22" fill="#fef3c7" font-family="'Inter', -apple-system, sans-serif" font-size="12.5" font-weight="600" letter-spacing="1.6">GENDER STUDIES • INTERVIEW ARCHIVE</text>
+
+    <!-- Thai Source Program Subtitle -->
+    <text x="2" y="74" fill="#f9a8d4" font-family="'Inter', 'Thonburi', sans-serif" font-size="18" font-weight="600" letter-spacing="0.6">CLUB FRIDAY SHOW  •  โยชิ รินรดา (YOSHI RINRADA)</text>
+
+    <!-- Main Burmese Headline -->
+    <text x="0" y="138" fill="#ffffff" font-family="'Pyidaungsu', 'Noto Serif Myanmar', Georgia, serif" font-size="40" font-weight="700">ယိုရှီ ရင်ရာဒါ — ကမ္ဘာနှစ်ခုမှ</text>
+    <text x="0" y="194" fill="#fde68a" font-family="'Pyidaungsu', 'Noto Serif Myanmar', Georgia, serif" font-size="40" font-weight="700">ကိုယ်ပိုင်ဖြစ်တည်မှုဆီသို့</text>
+
+    <!-- Accent Divider -->
+    <rect x="2" y="218" width="128" height="3.5" rx="2" fill="url(#roseRibbon)"/>
+
+    <!-- Bilingual Subtitle -->
+    <text x="0" y="258" fill="#f3e8ff" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="18.5" opacity="0.94">“ဘယ်အချိန်ကတည်းက ကိုယ့်ကိုယ်ကိုယ် အမျိုးသားမဟုတ်မှန်း သိခဲ့တာလဲ”</text>
+    <text x="0" y="290" fill="#e2d9f3" font-family="Georgia, serif" font-style="italic" font-size="16" opacity="0.85">When Did I Realize I Was Not a Boy? — Complete Burmese Translation &amp; Study</text>
+
+    <!-- Pull Quote Glass Card -->
+    <rect x="0" y="322" width="598" height="122" rx="14" fill="url(#cardGlass)" stroke="#f9a8d4" stroke-opacity="0.32" stroke-width="1"/>
+    <rect x="0" y="322" width="5" height="122" rx="2.5" fill="url(#goldSilk)"/>
+    <text x="24" y="356" fill="#fef3c7" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="16" font-weight="600">“ယိုက ယောက်ျားလေးမဟုတ်ဘူးနော် မေမေ... ယိုက မိန်းကလေးပဲ ဖြစ်ချင်တာ၊</text>
+    <text x="24" y="384" fill="#fef3c7" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="16" font-weight="600">ဒီခန္ဓာကိုယ်မျိုးထဲမှာ မနေချင်ဘူး...”</text>
+    <text x="24" y="422" fill="#e9d5ff" font-family="'Inter', 'Pyidaungsu', sans-serif" font-size="13" opacity="0.88">— โยชิ รินรดา (Miss Tiffany's Universe 2017) • Club Friday Show (00:00–07:09)</text>
+
+    <!-- Metadata Footer Bar -->
+    <g transform="translate(0, 476)">
+      <text x="0" y="16" fill="#fbcfe8" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="15" font-weight="600">မြန်မာဘာသာပြန်နှင့် လူမှုဗေဒသုံးသပ်ချက် — ထက်မြတ်ဧကရီ (ထက်)</text>
+      <text x="0" y="42" fill="#cbd5e1" font-family="'Inter', sans-serif" font-size="12.5" letter-spacing="0.4">Non-Commercial Educational &amp; Research Translation  •  Htet Official Digital Archive  •  2026</text>
+    </g>
+  </g>
+
+  <!-- Artisanal Vermilion Hanko Seal ("ထက်") in Bottom-Right Corner -->
+  <g transform="translate(1078, 558)">
+    <rect x="0" y="0" width="66" height="66" rx="12" fill="#b91c1c" fill-opacity="0.88" stroke="#fecaca" stroke-opacity="0.65" stroke-width="1.5"/>
+    <rect x="5" y="5" width="56" height="56" rx="8" fill="none" stroke="#fde68a" stroke-opacity="0.5" stroke-width="1"/>
+    <text x="33" y="41" text-anchor="middle" fill="#fff7ed" font-family="'Pyidaungsu', 'Noto Serif Myanmar', serif" font-size="24" font-weight="700">ထက်</text>
+    <text x="33" y="56" text-anchor="middle" fill="#fecaca" font-family="'Inter', sans-serif" font-size="7.2" letter-spacing="1.4" font-weight="600">HTET SEAL</text>
+  </g>
+</svg>

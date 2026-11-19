@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="1991 Nobel Peace Prize Acceptance Speech — Scholarly Study">
+  <defs>
+    <linearGradient id="bgRoyal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#131624"/>
+      <stop offset="52%" stop-color="#221C35"/>
+      <stop offset="100%" stop-color="#4A2628"/>
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="78%" cy="32%" r="44%">
+      <stop offset="0%" stop-color="#E8B96B" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#131624" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bgRoyal)"/>
+  <rect width="1200" height="630" fill="url(#goldGlow)"/>
+
+  <!-- Editorial Double Border -->
+  <rect x="28" y="28" width="1144" height="574" fill="none" stroke="#F6E8D0" stroke-opacity="0.3" stroke-width="1.5"/>
+  <rect x="38" y="38" width="1124" height="554" fill="none" stroke="#F6E8D0" stroke-opacity="0.14" stroke-width="1"/>
+
+  <!-- Symbolic Minimalist Light Rays & Peace Olive Arc (No Nobel Medal Logo per Nobel Policy) -->
+  <g transform="translate(950, 298)" opacity="0.24" stroke="#F4D39B" fill="none" stroke-width="1.8">
+    <circle cx="0" cy="0" r="142" stroke-dasharray="5 7"/>
+    <circle cx="0" cy="0" r="96"/>
+    <path d="M-70 72 Q-95 0 -42 -68"/>
+    <path d="M70 72 Q95 0 42 -68"/>
+    <circle cx="0" cy="0" r="24" fill="#E8B96B" fill-opacity="0.28"/>
+    <line x1="0" y1="-72" x2="0" y2="72"/>
+    <line x1="-72" y1="0" x2="72" y2="0"/>
+  </g>
+
+  <!-- Vertical Gold Bar -->
+  <rect x="76" y="106" width="5" height="402" rx="2.5" fill="#E0B063"/>
+
+  <!-- Eyebrow Pill -->
+  <g transform="translate(106, 118)">
+    <rect x="0" y="-14" width="465" height="30" rx="15" fill="#E0B063" fill-opacity="0.18" stroke="#F0CA88" stroke-opacity="0.45"/>
+    <text x="18" y="6" fill="#FCE7C2" font-family="Georgia, serif" font-size="12" letter-spacing="2.1">HISTORICAL FAIR-USE STUDY • OSLO, DEC 10, 1991</text>
+  </g>
+
+  <!-- Main Titles -->
+  <text x="106" y="210" fill="#FFF8EE" font-family="'Pyidaungsu', sans-serif" font-size="35" font-weight="700">၁၉၉၁ နိုဘယ်လ်ငြိမ်းချမ်းရေးဆု လက်ခံမိန့်ခွန်း</text>
+  <text x="106" y="268" fill="#F8D298" font-family="'Pyidaungsu', sans-serif" font-size="27" font-weight="700">ဒေါ်အောင်ဆန်းစုကြည် ကိုယ်စား အလက်ဇန္ဒားအဲရစ် မြွက်ကြားခဲ့သော</text>
+  <text x="106" y="314" fill="#F8D298" font-family="'Pyidaungsu', sans-serif" font-size="27" font-weight="700">“စိတ်ဝိညာဉ်၏ တော်လှန်ရေး” ပညာရပ်ဆိုင်ရာ လေ့လာသုံးသပ်ချက်</text>
+
+  <!-- English Subtitle -->
+  <text x="106" y="370" fill="#F2E4D4" font-family="Georgia, serif" font-size="20" font-style="italic" opacity="0.92">The Revolution of the Spirit — Scholarly Study of the 1991 Nobel Acceptance Speech</text>
+
+  <!-- Divider -->
+  <line x1="106" y1="402" x2="720" y2="402" stroke="#E8B96B" stroke-opacity="0.42" stroke-width="1.2"/>
+
+  <!-- Source & Legal Line -->
+  <text x="106" y="442" fill="#EBC792" font-family="Georgia, serif" font-size="13.5">Original Speech © The Nobel Foundation 1991 • Source: nobelprize.org (Strictly Educational Fair Use)</text>
+  <text x="106" y="486" fill="#FFF8EE" font-family="'Pyidaungsu', sans-serif" font-size="18" opacity="0.9">လေ့လာသုံးသပ်သူ — ထက် (Htet) • Htet Official Digital Archive</text>
+
+  <!-- Hanko Stamp -->
+  <g transform="translate(1078, 514)">
+    <rect x="-34" y="-34" width="68" height="68" rx="10" fill="#B83B28" stroke="#FFF4E6" stroke-opacity="0.55" stroke-width="1.5"/>
+    <text x="0" y="8" text-anchor="middle" fill="#FFF8EE" font-family="'Pyidaungsu', serif" font-size="24" font-weight="700">ထက်</text>
+  </g>
+</svg>

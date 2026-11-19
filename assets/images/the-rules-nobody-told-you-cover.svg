@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="The Rules Nobody Told You — ငါတို့မရေးဆွဲခဲ့ရသော ဘဝဇာတ်ညွှန်း">
+  <defs>
+    <linearGradient id="twilightBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141821"/>
+      <stop offset="52%" stop-color="#222536"/>
+      <stop offset="100%" stop-color="#3E2A32"/>
+    </linearGradient>
+    <radialGradient id="amberHalo" cx="80%" cy="35%" r="44%">
+      <stop offset="0%" stop-color="#E5A96F" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#141821" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#twilightBg)"/>
+  <rect width="1200" height="630" fill="url(#amberHalo)"/>
+
+  <!-- Editorial Double Frame -->
+  <rect x="28" y="28" width="1144" height="574" fill="none" stroke="#F4E7D4" stroke-opacity="0.28" stroke-width="1.5"/>
+  <rect x="38" y="38" width="1124" height="554" fill="none" stroke="#F4E7D4" stroke-opacity="0.14" stroke-width="1"/>
+
+  <!-- Symbolic Unwritten Script & Breaking Strings Motif (Right) -->
+  <g transform="translate(948, 300)" opacity="0.26" stroke="#F2D0A4" fill="none" stroke-width="1.8">
+    <circle cx="0" cy="0" r="140" stroke-dasharray="5 7"/>
+    <circle cx="0" cy="0" r="96"/>
+    <!-- Vertical invisible rules lines that fracture gently -->
+    <line x1="-54" y1="-150" x2="-54" y2="-24"/>
+    <line x1="-54" y1="16" x2="-54" y2="145" stroke-dasharray="4 6"/>
+    <line x1="0" y1="-160" x2="0" y2="-38"/>
+    <line x1="0" y1="22" x2="0" y2="155" stroke-dasharray="4 6"/>
+    <line x1="54" y1="-150" x2="54" y2="-24"/>
+    <line x1="54" y1="16" x2="54" y2="145" stroke-dasharray="4 6"/>
+    <!-- Spark of Free Consciousness in Center -->
+    <circle cx="0" cy="-6" r="16" fill="#E5A96F" fill-opacity="0.35"/>
+  </g>
+
+  <!-- Vertical Gold Accent -->
+  <rect x="76" y="108" width="5" height="398" rx="2.5" fill="#D99B58"/>
+
+  <!-- Eyebrow Pill -->
+  <g transform="translate(106, 118)">
+    <rect x="0" y="-14" width="420" height="30" rx="15" fill="#D99B58" fill-opacity="0.18" stroke="#E8BE8A" stroke-opacity="0.45"/>
+    <text x="18" y="6" fill="#FCE6C8" font-family="Georgia, serif" font-size="12" letter-spacing="2.2">SOCIOLOGICAL REFLECTION • OCT 3, 2026</text>
+  </g>
+
+  <!-- Main Title -->
+  <text x="106" y="216" fill="#FFF8EE" font-family="'Pyidaungsu', sans-serif" font-size="38" font-weight="700">“ငါဒီလိုနေမှ ပုံမှန်ဖြစ်မှာပါလား”</text>
+  <text x="106" y="276" fill="#F6CCA0" font-family="'Pyidaungsu', sans-serif" font-size="29" font-weight="700">ငါတို့မရေးဆွဲခဲ့ရသော ဘဝဇာတ်ညွှန်းနှင့် လူ့အဖွဲ့အစည်း၏ စည်းမျဉ်းများ</text>
+
+  <!-- English Title -->
+  <text x="106" y="340" fill="#F2E4D4" font-family="Georgia, serif" font-size="22" font-style="italic" opacity="0.92">The Rules Nobody Told You — Assigned Identity &amp; The Illusion of Pure Choice</text>
+
+  <!-- Divider -->
+  <line x1="106" y1="376" x2="720" y2="376" stroke="#E5B682" stroke-opacity="0.42" stroke-width="1.2"/>
+
+  <!-- Hashtags -->
+  <text x="106" y="418" fill="#E8BE8A" font-family="Georgia, serif" font-size="14" letter-spacing="1">#Htet    #Society    #Life    #TheRulesNobodyToldYou</text>
+
+  <!-- Author & Date -->
+  <text x="106" y="484" fill="#FFF8EE" font-family="'Pyidaungsu', sans-serif" font-size="18" opacity="0.9">ထက် (Htet) — Htet Official Archive • အောက်တိုဘာ ၃၊ ၂၀၂၆</text>
+
+  <!-- Hanko Stamp -->
+  <g transform="translate(1078, 514)">
+    <rect x="-34" y="-34" width="68" height="68" rx="10" fill="#B83B28" stroke="#FFF4E6" stroke-opacity="0.55" stroke-width="1.5"/>
+    <text x="0" y="8" text-anchor="middle" fill="#FFF8EE" font-family="'Pyidaungsu', serif" font-size="24" font-weight="700">ထက်</text>
+  </g>
+</svg>

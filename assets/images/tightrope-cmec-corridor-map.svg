@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" width="1000" height="540" role="img" aria-label="China-Myanmar Economic Corridor (CMEC), Indian Ocean Access and Strategic Interests Map">
+  <defs>
+    <linearGradient id="cmecBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#190B12"/>
+      <stop offset="50%" stop-color="#121426"/>
+      <stop offset="100%" stop-color="#0B192C"/>
+    </linearGradient>
+    <linearGradient id="corridorLine" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="50%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="540" rx="16" fill="url(#cmecBg)"/>
+  <rect x="14" y="14" width="972" height="512" rx="12" fill="none" stroke="#EF4444" stroke-opacity="0.3" stroke-width="1.2"/>
+
+  <!-- Header -->
+  <text x="42" y="50" font-family="ui-monospace, monospace" font-size="11.5" font-weight="bold" letter-spacing="2" fill="#FCA5A5">FIGURE 02 • BEIJING STRATEGIC ARTERY &amp; 15TH FIVE-YEAR PLAN</text>
+  <text x="42" y="82" font-family="Pyidaungsu, sans-serif" font-size="22" font-weight="bold" fill="#FFFBEB">တရုတ်–မြန်မာ စီးပွားရေးစင်္ကြံ (CMEC) နှင့် အိန္ဒိယသမုဒ္ဒရာ ထွက်ပေါက် မဟာဗျူဟာ</text>
+  <text x="42" y="106" font-family="Georgia, serif" font-size="13.5" font-style="italic" fill="#CBD5E1">Bypassing the Malacca Dilemma: Energy Pipelines, Kyaukphyu Deep-Sea Port, Rare Earths &amp; Border Security</text>
+  <line x1="42" y1="122" x2="958" y2="122" stroke="#EF4444" stroke-opacity="0.32"/>
+
+  <!-- Left Schematic Geopolitical Corridor Map -->
+  <g transform="translate(42, 142)">
+    <rect x="0" y="0" width="535" height="356" rx="12" fill="#0B1325" stroke="#334155" stroke-width="1.2"/>
+    <!-- Bay of Bengal Ocean Shading -->
+    <path d="M0,180 Q135,190 175,260 Q205,315 240,356 L0,356 Z" fill="#0C4A6E" fill-opacity="0.35"/>
+    <text x="26" y="332" font-family="Georgia, serif" font-size="12" font-style="italic" letter-spacing="1.5" fill="#7DD3FC">BAY OF BENGAL • INDIAN OCEAN</text>
+
+    <!-- Stylized Myanmar Strategic Landmass Outline -->
+    <path d="M250,48 L330,42 L365,95 L350,155 L312,205 L286,255 L292,315 L268,342 L252,290 L225,245 L178,220 L165,165 L198,118 Z" fill="#1E293B" fill-opacity="0.78" stroke="#F59E0B" stroke-opacity="0.55" stroke-width="1.6"/>
+
+    <!-- Yunnan / China Zone -->
+    <path d="M335,28 L525,28 L525,180 L365,155 L368,92 Z" fill="#7F1D1D" fill-opacity="0.30" stroke="#EF4444" stroke-opacity="0.45" stroke-dasharray="5 4"/>
+    <text x="442" y="64" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#FCA5A5">YUNNAN, CHINA</text>
+    <text x="442" y="83" text-anchor="middle" font-family="Pyidaungsu, sans-serif" font-size="11.5" fill="#FECACA">ယူနန်ပြည်နယ် (ကူမင်း)</text>
+
+    <!-- CMEC Inverted-Y Corridor Lines -->
+    <!-- Kunming -> Muse -> Mandalay -->
+    <path d="M445,105 L340,115 L265,165" fill="none" stroke="url(#corridorLine)" stroke-width="4.5" stroke-linecap="round"/>
+    <!-- Mandalay -> Kyaukphyu (West Leg) -->
+    <path d="M265,165 L175,212" fill="none" stroke="#38BDF8" stroke-width="4" stroke-linecap="round"/>
+    <!-- Mandalay -> Yangon (South Leg) -->
+    <path d="M265,165 L264,268" fill="none" stroke="#F59E0B" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"/>
+
+    <!-- Nodes -->
+    <circle cx="445" cy="105" r="8" fill="#EF4444" stroke="#FFF" stroke-width="2"/>
+    <text x="445" y="132" text-anchor="middle" font-family="Pyidaungsu, sans-serif" font-size="11.5" font-weight="bold" fill="#FEE2E2">ကူမင်း (Kunming)</text>
+
+    <circle cx="340" cy="115" r="6.5" fill="#F97316" stroke="#FFF" stroke-width="1.8"/>
+    <text x="348" y="102" font-family="Pyidaungsu, sans-serif" font-size="11" fill="#FDE68A">မူဆယ် (Muse)</text>
+
+    <circle cx="265" cy="165" r="7.5" fill="#F59E0B" stroke="#FFF" stroke-width="2"/>
+    <text x="278" y="170" font-family="Pyidaungsu, sans-serif" font-size="12" font-weight="bold" fill="#FEF3C7">မန္တလေး (Mandalay)</text>
+
+    <circle cx="175" cy="212" r="8" fill="#38BDF8" stroke="#FFF" stroke-width="2"/>
+    <text x="95" y="206" text-anchor="middle" font-family="Pyidaungsu, sans-serif" font-size="12" font-weight="bold" fill="#BAE6FD">ကျောက်ဖြူ</text>
+    <text x="95" y="224" text-anchor="middle" font-family="Georgia, serif" font-size="10.5" fill="#7DD3FC">Kyaukphyu Port</text>
+
+    <circle cx="264" cy="268" r="6" fill="#FDE68A" stroke="#0F172A" stroke-width="1.5"/>
+    <text x="315" y="273" font-family="Pyidaungsu, sans-serif" font-size="11" fill="#E2E8F0">ရန်ကုန် (Yangon)</text>
+
+    <!-- Kachin Rare Earths Marker -->
+    <circle cx="290" cy="68" r="5.5" fill="#A855F7" stroke="#FFF" stroke-width="1.5"/>
+    <text x="200" y="66" text-anchor="middle" font-family="Pyidaungsu, sans-serif" font-size="10.5" fill="#E9D5FF">မြေရှားသတ္တု (Rare Earths)</text>
+    <line x1="255" y1="66" x2="283" y2="68" stroke="#A855F7" stroke-width="1"/>
+
+    <!-- Malacca Bypass Tag -->
+    <rect x="330" y="294" width="188" height="44" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-opacity="0.5"/>
+    <text x="424" y="313" text-anchor="middle" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#7DD3FC">MALACCA BYPASS</text>
+    <text x="424" y="330" text-anchor="middle" font-family="Pyidaungsu, sans-serif" font-size="10.5" fill="#CBD5E1">မလက္ကာရေလက်ကြား ရှောင်ကွင်းလမ်း</text>
+  </g>
+
+  <!-- Right Panel: 4 Pillars of Beijing's Interests -->
+  <g transform="translate(598, 142)">
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="360" height="80" rx="10" fill="#1E1420" stroke="#EF4444" stroke-opacity="0.45"/>
+      <text x="16" y="25" font-family="Pyidaungsu, sans-serif" font-size="13.5" font-weight="bold" fill="#FCA5A5">၁။ အိန္ဒိယသမုဒ္ဒရာ စွမ်းအင်လုံခြုံရေး</text>
+      <text x="16" y="48" font-family="Pyidaungsu, sans-serif" font-size="11.8" fill="#E2E8F0">ကျောက်ဖြူရေနက်ဆိပ်ကမ်းနှင့် ရေနံ/သဘာဝဓာတ်ငွေ့</text>
+      <text x="16" y="66" font-family="Pyidaungsu, sans-serif" font-size="11.8" fill="#E2E8F0">ပိုက်လိုင်းများသည် မလက္ကာအကျပ်အတည်း ဖြေရှင်းချက်</text>
+    </g>
+
+    <g transform="translate(0, 92)">
+      <rect x="0" y="0" width="360" height="80" rx="10" fill="#1E1420" stroke="#A855F7" stroke-opacity="0.45"/>
+      <text x="16" y="25" font-family="Pyidaungsu, sans-serif" font-size="13.5" font-weight="bold" fill="#E9D5FF">၂။ ၁၅ ကြိမ်မြောက် ငါးနှစ်စီမံကိန်းနှင့် မြေရှားသတ္တု</text>
+      <text x="16" y="48" font-family="Pyidaungsu, sans-serif" font-size="11.8" fill="#E2E8F0">EV၊ AI နှင့် အဆင့်မြင့်နည်းပညာ ထုတ်လုပ်ရေးအတွက်</text>
+      <text x="16" y="66" font-family="Pyidaungsu, sans-serif" font-size="11.8" fill="#E2E8F0">မြန်မာ့မြေရှားသတ္တု (Heavy Rare Earths) အရေးပါမှု</text>
+    </g>
+
+    <g transform="translate(0, 184)">
+      <rect x="0" y="0" width="360" height="80" rx="10" fill="#1E1420" stroke="#F59E0B" stroke-opacity="0.45"/>
+      <text x="16" y="25" font-family="Pyidaungsu, sans-serif" font-size="13.5" font-weight="bold" fill="#FDE68A">၃။ နယ်စပ်တည်ငြိမ်ရေးနှင့် နှစ်ဖက်ကစားမူဝါဒ</text>
+      <text x="16" y="48" font-family="Pyidaungsu, sans-serif" font-size="11.8" fill="#E2E8F0">စစ်အုပ်စုနှင့် နယ်စပ်တိုင်းရင်းသားအဖွဲ့များကြား</text>
+      <text x="16" y="66" font-family="Pyidaungsu, sans-serif" font-size="11.8" fill="#E2E8F0">တရုတ်အကျိုးစီးပွား မထိခိုက်စေရန် ချိန်ညှိထိန်းချုပ်မှု</text>
+    </g>
+
+    <g transform="translate(0, 276)">
+      <rect x="0" y="0" width="360" height="80" rx="10" fill="#102032" stroke="#38BDF8" stroke-opacity="0.45"/>
+      <text x="16" y="25" font-family="Pyidaungsu, sans-serif" font-size="13.5" font-weight="bold" fill="#BAE6FD">၄။ မြန်မာ့အချုပ်အခြာအာဏာ စိန်ခေါ်မှု</text>
+      <text x="16" y="48" font-family="Pyidaungsu, sans-serif" font-size="11.8" fill="#E2E8F0">စီးပွားရေးနှင့် လုံခြုံရေး အလွန်အကျွံ မှီခိုမိပါက</text>
+      <text x="16" y="66" font-family="Pyidaungsu, sans-serif" font-size="11.8" fill="#E2E8F0">နိုင်ငံတော်၏ ကိုယ်ပိုင်ဆုံးဖြတ်ခွင့် ဆုံးရှုံးနိုင်ခြေ</text>
+    </g>
+  </g>
+</svg>

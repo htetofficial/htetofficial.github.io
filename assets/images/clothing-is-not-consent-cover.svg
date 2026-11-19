@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="ဘာဝတ်ဝတ် ရာဇဝတ်မှုကျူးလွန်ရန် မဟုတ်! အဝတ်အစားက မုဒိန်းမှုအတွက် ဆင်ခြေမဟုတ်ဘူး!">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#171312"/>
+      <stop offset="52%" stop-color="#2D1615"/>
+      <stop offset="100%" stop-color="#6B1F1B"/>
+    </linearGradient>
+    <radialGradient id="crimsonGlow" cx="76%" cy="32%" r="45%">
+      <stop offset="0%" stop-color="#D94B38" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#171312" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#crimsonGlow)"/>
+
+  <!-- Editorial Double Border -->
+  <rect x="28" y="28" width="1144" height="574" fill="none" stroke="#F6E9DA" stroke-opacity="0.28" stroke-width="1.5"/>
+  <rect x="38" y="38" width="1124" height="554" fill="none" stroke="#F6E9DA" stroke-opacity="0.14" stroke-width="1"/>
+
+  <!-- Symbolic Minimalist Scales of Justice & Breaking Silence Arc (Right Background) -->
+  <g transform="translate(940, 295)" opacity="0.22" stroke="#F5D3A8" fill="none" stroke-width="2.5">
+    <circle cx="0" cy="0" r="145" stroke-dasharray="6 8"/>
+    <circle cx="0" cy="0" r="102"/>
+    <line x1="0" y1="-92" x2="0" y2="92"/>
+    <line x1="-88" y1="-34" x2="88" y2="-34"/>
+    <path d="M-88 -34 L-114 34 L-62 34 Z"/>
+    <path d="M88 -34 L62 34 L114 34 Z"/>
+    <line x1="-42" y1="92" x2="42" y2="92"/>
+  </g>
+
+  <!-- Vertical Crimson Accent Bar -->
+  <rect x="76" y="108" width="6" height="398" rx="3" fill="#D94B38"/>
+
+  <!-- Eyebrow Pill -->
+  <g transform="translate(108, 118)">
+    <rect x="0" y="-14" width="378" height="30" rx="15" fill="#B83B28" fill-opacity="0.28" stroke="#E59C7A" stroke-opacity="0.45"/>
+    <text x="18" y="6" fill="#FCE2CC" font-family="Georgia, serif" font-size="12" letter-spacing="2.5">STATEMENT • END RAPE CULTURE • OCT 9, 2026</text>
+  </g>
+
+  <!-- Main Title -->
+  <text x="108" y="218" fill="#FFF8EE" font-family="'Pyidaungsu', sans-serif" font-size="40" font-weight="700">ဘာဝတ်ဝတ် ရာဇဝတ်မှုကျူးလွန်ရန် မဟုတ်!</text>
+  <text x="108" y="282" fill="#F8C89E" font-family="'Pyidaungsu', sans-serif" font-size="36" font-weight="700">အဝတ်အစားက မုဒိန်းမှုအတွက် ဆင်ခြေမဟုတ်ဘူး!</text>
+
+  <!-- English Subtitle -->
+  <text x="108" y="346" fill="#F4E6D6" font-family="Georgia, serif" font-size="22" font-style="italic" opacity="0.92">Clothing Is Never Consent — Confronting Institutional Impunity &amp; Victim-Blaming</text>
+
+  <!-- Horizontal Rule -->
+  <line x1="108" y1="382" x2="720" y2="382" stroke="#E5B682" stroke-opacity="0.45" stroke-width="1.2"/>
+
+  <!-- Key Hashtags -->
+  <text x="108" y="424" fill="#E8B088" font-family="Georgia, serif" font-size="14" letter-spacing="0.8">#FightThePatriarchy   #EndRapeCulture   #NoMoreSilence   #JusticeForSurvivors</text>
+
+  <!-- Author & Date -->
+  <text x="108" y="486" fill="#FFF8EE" font-family="'Pyidaungsu', sans-serif" font-size="18" opacity="0.9">ထက် (Htet) — Htet Official Archive • အောက်တိုဘာ ၉၊ ၂၀၂၆</text>
+
+  <!-- Hanko Stamp -->
+  <g transform="translate(1078, 514)">
+    <rect x="-34" y="-34" width="68" height="68" rx="10" fill="#B83B28" stroke="#FFF4E6" stroke-opacity="0.55" stroke-width="1.5"/>
+    <text x="0" y="8" text-anchor="middle" fill="#FFF8EE" font-family="'Pyidaungsu', serif" font-size="24" font-weight="700">ထက်</text>
+  </g>
+</svg>

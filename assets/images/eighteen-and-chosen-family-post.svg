@@ -1,0 +1,197 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="title desc">
+  <title id="title">Turning Eighteen: The Lit Window &amp; The Family of My Own Choosing — Htet Reflection</title>
+  <desc id="desc">Editorial artwork depicting a young woman standing beneath a cold starry sky gazing toward a warm amber lit window, symbolizing the journey toward chosen family and true selfhood at eighteen.</desc>
+  <defs>
+    <!-- Night Sky Gradient -->
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050814"/>
+      <stop offset="45%" stop-color="#0f172a"/>
+      <stop offset="85%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#2e1065"/>
+    </linearGradient>
+
+    <!-- Warm Window Light Radial -->
+    <radialGradient id="windowGlow" cx="72%" cy="46%" r="55%">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="0.95"/>
+      <stop offset="25%" stop-color="#f59e0b" stop-opacity="0.6"/>
+      <stop offset="55%" stop-color="#f43f5e" stop-opacity="0.25"/>
+      <stop offset="85%" stop-color="#0f172a" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Rose-Gold Accent Gradient -->
+    <linearGradient id="roseAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f43f5e"/>
+      <stop offset="50%" stop-color="#fb7185"/>
+      <stop offset="100%" stop-color="#fde047"/>
+    </linearGradient>
+
+    <filter id="bloom" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="675" fill="url(#skyGrad)"/>
+
+  <!-- Stars & Starlight Field -->
+  <g fill="#ffffff" opacity="0.65">
+    <circle cx="120" cy="80" r="1.5"/>
+    <circle cx="180" cy="140" r="1.2"/>
+    <circle cx="260" cy="65" r="1.8" opacity="0.9"/>
+    <circle cx="340" cy="110" r="1"/>
+    <circle cx="430" cy="75" r="1.5"/>
+    <circle cx="510" cy="150" r="1.2"/>
+    <circle cx="580" cy="90" r="2" opacity="0.95"/>
+    <circle cx="650" cy="60" r="1.4"/>
+    <circle cx="140" cy="220" r="1.2"/>
+    <circle cx="220" cy="280" r="1.6"/>
+    <circle cx="95" cy="360" r="1.4"/>
+    <circle cx="400" cy="230" r="1.8"/>
+  </g>
+
+  <!-- Editorial Double Border -->
+  <rect x="28" y="28" width="1144" height="619" rx="16" fill="none" stroke="#fb7185" stroke-opacity="0.32" stroke-width="1.2"/>
+  <rect x="36" y="36" width="1128" height="603" rx="12" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="0.8"/>
+
+  <!-- Right Visual: The Warm House with Lit Window & The Silhouette Looking In -->
+  <g transform="translate(620, 70)">
+    <!-- Ambient Warm Glow from Window -->
+    <circle cx="300" cy="240" r="260" fill="url(#windowGlow)"/>
+
+    <!-- Architectural Silhouette: Home Wall & Roof -->
+    <path d="M 120,480 L 120,160 L 320,60 L 500,160 L 500,480 Z" fill="#090d16" stroke="#334155" stroke-width="1.5"/>
+
+    <!-- The Lit Window (The Warmth Yearned For) -->
+    <g transform="translate(220, 160)" filter="url(#bloom)">
+      <!-- Outer Frame -->
+      <rect x="0" y="0" width="160" height="190" rx="6" fill="#fef08a" stroke="#ca8a04" stroke-width="3"/>
+      <!-- Window Panes Shadow/Glow -->
+      <rect x="8" y="8" width="68" height="82" rx="3" fill="#fef9c3" fill-opacity="0.9"/>
+      <rect x="84" y="8" width="68" height="82" rx="3" fill="#fef9c3" fill-opacity="0.9"/>
+      <rect x="8" y="98" width="68" height="82" rx="3" fill="#fde047" fill-opacity="0.9"/>
+      <rect x="84" y="98" width="68" height="82" rx="3" fill="#fde047" fill-opacity="0.9"/>
+      <!-- Window Cross Bars -->
+      <line x1="79" y1="0" x2="79" y2="190" stroke="#a16207" stroke-width="6"/>
+      <line x1="0" y1="93" x2="160" y2="93" stroke="#a16207" stroke-width="6"/>
+      <!-- Warm Curtain Silhouette -->
+      <path d="M 8,8 Q 38,50 14,90 L 8,90 Z" fill="#b45309" opacity="0.45"/>
+      <path d="M 152,8 Q 122,50 146,90 L 152,90 Z" fill="#b45309" opacity="0.45"/>
+    </g>
+
+    <!-- Foreground Cold Ground Silhouette -->
+    <path d="M -80,510 Q 150,470 540,510 L 540,550 L -80,550 Z" fill="#030712"/>
+
+    <!-- The Girl's Silhouette Standing Outside in the Cold -->
+    <g transform="translate(80, 270)">
+      <!-- Soft Moonlight Rim Light behind her -->
+      <ellipse cx="25" cy="110" rx="42" ry="110" fill="#38bdf8" opacity="0.12"/>
+      <!-- Hair & Head (Graceful long hair in breeze) -->
+      <path d="M 22,25 C 10,25 2,36 3,50 C 4,64 12,74 20,74 C 28,74 35,64 36,50 C 37,36 31,25 22,25 Z" fill="#020617"/>
+      <!-- Long Flowing Hair Cascading down -->
+      <path d="M 12,42 Q -6,85 0,140 Q 8,110 18,72 Z" fill="#020617"/>
+      <path d="M 28,42 Q 36,80 32,130 Q 24,95 24,72 Z" fill="#020617"/>
+      <!-- Shoulders & Coat/Dress Profile gazing toward the window -->
+      <path d="M 20,75 C 8,82 -2,105 -4,155 L 48,155 C 44,105 34,82 22,75 Z" fill="#020617"/>
+      <!-- Lower Dress flowing to ground -->
+      <path d="M -4,155 L -15,240 L 58,240 L 48,155 Z" fill="#020617"/>
+      <!-- Soft rim highlight on edge facing window light -->
+      <path d="M 28,32 C 34,44 33,60 30,75 C 36,92 42,120 44,165" stroke="#fde047" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.75"/>
+    </g>
+
+    <!-- Luminous Butterfly symbolizing Blossoming Daughterhood & Transformation -->
+    <g transform="translate(145, 230)" filter="url(#bloom)">
+      <path d="M 0,0 Q -14,-16 -6,-28 Q 8,-18 2,-2 Z" fill="url(#roseAccent)" opacity="0.9"/>
+      <path d="M 4,-2 Q 18,-18 10,-28 Q -4,-18 2,-2 Z" fill="url(#roseAccent)" opacity="0.9"/>
+      <path d="M -1,-1 Q -12,8 -6,14 Q 4,8 1,-1 Z" fill="#fde047" opacity="0.85"/>
+      <path d="M 3,-1 Q 14,8 8,14 Q -2,8 1,-1 Z" fill="#fde047" opacity="0.85"/>
+      <circle cx="1" cy="-2" r="1.5" fill="#ffffff"/>
+    </g>
+  </g>
+
+  <!-- Left Editorial Typography & Literary Excerpt -->
+  <g transform="translate(70, 75)">
+    <!-- Pill Tag -->
+    <rect x="0" y="0" width="220" height="28" rx="6" fill="#fb7185" fill-opacity="0.15" stroke="#fb7185" stroke-opacity="0.4"/>
+    <text x="14" y="19" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#fecdd3" letter-spacing="1">PERSONAL DIARY • REFLECTION</text>
+
+    <!-- Main Title -->
+    <text x="0" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="700" fill="#ffffff" letter-spacing="-0.5">
+      When I Turned Eighteen
+    </text>
+    <text x="0" y="106" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="500" fill="url(#roseAccent)">
+      The Lit Window, The Ghost, and The Family of My Own Choosing
+    </text>
+
+    <!-- Burmese Subtitle -->
+    <text x="0" y="136" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="400" fill="#cbd5e1">
+      မီးရောင်လင်းနေသော ပြတင်းပေါက်၊ အတင်းသရုပ်ဆောင်ခဲ့ရသည့် တစ္ဆေနှင့် ကိုယ်တိုင်ရွေးချယ်မည့် မိသားစု
+    </text>
+
+    <!-- Key Quote Card -->
+    <g transform="translate(0, 165)">
+      <rect x="0" y="0" width="530" height="155" rx="12" fill="#0f172a" fill-opacity="0.75" stroke="#334155" stroke-width="1.2"/>
+      <line x1="0" y1="0" x2="0" y2="155" stroke="#fb7185" stroke-width="4.5"/>
+
+      <text x="24" y="30" font-family="Georgia, serif" font-size="18" font-style="italic" fill="#fde047">“</text>
+      <text x="38" y="32" font-family="Georgia, 'Pyidaungsu', serif" font-size="13.5" font-style="italic" fill="#e2e8f0">
+        If the family I was born into couldn't make room for this girl,
+      </text>
+      <text x="24" y="54" font-family="Georgia, 'Pyidaungsu', serif" font-size="13.5" font-style="italic" fill="#e2e8f0">
+        I would live until I could create a family of my own choosing
+      </text>
+      <text x="24" y="76" font-family="Georgia, 'Pyidaungsu', serif" font-size="13.5" font-style="italic" fill="#e2e8f0">
+        that would embrace me. The life I wanted wasn't a dream,
+      </text>
+      <text x="24" y="98" font-family="Georgia, 'Pyidaungsu', serif" font-size="13.5" font-style="italic" fill="#f43f5e" font-weight="600">
+        it was a destination.
+      </text>
+      <text x="175" y="98" font-family="Georgia, serif" font-size="18" font-style="italic" fill="#fde047">”</text>
+
+      <line x1="24" y1="116" x2="506" y2="116" stroke="#334155" stroke-width="1"/>
+      <text x="24" y="137" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11.5" fill="#94a3b8">
+        “မွေးဖွားရာမိသားစုက နေရာမပေးနိုင်ခဲ့ရင်တောင် ကိုယ်တိုင်ရွေးချယ်မယ့် မိသားစုအတွက် အသက်ရှင်မည်”
+      </text>
+    </g>
+
+    <!-- Three Pillars of True Selfhood -->
+    <g transform="translate(0, 345)">
+      <!-- Item 1 -->
+      <g transform="translate(0, 0)">
+        <circle cx="12" cy="12" r="10" fill="#f43f5e" fill-opacity="0.2" stroke="#f43f5e" stroke-width="1.2"/>
+        <text x="12" y="16" font-family="sans-serif" font-size="11" font-weight="bold" fill="#fca5a5" text-anchor="middle">✓</text>
+        <text x="32" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="13" font-weight="600" fill="#ffffff">A Blossoming Daughter (ပွင့်လန်းစ သမီးလေးတစ်ယောက်)</text>
+        <text x="32" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11.5" fill="#94a3b8">ပြုပြင်ရမည့် စိတ်ပျက်စရာအဖြစ်မဟုတ်ဘဲ သမီးအဖြစ် ချစ်ခင်နွေးထွေးမှု ရရှိလိုခြင်း</text>
+      </g>
+
+      <!-- Item 2 -->
+      <g transform="translate(0, 48)">
+        <circle cx="12" cy="12" r="10" fill="#38bdf8" fill-opacity="0.2" stroke="#38bdf8" stroke-width="1.2"/>
+        <text x="12" y="16" font-family="sans-serif" font-size="11" font-weight="bold" fill="#7dd3fc" text-anchor="middle">✓</text>
+        <text x="32" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="13" font-weight="600" fill="#ffffff">My Real Name &amp; My Own Skin (နာမည်အစစ်နှင့် ကိုယ်ပိုင်ဖြစ်တည်မှု)</text>
+        <text x="32" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11.5" fill="#94a3b8">အတင်းဝတ်ဆင်ခိုင်းထားသော ဇာတ်ဝတ်ဇာတ်စား မဟုတ်သည့် စစ်မှန်သောဘဝ</text>
+      </g>
+
+      <!-- Item 3 -->
+      <g transform="translate(0, 96)">
+        <circle cx="12" cy="12" r="10" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1.2"/>
+        <text x="12" y="16" font-family="sans-serif" font-size="11" font-weight="bold" fill="#fde68a" text-anchor="middle">✓</text>
+        <text x="32" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="13" font-weight="600" fill="#ffffff">Chosen Family as a Destination (ကိုယ်တိုင်ရွေးချယ်သော မိသားစု)</text>
+        <text x="32" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11.5" fill="#94a3b8">အသက်ရှူသံတိုင်းသည် စစ်မှန်သော မိသားစုနှင့် ဘဝဆီသို့ ချဉ်းကပ်စေနေသည်</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom Metadata Footer -->
+  <g transform="translate(70, 600)">
+    <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">
+      Htet Official Journal • Personal Diary Entry (2026-08-31) • Written directly in English by Htet
+    </text>
+    <text x="1060" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#fb7185" text-anchor="end" font-weight="600">
+      #Htet #Feelings #MyThoughts #Life #Family
+    </text>
+  </g>
+</svg>

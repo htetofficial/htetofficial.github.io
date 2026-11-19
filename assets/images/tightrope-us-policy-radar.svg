@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="1000" height="520" role="img" aria-label="US Political Crossroads and Policy Posture Toward Myanmar (2026-2028)">
+  <defs>
+    <linearGradient id="usBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#091326"/>
+      <stop offset="100%" stop-color="#132242"/>
+    </linearGradient>
+    <linearGradient id="barBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="barGold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="520" rx="16" fill="url(#usBg)"/>
+  <rect x="14" y="14" width="972" height="492" rx="12" fill="none" stroke="#60A5FA" stroke-opacity="0.28" stroke-width="1.2"/>
+
+  <!-- Header -->
+  <text x="42" y="52" font-family="ui-monospace, monospace" font-size="11.5" font-weight="bold" letter-spacing="2" fill="#60A5FA">FIGURE 01 • WASHINGTON STRATEGIC CALCULUS (2026–2028)</text>
+  <text x="42" y="84" font-family="Pyidaungsu, sans-serif" font-size="22" font-weight="bold" fill="#F8FAFC">အမေရိကန် နိုင်ငံခြားရေးမူဝါဒနှင့် မြန်မာ့အရေး ရပ်တည်ချက် ခွဲခြမ်းစိတ်ဖြာမှု</text>
+  <text x="42" y="108" font-family="Georgia, serif" font-size="13.5" font-style="italic" fill="#94A3B8">Post-2026 Midterm Dynamics, America First Realism, and the Limits of U.S. Intervention in Myanmar</text>
+  <line x1="42" y1="124" x2="958" y2="124" stroke="#3B82F6" stroke-opacity="0.3"/>
+
+  <!-- Left Panel: Domestic & Global Drivers -->
+  <g transform="translate(42, 146)">
+    <rect x="0" y="0" width="435" height="325" rx="12" fill="#0F1C36" stroke="#3B82F6" stroke-opacity="0.4"/>
+    <text x="22" y="34" font-family="Pyidaungsu, sans-serif" font-size="15.5" font-weight="bold" fill="#93C5FD">၁။ အမေရိကန် ပြည်တွင်းနှင့် ကမ္ဘာလုံးဆိုင်ရာ ဦးစားပေးချက်များ</text>
+
+    <!-- Priority Bars -->
+    <g transform="translate(22, 60)">
+      <text x="0" y="0" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#E2E8F0">တရုတ်နှင့် နည်းပညာ/စီးပွားရေး ပြိုင်ဆိုင်မှု (China Containment)</text>
+      <rect x="0" y="10" width="390" height="12" rx="6" fill="#1E293B"/>
+      <rect x="0" y="10" width="366" height="12" rx="6" fill="url(#barBlue)"/>
+      <text x="390" y="0" text-anchor="end" font-family="ui-monospace, monospace" font-size="11.5" font-weight="bold" fill="#93C5FD">CRITICAL</text>
+    </g>
+
+    <g transform="translate(22, 118)">
+      <text x="0" y="0" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#E2E8F0">အမေရိကန် ပြည်တွင်းစီးပွားရေးနှင့် အခွန်မူဝါဒ (America First)</text>
+      <rect x="0" y="10" width="390" height="12" rx="6" fill="#1E293B"/>
+      <rect x="0" y="10" width="340" height="12" rx="6" fill="url(#barBlue)"/>
+      <text x="390" y="0" text-anchor="end" font-family="ui-monospace, monospace" font-size="11.5" font-weight="bold" fill="#93C5FD">HIGH</text>
+    </g>
+
+    <g transform="translate(22, 176)">
+      <text x="0" y="0" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#E2E8F0">အင်ဒို-ပစိဖိတ် မဟာမိတ်ကွန်ရက် (Quad / AUKUS / Taiwan)</text>
+      <rect x="0" y="10" width="390" height="12" rx="6" fill="#1E293B"/>
+      <rect x="0" y="10" width="315" height="12" rx="6" fill="url(#barBlue)"/>
+      <text x="390" y="0" text-anchor="end" font-family="ui-monospace, monospace" font-size="11.5" font-weight="bold" fill="#93C5FD">HIGH</text>
+    </g>
+
+    <g transform="translate(22, 234)">
+      <text x="0" y="0" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#FDE68A">မြန်မာ့အရေး တိုက်ရိုက်စစ်ရေး/နိုင်ငံရေး ဝင်ရောက်မှု</text>
+      <rect x="0" y="10" width="390" height="12" rx="6" fill="#1E293B"/>
+      <rect x="0" y="10" width="128" height="12" rx="6" fill="url(#barGold)"/>
+      <text x="390" y="0" text-anchor="end" font-family="ui-monospace, monospace" font-size="11.5" font-weight="bold" fill="#FDE68A">LIMITED</text>
+    </g>
+
+    <text x="22" y="302" font-family="Pyidaungsu, sans-serif" font-size="11.5" fill="#94A3B8">* ပြည်တွင်းအာရုံစိုက်မှုနှင့် ၂၀၂၆ ကြားဖြတ်ရွေးကောက်ပွဲအလွန် ကန့်သတ်ချက်များ</text>
+  </g>
+
+  <!-- Center Arrow Connector -->
+  <g transform="translate(486, 295)">
+    <path d="M0,14 L28,14" stroke="#F59E0B" stroke-width="2.5" stroke-dasharray="4 3"/>
+    <polygon points="28,7 40,14 28,21" fill="#F59E0B"/>
+  </g>
+
+  <!-- Right Panel: Policy Instruments on Myanmar -->
+  <g transform="translate(534, 146)">
+    <rect x="0" y="0" width="424" height="325" rx="12" fill="#0F1C36" stroke="#F59E0B" stroke-opacity="0.45"/>
+    <text x="22" y="34" font-family="Pyidaungsu, sans-serif" font-size="15.5" font-weight="bold" fill="#FDE68A">၂။ မြန်မာ့အရေးအပေါ် အမေရိကန်၏ လက်တွေ့ကိရိယာများ</text>
+
+    <!-- 3 Policy Cards -->
+    <g transform="translate(20, 52)">
+      <rect x="0" y="0" width="384" height="76" rx="10" fill="#172544" stroke="#60A5FA" stroke-opacity="0.35"/>
+      <text x="16" y="25" font-family="Pyidaungsu, sans-serif" font-size="13.5" font-weight="bold" fill="#DBEAFE">ပစ်မှတ်ထား ပိတ်ဆို့အရေးယူမှု (Targeted Sanctions)</text>
+      <text x="16" y="48" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#CBD5E1">စစ်အုပ်စု၏ ဘဏ္ဍာရေး၊ လေယာဉ်ဆီနှင့် စစ်လက်နက်</text>
+      <text x="16" y="65" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#CBD5E1">ကွန်ရက်များကို ဖိအားပေးခြင်း (BURMA Act မူဘောင်)</text>
+    </g>
+
+    <g transform="translate(20, 140)">
+      <rect x="0" y="0" width="384" height="76" rx="10" fill="#172544" stroke="#60A5FA" stroke-opacity="0.35"/>
+      <text x="16" y="25" font-family="Pyidaungsu, sans-serif" font-size="13.5" font-weight="bold" fill="#DBEAFE">သံတမန်ရေးနှင့် လူသားချင်းစာနာမှု (Diplomatic &amp; Aid)</text>
+      <text x="16" y="48" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#CBD5E1">အာဆီယံ (ASEAN) ဗဟိုပြုမူဝါဒကို ထောက်ခံခြင်းနှင့်</text>
+      <text x="16" y="65" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#CBD5E1">လက်နက်မဲ့ အရပ်ဘက်အကူအညီများ ကန့်သတ်ပေးအပ်ခြင်း</text>
+    </g>
+
+    <g transform="translate(20, 228)">
+      <rect x="0" y="0" width="384" height="78" rx="10" fill="#2A1D12" stroke="#F59E0B" stroke-opacity="0.6"/>
+      <text x="16" y="25" font-family="Pyidaungsu, sans-serif" font-size="13.5" font-weight="bold" fill="#FDE68A">မဟာဗျူဟာ သင်ခန်းစာ (Strategic Reality Check)</text>
+      <text x="16" y="48" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#FEF3C7">ပြည်ပအင်အားကြီးနိုင်ငံ၏ တိုက်ရိုက်ကယ်တင်မှုကို</text>
+      <text x="16" y="66" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#FEF3C7">မျှော်လင့်၍မရ — မြန်မာ့ပြည်တွင်းစည်းလုံးမှုသာ အဓိက</text>
+    </g>
+  </g>
+</svg>

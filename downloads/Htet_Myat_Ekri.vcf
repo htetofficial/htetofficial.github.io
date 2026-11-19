@@ -1,11 +1,12 @@
 BEGIN:VCARD
 VERSION:3.0
 N:Ekri;Htet;Myat;;
-FN:Htet Myat Ekri
-TITLE:Public Intellectual, Writer & Philosophy Researcher
+FN:Htet Myat Ekri (ထက်မြတ်ဧကရီ)
+TITLE:Writer, Political Philosophy Researcher & Human Rights Activist
 ORG:Htet Official
 NOTE:Writer, Political Philosophy Researcher & Trans Liberation Activist
-URL:https://htetofficial.wordpress.com
+EMAIL;TYPE=INTERNET,PREF:htethtet2025ideahub@gmail.com
+EMAIL;TYPE=INTERNET:htetmyatekri@icloud.com
+URL;TYPE=PREF:https://htetofficial.github.io
 URL;TYPE=Telegram:https://t.me/htetmmofficial
-URL;TYPE=Facebook:https://facebook.com/htetmyatekri
 END:VCARD

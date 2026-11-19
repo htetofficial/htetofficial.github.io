@@ -12,14 +12,15 @@
       try {
         var validThemes = [
           'light', 'sepia', 'dark', 'amoled',
+          'green', 'green-forest',
+          'blue', 'blue-sapphire',
           'red', 'red-crimson', 'red-rosewood',
           'purple', 'purple-lavender', 'purple-plum', 'purple-indigo',
           'pink', 'pink-peach', 'pink-rose'
         ];
         var savedTheme = null;
         try { savedTheme = localStorage.getItem('site_theme'); } catch(e) {}
-        var theme = (savedTheme && validThemes.indexOf(savedTheme) !== -1) ? savedTheme : 
-          ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light');
+        var theme = (savedTheme && validThemes.indexOf(savedTheme) !== -1) ? savedTheme : 'light';
         
         document.documentElement.setAttribute('data-theme', theme);
         if (theme === 'dark' || theme === 'amoled') {
@@ -33,6 +34,10 @@
           sepia: '#F5EEDB',
           dark: '#121110',
           amoled: '#000000',
+          green: '#F5FAF6',
+          'green-forest': '#F4F8F5',
+          blue: '#F4F8FD',
+          'blue-sapphire': '#F3F7FC',
           red: '#FAF5F5',
           'red-crimson': '#FAF4F5',
           'red-rosewood': '#FAF6F3',
@@ -75,28 +80,102 @@
     html { color-scheme: light dark; }
     html[data-theme="amoled"], html[data-theme="amoled"].dark { background-color: #000000 !important; }
     html[data-theme="amoled"] body, html[data-theme="amoled"].dark body { background-color: #000000 !important; color: #FFFFFF !important; }
-    html[data-theme="amoled"] header.sticky { background-color: rgba(0, 0, 0, 0.9) !important; }
+    html[data-theme="amoled"] header.sticky { background-color: rgba(0, 0, 0, 0.95) !important; }
     html[data-theme="dark"], html.dark { background-color: #121110 !important; }
     html[data-theme="dark"] body, html.dark body { background-color: #121110 !important; color: #F5EFE6 !important; }
     html[data-theme="dark"] .bg-cream, html.dark .bg-cream { background-color: #221F1C !important; }
     html[data-theme="dark"] header.sticky, html.dark header.sticky { background-color: rgba(18, 17, 16, 0.85) !important; }
-    html[data-theme="pink"] { background-color: #FDF6F8 !important; }
-    html[data-theme="pink"] body { background-color: #FDF6F8 !important; color: #2D1A24 !important; }
-    html[data-theme="purple"] { background-color: #F8F6FD !important; }
-    html[data-theme="purple"] body { background-color: #F8F6FD !important; color: #211B33 !important; }
-    html[data-theme="red"] { background-color: #FAF5F5 !important; }
-    html[data-theme="red"] body { background-color: #FAF5F5 !important; color: #2A1717 !important; }
     html[data-theme="sepia"] { background-color: #F5EEDB !important; }
-    html[data-theme="sepia"] body, html.sepia body { background-color: #F5EEDB !important; color: #383024 !important; }
+    html[data-theme="sepia"] body, html.sepia body { background-color: #F5EEDB !important; color: #342A1E !important; }
     html[data-theme="light"] { background-color: #FAF8F5; }
     html[data-theme="light"] body { background-color: #FAF8F5; color: #252321; }
+
+    /* Red Themes (3) */
+    html[data-theme="red"] { background-color: #FAF5F5 !important; }
+    html[data-theme="red"] body { background-color: #FAF5F5 !important; color: #2A1717 !important; }
+    html[data-theme="red-crimson"] { background-color: #FAF4F5 !important; }
+    html[data-theme="red-crimson"] body { background-color: #FAF4F5 !important; color: #2E1218 !important; }
+    html[data-theme="red-rosewood"] { background-color: #FAF6F3 !important; }
+    html[data-theme="red-rosewood"] body { background-color: #FAF6F3 !important; color: #2C1A14 !important; }
+
+    /* Purple Themes (4) */
+    html[data-theme="purple"] { background-color: #F8F6FD !important; }
+    html[data-theme="purple"] body { background-color: #F8F6FD !important; color: #211B33 !important; }
+    html[data-theme="purple-lavender"] { background-color: #F8F7FD !important; }
+    html[data-theme="purple-lavender"] body { background-color: #F8F7FD !important; color: #1E1830 !important; }
+    html[data-theme="purple-plum"] { background-color: #F9F5FA !important; }
+    html[data-theme="purple-plum"] body { background-color: #F9F5FA !important; color: #28112C !important; }
+    html[data-theme="purple-indigo"] { background-color: #F5F6FC !important; }
+    html[data-theme="purple-indigo"] body { background-color: #F5F6FC !important; color: #131B36 !important; }
+
+    /* Pink Themes (3) */
+    html[data-theme="pink"] { background-color: #FDF6F8 !important; }
+    html[data-theme="pink"] body { background-color: #FDF6F8 !important; color: #2D1A24 !important; }
+    html[data-theme="pink-peach"] { background-color: #FDF7F4 !important; }
+    html[data-theme="pink-peach"] body { background-color: #FDF7F4 !important; color: #2E1C15 !important; }
+    html[data-theme="pink-rose"] { background-color: #FDF5F7 !important; }
+    html[data-theme="pink-rose"] body { background-color: #FDF5F7 !important; color: #2E151E !important; }
+
+    /* Green Themes (2) */
+    html[data-theme="green"] { background-color: #F5FAF6 !important; }
+    html[data-theme="green"] body { background-color: #F5FAF6 !important; color: #12281D !important; }
+    html[data-theme="green-forest"] { background-color: #F4F8F5 !important; }
+    html[data-theme="green-forest"] body { background-color: #F4F8F5 !important; color: #0F241A !important; }
+
+    /* Blue Themes (2) */
+    html[data-theme="blue"] { background-color: #F4F8FD !important; }
+    html[data-theme="blue"] body { background-color: #F4F8FD !important; color: #102138 !important; }
+    html[data-theme="blue-sapphire"] { background-color: #F3F7FC !important; }
+    html[data-theme="blue-sapphire"] body { background-color: #F3F7FC !important; color: #0B1E36 !important; }
+
+    /* Zero-Latency Sidebar & Element Cloaking: Prevent drawer, overlays, modals and menus from flashing during navigation */
+    #mobile-menu-drawer {
+      visibility: hidden !important;
+      transform: translateX(-100%) !important;
+      -webkit-transform: translateX(-100%) !important;
+      pointer-events: none !important;
+    }
+    #mobile-menu-drawer.is-open {
+      visibility: visible !important;
+      transform: translateX(0) !important;
+      -webkit-transform: translateX(0) !important;
+      pointer-events: auto !important;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s !important;
+      -webkit-transition: -webkit-transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s !important;
+    }
+    #mobile-menu-overlay {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    #mobile-menu-overlay.is-open {
+      display: block !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      transition: opacity 0.25s ease !important;
+    }
+    [hidden],
+    #lang-dropdown-menu:not(.is-open),
+    #journal-reader-modal:not(.is-open),
+    #reading-list-badge.hidden,
+    #article-download-dropdown.hidden,
+    #article-scroll-flyout.hidden,
+    .category-drawer:not(.open) {
+      display: none !important;
+    }
+    #lang-dropdown-menu.is-open {
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      z-index: 9999 !important;
+    }
 
     /* Instant language transition cloaking - hides Burmese text until translated to chosen language */
     html.i18n-cloaked body {
       opacity: 0 !important;
       visibility: hidden !important;
-    }
-  </style>
+    }</style>
 
   <title data-mm="၄၀၄ — စာမျက်နှာ ရှာမတွေ့ပါ" data-en="404 — Page Not Found">၄၀၄ — စာမျက်နှာ ရှာမတွေ့ပါ</title>
   <!-- SEO, Open Graph (Facebook/Telegram) & Structured Data -->
@@ -114,9 +193,11 @@
   <meta property="og:url" content="https://htetofficial.github.io/404.html">
   <meta property="og:image" content="https://htetofficial.github.io/assets/favicon-512x512.png">
   <meta property="og:image:secure_url" content="https://htetofficial.github.io/assets/favicon-512x512.png">
+  <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="512">
   <meta property="og:image:height" content="512">
   <meta property="og:image:alt" content="Htet Official Hanko Seal">
+  <meta property="telegram:channel" content="@htetmmofficial">
   <meta property="og:locale" content="my_MM">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
@@ -135,7 +216,15 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <link rel="mask-icon" href="assets/seal-stamp.svg" color="#B83A2D">
-  <link rel="manifest" href="manifest.webmanifest">
+  <script>
+    if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+      var _ml = document.createElement('link');
+      _ml.rel = 'manifest';
+      _ml.href = 'manifest.webmanifest';
+      document.head.appendChild(_ml);
+    }
+  </script>
+  <noscript><link rel="manifest" href="manifest.webmanifest"></noscript>
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -192,12 +281,17 @@
   </script>
   <link rel="stylesheet" href="css/custom.css">
   <script src="js/theme.js"></script>
+  <!-- Telegram WebApp SDK & Mini App Controller -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="js/telegram-webapp.js"></script>
 </head>
 <body class="bg-ivory text-charcoal min-h-screen flex flex-col justify-between font-sans">
 
+
+
   <!-- Header -->
     <!-- Master Minimalist Header -->
-  <header class="sticky top-0 z-40 bg-ivory/85 dark:bg-[#121110]/85 backdrop-blur-md border-b border-hairline transition-colors duration-300">
+  <header class="sticky top-0 z-40 bg-ivory/85 dark:bg-[#121110]/85 backdrop-blur-md border-b border-hairline transition-colors duration-300 w-full max-w-full overflow-x-clip left-0 right-0">
     <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
       <a href="index.html" class="flex items-center space-x-2 sm:space-x-2.5 group shrink-0" aria-label="Htet — Home">
         <div class="nav-brand-glass-icon w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0" title="ထက် (Htet)">
@@ -217,9 +311,13 @@
 
         <!-- Reading Theme Segmented Controller -->
         <div class="flex items-center p-0.5 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 shadow-xs theme-segmented-glass">
-          <button data-set-theme="light" data-theme-btn="light" title="Light" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90"><i class="ri-sun-cloudy-line text-xs"></i></button>
-          <button data-set-theme="sepia" data-theme-btn="sepia" title="Sepia" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90"><i class="ri-book-open-line text-xs"></i></button>
-          <button data-set-theme="dark" data-theme-btn="dark" title="Dark" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90"><i class="ri-moon-clear-line text-xs"></i></button>
+          <div class="theme-quick-buttons hidden sm:flex items-center">
+            <button data-set-theme="light" data-theme-btn="light" title="Light" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90"><i class="ri-sun-cloudy-line text-xs"></i></button>
+            <button data-set-theme="sepia" data-theme-btn="sepia" title="Sepia" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90"><i class="ri-book-open-line text-xs"></i></button>
+            <button data-set-theme="dark" data-theme-btn="dark" title="Dark" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90"><i class="ri-moon-clear-line text-xs"></i></button>
+            <button data-set-theme="amoled" data-theme-btn="amoled" title="AMOLED" class="w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer active:scale-90"><i class="ri-contrast-drop-2-line text-xs"></i></button>
+            <span class="w-px h-3.5 bg-hairline/60 mx-0.5"></span>
+          </div>
           <button data-set-theme="palette" title="စာဖတ်ရောင်စဉ် စတူဒီယို (14 Themes)" class="w-7 h-7 rounded-full flex items-center justify-center text-xs text-charcoal hover:text-vermilion hover:bg-vermilion/10 transition-all cursor-pointer btn-palette-glow active:scale-90 relative"><i class="ri-palette-line text-xs"></i><span class="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full theme-active-dot ring-1 ring-white/60"></span></button>
         </div>
 

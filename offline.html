@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="my" data-theme="dark" class="dark">
+<html lang="my" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -19,9 +19,11 @@
   <meta property="og:url" content="https://htetofficial.github.io/offline.html">
   <meta property="og:image" content="https://htetofficial.github.io/assets/favicon-512x512.png">
   <meta property="og:image:secure_url" content="https://htetofficial.github.io/assets/favicon-512x512.png">
+  <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="512">
   <meta property="og:image:height" content="512">
   <meta property="og:image:alt" content="Htet Official PWA">
+  <meta property="telegram:channel" content="@htetmmofficial">
   <meta property="og:locale" content="my_MM">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
@@ -44,7 +46,15 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <link rel="manifest" href="manifest.webmanifest">
+  <script>
+    if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+      var _ml = document.createElement('link');
+      _ml.rel = 'manifest';
+      _ml.href = 'manifest.webmanifest';
+      document.head.appendChild(_ml);
+    }
+  </script>
+  <noscript><link rel="manifest" href="manifest.webmanifest"></noscript>
 
   <link rel="stylesheet" href="css/remixicon.css">
   <link rel="stylesheet" href="css/custom.css">
@@ -69,6 +79,28 @@
       }
     }
   </script>
+  <style>
+    /* Critical zero-latency base paint to completely eliminate theme flash */
+    html { color-scheme: light dark; }
+    html[data-theme="amoled"], html[data-theme="amoled"].dark { background-color: #000000 !important; }
+    html[data-theme="amoled"] body, html[data-theme="amoled"].dark body { background-color: #000000 !important; color: #FFFFFF !important; }
+    html[data-theme="dark"], html.dark { background-color: #121110 !important; }
+    html[data-theme="dark"] body, html.dark body { background-color: #121110 !important; color: #F5EFE6 !important; }
+    html[data-theme="sepia"] { background-color: #F5EEDB !important; }
+    html[data-theme="sepia"] body, html.sepia body { background-color: #F5EEDB !important; color: #342A1E !important; }
+    html[data-theme="light"] { background-color: #FAF8F5; }
+    html[data-theme="light"] body { background-color: #FAF8F5; color: #252321; }
+    html[data-theme^="red"] { background-color: #FAF5F5 !important; }
+    html[data-theme^="red"] body { background-color: #FAF5F5 !important; color: #2A1717 !important; }
+    html[data-theme^="purple"] { background-color: #F8F6FD !important; }
+    html[data-theme^="purple"] body { background-color: #F8F6FD !important; color: #211B33 !important; }
+    html[data-theme^="pink"] { background-color: #FDF6F8 !important; }
+    html[data-theme^="pink"] body { background-color: #FDF6F8 !important; color: #2D1A24 !important; }
+    html[data-theme^="green"] { background-color: #F5FAF6 !important; }
+    html[data-theme^="green"] body { background-color: #F5FAF6 !important; color: #12281D !important; }
+    html[data-theme^="blue"] { background-color: #F4F8FD !important; }
+    html[data-theme^="blue"] body { background-color: #F4F8FD !important; color: #102138 !important; }
+  </style>
 </head>
 <body class="min-h-screen bg-ivory text-charcoal flex flex-col justify-between selection:bg-vermilion selection:text-white font-sans">
   
@@ -144,6 +176,10 @@
           <i class="ri-book-open-line text-vermilion"></i>
           <span class="font-medium text-charcoal">ဝေါဟာရ</span>
         </a>
+        <a href="dictionary.html" class="p-2.5 rounded-xl border border-hairline hover:border-vermilion/50 bg-cream/50 hover:bg-cream transition-all flex items-center space-x-2">
+          <i class="ri-book-2-line text-vermilion"></i>
+          <span class="font-medium text-charcoal">အဘိဓာန်</span>
+        </a>
       </div>
     </div>
   </main>
@@ -153,6 +189,9 @@
   </footer>
 
   <script src="js/theme.js"></script>
+  <!-- Telegram WebApp SDK & Mini App Controller -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="js/telegram-webapp.js"></script>
   <script>
     // Auto-reconnect detector
     window.addEventListener('online', () => {

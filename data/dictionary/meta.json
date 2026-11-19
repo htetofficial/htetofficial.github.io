@@ -1,0 +1,550 @@
+{
+  "title": "Ornagai English-Myanmar Comprehensive Dictionary",
+  "title_mm": "အော်နဂါး အင်္ဂလိပ်-မြန်မာ အဘိဓာန် အပြည့်အစုံ",
+  "author": "Ornagai (Exported 2026-11-15)",
+  "website": "https://ornagai.com",
+  "license": "Non-Commercial Educational & Research Integration",
+  "total_words": 111232,
+  "letters": {
+    "a": {
+      "count": 6470,
+      "sample_words": [
+        "A",
+        "A & M",
+        "A & R",
+        "a back-seat driver",
+        "a bad lot",
+        "a bag/ bundle of nerves",
+        "a bald head",
+        "a baptism of fire",
+        "a barber-shop quartet.",
+        "a barrage of gunfire",
+        "a barren fruit",
+        "a barren woman",
+        "a battuta",
+        "a big cheese",
+        "a big fish"
+      ]
+    },
+    "b": {
+      "count": 7127,
+      "sample_words": [
+        "b",
+        "B & B",
+        "B & E",
+        "B and B",
+        "B cell",
+        "B Ed",
+        "B Litt",
+        "B lymphocyte",
+        "B'nai B'rith",
+        "b-ball",
+        "b-boy",
+        "b-boying",
+        "b-day",
+        "b-girl",
+        "B-list"
+      ]
+    },
+    "c": {
+      "count": 10483,
+      "sample_words": [
+        "c",
+        "C & W",
+        "C and W",
+        "C clef",
+        "C of E",
+        "C rations",
+        "c'est la vie",
+        "c'mon",
+        "C-19",
+        "C-in-C",
+        "C-level",
+        "C-note",
+        "C-section",
+        "C-suite",
+        "C. diff"
+      ]
+    },
+    "d": {
+      "count": 5830,
+      "sample_words": [
+        "d",
+        "D & I",
+        "D & X",
+        "D and C",
+        "D layer",
+        "D'Oyly Carte, Richard",
+        "d-bag",
+        "D-Day",
+        "D-line",
+        "D-mark",
+        "d.o.b.",
+        "D/A",
+        "d2k",
+        "DA",
+        "da capo"
+      ]
+    },
+    "e": {
+      "count": 4000,
+      "sample_words": [
+        "E",
+        "E layer",
+        "E mail",
+        "e pluribus unum",
+        "e'en",
+        "e'er",
+        "e-",
+        "e-banking",
+        "e-bike",
+        "e-billing",
+        "E-boat",
+        "e-book",
+        "e-business",
+        "e-card",
+        "e-cash"
+      ]
+    },
+    "f": {
+      "count": 4719,
+      "sample_words": [
+        "f",
+        "F layer",
+        "F-bomb",
+        "f-hole",
+        "f-number",
+        "f-stop",
+        "F-word",
+        "f. sp.",
+        "f.a.a.",
+        "f.a.s.",
+        "f.c.",
+        "f.o.b.",
+        "f.o.r.",
+        "f.r.",
+        "f.v."
+      ]
+    },
+    "g": {
+      "count": 4050,
+      "sample_words": [
+        "g",
+        "G 8",
+        "G and T",
+        "g'day",
+        "G-force",
+        "G-man",
+        "G-ride",
+        "G-spot",
+        "G-string",
+        "G-suit",
+        "g.p.d.",
+        "g.p.s.",
+        "g.t.c.",
+        "G20",
+        "G7"
+      ]
+    },
+    "h": {
+      "count": 4545,
+      "sample_words": [
+        "H",
+        "h'm",
+        "H-bomb",
+        "H-hour",
+        "H. Rept.",
+        "H. Res.",
+        "h.c.",
+        "h.p.",
+        "h/t",
+        "H2O",
+        "ha",
+        "ha ha",
+        "Ha'il",
+        "ha'p'orth",
+        "ha'penny"
+      ]
+    },
+    "i": {
+      "count": 3648,
+      "sample_words": [
+        "i",
+        "I beg to differ",
+        "I beg your pardon",
+        "I Ching",
+        "I don't mind if I do",
+        "I promise you",
+        "I spy",
+        "I'd",
+        "I'll",
+        "I'll be damned!",
+        "I'll eat my hat",
+        "I'm",
+        "I'm afraid",
+        "I'm easy",
+        "I'ma"
+      ]
+    },
+    "j": {
+      "count": 1144,
+      "sample_words": [
+        "j",
+        "j'adoube",
+        "J'Ouvert",
+        "J-horror",
+        "J-pop",
+        "j/k",
+        "jab",
+        "Jabalpur",
+        "jabber",
+        "jabberwocky",
+        "jabiru",
+        "Jaboatão",
+        "jaborandi",
+        "jabot",
+        "jabroni"
+      ]
+    },
+    "k": {
+      "count": 1526,
+      "sample_words": [
+        "K",
+        "K of C",
+        "K of P",
+        "K'ung Fu-tzu",
+        "K-",
+        "K-drama",
+        "K-leg",
+        "K-meson",
+        "K-pop",
+        "K/T boundary",
+        "K2",
+        "KA",
+        "ka-ching",
+        "Kaaba",
+        "kabaka"
+      ]
+    },
+    "l": {
+      "count": 4087,
+      "sample_words": [
+        "l",
+        "L'Aquila",
+        "L'Enfant, Pierre Charles",
+        "L'Engle, Madeleine",
+        "L-dopa",
+        "L-plate",
+        "L-word",
+        "l.c.",
+        "l.h.",
+        "l.p.",
+        "l.t.",
+        "L/C",
+        "L/R",
+        "La",
+        "la Barca, Pedro Calderón de"
+      ]
+    },
+    "m": {
+      "count": 6317,
+      "sample_words": [
+        "m",
+        "M & A",
+        "m'",
+        "M-1",
+        "M-16",
+        "M-cat",
+        "m-commerce",
+        "m-learning",
+        "M.A.Ed.",
+        "M.Agr.",
+        "m.b.d",
+        "M.Div.",
+        "m.g.d.",
+        "m.m.f.",
+        "m.p."
+      ]
+    },
+    "n": {
+      "count": 3015,
+      "sample_words": [
+        "n",
+        "N'awlins",
+        "N'Djamena",
+        "N-bomb",
+        "n-gram",
+        "n-tuple",
+        "n-type",
+        "N-word",
+        "n.d.",
+        "N.Dak.",
+        "n.e.s.",
+        "n.m.",
+        "N.Mex.",
+        "n.o.p.",
+        "n.o.s."
+      ]
+    },
+    "o": {
+      "count": 2893,
+      "sample_words": [
+        "O",
+        "O & M",
+        "o lay sth aside",
+        "O level",
+        "O'",
+        "o' clock",
+        "O'Brien, Edna",
+        "O'Brien, Flann",
+        "O'Casey, Sean",
+        "o'clock",
+        "O'Connell, Daniel",
+        "O'Connor, Carroll",
+        "O'Connor, Flannery",
+        "O'Connor, Sandra Day",
+        "O'Donnell, Rosie"
+      ]
+    },
+    "other": {
+      "count": 565,
+      "sample_words": [
+        "#",
+        "$",
+        "%",
+        "&",
+        "'d",
+        "'em",
+        "'fraid",
+        "'ll",
+        "'m",
+        "'Merica",
+        "'n'",
+        "'Ndrangheta",
+        "'roid",
+        "'s",
+        "'s-"
+      ]
+    },
+    "p": {
+      "count": 9043,
+      "sample_words": [
+        "P",
+        "P & L",
+        "p and p",
+        "P-Celtic",
+        "p-code",
+        "p-hacking",
+        "p-type",
+        "p-value",
+        "p. & h.",
+        "p. & p.",
+        "p.a.",
+        "p.c.",
+        "p.d.",
+        "p.d.q.",
+        "p.m."
+      ]
+    },
+    "q": {
+      "count": 547,
+      "sample_words": [
+        "q",
+        "Q & A",
+        "Q fever",
+        "Q-Celtic",
+        "Q-ship",
+        "q.i.d.",
+        "q.p.",
+        "q.s.",
+        "q.t.",
+        "q.v.",
+        "QA",
+        "qadi",
+        "QALY",
+        "qanat",
+        "Qaraghandy"
+      ]
+    },
+    "r": {
+      "count": 4865,
+      "sample_words": [
+        "R",
+        "R & B",
+        "R & D",
+        "R & R",
+        "R and D",
+        "R-value",
+        "r.h.",
+        "r.m.s.",
+        "R0",
+        "Ra",
+        "Ra.",
+        "RAAF",
+        "Rabat",
+        "Rabaul",
+        "rabbet"
+      ]
+    },
+    "s": {
+      "count": 12278,
+      "sample_words": [
+        "s",
+        "S & L",
+        "S & M",
+        "S & P 500",
+        "S level",
+        "s lot tdsth",
+        "s lot with sb",
+        "s'more",
+        "s'pose",
+        "S-Bahn",
+        "S-bend",
+        "S-M",
+        "S-VHS",
+        "S. of S.",
+        "S. of Sol."
+      ]
+    },
+    "t": {
+      "count": 5781,
+      "sample_words": [
+        "T",
+        "T & A",
+        "T cell",
+        "T lymphocyte",
+        "t'other",
+        "T-1",
+        "T-back",
+        "t-ball",
+        "T-bar",
+        "T-bill",
+        "T-bond",
+        "T-bone",
+        "T-dot",
+        "T-formation",
+        "T-group"
+      ]
+    },
+    "u": {
+      "count": 2607,
+      "sample_words": [
+        "u",
+        "U - turn",
+        "U-boat",
+        "U-ey",
+        "U-lock",
+        "U-turn",
+        "u.c.",
+        "UAE",
+        "UAV",
+        "Ubanghi Shari",
+        "Ubangi River",
+        "ube",
+        "uber-",
+        "UBI",
+        "ubiquiatous"
+      ]
+    },
+    "v": {
+      "count": 1738,
+      "sample_words": [
+        "V",
+        "V and A",
+        "v chum up",
+        "v clam up",
+        "v pen",
+        "V-1",
+        "V-2",
+        "V-card",
+        "V-chip",
+        "V-day",
+        "V-E Day",
+        "V-J Day",
+        "V-mail",
+        "V-neck",
+        "V-shaped"
+      ]
+    },
+    "w": {
+      "count": 2991,
+      "sample_words": [
+        "W",
+        "W boson",
+        "W particle",
+        "w.e.f.",
+        "w.f.",
+        "w.p.",
+        "W.Va",
+        "w/o",
+        "Wa",
+        "Waac",
+        "Waadt",
+        "Waal",
+        "Wabash River",
+        "wabi",
+        "WAC"
+      ]
+    },
+    "x": {
+      "count": 110,
+      "sample_words": [
+        "X",
+        "X chromosome",
+        "X factor",
+        "X-acto knife",
+        "x-axis",
+        "X-chromosome",
+        "x-height",
+        "X-irradiation",
+        "x-radiation",
+        "X-rated",
+        "X-ray",
+        "X-ray astronomy",
+        "X-ray crystallography",
+        "X-ray diffraction",
+        "X-ray fish"
+      ]
+    },
+    "y": {
+      "count": 476,
+      "sample_words": [
+        "y",
+        "Y chromosome",
+        "y'all",
+        "y-axis",
+        "Y-chromosome",
+        "Y-fronts",
+        "Y2K",
+        "ya",
+        "ya-yas",
+        "yabber",
+        "YAC",
+        "yacare",
+        "yacht",
+        "yacht race",
+        "yacht rock"
+      ]
+    },
+    "z": {
+      "count": 377,
+      "sample_words": [
+        "Z",
+        "Z boson",
+        "Z particle",
+        "Z-DNA",
+        "Z-list",
+        "Z-plasty",
+        "za'atar",
+        "zabaglione",
+        "zabra",
+        "zabrus",
+        "Zabrze",
+        "Zacatecas",
+        "zaddy",
+        "zaffer",
+        "zaftig"
+      ]
+    }
+  }
+}

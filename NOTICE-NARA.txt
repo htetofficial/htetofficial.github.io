@@ -1,0 +1,18 @@
+Nara Mini v1
+Copyright 2026 Nara contributors
+https://naraaudio.app
+
+Nara Mini v1 is adapted from Kokoro for Burmese and English speech synthesis.
+Kokoro is published by hexgrad under the Apache License, Version 2.0.
+https://huggingface.co/hexgrad/Kokoro-82M
+
+The four preset voices were developed using synthetic speech generated with
+VoxCPM2, published by OpenBMB under the Apache License, Version 2.0.
+https://huggingface.co/openbmb/VoxCPM2
+
+Nara adaptations include Burmese pronunciation processing, number verbalization,
+voice adaptation, and mobile ONNX export with selective decoder quantization.
+
+Modifications in Htet Official Digital Archive (2026):
+- Ported Burmese G2P, number verbalization, and lexicon lookup rules to JavaScript (js/nara-g2p.js, data/nara-lexicon.json) for opt-in browser ONNX Runtime Web synthesis (js/nara-tts.js).
+- Added Method 1 batch generator helper (scripts/generate_nara_audio.py) and Apache 2.0 attribution notices.

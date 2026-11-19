@@ -34,6 +34,8 @@
   const THEME_KEY = 'site_theme';
   const VALID_THEMES = [
     'light', 'sepia', 'dark', 'amoled',
+    'green', 'green-forest',
+    'blue', 'blue-sapphire',
     'red', 'red-crimson', 'red-rosewood',
     'purple', 'purple-lavender', 'purple-plum', 'purple-indigo',
     'pink', 'pink-peach', 'pink-rose'
@@ -172,19 +174,59 @@
       color: '#FDF5F7',
       accent: '#BE185D',
       icon: 'ri-flower-line'
+    },
+
+    // 5. Green Variants (2) (အစိမ်းရောင်)
+    green: {
+      category: 'green',
+      name_mm: 'မြစိမ်းရောင် (Emerald Jade)',
+      name_en: 'Emerald Jade Green',
+      desc_mm: 'အေးချမ်းကြည်လင်သော မြစိမ်းရောင် ရတနာစဉ်',
+      color: '#F5FAF6',
+      accent: '#059669',
+      icon: 'ri-leaf-line'
+    },
+    'green-forest': {
+      category: 'green',
+      name_mm: 'သစ်တောစိမ်းရင့် (Forest Pine)',
+      name_en: 'Forest Pine Green',
+      desc_mm: 'နက်ရှိုင်းအေးမြသော သဘာဝတောအုပ် စိမ်းရင့်ရောင်',
+      color: '#F4F8F5',
+      accent: '#15803D',
+      icon: 'ri-tree-line'
+    },
+
+    // 6. Blue Variants (2) (အပြာရောင်)
+    blue: {
+      category: 'blue',
+      name_mm: 'သမုဒ္ဒရာပြာ (Ocean Azure)',
+      name_en: 'Ocean Azure Blue',
+      desc_mm: 'ကျယ်ပြောကြည်လင်သော ပင်လယ်သမုဒ္ဒရာ မိုးပြာရောင်',
+      color: '#F4F8FD',
+      accent: '#2563EB',
+      icon: 'ri-water-flash-line'
+    },
+    'blue-sapphire': {
+      category: 'blue',
+      name_mm: 'နီလာပြာရင့် (Midnight Sapphire)',
+      name_en: 'Midnight Sapphire Blue',
+      desc_mm: 'ခန့်ညားနက်ရှိုင်းသော နီလာကျောက်ပြာရင့်ရောင်',
+      color: '#F3F7FC',
+      accent: '#0284C7',
+      icon: 'ri-shining-line'
     }
   };
 
   const Theme = {
-    currentTheme: 'dark',
+    currentTheme: 'light',
     controlsBound: false,
 
     init() {
       const saved = safeStorage.get(THEME_KEY);
       if (VALID_THEMES.includes(saved)) {
         this.currentTheme = saved;
-      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        this.currentTheme = 'dark';
+      } else {
+        this.currentTheme = 'light';
       }
       this.applyTheme(this.currentTheme);
       if (!this.controlsBound) {
@@ -230,7 +272,7 @@
     },
 
     applyTheme(theme) {
-      if (!VALID_THEMES.includes(theme)) theme = 'dark';
+      if (!VALID_THEMES.includes(theme)) theme = 'light';
       document.documentElement.setAttribute('data-theme', theme);
       if (document.body) {
         document.body.setAttribute('data-theme', theme);
@@ -258,7 +300,7 @@
       });
 
       // Update active dot indicators on navbar theme buttons
-      const meta = THEME_METADATA[theme] || THEME_METADATA.dark;
+      const meta = THEME_METADATA[theme] || THEME_METADATA.light;
       document.querySelectorAll('.theme-active-dot').forEach(dot => {
         dot.style.backgroundColor = meta.accent;
         dot.style.boxShadow = `0 0 8px ${meta.accent}`;
@@ -301,8 +343,10 @@
 
       // Filter Categories
       const categories = [
-        { id: 'all', label_mm: 'အားလုံး (၁၄ မျိုး)', label_en: 'All 14 Themes', icon: 'ri-apps-2-line' },
+        { id: 'all', label_mm: 'အားလုံး (၁၈ မျိုး)', label_en: 'All 18 Themes', icon: 'ri-apps-2-line' },
         { id: 'classic', label_mm: 'အခြေခံ (၄)', label_en: 'Classics', icon: 'ri-contrast-2-line' },
+        { id: 'green', label_mm: 'အစိမ်းရောင် (၂)', label_en: 'Emerald Green', icon: 'ri-leaf-line' },
+        { id: 'blue', label_mm: 'အပြာရောင် (၂)', label_en: 'Ocean Blue', icon: 'ri-water-flash-line' },
         { id: 'pink', label_mm: 'ပန်းရောင် (၃)', label_en: 'Pink Sakura', icon: 'ri-heart-3-line' },
         { id: 'purple', label_mm: 'ခရမ်းရောင် (၄)', label_en: 'Purple Violet', icon: 'ri-magic-line' },
         { id: 'red', label_mm: 'အနီရောင် (၃)', label_en: 'Ruby & Crimson', icon: 'ri-fire-line' }
@@ -318,6 +362,34 @@
           <span>${lang === 'mm' ? cat.label_mm : cat.label_en}</span>
         </button>
       `).join('');
+
+      // 9 Core Quick Swatches for Instant 1-Tap Switching
+      const quickSwatches = [
+        { id: 'light', label: 'Light', color: '#FAF8F5', accent: '#B83A2D', icon: 'ri-sun-cloudy-line' },
+        { id: 'sepia', label: 'Sepia', color: '#F5EEDB', accent: '#A83626', icon: 'ri-book-open-line' },
+        { id: 'dark', label: 'Dark', color: '#121110', accent: '#E55C52', icon: 'ri-moon-clear-line' },
+        { id: 'amoled', label: 'AMOLED', color: '#000000', accent: '#FF4D42', icon: 'ri-flashlight-line' },
+        { id: 'green', label: 'Emerald', color: '#F5FAF6', accent: '#059669', icon: 'ri-leaf-line' },
+        { id: 'blue', label: 'Azure', color: '#F4F8FD', accent: '#2563EB', icon: 'ri-water-flash-line' },
+        { id: 'purple', label: 'Amethyst', color: '#F8F6FD', accent: '#7C3AED', icon: 'ri-magic-line' },
+        { id: 'red', label: 'Ruby', color: '#FAF5F5', accent: '#DC2626', icon: 'ri-fire-line' },
+        { id: 'pink', label: 'Sakura', color: '#FDF6F8', accent: '#D94676', icon: 'ri-heart-3-line' }
+      ];
+
+      const quickSwatchesHtml = quickSwatches.map(sw => {
+        const isSwActive = (current === sw.id);
+        return `
+          <button data-quick-theme="${sw.id}" class="quick-swatch-btn flex flex-col items-center justify-center p-1 rounded-xl transition-all cursor-pointer active:scale-95 group shrink-0 ${
+            isSwActive ? 'ring-2 ring-vermilion bg-vermilion/10' : 'hover:bg-cream/80 dark:hover:bg-white/10'
+          }" title="${sw.label}">
+            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs shadow-xs border border-hairline/80 relative transition-transform group-hover:scale-105" style="background-color: ${sw.color}; color: ${sw.accent};">
+              <i class="${sw.icon}"></i>
+              ${isSwActive ? '<span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-vermilion ring-1 ring-white"></span>' : ''}
+            </span>
+            <span class="text-[9px] mt-1 text-charcoal font-medium truncate max-w-[42px] leading-none">${sw.label}</span>
+          </button>
+        `;
+      }).join('');
 
       const themeOptionsHtml = VALID_THEMES.map(key => {
         const item = THEME_METADATA[key];
@@ -368,13 +440,24 @@
                   ${lang === 'mm' ? 'စာဖတ်ရောင်စဉ် စတူဒီယို' : 'Reading Palette Studio'}
                 </h3>
                 <span class="text-[10px] sm:text-[11px] text-muted font-sans-ui block truncate">
-                  ${lang === 'mm' ? 'အနုပညာရောင်စဉ် ၁၄ မျိုး • စာဖတ်အမြင်အေး' : '14 Curated Themes • High Legibility'}
+                  ${lang === 'mm' ? 'အနုပညာရောင်စဉ် ၁၈ မျိုး • စာဖတ်အမြင်အေး' : '18 Curated Themes • High Legibility'}
                 </span>
               </div>
             </div>
             <button id="theme-modal-close-btn" class="w-8 h-8 rounded-full border border-hairline/80 flex items-center justify-center text-muted hover:text-charcoal hover:border-charcoal/40 transition-all cursor-pointer active:scale-90 shrink-0 ml-2" aria-label="Close">
               <i class="ri-close-line text-lg"></i>
             </button>
+          </div>
+
+          <!-- Instant 1-Tap Quick Swatch Bar -->
+          <div class="mb-2.5 p-2 rounded-2xl bg-cream/50 dark:bg-stone-900/40 border border-hairline/60 shrink-0">
+            <div class="text-[10px] uppercase tracking-wider text-muted font-bold mb-1.5 px-1 flex items-center justify-between">
+              <span>${lang === 'mm' ? 'အမြန်ရွေးချယ်ရန် (Quick 1-Tap)' : 'Quick 1-Tap Switch'}</span>
+              <span class="text-[9px] font-mono text-vermilion font-bold">1-TAP</span>
+            </div>
+            <div class="flex items-center justify-between gap-1 overflow-x-auto no-scrollbar py-0.5">
+              ${quickSwatchesHtml}
+            </div>
           </div>
 
           <!-- Category Filter Bar -->
@@ -433,6 +516,15 @@
         });
       });
 
+      // Quick 1-tap swatch selection
+      modal.querySelectorAll('[data-quick-theme]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const t = btn.getAttribute('data-quick-theme');
+          this.setTheme(t);
+        });
+      });
+
       // Close handlers
       const closeModal = () => this.closeThemeModal();
       document.getElementById('theme-modal-close-btn')?.addEventListener('click', closeModal);
@@ -470,6 +562,17 @@
       const nameEl = document.getElementById('theme-modal-current-name');
       if (nameEl) nameEl.textContent = meta.name_mm;
 
+      // Update quick swatches in modal
+      modal.querySelectorAll('[data-quick-theme]').forEach(swBtn => {
+        const swId = swBtn.getAttribute('data-quick-theme');
+        const isSwActive = (swId === theme);
+        if (isSwActive) {
+          swBtn.className = 'quick-swatch-btn flex flex-col items-center justify-center p-1 rounded-xl transition-all cursor-pointer active:scale-95 group shrink-0 ring-2 ring-vermilion bg-vermilion/10';
+        } else {
+          swBtn.className = 'quick-swatch-btn flex flex-col items-center justify-center p-1 rounded-xl transition-all cursor-pointer active:scale-95 group shrink-0 hover:bg-cream/80 dark:hover:bg-white/10';
+        }
+      });
+
       modal.querySelectorAll('[data-select-theme]').forEach(btn => {
         const key = btn.getAttribute('data-select-theme');
         const isActive = (key === theme);
@@ -486,6 +589,16 @@
     },
 
     bindControls() {
+      // Global keyboard shortcut 'T' or 'Shift+T' to instantly toggle Theme Palette Studio
+      document.addEventListener('keydown', (e) => {
+        if ((e.key === 't' || e.key === 'T') && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) {
+          if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+            e.preventDefault();
+            this.openThemeModal();
+          }
+        }
+      });
+
       document.addEventListener('click', (e) => {
         const themeBtn = e.target.closest('[data-set-theme]');
         if (themeBtn) {

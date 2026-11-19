@@ -10,9 +10,10 @@
 - IdeaHub Open Digital Library: https://t.me/ideahublibrary (၁,၅၂၂+ ပညာရပ်ဆိုင်ရာ စာအုပ်များနှင့် သုတေသနဖိုင်များ)  
 - For The Future Myanmar: https://t.me/For_The_Future_Myanmar (Youth Organization — Volunteer Operations)  
 - Facebook: https://facebook.com/htetmyatekri  
+- Official Research Portal: https://htetofficial.github.io
 - WordPress Archive: https://htetofficial.wordpress.com  
 - Blogspot: https://htetofficialmm.blogspot.com  
-- Direct Official Email: htethtet2025ideahub@gmail.com *(သတိပြုရန် - အဖွဲ့အစည်းအီးမေးလ် htetmyatekri@women-nation.org သည် သက်တမ်းကုန်ဆုံးတော့မည်ဖြစ်သဖြင့် ဆက်သွယ်ရန်များကို htethtet2025ideahub@gmail.com သို့သာ တိုက်ရိုက် ပေးပို့နိုင်ပါသည်)*  
+- Direct Official Emails: htethtet2025ideahub@gmail.com | htetmyatekri@icloud.com *(သတိပြုရန် - အဖွဲ့အစည်းအီးမေးလ် htetmyatekri@women-nation.org သည် သက်တမ်းကုန်ဆုံးတော့မည်ဖြစ်သဖြင့် တရားဝင်ဆက်သွယ်ရန်များကို htethtet2025ideahub@gmail.com နှင့် htetmyatekri@icloud.com သို့သာ တိုက်ရိုက် ပေးပို့နိုင်ပါသည်)*  
 
 ---
 

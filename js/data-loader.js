@@ -171,6 +171,19 @@
   }
 ];
 
+  const scriptLoaders = {};
+  function loadBackupScript(src) {
+    if (scriptLoaders[src]) return scriptLoaders[src];
+    scriptLoaders[src] = new Promise((resolve) => {
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = () => resolve(true);
+      s.onerror = () => resolve(false);
+      document.head.appendChild(s);
+    });
+    return scriptLoaders[src];
+  }
+
   const HtetData = {
     /**
      * Fetch all articles with automatic fallback
@@ -178,6 +191,9 @@
      */
     async getArticles() {
       if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+        if (!window.HTET_ARTICLES_BACKUP && !window.articlesData) {
+          await loadBackupScript('js/data/articles-backup.js');
+        }
         return window.HTET_ARTICLES_BACKUP || window.articlesData || [];
       }
       try {
@@ -187,6 +203,9 @@
         return Array.isArray(data) ? data : (window.HTET_ARTICLES_BACKUP || window.articlesData || []);
       } catch (err) {
         console.warn('[HtetData] fetch(data/articles.json) fallback triggered.', err);
+        if (!window.HTET_ARTICLES_BACKUP && !window.articlesData) {
+          await loadBackupScript('js/data/articles-backup.js');
+        }
         return window.HTET_ARTICLES_BACKUP || window.articlesData || [];
       }
     },
@@ -212,6 +231,9 @@
      */
     async getPosts() {
       if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+        if (!window.HTET_POSTS_BACKUP && !window.postsData) {
+          await loadBackupScript('js/data/posts-backup.js');
+        }
         return window.HTET_POSTS_BACKUP || window.postsData || [];
       }
       try {
@@ -221,6 +243,9 @@
         return Array.isArray(data) ? data : (window.HTET_POSTS_BACKUP || window.postsData || []);
       } catch (err) {
         console.warn('[HtetData] fetch(data/posts.json) fallback triggered.', err);
+        if (!window.HTET_POSTS_BACKUP && !window.postsData) {
+          await loadBackupScript('js/data/posts-backup.js');
+        }
         return window.HTET_POSTS_BACKUP || window.postsData || [];
       }
     },
@@ -231,6 +256,9 @@
      */
     async getGlossary() {
       if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+        if (!window.HTET_GLOSSARY_BACKUP) {
+          await loadBackupScript('js/data/glossary-backup.js');
+        }
         return window.HTET_GLOSSARY_BACKUP || [];
       }
       try {
@@ -240,6 +268,9 @@
         return Array.isArray(data) ? data : (window.HTET_GLOSSARY_BACKUP || []);
       } catch (err) {
         console.warn('[HtetData] fetch(data/glossary.json) fallback triggered.', err);
+        if (!window.HTET_GLOSSARY_BACKUP) {
+          await loadBackupScript('js/data/glossary-backup.js');
+        }
         return window.HTET_GLOSSARY_BACKUP || [];
       }
     },
@@ -250,6 +281,9 @@
      */
     async getPublications() {
       if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+        if (!window.HTET_PUBLICATIONS_BACKUP && !window.publicationsData && !window.HtetPublicationsBackup) {
+          await loadBackupScript('js/data/publications-backup.js');
+        }
         return window.HTET_PUBLICATIONS_BACKUP || window.publicationsData || window.HtetPublicationsBackup || [];
       }
       try {
@@ -259,6 +293,9 @@
         return (Array.isArray(data) && data.length > 0) ? data : (window.HTET_PUBLICATIONS_BACKUP || window.publicationsData || window.HtetPublicationsBackup || []);
       } catch (err) {
         console.warn('[HtetData] fetch(data/publications.json) fallback triggered.', err);
+        if (!window.HTET_PUBLICATIONS_BACKUP && !window.publicationsData && !window.HtetPublicationsBackup) {
+          await loadBackupScript('js/data/publications-backup.js');
+        }
         return window.HTET_PUBLICATIONS_BACKUP || window.publicationsData || window.HtetPublicationsBackup || [];
       }
     },
@@ -269,6 +306,9 @@
      */
     async getBooks() {
       if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+        if (!window.HTET_BOOKS_BACKUP && !window.booksData) {
+          await loadBackupScript('js/data/books-backup.js');
+        }
         return window.HTET_BOOKS_BACKUP || window.booksData || [];
       }
       try {
@@ -278,6 +318,9 @@
         return Array.isArray(data) ? data : (window.HTET_BOOKS_BACKUP || window.booksData || []);
       } catch (err) {
         console.warn('[HtetData] fetch(data/books.json) fallback triggered.', err);
+        if (!window.HTET_BOOKS_BACKUP && !window.booksData) {
+          await loadBackupScript('js/data/books-backup.js');
+        }
         return window.HTET_BOOKS_BACKUP || window.booksData || [];
       }
     },
@@ -287,7 +330,14 @@
      * @returns {Array}
      */
     getQuotes() {
-      return (window.HTET_QUOTES_BACKUP && window.HTET_QUOTES_BACKUP.length > 0) ? window.HTET_QUOTES_BACKUP : STATIC_QUOTES;
+      if (window.HTET_QUOTES_BACKUP && window.HTET_QUOTES_BACKUP.length > 0) {
+        return window.HTET_QUOTES_BACKUP;
+      }
+      // If not loaded yet, lazily trigger backup script in background
+      if (typeof window !== 'undefined' && !window.HTET_QUOTES_BACKUP) {
+        loadBackupScript('js/data/quotes-backup.js');
+      }
+      return STATIC_QUOTES;
     }
   };
 

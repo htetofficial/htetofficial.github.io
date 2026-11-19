@@ -20,40 +20,125 @@
     }
   };
 
-  // 1. Mobile Menu Drawer
+  // 1. Mobile Menu Drawer (Toggleable on 1st & 2nd Tap)
   function initMobileMenu() {
     const toggleBtn = document.getElementById('mobile-menu-toggle');
     const drawer = document.getElementById('mobile-menu-drawer');
     const overlay = document.getElementById('mobile-menu-overlay');
     const closeBtn = document.getElementById('mobile-menu-close');
 
-    if (!toggleBtn || !drawer) return;
+    if (!drawer) return;
 
     function openMenu() {
-      drawer.classList.remove('-translate-x-full');
+      drawer.style.visibility = 'visible';
+      drawer.style.transform = 'translateX(0)';
+      drawer.style.webkitTransform = 'translateX(0)';
+      drawer.style.pointerEvents = 'auto';
+      drawer.classList.add('is-open');
+
       if (overlay) {
+        overlay.classList.add('is-open');
         overlay.classList.remove('hidden');
+        overlay.style.display = 'block';
         setTimeout(() => overlay.classList.remove('opacity-0'), 10);
       }
       document.body.classList.add('overflow-hidden');
+      updateMenuButtonsState(true);
     }
 
     function closeMenu() {
-      drawer.classList.add('-translate-x-full');
+      drawer.classList.remove('is-open');
+      drawer.style.transform = 'translateX(-100%)';
+      drawer.style.webkitTransform = 'translateX(-100%)';
+      drawer.style.pointerEvents = 'none';
+
       if (overlay) {
+        overlay.classList.remove('is-open');
         overlay.classList.add('opacity-0');
-        setTimeout(() => overlay.classList.add('hidden'), 300);
+        setTimeout(() => {
+          if (!drawer.classList.contains('is-open')) {
+            overlay.classList.add('hidden');
+            overlay.style.display = 'none';
+          }
+        }, 300);
       }
       document.body.classList.remove('overflow-hidden');
+      setTimeout(() => {
+        if (!drawer.classList.contains('is-open')) {
+          drawer.style.visibility = 'hidden';
+        }
+      }, 300);
+      updateMenuButtonsState(false);
     }
 
-    toggleBtn.addEventListener('click', openMenu);
-    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-    if (overlay) overlay.addEventListener('click', closeMenu);
+    function toggleMenu() {
+      if (drawer.classList.contains('is-open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    function updateMenuButtonsState(isOpen) {
+      // Bottom App Bar Menu Button: toggle icon & active highlight
+      const bottomMenuBtn = document.getElementById('bottom-nav-menu-btn');
+      if (bottomMenuBtn) {
+        const icon = bottomMenuBtn.querySelector('i');
+        const text = bottomMenuBtn.querySelector('span');
+        if (icon) {
+          icon.className = isOpen ? 'ri-close-line text-lg text-vermilion font-bold' : 'ri-menu-line text-lg';
+        }
+        if (text) {
+          text.setAttribute('data-mm', isOpen ? 'ပိတ်ရန်' : 'မီနူး');
+          text.textContent = isOpen ? 'ပိတ်ရန်' : 'မီနူး';
+        }
+        if (isOpen) {
+          bottomMenuBtn.classList.add('text-vermilion', 'font-bold');
+        } else {
+          bottomMenuBtn.classList.remove('text-vermilion', 'font-bold');
+        }
+      }
+
+      // Top Header Hamburger Toggle: toggle icon & active highlight
+      if (toggleBtn) {
+        const hIcon = toggleBtn.querySelector('i');
+        if (hIcon) {
+          hIcon.className = isOpen ? 'ri-close-line text-base text-vermilion font-bold' : 'ri-menu-3-line text-base';
+        }
+      }
+    }
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (navigator.vibrate) try { navigator.vibrate(12); } catch(err) {}
+        toggleMenu();
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeMenu();
+      });
+    }
+
+    if (overlay) {
+      overlay.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeMenu();
+      });
+    }
 
     drawer.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', closeMenu);
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
     });
+
+    window.openMobileMenu = openMenu;
+    window.closeMobileMenu = closeMenu;
+    window.toggleMobileMenu = toggleMenu;
   }
 
   // 2. Refined Toast Notification with Icon
@@ -92,7 +177,7 @@
     }
   }
 
-  // 4. Smart Combined Back-to-Top & Navigation Pill
+  // 4. Smart Combined Back-to-Top & Navigation Pill (with Dismiss 'X' & Restore Support)
   function initBackToTop() {
     // If on article.html or if companion already exists, avoid duplicate button overlap
     if (document.getElementById('floating-reading-companion') || 
@@ -103,6 +188,33 @@
       return;
     }
 
+    // Helper: get or create floating restore trigger icon
+    function getOrCreateRestoreBtn() {
+      let restoreBtn = document.getElementById('smart-scroll-restore-btn');
+      if (!restoreBtn) {
+        restoreBtn = document.createElement('button');
+        restoreBtn.id = 'smart-scroll-restore-btn';
+        restoreBtn.className = 'hidden fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 w-9 h-9 rounded-full bg-card/90 dark:bg-stone-900/90 border border-hairline/80 shadow-lg flex items-center justify-center text-muted hover:text-vermilion hover:scale-110 active:scale-95 transition-all text-sm cursor-pointer glass-3d-pill no-print';
+        restoreBtn.title = 'All-in-One ပြန်ဖော်ရန် (Restore Navigation Hub)';
+        restoreBtn.setAttribute('aria-label', 'Restore All-in-One Navigation Hub');
+        restoreBtn.innerHTML = '<i class="ri-compass-3-line text-sm"></i>';
+        document.body.appendChild(restoreBtn);
+
+        restoreBtn.addEventListener('click', () => {
+          localStorage.removeItem('htet_all_in_one_hidden');
+          restoreBtn.classList.add('hidden');
+          if (pill) {
+            pill.classList.remove('all-in-one-dismissed');
+            onScroll();
+          }
+          if (window.HtetUI && typeof window.HtetUI.showToast === 'function') {
+            window.HtetUI.showToast('All-in-One Navigation Hub ပြန်လည်ဖော်ပြပြီးပါပြီ ✓');
+          }
+        });
+      }
+      return restoreBtn;
+    }
+
     let pill = document.getElementById('smart-back-to-top') || document.getElementById('back-to-top');
     if (!pill) {
       pill = document.createElement('div');
@@ -111,6 +223,11 @@
       pill.setAttribute('role', 'toolbar');
       pill.setAttribute('aria-label', 'Smart Scroll Navigation');
       pill.innerHTML = `
+        <!-- Dismiss / Hide 'X' Action (အမှားခြစ် ခလုတ်) -->
+        <button id="smart-scroll-hide-btn" class="w-6 h-6 rounded-full flex items-center justify-center text-muted/60 hover:text-rose-500 hover:bg-rose-500/10 transition-colors cursor-pointer mb-0.5" title="All-in-One ခလုတ် ဖျောက်ထားရန် (Dismiss / Hide)" aria-label="Dismiss Navigation Hub">
+          <i class="ri-close-line text-xs font-bold"></i>
+        </button>
+
         <!-- Scroll to Top Action -->
         <button id="smart-scroll-top-btn" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-charcoal hover:text-vermilion hover:bg-vermilion/10 dark:hover:bg-vermilion/20 transition-all cursor-pointer group" title="ထိပ်ဆုံးသို့ ပြန်သွားရန် (Scroll to Top)" aria-label="Back to top">
           <i class="ri-arrow-up-line text-sm sm:text-base font-bold group-hover:-translate-y-0.5 transition-transform"></i>
@@ -159,6 +276,24 @@
     const progressBadge = document.getElementById('smart-scroll-progress-badge');
     const menuBtn = document.getElementById('smart-scroll-menu-btn');
     const flyout = document.getElementById('smart-scroll-flyout');
+    const hideBtn = document.getElementById('smart-scroll-hide-btn');
+
+    if (hideBtn) {
+      hideBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        localStorage.setItem('htet_all_in_one_hidden', 'true');
+        pill.classList.add('all-in-one-dismissed', 'opacity-0', 'pointer-events-none');
+        if (flyout) {
+          flyout.classList.add('hidden');
+          flyout.classList.remove('is-open');
+        }
+        const restoreBtn = getOrCreateRestoreBtn();
+        restoreBtn.classList.remove('hidden');
+        if (window.HtetUI && typeof window.HtetUI.showToast === 'function') {
+          window.HtetUI.showToast('All-in-One ခလုတ်ကို ဖျောက်ထားပါသည် (ပြန်ဖော်ရန် ညာဘက်အောက်ထောင့်ရှိ အိုင်ကွန်ကို နှိပ်ပါ)');
+        }
+      });
+    }
 
     if (scrollTopBtn) {
       scrollTopBtn.addEventListener('click', (e) => {
@@ -239,13 +374,28 @@
 
     const circumference = 87.96; // 2 * PI * 14
     const onScroll = () => {
+      const isHiddenByUser = localStorage.getItem('htet_all_in_one_hidden') === 'true';
       const doc = document.documentElement;
       const total = doc.scrollHeight - window.innerHeight;
       const current = window.pageYOffset || window.scrollY;
 
+      if (isHiddenByUser) {
+        pill.classList.add('all-in-one-dismissed', 'opacity-0', 'pointer-events-none');
+        const restoreBtn = getOrCreateRestoreBtn();
+        if (current > 120) {
+          restoreBtn.classList.remove('hidden');
+        } else {
+          restoreBtn.classList.add('hidden');
+        }
+        return;
+      } else {
+        const restoreBtn = document.getElementById('smart-scroll-restore-btn');
+        if (restoreBtn) restoreBtn.classList.add('hidden');
+      }
+
       if (current > 120) {
         pill.classList.add('visible');
-        pill.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+        pill.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3', 'all-in-one-dismissed');
       } else {
         pill.classList.remove('visible');
         pill.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
@@ -267,6 +417,100 @@
 
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+  }
+
+  // Mobile App Bottom Navigation Bar & Tactile Controls
+  function initAppBottomNav() {
+    let nav = document.getElementById('app-bottom-nav');
+    const isNew = !nav;
+    if (isNew) {
+      nav = document.createElement('nav');
+      nav.id = 'app-bottom-nav';
+    }
+    if (isNew || !nav.children.length) {
+      nav.className = 'sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-card/95 dark:bg-[#121110]/95 backdrop-blur-xl border-t border-hairline/80 px-1 py-1 flex items-center justify-around font-sans-ui no-print select-none shadow-[0_-4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_-4px_24px_rgba(0,0,0,0.4)]';
+      nav.setAttribute('aria-label', 'Mobile Bottom Navigation');
+
+      const path = (window.location.pathname || '').toLowerCase();
+      const isHome = path.endsWith('index.html') || path.endsWith('/') || path === '' || (!path.includes('.html') && !path.includes('/'));
+      const isArticles = path.includes('article') && !isHome;
+      const isPublications = path.includes('publication');
+      const isJournal = path.includes('journal');
+
+      nav.innerHTML = `
+        <a href="index.html" class="app-tab-btn flex flex-col items-center justify-center py-1 px-2 ${isHome ? 'text-vermilion font-bold active-tab' : 'text-muted hover:text-vermilion'} transition-all active:scale-95" data-nav="home">
+          <i class="${isHome ? 'ri-home-5-fill' : 'ri-home-5-line'} text-lg"></i>
+          <span class="text-[10px] mt-0.5 tracking-tight" data-mm="ပင်မ" data-en="Home">ပင်မ</span>
+          ${isHome ? '<span class="w-1 h-1 rounded-full bg-vermilion mt-0.5"></span>' : ''}
+        </a>
+        <a href="articles.html" class="app-tab-btn flex flex-col items-center justify-center py-1 px-2 ${isArticles ? 'text-vermilion font-bold active-tab' : 'text-muted hover:text-vermilion'} transition-all active:scale-95" data-nav="articles">
+          <i class="${isArticles ? 'ri-book-open-fill' : 'ri-book-open-line'} text-lg"></i>
+          <span class="text-[10px] mt-0.5 tracking-tight" data-mm="ဆောင်းပါး" data-en="Articles">ဆောင်းပါး</span>
+          ${isArticles ? '<span class="w-1 h-1 rounded-full bg-vermilion mt-0.5"></span>' : ''}
+        </a>
+        <a href="publications.html" class="app-tab-btn flex flex-col items-center justify-center py-1 px-2 ${isPublications ? 'text-vermilion font-bold active-tab' : 'text-muted hover:text-vermilion'} transition-all active:scale-95" data-nav="publications">
+          <i class="${isPublications ? 'ri-file-paper-2-fill' : 'ri-file-paper-2-line'} text-lg"></i>
+          <span class="text-[10px] mt-0.5 tracking-tight" data-mm="စာစောင်များ" data-en="Publications">စာစောင်များ</span>
+          ${isPublications ? '<span class="w-1 h-1 rounded-full bg-vermilion mt-0.5"></span>' : ''}
+        </a>
+        <a href="journal.html" class="app-tab-btn flex flex-col items-center justify-center py-1 px-2 ${isJournal ? 'text-vermilion font-bold active-tab' : 'text-muted hover:text-vermilion'} transition-all active:scale-95" data-nav="journal">
+          <i class="${isJournal ? 'ri-quill-pen-fill' : 'ri-quill-pen-line'} text-lg"></i>
+          <span class="text-[10px] mt-0.5 tracking-tight" data-mm="ဂျာနယ်" data-en="Journal">ဂျာနယ်</span>
+          ${isJournal ? '<span class="w-1 h-1 rounded-full bg-vermilion mt-0.5"></span>' : ''}
+        </a>
+        <button type="button" id="bottom-nav-theme-btn" class="app-tab-btn flex flex-col items-center justify-center py-1 px-2 text-muted hover:text-vermilion transition-all active:scale-95 cursor-pointer relative" data-nav="theme" title="Themes / ရောင်စဉ်">
+          <div class="relative">
+            <i class="ri-palette-line text-lg"></i>
+            <span class="absolute -top-0.5 -right-1 w-1.5 h-1.5 rounded-full theme-active-dot ring-1 ring-white/60"></span>
+          </div>
+          <span class="text-[10px] mt-0.5 tracking-tight" data-mm="ရောင်စဉ်" data-en="Theme">ရောင်စဉ်</span>
+        </button>
+      `;
+      if (isNew) {
+        document.body.appendChild(nav);
+      }
+
+      document.body.classList.add('has-bottom-nav');
+
+      const themeBtn = document.getElementById('bottom-nav-theme-btn');
+      if (themeBtn) {
+        themeBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (navigator.vibrate) try { navigator.vibrate(15); } catch(e) {}
+          if (window.Theme && window.Theme.openThemeModal) {
+            window.Theme.openThemeModal();
+          } else if (window.Theme && window.Theme.cycleTheme) {
+            window.Theme.cycleTheme();
+          }
+        });
+      }
+
+      // Smooth scroll to top when tapping the already active tab
+      nav.querySelectorAll('a.app-tab-btn').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          if (tab.classList.contains('active-tab')) {
+            e.preventDefault();
+            if (navigator.vibrate) try { navigator.vibrate(10); } catch(err) {}
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Live synchronize active dot on bottom nav theme button
+      const syncBottomThemeDot = () => {
+        const dot = nav.querySelector('.theme-active-dot');
+        if (dot && window.Theme) {
+          const current = document.documentElement.getAttribute('data-theme') || 'light';
+          const meta = (window.Theme.THEME_METADATA && window.Theme.THEME_METADATA[current]) ? window.Theme.THEME_METADATA[current] : null;
+          if (meta) {
+            dot.style.backgroundColor = meta.accent;
+            dot.style.boxShadow = `0 0 8px ${meta.accent}`;
+          }
+        }
+      };
+      syncBottomThemeDot();
+      window.addEventListener('themechange', syncBottomThemeDot);
+    }
   }
 
   // 5. Interactive Hanko Stamp Ripple Effect
@@ -575,8 +819,8 @@
     // Real-Time Global Search Execution
     if (input && resultsContainer) {
       input.addEventListener('input', async (e) => {
-        const query = e.target.value.trim().toLowerCase();
-        if (!query) {
+        let rawQuery = e.target.value.trim();
+        if (!rawQuery) {
           resultsContainer.innerHTML = `
             <div class="py-12 text-center text-muted text-xs">
               <i class="ri-compass-3-line text-3xl text-faint mb-2 block"></i>
@@ -586,10 +830,27 @@
           return;
         }
 
+        if (window.BurmeseNLP) {
+          rawQuery = window.BurmeseNLP.toUnicode(rawQuery);
+        }
+        const query = rawQuery.toLowerCase();
+
         const lang = window.I18n ? window.I18n.getLang() : 'mm';
         const articles = (await window.HtetData.getArticles()) || [];
         const glossary = (await window.HtetData.getGlossary()) || [];
         const posts = (await window.HtetData.getPosts()) || [];
+
+        // Match Dictionary
+        const matchedDict = [];
+        if (query.length >= 2) {
+          matchedDict.push({
+            type: 'Dictionary',
+            title: `အဘိဓာန်တွင် "${rawQuery}" ရှာဖွေဖတ်ရှုရန်`,
+            subtitle: `Ornagai & BurmeseNLP Dual Dictionary Lookup`,
+            url: `dictionary.html?q=${encodeURIComponent(rawQuery)}`,
+            icon: 'ri-book-2-line'
+          });
+        }
 
         // Match articles
         const matchedArticles = articles.filter(a => {
@@ -631,7 +892,7 @@
           };
         });
 
-        const combined = [...matchedArticles, ...matchedGlossary, ...matchedPosts];
+        const combined = [...matchedArticles, ...matchedGlossary, ...matchedPosts, ...matchedDict];
 
         if (combined.length === 0) {
           resultsContainer.innerHTML = `
@@ -791,7 +1052,7 @@
     return dots[hash];
   }
 
-  // 11. Articles Archive Render with Enhanced Space-Saving Multi-Category Filter
+  // 11. Articles Archive Studio v2 — 100% Dynamic Primary Categories, Multi-Select (OR/AND), 4 View Modes, 5 Sort Orders & Full Uncropped Covers
   async function initArticlesArchive() {
     const listContainer = document.getElementById("articles-archive-list");
     if (!listContainer || !window.HtetData) return;
@@ -800,99 +1061,426 @@
     const searchClearBtn = document.getElementById("articles-search-clear");
     const categoryFilterContainer = document.getElementById("articles-category-filter");
     const countBadge = document.getElementById("articles-count-badge");
+    const totalBadge = document.getElementById("articles-total-badge");
+    const primaryCountBadge = document.getElementById("articles-primary-count-badge");
+    const subcatTotalPill = document.getElementById("articles-subcat-total-pill");
     const sortSelect = document.getElementById("articles-sort");
     const activeFiltersBar = document.getElementById("articles-active-filters");
     const resetFiltersBtn = document.getElementById("articles-reset-filters");
+    const liveStatusEl = document.getElementById("articles-live-status");
 
-    // Multi-Category Space-Saving Controls
+    // Primary Categories Directory Controls
+    const primaryCatContainer = document.getElementById("articles-primary-categories");
+    const primaryResetBtn = document.getElementById("articles-primary-reset");
+
+    // 4-Mode View Switcher & Multi-Select Controls
+    const viewSwitcher = document.getElementById("articles-view-switcher");
+    const matchModeBtns = document.querySelectorAll("[data-match-mode]");
     const scrollLeftBtn = document.getElementById("articles-scroll-left");
     const scrollRightBtn = document.getElementById("articles-scroll-right");
     const toggleExpandBtn = document.getElementById("articles-toggle-expand");
     const drawerContainer = document.getElementById("articles-category-drawer");
     const drawerPillsContainer = document.getElementById("articles-drawer-pills");
     const drawerClearBtn = document.getElementById("articles-drawer-clear-btn");
+    const catSearchInput = document.getElementById("articles-cat-search");
     const multiCountBadge = document.getElementById("articles-multi-count-badge");
     const activeTagsList = document.getElementById("articles-active-tags-list");
 
-    const articles = await window.HtetData.getArticles();
-    let selectedCategories = new Set();
-    let searchQuery = "";
-    let currentSort = "newest";
+    // Native <dialog> Full-Image Lightbox Elements
+    const lightboxDialog = document.getElementById("article-image-lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const lightboxTitle = document.getElementById("lightbox-caption-title");
+    const lightboxMeta = document.getElementById("lightbox-meta");
+    const lightboxArticleLink = document.getElementById("lightbox-article-link");
+    const lightboxCloseBtn = document.getElementById("lightbox-close-btn");
 
-    // Read URL query parameter ?category=... or ?categories=...
+    const escHtml = (str) => String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+
+    // Load Articles Dynamically from JSON / JS Backup
+    const articles = await window.HtetData.getArticles();
+
+    // Sync Mobile Drawer Dynamic Counters (Zero Hardcoded Counts)
+    (async () => {
+      try {
+        const setDynCount = (key, val) => {
+          document.querySelectorAll(`[data-dynamic-count="${key}"]`).forEach(el => {
+            el.textContent = val;
+          });
+        };
+        setDynCount("articles", articles.length);
+        if (typeof window.HtetData.getPublications === "function") {
+          const pubs = await window.HtetData.getPublications();
+          setDynCount("publications", pubs.length);
+        }
+        if (typeof window.HtetData.getPosts === "function") {
+          const posts = await window.HtetData.getPosts();
+          setDynCount("posts", posts.length);
+        }
+        if (typeof window.HtetData.getGlossary === "function") {
+          const glossary = await window.HtetData.getGlossary();
+          setDynCount("glossary", glossary.length);
+        }
+      } catch (_) {}
+    })();
+
+    // Dynamic Primary Category Taxonomy (Auto-computed from JSON fields; auto-adds unknown buckets)
+    const PRIMARY_TAXONOMY = [
+      {
+        id: "political-philosophy",
+        icon: "ri-scales-3-line",
+        labels: {
+          mm: "နိုင်ငံရေးဒဿနနှင့် မူဝါဒ",
+          en: "Political Philosophy & Policy",
+          zh: "政治哲学与政策",
+          th: "ปรัชญาการเมืองและนโยบาย",
+          ja: "政治哲学・政策"
+        },
+        match: (hay) => /နိုင်ငံရေး|ပထဝီ|တော်လှန်ရေး|ဖက်ဒရယ်|အာဏာ|လူ့ဘောင်သစ်|politic|geopolitic|federal|commufemocrat|revolutionary|sovereignty|election|jinggangshan|systemicfear|tightrope/.test(hay)
+      },
+      {
+        id: "feminism-gender",
+        icon: "ri-women-line",
+        labels: {
+          mm: "ဖီမင်နစ်ဇင်နှင့် ကျားမတရားမျှတမှု",
+          en: "Feminism & Gender Justice",
+          zh: "女性主义与性别正义",
+          th: "สตรีนิยมและความยุติธรรมทางเพศ",
+          ja: "フェミニズム・ジェンダー正義"
+        },
+        match: (hay) => /ဖီမင်|ဖီမီနစ်|ကျား|ဂျန်ဒါ|အမျိုးသမီး|trans|lgbtq|gender|feminis|cisgender|womanhood|bodily|rape|consent|apartheid|clothing/.test(hay)
+      },
+      {
+        id: "historical-archives",
+        icon: "ri-quill-pen-line",
+        labels: {
+          mm: "သမိုင်းဝင်မော်ကွန်းနှင့် ဘာသာပြန်",
+          en: "Historical Archives & Translations",
+          zh: "历史文献与经典译作",
+          th: "เอกสารประวัติศาสตร์และงานแปล",
+          ja: "歴史アーカイブ・翻訳"
+        },
+        match: (hay, art) => art.category === "historical-archive" || /သမိုင်း|မော်ကွန်း|ဘာသာပြန်|နိုဘယ်|မင်ဒဲလား|အောင်ဆန်း|ပရီဒီ|ဟယ်လင်|historical|archive|nobel|mandela|suu kyi|aung san|pridi|thammasat|sakharov|translation|keller/.test(hay)
+      },
+      {
+        id: "human-rights-society",
+        icon: "ri-shield-star-line",
+        labels: {
+          mm: "လူ့အခွင့်အရေးနှင့် လူမှုဝေဖန်ရေး",
+          en: "Human Rights & Social Critique",
+          zh: "人权与社会批判",
+          th: "สิทธิมนุษยชนและสังคมวิจารณ์",
+          ja: "人権・社会批評"
+        },
+        match: (hay) => /လူ့အခွင့်အရေး|တရားမျှတ|လူမှု|ယဉ်ကျေးမှု|မီဒီယာ|ကလေးသူငယ်|မျိုးဆက်|human rights|social|justice|dignity|equality|grooming|culture|critic|dream/.test(hay)
+      },
+      {
+        id: "education-youth-science",
+        icon: "ri-graduation-cap-line",
+        labels: {
+          mm: "ပညာရေး၊ သိပ္ပံနှင့် လူငယ်",
+          en: "Education, Science & Youth",
+          zh: "教育、科学与青年",
+          th: "การศึกษา วิทยาศาสตร์ และเยาวชน",
+          ja: "教育・科学・ユース"
+        },
+        match: (hay) => /ပညာရေး|လူငယ်|သိပ္ပံ|ကျန်းမာရေး|ဒစ်ဂျစ်တယ်|ငလျင်|အလုပ်သမား|education|youth|science|neuroscience|puberty|digital|skills|earthquake|labor|pedagogy|cdm/.test(hay)
+      },
+      {
+        id: "identity-existential",
+        icon: "ri-sparkling-2-line",
+        labels: {
+          mm: "ဖြစ်တည်မှုဒဿနနှင့် ကိုယ်ပိုင်လက္ခဏာ",
+          en: "Identity & Existential Philosophy",
+          zh: "身份认同与存在哲学",
+          th: "อัตลักษณ์และปรัชญาการดำรงอยู่",
+          ja: "アイデンティティ・実存哲学"
+        },
+        match: (hay) => /ဖြစ်တည်မှု|ကိုယ်ပိုင်လက္ခဏာ|စိတ်ပညာ|ရသ|ကိုယ်တွေ့|identity|existential|authenticity|phoenix|slow walkers|rules|fear|courage|confession/.test(hay)
+      }
+    ];
+
+    function getArticlePrimaryIds(art) {
+      if (Array.isArray(art.primary_categories) && art.primary_categories.length > 0) {
+        return art.primary_categories;
+      }
+      if (art.primary_category) {
+        return [art.primary_category];
+      }
+      const hay = [
+        art.category, art.category_mm, art.category_en,
+        ...(art.categories_mm || []), ...(art.categories_en || []),
+        ...(art.tags || []), art.title_mm, art.title_en
+      ].filter(Boolean).join(" ").toLowerCase();
+
+      const matched = [];
+      PRIMARY_TAXONOMY.forEach(group => {
+        if (group.match(hay, art)) matched.push(group.id);
+      });
+      if (matched.length === 0) {
+        matched.push("general-archive");
+      }
+      return matched;
+    }
+
+    function computePrimaryGroups() {
+      const counts = new Map();
+      const customMeta = new Map();
+
+      articles.forEach(art => {
+        const ids = getArticlePrimaryIds(art);
+        ids.forEach(id => {
+          counts.set(id, (counts.get(id) || 0) + 1);
+          if (!PRIMARY_TAXONOMY.some(t => t.id === id) && !customMeta.has(id)) {
+            customMeta.set(id, {
+              id,
+              icon: "ri-bookmark-2-line",
+              labels: {
+                mm: art.category_mm || id,
+                en: art.category_en || id,
+                zh: art.category_en || id,
+                th: art.category_en || id,
+                ja: art.category_en || id
+              }
+            });
+          }
+        });
+      });
+
+      const list = [];
+      PRIMARY_TAXONOMY.forEach(group => {
+        const c = counts.get(group.id) || 0;
+        if (c > 0) list.push({ ...group, count: c });
+      });
+      customMeta.forEach((meta, id) => {
+        const c = counts.get(id) || 0;
+        if (c > 0) list.push({ ...meta, count: c });
+      });
+
+      list.sort((a, b) => b.count - a.count);
+      return list;
+    }
+
+    function getLocalizedLabel(labels, lang) {
+      return labels[lang] || labels.en || labels.mm || "";
+    }
+
+    function parseReadMinutes(art) {
+      const raw = String(art.reading_time || art.read_time_en || "");
+      const m = raw.match(/(\d+)/);
+      if (m) return parseInt(m[1], 10);
+      const len = (art.content_mm || art.content_en || "").length;
+      return Math.max(1, Math.round(len / 900));
+    }
+
+    function getPopularityScore(art) {
+      const views = Number(art.views) || 0;
+      const shares = Number(art.shares) || 0;
+      const cites = Array.isArray(art.citations) ? art.citations.length : 0;
+      return views + (shares * 3) + (cites * 25);
+    }
+
+    // State Initialization (with URL + localStorage persistence)
     const urlParams = new URLSearchParams(window.location.search);
+    const validViews = ["editorial", "grid", "magazine", "compact"];
+    const validSorts = ["newest", "oldest", "popular", "longest", "title_az"];
+
+    let selectedPrimaryCategories = new Set();
+    let selectedCategories = new Set();
+    let searchQuery = urlParams.get("q") || "";
+    let catSearchQuery = "";
+    let matchMode = (urlParams.get("mode") === "and") ? "and" : "or";
+
+    let savedView = "editorial";
+    try { savedView = localStorage.getItem("htet_articles_view") || "editorial"; } catch (_) {}
+    let currentView = validViews.includes(urlParams.get("view")) ? urlParams.get("view")
+      : (validViews.includes(savedView) ? savedView : "editorial");
+
+    let currentSort = validSorts.includes(urlParams.get("sort")) ? urlParams.get("sort") : "newest";
+
+    const initialPrimary = urlParams.get("primary");
+    if (initialPrimary && initialPrimary !== "all") {
+      initialPrimary.split(",").map(c => c.trim()).filter(Boolean).forEach(c => selectedPrimaryCategories.add(c));
+    }
     const initialCategory = urlParams.get("category") || urlParams.get("categories");
     if (initialCategory && initialCategory !== "all") {
       initialCategory.split(",").map(c => c.trim()).filter(Boolean).forEach(c => selectedCategories.add(c));
     }
 
-    // Build Dynamic Category Pills with live item counts (Both compact track & expanded drawer)
+    if (searchInput && searchQuery) {
+      searchInput.value = searchQuery;
+      if (searchClearBtn) searchClearBtn.classList.remove("hidden");
+    }
+    if (sortSelect) sortSelect.value = currentSort;
+    if (totalBadge) totalBadge.textContent = articles.length;
+
+    // Sync view mode buttons & attribute
+    function applyViewMode(mode, persist = true) {
+      if (!validViews.includes(mode)) mode = "editorial";
+      currentView = mode;
+      listContainer.setAttribute("data-view", currentView);
+      if (viewSwitcher) {
+        viewSwitcher.querySelectorAll("[data-view-mode]").forEach(btn => {
+          const isMatch = btn.getAttribute("data-view-mode") === currentView;
+          btn.classList.toggle("active", isMatch);
+          btn.setAttribute("aria-pressed", isMatch ? "true" : "false");
+        });
+      }
+      if (persist) {
+        try { localStorage.setItem("htet_articles_view", currentView); } catch (_) {}
+      }
+    }
+
+    function applyMatchMode(mode) {
+      matchMode = (mode === "and") ? "and" : "or";
+      matchModeBtns.forEach(btn => {
+        const isMatch = btn.getAttribute("data-match-mode") === matchMode;
+        btn.classList.toggle("active", isMatch);
+        btn.setAttribute("aria-pressed", isMatch ? "true" : "false");
+      });
+    }
+
+    // Render Primary Categories Overview Cards (100% Dynamic)
+    function renderPrimaryCategories() {
+      if (!primaryCatContainer) return;
+      const lang = window.I18n ? window.I18n.getLang() : "mm";
+      const groups = computePrimaryGroups();
+      if (primaryCountBadge) primaryCountBadge.textContent = groups.length;
+
+      const isAllPrimary = selectedPrimaryCategories.size === 0;
+      if (primaryResetBtn) {
+        primaryResetBtn.classList.toggle("hidden", isAllPrimary);
+      }
+
+      const allLabel = {
+        mm: "အားလုံး (All)",
+        en: "All Themes",
+        zh: "全部分类",
+        th: "ทุกหมวดหมู่",
+        ja: "すべての分野"
+      }[lang] || "All Themes";
+
+      const allCard = `
+        <button type="button" data-primary-cat="all" aria-pressed="${isAllPrimary ? "true" : "false"}" class="primary-cat-card ${isAllPrimary ? "active" : ""}">
+          <span class="flex items-center space-x-2 min-w-0">
+            <span class="primary-cat-icon"><i class="ri-apps-2-line" aria-hidden="true"></i></span>
+            <span class="text-xs font-semibold leading-snug line-clamp-2">${escHtml(allLabel)}</span>
+          </span>
+          <span class="primary-cat-count">${articles.length}</span>
+        </button>
+      `;
+
+      const groupCards = groups.map(g => {
+        const isActive = selectedPrimaryCategories.has(g.id);
+        const label = getLocalizedLabel(g.labels, lang);
+        return `
+          <button type="button" data-primary-cat="${escHtml(g.id)}" aria-pressed="${isActive ? "true" : "false"}" class="primary-cat-card ${isActive ? "active" : ""}">
+            <span class="flex items-center space-x-2 min-w-0">
+              <span class="primary-cat-icon"><i class="${g.icon}" aria-hidden="true"></i></span>
+              <span class="text-xs font-semibold leading-snug line-clamp-2">${escHtml(label)}</span>
+            </span>
+            <span class="flex items-center gap-1 shrink-0">
+              ${isActive ? `<i class="ri-check-line text-xs" aria-hidden="true"></i>` : ""}
+              <span class="primary-cat-count">${g.count}</span>
+            </span>
+          </button>
+        `;
+      }).join("");
+
+      primaryCatContainer.innerHTML = allCard + groupCards;
+    }
+
+    // Build Dynamic Sub-Category Pills sorted by frequency (Compact track + Searchable Drawer)
     function renderCategoryPills() {
       if (!categoryFilterContainer) return;
       const lang = window.I18n ? window.I18n.getLang() : "mm";
 
-      // Collect categories and counts
       const counts = { "all": articles.length };
-      const categoryMap = new Map(); // key -> { mm, en, key }
+      const categoryMap = new Map();
 
       articles.forEach(art => {
         const catsMM = art.categories_mm || (art.category_mm ? [art.category_mm] : []);
         const catsEN = art.categories_en || (art.category_en ? [art.category_en] : []);
-        
+
         catsMM.forEach((catMM, idx) => {
           const catEN = catsEN[idx] || catMM;
           const key = (lang === "mm") ? catMM : catEN;
           counts[key] = (counts[key] || 0) + 1;
           if (!categoryMap.has(key)) {
-            categoryMap.set(key, { mm: catMM, en: catEN, key: key });
+            categoryMap.set(key, { mm: catMM, en: catEN, key });
           }
         });
       });
 
+      // Sort categories by frequency descending, then alphabetically
+      const sortedCats = Array.from(categoryMap.values()).sort((a, b) => {
+        const diff = (counts[b.key] || 0) - (counts[a.key] || 0);
+        if (diff !== 0) return diff;
+        return a.key.localeCompare(b.key);
+      });
+
+      if (subcatTotalPill) subcatTotalPill.textContent = sortedCats.length;
+
       const isAllActive = (selectedCategories.size === 0);
 
-      // Helper to generate a pill button
       function createPill(catKey, label, count, isActive, isAll = false) {
         const dotClass = isAll ? "" : getCategoryDotClass(catKey);
         return `
-          <button type="button" data-category="${catKey}" class="category-pill ${isActive ? "active" : ""}" title="${label} (${count})">
-            ${isAll 
-              ? `<i class="ri-apps-2-line ${isActive ? "text-white" : "text-vermilion"}"></i>`
-              : `<span class="category-color-dot ${dotClass}"></span>`
+          <button type="button" data-category="${escHtml(catKey)}" aria-pressed="${isActive ? "true" : "false"}" class="category-pill ${isActive ? "active" : ""}">
+            ${isAll
+              ? `<i class="ri-apps-2-line ${isActive ? "text-white" : "text-vermilion"}" aria-hidden="true"></i>`
+              : `<span class="category-color-dot ${dotClass}" aria-hidden="true"></span>`
             }
-            <span>${label}</span>
+            <span>${escHtml(label)}</span>
             <span class="category-pill-count">${count}</span>
-            ${(!isAll && isActive) ? `<i class="ri-check-line text-[11px] ml-0.5"></i>` : ""}
+            ${(!isAll && isActive) ? `<i class="ri-check-line text-[11px] ml-0.5" aria-hidden="true"></i>` : ""}
           </button>
         `;
       }
 
-      let allPillHtml = createPill(
-        "all", 
-        lang === "mm" ? "အားလုံး" : "All Categories", 
-        counts["all"], 
-        isAllActive, 
+      const allPillHtml = createPill(
+        "all",
+        lang === "mm" ? "အားလုံး" : "All Sub-Categories",
+        counts["all"],
+        isAllActive,
         true
       );
 
-      let pillsListHtml = "";
-      categoryMap.forEach(cat => {
+      const trackPillsHtml = sortedCats.map(cat => {
         const count = counts[cat.key] || 0;
         const isActive = selectedCategories.has(cat.key) || selectedCategories.has(cat.mm) || selectedCategories.has(cat.en);
-        pillsListHtml += createPill(cat.key, cat.key, count, isActive, false);
-      });
+        return createPill(cat.key, cat.key, count, isActive, false);
+      }).join("");
 
-      categoryFilterContainer.innerHTML = allPillHtml + pillsListHtml;
+      categoryFilterContainer.innerHTML = allPillHtml + trackPillsHtml;
 
       if (drawerPillsContainer) {
-        drawerPillsContainer.innerHTML = allPillHtml + pillsListHtml;
+        const q = catSearchQuery.trim().toLowerCase();
+        const drawerCats = q
+          ? sortedCats.filter(c => c.key.toLowerCase().includes(q) || c.mm.toLowerCase().includes(q) || c.en.toLowerCase().includes(q))
+          : sortedCats;
+
+        if (drawerCats.length === 0) {
+          drawerPillsContainer.innerHTML = `<p class="text-xs text-muted py-2 m-0">${lang === "mm" ? "ကိုက်ညီသော ကဏ္ဍအမည် မတွေ့ပါ။" : "No matching categories found."}</p>`;
+        } else {
+          const drawerHtml = drawerCats.map(cat => {
+            const count = counts[cat.key] || 0;
+            const isActive = selectedCategories.has(cat.key) || selectedCategories.has(cat.mm) || selectedCategories.has(cat.en);
+            return createPill(cat.key, cat.key, count, isActive, false);
+          }).join("");
+          drawerPillsContainer.innerHTML = (q ? "" : allPillHtml) + drawerHtml;
+        }
       }
 
-      // Update Header Multi-Count Badge
+      const totalSelectedCount = selectedPrimaryCategories.size + selectedCategories.size;
       if (multiCountBadge) {
-        if (selectedCategories.size > 0) {
+        if (totalSelectedCount > 0) {
           multiCountBadge.classList.remove("hidden");
-          multiCountBadge.textContent = `${selectedCategories.size} ${lang === "mm" ? "ခု ရွေးထားသည်" : "selected"}`;
+          multiCountBadge.textContent = `${totalSelectedCount} ${lang === "mm" ? "ခု ရွေးထားသည်" : "selected"}`;
         } else {
           multiCountBadge.classList.add("hidden");
           multiCountBadge.textContent = "";
@@ -900,51 +1488,108 @@
       }
     }
 
+    // Open Native <dialog> Full-Image Lightbox
+    function openLightbox(imgSrc, titleText, metaText, articleUrl) {
+      if (!lightboxDialog || !lightboxImg) return;
+      lightboxImg.src = imgSrc;
+      lightboxImg.alt = titleText;
+      if (lightboxTitle) lightboxTitle.textContent = titleText;
+      if (lightboxMeta) lightboxMeta.textContent = metaText;
+      if (lightboxArticleLink) lightboxArticleLink.setAttribute("href", articleUrl);
+      if (typeof lightboxDialog.showModal === "function") {
+        lightboxDialog.showModal();
+      } else {
+        lightboxDialog.setAttribute("open", "open");
+      }
+    }
+
+    if (lightboxCloseBtn && lightboxDialog) {
+      lightboxCloseBtn.addEventListener("click", () => {
+        if (typeof lightboxDialog.close === "function") lightboxDialog.close();
+        else lightboxDialog.removeAttribute("open");
+      });
+      lightboxDialog.addEventListener("click", (e) => {
+        if (e.target === lightboxDialog) {
+          if (typeof lightboxDialog.close === "function") lightboxDialog.close();
+          else lightboxDialog.removeAttribute("open");
+        }
+      });
+    }
+
+    // Core Render Function
     function renderList() {
       const lang = window.I18n ? window.I18n.getLang() : "mm";
+      const primaryGroups = computePrimaryGroups();
+      const primaryLabelMap = new Map(primaryGroups.map(g => [g.id, getLocalizedLabel(g.labels, lang)]));
 
-      // 1. Filter articles by Multi-Category & Search Query
+      // 1. Filter articles by Primary Categories + Sub-Categories (OR / AND) + Search Query
       let filtered = articles.filter(article => {
+        const artPrimaryIds = getArticlePrimaryIds(article);
         const catsMM = article.categories_mm || (article.category_mm ? [article.category_mm] : []);
         const catsEN = article.categories_en || (article.category_en ? [article.category_en] : []);
-        const allCats = [...catsMM, ...catsEN, article.category_mm, article.category_en].filter(Boolean);
+        const allCatsLower = [...catsMM, ...catsEN, article.category_mm, article.category_en]
+          .filter(Boolean)
+          .map(c => c.toLowerCase());
 
-        // Multi-category match: empty set = match all; non-empty set = article has at least one matching category
-        const matchesCategory = (selectedCategories.size === 0) || 
-          allCats.some(c => Array.from(selectedCategories).some(sc => sc.toLowerCase() === c.toLowerCase()));
+        // Primary Categories check
+        let matchesPrimary = true;
+        if (selectedPrimaryCategories.size > 0) {
+          const selPrim = Array.from(selectedPrimaryCategories);
+          matchesPrimary = (matchMode === "and")
+            ? selPrim.every(pid => artPrimaryIds.includes(pid))
+            : selPrim.some(pid => artPrimaryIds.includes(pid));
+        }
 
-        const title = (lang === "mm") ? article.title_mm : article.title_en;
-        const excerpt = (lang === "mm") ? article.excerpt_mm : article.excerpt_en;
-        const content = (lang === "mm") ? article.content_mm : article.content_en;
+        // Sub-Categories check
+        let matchesSub = true;
+        if (selectedCategories.size > 0) {
+          const selSub = Array.from(selectedCategories).map(c => c.toLowerCase());
+          matchesSub = (matchMode === "and")
+            ? selSub.every(sc => allCatsLower.includes(sc))
+            : selSub.some(sc => allCatsLower.includes(sc));
+        }
+
+        const title = `${article.title_mm || ""} ${article.title_en || ""}`;
+        const excerpt = `${article.excerpt_mm || ""} ${article.excerpt_en || ""}`;
         const tags = Array.isArray(article.tags) ? article.tags.join(" ") : "";
-        const author = (lang === "mm") ? (article.author_mm || "") : (article.author_en || "");
-        const haystack = `${title} ${excerpt} ${tags} ${author} ${allCats.join(" ")}`.toLowerCase();
+        const author = `${article.author || ""} ${article.author_mm || ""} ${article.author_en || ""}`;
+        const haystack = `${title} ${excerpt} ${tags} ${author} ${allCatsLower.join(" ")}`.toLowerCase();
 
         const matchesSearch = !searchQuery || haystack.includes(searchQuery.toLowerCase());
-        return matchesCategory && matchesSearch;
+        return matchesPrimary && matchesSub && matchesSearch;
       });
 
-      // 2. Sort articles
+      // 2. Sort articles across all 5 Sort Orders
       filtered.sort((a, b) => {
         if (currentSort === "oldest") {
           return (a.date || "").localeCompare(b.date || "");
+        } else if (currentSort === "popular") {
+          const diff = getPopularityScore(b) - getPopularityScore(a);
+          return diff !== 0 ? diff : (b.date || "").localeCompare(a.date || "");
         } else if (currentSort === "longest") {
-          const lenA = (a.content_mm || "").length;
-          const lenB = (b.content_mm || "").length;
-          return lenB - lenA;
-        } else if (currentSort === "shortest") {
-          const lenA = (a.content_mm || "").length;
-          const lenB = (b.content_mm || "").length;
-          return lenA - lenB;
+          const minDiff = parseReadMinutes(b) - parseReadMinutes(a);
+          if (minDiff !== 0) return minDiff;
+          return (b.content_mm || "").length - (a.content_mm || "").length;
+        } else if (currentSort === "title_az") {
+          const tA = (lang === "mm" ? (a.title_mm || a.title_en) : (a.title_en || a.title_mm)) || "";
+          const tB = (lang === "mm" ? (b.title_mm || b.title_en) : (b.title_en || b.title_mm)) || "";
+          return tA.localeCompare(tB, lang === "mm" ? "my" : "en", { sensitivity: "base" });
         }
+        // Default: newest
         return (b.date || "").localeCompare(a.date || "");
       });
 
       if (countBadge) countBadge.textContent = filtered.length;
+      if (totalBadge) totalBadge.textContent = articles.length;
+      if (liveStatusEl) {
+        liveStatusEl.textContent = lang === "mm"
+          ? `စာမူ ${filtered.length} ပုဒ် တွေ့ရှိပြသထားပါသည်`
+          : `Showing ${filtered.length} of ${articles.length} articles`;
+      }
 
-      // Update Active Filter bar & Tag chips
+      // 3. Update Active Filter Chips Bar
       if (activeFiltersBar) {
-        const hasFilters = (selectedCategories.size > 0 || searchQuery !== "");
+        const hasFilters = (selectedPrimaryCategories.size > 0 || selectedCategories.size > 0 || searchQuery !== "");
         if (hasFilters) {
           activeFiltersBar.classList.remove("hidden");
           if (activeTagsList) {
@@ -952,31 +1597,49 @@
             if (searchQuery) {
               tagsHtml += `
                 <span class="active-filter-chip">
-                  <i class="ri-search-line text-xs"></i>
-                  <span>"${searchQuery}"</span>
-                  <button type="button" id="articles-clear-search-chip" title="Clear query">
-                    <i class="ri-close-line"></i>
+                  <i class="ri-search-line text-xs" aria-hidden="true"></i>
+                  <span>"${escHtml(searchQuery)}"</span>
+                  <button type="button" id="articles-clear-search-chip" aria-label="Clear search query" class="cursor-pointer">
+                    <i class="ri-close-line" aria-hidden="true"></i>
                   </button>
                 </span>
               `;
             }
-            selectedCategories.forEach(cat => {
+            selectedPrimaryCategories.forEach(pid => {
+              const pLabel = primaryLabelMap.get(pid) || pid;
               tagsHtml += `
-                <span class="active-filter-chip">
-                  <span class="category-color-dot ${getCategoryDotClass(cat)}"></span>
-                  <span>${cat}</span>
-                  <button type="button" data-remove-cat="${cat}" title="Remove ${cat}">
-                    <i class="ri-close-line"></i>
+                <span class="active-filter-chip" style="background: rgba(217, 119, 6, 0.14); color: #B45309;">
+                  <i class="ri-compass-3-line text-xs" aria-hidden="true"></i>
+                  <span>${escHtml(pLabel)}</span>
+                  <button type="button" data-remove-primary="${escHtml(pid)}" aria-label="Remove ${escHtml(pLabel)}" class="cursor-pointer">
+                    <i class="ri-close-line" aria-hidden="true"></i>
                   </button>
                 </span>
               `;
             });
+            selectedCategories.forEach(cat => {
+              tagsHtml += `
+                <span class="active-filter-chip">
+                  <span class="category-color-dot ${getCategoryDotClass(cat)}" aria-hidden="true"></span>
+                  <span>${escHtml(cat)}</span>
+                  <button type="button" data-remove-cat="${escHtml(cat)}" aria-label="Remove ${escHtml(cat)}" class="cursor-pointer">
+                    <i class="ri-close-line" aria-hidden="true"></i>
+                  </button>
+                </span>
+              `;
+            });
+            if (selectedPrimaryCategories.size + selectedCategories.size > 1) {
+              tagsHtml += `
+                <span class="px-2 py-0.5 rounded-full bg-cream border border-hairline text-[10px] font-mono font-bold text-charcoal">
+                  ${matchMode.toUpperCase()}
+                </span>
+              `;
+            }
             tagsHtml += `
-              <span class="text-[11px] text-faint ml-1 font-mono">(${filtered.length} ${lang === "mm" ? "ပုဒ် တွေ့ရှိ" : "found"})</span>
+              <span class="text-[11px] text-faint ml-1 font-mono">(${filtered.length} / ${articles.length} ${lang === "mm" ? "ပုဒ်" : "found"})</span>
             `;
             activeTagsList.innerHTML = tagsHtml;
 
-            // Wire clear search chip
             const clearSearchChip = document.getElementById("articles-clear-search-chip");
             if (clearSearchChip) {
               clearSearchChip.addEventListener("click", () => {
@@ -986,12 +1649,17 @@
                 renderList();
               });
             }
-
-            // Wire individual tag remove buttons
+            activeTagsList.querySelectorAll("[data-remove-primary]").forEach(btn => {
+              btn.addEventListener("click", () => {
+                selectedPrimaryCategories.delete(btn.getAttribute("data-remove-primary"));
+                renderPrimaryCategories();
+                renderCategoryPills();
+                renderList();
+              });
+            });
             activeTagsList.querySelectorAll("[data-remove-cat]").forEach(btn => {
               btn.addEventListener("click", () => {
-                const catToRemove = btn.getAttribute("data-remove-cat");
-                selectedCategories.delete(catToRemove);
+                selectedCategories.delete(btn.getAttribute("data-remove-cat"));
                 renderCategoryPills();
                 renderList();
               });
@@ -1002,116 +1670,185 @@
         }
       }
 
+      // 4. Empty State
       if (filtered.length === 0) {
         listContainer.innerHTML = `
-          <div class="py-16 text-center border border-dashed border-taupe-light rounded-2xl bg-card" data-aos="fade-up">
-            <span class="text-4xl text-faint mb-2 block font-serif-editorial"><i class="ri-inbox-line"></i></span>
-            <p class="text-muted text-sm font-sans-ui">
-              ${lang === "mm" ? "မည်သည့် စာမူမျှ ရှာမတွေ့ပါ။ စစ်ထုတ်မှုများကို ပြန်လည်ရှင်းလင်းကြည့်ပါ။" : "No articles found matching your criteria. Try resetting filters."}
+          <div class="col-span-full py-16 px-4 text-center border border-dashed border-taupe-light rounded-2xl bg-card" data-aos="fade-up">
+            <span class="text-4xl text-faint mb-2 block"><i class="ri-inbox-line" aria-hidden="true"></i></span>
+            <p class="text-muted text-sm font-sans-ui mb-2">
+              ${lang === "mm"
+                ? (matchMode === "and"
+                  ? "ရွေးချယ်ထားသော ကဏ္ဍအားလုံး တစ်ပြိုင်နက်ပါဝင်သည့် စာမူ မတွေ့ပါ။ OR စနစ်သို့ ပြောင်းကြည့်ပါ သို့မဟုတ် စစ်ထုတ်မှုရှင်းလင်းပါ။"
+                  : "မည်သည့် စာမူမျှ ရှာမတွေ့ပါ။ စစ်ထုတ်မှုများကို ပြန်လည်ရှင်းလင်းကြည့်ပါ။")
+                : (matchMode === "and"
+                  ? "No articles match ALL selected categories simultaneously. Try switching to OR mode or clearing filters."
+                  : "No articles found matching your criteria. Try resetting filters.")}
             </p>
-            <button onclick="document.getElementById('articles-reset-filters')?.click()" class="mt-4 px-4 py-2 rounded-xl bg-vermilion text-white text-xs font-sans-ui hover:bg-vermilion-dark transition-colors cursor-pointer">
-              ${lang === "mm" ? "စစ်ထုတ်မှု အားလုံး ရှင်းလင်းရန်" : "Reset All Filters"}
-            </button>
+            <div class="flex flex-wrap items-center justify-center gap-2 mt-4">
+              ${matchMode === "and" ? `
+                <button type="button" id="empty-switch-or-btn" class="px-4 py-2 rounded-xl border border-vermilion text-vermilion text-xs font-sans-ui hover:bg-vermilion/10 transition-colors cursor-pointer">
+                  ${lang === "mm" ? "OR (တစ်ခုခုပါလျှင်) သို့ ပြောင်းရန်" : "Switch to OR (Any) Mode"}
+                </button>
+              ` : ""}
+              <button type="button" id="empty-reset-all-btn" class="px-4 py-2 rounded-xl bg-vermilion text-white text-xs font-sans-ui hover:bg-vermilion-dark transition-colors cursor-pointer">
+                ${lang === "mm" ? "စစ်ထုတ်မှု အားလုံး ရှင်းလင်းရန်" : "Reset All Filters"}
+              </button>
+            </div>
           </div>
         `;
+        const switchOrBtn = document.getElementById("empty-switch-or-btn");
+        if (switchOrBtn) {
+          switchOrBtn.addEventListener("click", () => {
+            applyMatchMode("or");
+            renderList();
+          });
+        }
+        const emptyResetBtn = document.getElementById("empty-reset-all-btn");
+        if (emptyResetBtn && resetFiltersBtn) {
+          emptyResetBtn.addEventListener("click", () => resetFiltersBtn.click());
+        }
         return;
       }
 
+      // 5. Render Cards Across All 4 Modes with Full Uncropped Images
       listContainer.innerHTML = filtered.map((article, idx) => {
         const isSaved = BookmarkSystem.isBookmarked(article.id);
         const iconClass = isSaved ? "ri-bookmark-3-fill text-vermilion" : "ri-bookmark-3-line text-faint";
         const cats = (lang === "mm")
           ? (article.categories_mm || (article.category_mm ? [article.category_mm] : []))
           : (article.categories_en || (article.category_en ? [article.category_en] : []));
-        const author = (lang === "mm") ? (article.author_mm || "ဧကရီ (ထက်)") : (article.author_en || "Ekri (Htet)");
+        const author = (lang === "mm") ? (article.author_mm || article.author || "ထက် (Htet)") : (article.author_en || article.author || "Htet");
         const citationsCount = Array.isArray(article.citations) ? article.citations.length : 0;
+        const titleText = (lang === "mm" ? (article.title_mm || article.title_en) : (article.title_en || article.title_mm)) || "";
+        const excerptText = (lang === "mm" ? (article.excerpt_mm || article.excerpt_en) : (article.excerpt_en || article.excerpt_mm)) || "";
+        const readTimeText = lang === "mm" ? (article.read_time_mm || `${parseReadMinutes(article)} မိနစ် ဖတ်ရှုရန်`) : (article.read_time_en || `${parseReadMinutes(article)} min read`);
+        const imgSrc = article.image || article.cover_image || "";
+        const primaryIds = getArticlePrimaryIds(article);
+        const primaryBadgeLabel = primaryLabelMap.get(primaryIds[0]) || "";
+        const isHeroPriority = idx < 2; // LCP image priority optimization (no lazy on first 2)
+        const imgPriorityAttrs = isHeroPriority ? `fetchpriority="high" decoding="async"` : `loading="lazy" decoding="async"`;
+        const isMagazineLead = (currentView === "magazine" && idx === 0);
+        const isCompact = (currentView === "compact");
+        const isGrid = (currentView === "grid");
+
+        const titleSizeClass = isCompact
+          ? "text-base sm:text-lg"
+          : (isGrid ? "text-lg sm:text-xl" : (isMagazineLead ? "text-2xl sm:text-3xl" : "text-xl sm:text-2xl"));
+
+        const excerptClampClass = isCompact
+          ? "line-clamp-1 text-xs"
+          : (isGrid ? "line-clamp-3 text-[13px] sm:text-sm" : "line-clamp-3 sm:line-clamp-4 text-sm sm:text-[15px]");
+
+        const maxVisibleCats = isCompact ? 1 : (isGrid ? 2 : 3);
+        const visibleCats = cats.slice(0, maxVisibleCats);
+        const extraCatsCount = Math.max(0, cats.length - maxVisibleCats);
 
         return `
-          <article class="glass-3d-card card-3d-interactive p-6 md:p-8 rounded-2xl border border-taupe-light bg-card transition-all duration-300 relative group shadow-sm" data-aos="fade-up" data-aos-delay="${idx * 60}">
-            
-            <!-- Metadata Top Row -->
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-3 text-xs text-faint font-sans-ui">
-              <div class="flex flex-wrap items-center gap-1.5">
-                ${cats.map(c => `
-                  <button type="button" class="article-cat-chip px-2.5 py-0.5 rounded-full bg-cream hover:bg-taupe-light text-charcoal font-medium border border-hairline flex items-center space-x-1 cursor-pointer transition-colors" data-filter-cat="${c}">
-                    <span class="category-color-dot ${getCategoryDotClass(c)}"></span>
-                    <span>${c}</span>
+          <article class="article-archive-card glass-3d-card shadow-sm relative group" data-aos="fade-up" data-aos-delay="${Math.min(idx * 40, 240)}">
+            <div class="article-card-shell">
+              ${imgSrc ? `
+                <div class="article-cover-stage">
+                  <a href="article.html?id=${escHtml(article.id)}" class="article-cover-link" aria-label="${escHtml(titleText)}">
+                    <img src="${escHtml(imgSrc)}" alt="${escHtml(titleText)}" class="article-cover-img" ${imgPriorityAttrs}>
+                  </a>
+                  <button type="button" class="article-zoom-btn" data-zoom-src="${escHtml(imgSrc)}" data-zoom-title="${escHtml(titleText)}" data-zoom-meta="${escHtml(`${author} • ${article.date || ""} • ${readTimeText}`)}" data-zoom-url="article.html?id=${escHtml(article.id)}" aria-label="${escHtml(lang === 'mm' ? 'ပုံအပြည့်ကြည့်ရန် — ' + titleText : 'View full cover image — ' + titleText)}">
+                    <i class="ri-fullscreen-line" aria-hidden="true"></i>
+                    <span>${lang === "mm" ? "ပုံအပြည့်" : "Full View"}</span>
                   </button>
-                `).join("")}
-                <span>•</span>
-                <span class="flex items-center space-x-1">
-                  <i class="ri-calendar-2-line"></i>
-                  <span>${article.date}</span>
-                </span>
-              </div>
-              <div class="flex items-center space-x-3">
-                <span class="flex items-center space-x-1">
-                  <i class="ri-time-line text-vermilion"></i>
-                  <span>${lang === "mm" ? (article.read_time_mm || '၁၂ မိနစ် ဖတ်ရှုရန်') : (article.read_time_en || '12 min read')}</span>
-                </span>
-                <button data-bookmark-id="${article.id}" class="hover:text-vermilion transition-colors p-1" title="Bookmark article">
-                  <i class="${iconClass} text-base"></i>
-                </button>
-              </div>
-            </div>
+                </div>
+              ` : ""}
 
-            <!-- Title -->
-            <h2 class="font-serif-editorial text-2xl md:text-3xl text-charcoal group-hover:text-vermilion font-medium transition-colors mb-3">
-              <a href="article.html?id=${article.id}" class="hover:underline">
-                ${lang === "mm" ? article.title_mm : article.title_en}
-              </a>
-            </h2>
+              <div class="article-card-content">
+                <!-- Metadata Top Row -->
+                <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] sm:text-xs text-faint font-sans-ui">
+                  <div class="flex flex-wrap items-center gap-1.5 min-w-0">
+                    ${primaryBadgeLabel ? `
+                      <button type="button" data-card-primary="${escHtml(primaryIds[0])}" class="px-2 py-0.5 rounded-md bg-vermilion/10 hover:bg-vermilion/20 text-vermilion font-semibold border border-vermilion/20 cursor-pointer transition-colors text-[10px] sm:text-[11px]">
+                        ${escHtml(primaryBadgeLabel)}
+                      </button>
+                    ` : ""}
+                    ${visibleCats.map(c => `
+                      <button type="button" class="article-cat-chip px-2 py-0.5 rounded-full bg-cream hover:bg-taupe-light text-charcoal font-medium border border-hairline inline-flex items-center space-x-1 cursor-pointer transition-colors text-[10px] sm:text-[11px]" data-filter-cat="${escHtml(c)}">
+                        <span class="category-color-dot ${getCategoryDotClass(c)}" aria-hidden="true"></span>
+                        <span class="truncate max-w-[14rem]">${escHtml(c)}</span>
+                      </button>
+                    `).join("")}
+                    ${extraCatsCount > 0 ? `<span class="text-[10px] text-faint font-mono">+${extraCatsCount}</span>` : ""}
+                  </div>
+                  <div class="flex items-center space-x-2.5 shrink-0">
+                    <span class="inline-flex items-center space-x-1">
+                      <i class="ri-calendar-2-line" aria-hidden="true"></i>
+                      <span>${escHtml(article.date || "")}</span>
+                    </span>
+                    <span class="inline-flex items-center space-x-1">
+                      <i class="ri-time-line text-vermilion" aria-hidden="true"></i>
+                      <span>${escHtml(readTimeText)}</span>
+                    </span>
+                    <button type="button" data-bookmark-id="${escHtml(article.id)}" class="hover:text-vermilion transition-colors p-1 cursor-pointer" aria-label="${escHtml(lang === 'mm' ? 'သိမ်းဆည်းရန် — ' + titleText : 'Bookmark ' + titleText)}">
+                      <i class="${iconClass} text-base" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
 
-            ${(article.image || article.cover_image) ? `
-              <div class="mb-4 rounded-xl overflow-hidden border border-hairline shadow-2xs max-h-60 sm:max-h-72">
-                <a href="article.html?id=${article.id}">
-                  <img src="${article.image || article.cover_image}" alt="${lang === 'mm' ? article.title_mm : article.title_en}" class="w-full h-48 sm:h-56 object-cover object-center group-hover:scale-102 transition-transform duration-500" loading="lazy">
-                </a>
-              </div>
-            ` : ""}
-
-            <!-- Excerpt -->
-            <p class="text-muted text-base leading-relaxed mb-6 font-sans-ui line-clamp-3">
-              ${lang === "mm" ? article.excerpt_mm : article.excerpt_en}
-            </p>
-
-            <!-- Bottom Row: Author Badge, Citations, Tags, and Read CTA -->
-            <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-hairline text-xs font-sans-ui">
-              <div class="flex flex-wrap items-center gap-2">
-                <span class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-cream text-charcoal border border-hairline text-[11px]">
-                  <span class="hanko-seal-3d w-4 h-4 text-[8px] flex items-center justify-center font-bold">ထက်</span>
-                  <span>${author}</span>
-                </span>
-                ${citationsCount > 0 ? `
-                  <span class="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/50 text-[11px]">
-                    <i class="bi bi-journal-bookmark text-xs"></i>
-                    <span>${citationsCount} ${lang === "mm" ? "စာကိုး" : "citations"}</span>
-                  </span>
-                ` : ""}
-                ${(article.tags || []).slice(0, 3).map(t => `<span class="px-2 py-0.5 rounded bg-cream/70 text-faint flex items-center space-x-0.5 text-[11px]"><i class="ri-hashtag text-[9px]"></i><span>${t}</span></span>`).join("")}
-              </div>
-
-              <div class="flex flex-wrap items-center gap-2.5">
-                <a href="article.html?id=${article.id}" class="btn-3d-tactile inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-vermilion text-white hover:bg-vermilion-dark font-medium text-xs shadow-xs transition-all" title="${lang === 'mm' ? 'ဆောင်းပါး အပြည့်အစုံ ဖတ်ရှုရန်' : 'Read Full Article'}">
-                  <i class="ri-book-open-line"></i>
-                  <span>${lang === 'mm' ? 'ဆောင်းပါးဖတ်ရန်' : 'Read Article'}</span>
-                </a>
-                <button type="button" class="btn-3d-tactile article-card-lang-toggle-btn px-2.5 py-1.5 rounded-xl border border-hairline bg-cream hover:bg-taupe-light dark:bg-zinc-800 text-charcoal font-medium text-xs flex items-center space-x-1 cursor-pointer transition-colors shadow-2xs" data-article-id="${article.id}" data-showing-original="${lang === 'mm' ? 'true' : 'false'}" title="${lang === 'mm' ? 'အင်္ဂလိပ်ဘာသာပြန်ချက် ကြည့်ရန်' : 'မူရင်းမြန်မာဘာသာဖြင့် ကြည့်ရန် (View Original Burmese)'}">
-                  <span class="lang-toggle-flag text-xs">${lang === 'mm' ? '🌐' : '🇲🇲'}</span>
-                  <span class="lang-toggle-label text-[11px] font-sans-ui">${lang === 'mm' ? 'English' : 'Original (MM)'}</span>
-                </button>
-                ${article.source_url ? `
-                  <a href="${article.source_url}" target="_blank" rel="noopener noreferrer" class="btn-3d-tactile px-2.5 py-1.5 rounded-xl bg-cream hover:bg-taupe-light text-charcoal font-medium text-xs flex items-center space-x-1 border border-hairline transition-colors" title="မူရင်း Blogpost သို့">
-                    <i class="ri-external-link-line text-amber-600"></i>
-                    <span>Blog</span>
+                <!-- Title -->
+                <h3 class="article-card-title ${titleSizeClass}">
+                  <a href="article.html?id=${escHtml(article.id)}" class="hover:underline focus-visible:outline-none">
+                    ${escHtml(titleText)}
                   </a>
-                ` : ''}
-                ${article.pdf_file ? `
-                  <a href="${article.pdf_file.startsWith('downloads/') ? article.pdf_file : 'downloads/' + article.pdf_file}" download class="btn-3d-tactile px-3 py-1.5 rounded-xl bg-red-50 hover:bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 font-semibold border border-red-200 dark:border-red-900/60 flex items-center space-x-1 transition-colors shadow-2xs" title="Download Full Version PDF">
-                    <i class="ri-file-pdf-line text-red-500"></i>
-                    <span>PDF</span>
-                  </a>
-                ` : ''}
+                </h3>
+
+                <!-- Excerpt -->
+                <p class="article-card-excerpt font-sans-ui ${excerptClampClass}">
+                  ${escHtml(excerptText)}
+                </p>
+
+                <!-- Footer: Author, Telemetry & Actions -->
+                <footer class="article-card-footer text-xs font-sans-ui">
+                  <div class="flex flex-wrap items-center gap-1.5 min-w-0">
+                    <span class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-cream text-charcoal border border-hairline text-[11px] max-w-full">
+                      <span class="hanko-seal-3d w-4 h-4 text-[8px] flex items-center justify-center font-bold shrink-0" aria-hidden="true">ထက်</span>
+                      <span class="truncate max-w-[15rem]">${escHtml(author)}</span>
+                    </span>
+                    ${(!isGrid && citationsCount > 0) ? `
+                      <span class="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/50 text-[10px]">
+                        <i class="bi bi-journal-bookmark" aria-hidden="true"></i>
+                        <span>${citationsCount} ${lang === "mm" ? "စာကိုး" : "cites"}</span>
+                      </span>
+                    ` : ""}
+                    ${(!isGrid && !isCompact && article.views) ? `
+                      <span class="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full bg-cream/80 text-faint border border-hairline text-[10px] font-mono">
+                        <i class="ri-eye-line" aria-hidden="true"></i>
+                        <span>${Number(article.views).toLocaleString()}</span>
+                      </span>
+                    ` : ""}
+                  </div>
+
+                  <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                    <a href="article.html?id=${escHtml(article.id)}" class="btn-3d-tactile inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-vermilion text-white hover:bg-vermilion-dark font-medium text-xs shadow-xs transition-all">
+                      <i class="ri-book-open-line" aria-hidden="true"></i>
+                      <span>${lang === "mm" ? "ဖတ်ရှုရန်" : "Read"}</span>
+                      <span class="visually-hidden"> — ${escHtml(titleText)}</span>
+                    </a>
+                    ${!isCompact ? `
+                      <button type="button" class="btn-3d-tactile article-card-lang-toggle-btn px-2.5 py-1.5 rounded-xl border border-hairline bg-cream hover:bg-taupe-light dark:bg-zinc-800 text-charcoal font-medium text-xs inline-flex items-center space-x-1 cursor-pointer transition-colors shadow-2xs" data-article-id="${escHtml(article.id)}" data-showing-original="${lang === 'mm' ? 'true' : 'false'}" aria-label="${escHtml(lang === 'mm' ? 'အင်္ဂလိပ်ဘာသာပြန်ကြည့်ရန် — ' + titleText : 'View original Burmese — ' + titleText)}">
+                        <span class="lang-toggle-flag text-xs" aria-hidden="true">${lang === "mm" ? "🌐" : "🇲🇲"}</span>
+                        <span class="lang-toggle-label text-[11px] font-sans-ui">${lang === "mm" ? "EN" : "MM"}</span>
+                      </button>
+                    ` : ""}
+                    ${article.pdf_file ? `
+                      <a href="${escHtml(article.pdf_file.startsWith('downloads/') ? article.pdf_file : 'downloads/' + article.pdf_file)}" download class="btn-3d-tactile px-2.5 py-1.5 rounded-xl bg-red-50 hover:bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 font-semibold border border-red-200 dark:border-red-900/60 inline-flex items-center space-x-1 transition-colors shadow-2xs text-xs" aria-label="${escHtml('Download PDF — ' + titleText)}">
+                        <i class="ri-file-pdf-line text-red-500" aria-hidden="true"></i>
+                        <span>PDF</span>
+                      </a>
+                    ` : ""}
+                    ${(!isGrid && !isCompact && article.source_url && /^https?:\/\//.test(article.source_url)) ? `
+                      <a href="${escHtml(article.source_url)}" target="_blank" rel="noopener noreferrer" class="btn-3d-tactile px-2.5 py-1.5 rounded-xl bg-cream hover:bg-taupe-light text-charcoal font-medium text-xs inline-flex items-center space-x-1 border border-hairline transition-colors" aria-label="${escHtml('Original source — ' + titleText)}">
+                        <i class="ri-external-link-line text-amber-600" aria-hidden="true"></i>
+                        <span>${lang === "mm" ? "မူရင်း" : "Source"}</span>
+                      </a>
+                    ` : ""}
+                  </div>
+                </footer>
               </div>
             </div>
           </article>
@@ -1119,11 +1856,25 @@
       }).join("");
 
       initAOS();
-      if (typeof init3DTiltAndFloatingEffects === 'function') {
+      if (typeof init3DTiltAndFloatingEffects === "function") {
         init3DTiltAndFloatingEffects();
       }
 
-      // Inline card language toggle handler (Burmese Original <-> Translation)
+      // Wire Full-Image Lightbox Zoom Buttons
+      listContainer.querySelectorAll(".article-zoom-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          openLightbox(
+            btn.getAttribute("data-zoom-src"),
+            btn.getAttribute("data-zoom-title"),
+            btn.getAttribute("data-zoom-meta"),
+            btn.getAttribute("data-zoom-url")
+          );
+        });
+      });
+
+      // Wire Inline Card Language Toggle
       listContainer.querySelectorAll(".article-card-lang-toggle-btn").forEach(btn => {
         btn.addEventListener("click", (e) => {
           e.preventDefault();
@@ -1135,110 +1886,139 @@
           if (!card) return;
 
           const isShowingOriginal = btn.getAttribute("data-showing-original") === "true";
-          const siteLang = window.I18n ? window.I18n.getLang() : "mm";
           const willShowOriginal = !isShowingOriginal;
-
           btn.setAttribute("data-showing-original", willShowOriginal ? "true" : "false");
-          const flagEl = btn.querySelector(".lang-toggle-flag") || btn.querySelector("span:first-child");
+
+          const flagEl = btn.querySelector(".lang-toggle-flag");
           const labelEl = btn.querySelector(".lang-toggle-label");
+          if (flagEl) flagEl.textContent = willShowOriginal ? "🌐" : "🇲🇲";
+          if (labelEl) labelEl.textContent = willShowOriginal ? "EN" : "MM";
 
-          if (siteLang !== "mm") {
-            if (willShowOriginal) {
-              if (flagEl) flagEl.textContent = "🌐";
-              if (labelEl) labelEl.textContent = siteLang.toUpperCase();
-              btn.title = `Switch back to ${siteLang.toUpperCase()} translation`;
-            } else {
-              if (flagEl) flagEl.textContent = "🇲🇲";
-              if (labelEl) labelEl.textContent = "Original (MM)";
-              btn.title = "View Original Burmese (မူရင်းမြန်မာဘာသာဖြင့် ကြည့်ရန်)";
-            }
-          } else {
-            if (willShowOriginal) {
-              if (flagEl) flagEl.textContent = "🌐";
-              if (labelEl) labelEl.textContent = "English";
-              btn.title = "View English translation";
-            } else {
-              if (flagEl) flagEl.textContent = "🇲🇲";
-              if (labelEl) labelEl.textContent = "Original (MM)";
-              btn.title = "မူရင်းမြန်မာစာမူသို့ ပြန်သွားရန်";
-            }
-          }
-
-          const titleLink = card.querySelector("h2 a");
+          const titleLink = card.querySelector(".article-card-title a");
           if (titleLink) {
             titleLink.textContent = willShowOriginal ? (article.title_mm || article.title_en) : (article.title_en || article.title_mm);
           }
-          const excerptP = card.querySelector("p.line-clamp-3");
+          const excerptP = card.querySelector(".article-card-excerpt");
           if (excerptP) {
             excerptP.textContent = willShowOriginal ? (article.excerpt_mm || article.excerpt_en) : (article.excerpt_en || article.excerpt_mm);
           }
 
           if (window.HtetUI && typeof window.HtetUI.showToast === "function") {
-            window.HtetUI.showToast(willShowOriginal 
-              ? "မူရင်းမြန်မာဘာသာ စာမူသို့ ပြောင်းလဲပြသထားပါသည် ✓" 
-              : "ဘာသာပြန်ဆိုချက်သို့ ပြောင်းလဲပြသထားပါသည် ✓");
+            window.HtetUI.showToast(willShowOriginal
+              ? "မူရင်းမြန်မာဘာသာ စာမူသို့ ပြောင်းလဲပြသထားပါသည် ✓"
+              : "English ဘာသာပြန်အနှစ်ချုပ်သို့ ပြောင်းလဲပြသထားပါသည် ✓");
           }
         });
       });
 
-      // In-article category tag click: toggles category filter
+      // Wire In-Card Primary Badge Click
+      listContainer.querySelectorAll("[data-card-primary]").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const pid = btn.getAttribute("data-card-primary");
+          if (selectedPrimaryCategories.has(pid)) selectedPrimaryCategories.delete(pid);
+          else selectedPrimaryCategories.add(pid);
+          renderPrimaryCategories();
+          renderCategoryPills();
+          renderList();
+        });
+      });
+
+      // Wire In-Card Sub-Category Tag Click
       listContainer.querySelectorAll(".article-cat-chip").forEach(chip => {
         chip.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
           const targetCat = chip.getAttribute("data-filter-cat");
-          if (selectedCategories.has(targetCat)) {
-            selectedCategories.delete(targetCat);
-          } else {
-            selectedCategories.add(targetCat);
-          }
+          if (selectedCategories.has(targetCat)) selectedCategories.delete(targetCat);
+          else selectedCategories.add(targetCat);
           renderCategoryPills();
           renderList();
-          window.scrollTo({ top: categoryFilterContainer.offsetTop - 120, behavior: "smooth" });
         });
       });
     }
 
-    // Category button click delegation handler (works for both compact track & drawer)
-    function handleCategoryClick(e) {
-      const catBtn = e.target.closest("[data-category]");
-      if (catBtn) {
+    // Primary Category Click Delegation (Multi-Select Enabled!)
+    if (primaryCatContainer) {
+      primaryCatContainer.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-primary-cat]");
+        if (!btn) return;
         e.preventDefault();
-        const clickedCat = catBtn.getAttribute("data-category");
-        if (clickedCat === "all") {
-          selectedCategories.clear();
+        const pid = btn.getAttribute("data-primary-cat");
+        if (pid === "all") {
+          selectedPrimaryCategories.clear();
         } else {
-          if (selectedCategories.has(clickedCat)) {
-            selectedCategories.delete(clickedCat);
-          } else {
-            selectedCategories.add(clickedCat);
-          }
+          if (selectedPrimaryCategories.has(pid)) selectedPrimaryCategories.delete(pid);
+          else selectedPrimaryCategories.add(pid);
         }
+        renderPrimaryCategories();
         renderCategoryPills();
         renderList();
+      });
+    }
+
+    if (primaryResetBtn) {
+      primaryResetBtn.addEventListener("click", () => {
+        selectedPrimaryCategories.clear();
+        renderPrimaryCategories();
+        renderCategoryPills();
+        renderList();
+      });
+    }
+
+    // Sub-Category Pill Click Delegation (Multi-Select Track & Drawer)
+    function handleCategoryClick(e) {
+      const catBtn = e.target.closest("[data-category]");
+      if (!catBtn) return;
+      e.preventDefault();
+      const clickedCat = catBtn.getAttribute("data-category");
+      if (clickedCat === "all") {
+        selectedCategories.clear();
+      } else {
+        if (selectedCategories.has(clickedCat)) selectedCategories.delete(clickedCat);
+        else selectedCategories.add(clickedCat);
       }
+      renderCategoryPills();
+      renderList();
     }
 
-    if (categoryFilterContainer) {
-      categoryFilterContainer.addEventListener("click", handleCategoryClick);
-    }
-    if (drawerPillsContainer) {
-      drawerPillsContainer.addEventListener("click", handleCategoryClick);
+    if (categoryFilterContainer) categoryFilterContainer.addEventListener("click", handleCategoryClick);
+    if (drawerPillsContainer) drawerPillsContainer.addEventListener("click", handleCategoryClick);
+
+    // 4-Mode View Switcher Events
+    if (viewSwitcher) {
+      viewSwitcher.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-view-mode]");
+        if (!btn) return;
+        const mode = btn.getAttribute("data-view-mode");
+        applyViewMode(mode, true);
+        renderList();
+      });
     }
 
-    // Scroll buttons
+    // OR / AND Multi-Select Match Mode Events
+    matchModeBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const mode = btn.getAttribute("data-match-mode");
+        applyMatchMode(mode);
+        renderList();
+      });
+    });
+
+    // Horizontal Track Scroll Buttons
     if (scrollLeftBtn && categoryFilterContainer) {
       scrollLeftBtn.addEventListener("click", () => {
-        categoryFilterContainer.scrollBy({ left: -240, behavior: "smooth" });
+        categoryFilterContainer.scrollBy({ left: -260, behavior: "smooth" });
       });
     }
     if (scrollRightBtn && categoryFilterContainer) {
       scrollRightBtn.addEventListener("click", () => {
-        categoryFilterContainer.scrollBy({ left: 240, behavior: "smooth" });
+        categoryFilterContainer.scrollBy({ left: 260, behavior: "smooth" });
       });
     }
 
-    // Expand Drawer Toggle
+    // Expandable Multi-Select Drawer Toggle
     if (toggleExpandBtn && drawerContainer) {
       toggleExpandBtn.addEventListener("click", () => {
         const lang = window.I18n ? window.I18n.getLang() : "mm";
@@ -1247,45 +2027,55 @@
         const iconEl = document.getElementById("articles-expand-icon");
         if (isOpen) {
           drawerContainer.classList.remove("open");
-          if (labelEl) labelEl.textContent = lang === "mm" ? "အားလုံးဖြန့်ကြည့်ရန်" : "Expand All";
+          toggleExpandBtn.setAttribute("aria-expanded", "false");
+          if (labelEl) labelEl.textContent = lang === "mm" ? "ကဏ္ဍအားလုံး ဖြန့်ရွေးရန်" : "Expand Multi-Select";
           if (iconEl) iconEl.className = "ri-arrow-down-s-line text-xs";
         } else {
           drawerContainer.classList.add("open");
+          toggleExpandBtn.setAttribute("aria-expanded", "true");
           if (labelEl) labelEl.textContent = lang === "mm" ? "ပြန်သိမ်းရန်" : "Collapse";
           if (iconEl) iconEl.className = "ri-arrow-up-s-line text-xs";
         }
       });
     }
 
+    // Live Search Inside Expanded Category Drawer
+    if (catSearchInput) {
+      catSearchInput.addEventListener("input", (e) => {
+        catSearchQuery = e.target.value;
+        renderCategoryPills();
+      });
+    }
+
     if (drawerClearBtn) {
       drawerClearBtn.addEventListener("click", () => {
         selectedCategories.clear();
+        catSearchQuery = "";
+        if (catSearchInput) catSearchInput.value = "";
         renderCategoryPills();
         renderList();
       });
     }
 
-    // Search input
+    // Main Article Search Input
     if (searchInput) {
       searchInput.addEventListener("input", (e) => {
         searchQuery = e.target.value.trim();
-        if (searchClearBtn) {
-          searchClearBtn.classList.toggle("hidden", searchQuery.length === 0);
-        }
+        if (searchClearBtn) searchClearBtn.classList.toggle("hidden", searchQuery.length === 0);
         renderList();
       });
     }
 
     if (searchClearBtn) {
       searchClearBtn.addEventListener("click", () => {
-        searchInput.value = "";
+        if (searchInput) searchInput.value = "";
         searchQuery = "";
         searchClearBtn.classList.add("hidden");
         renderList();
       });
     }
 
-    // Sort select
+    // 5-Option Sort Select
     if (sortSelect) {
       sortSelect.addEventListener("change", (e) => {
         currentSort = e.target.value;
@@ -1293,23 +2083,34 @@
       });
     }
 
-    // Reset filters
+    // Master Reset All Filters
     if (resetFiltersBtn) {
       resetFiltersBtn.addEventListener("click", () => {
+        selectedPrimaryCategories.clear();
         selectedCategories.clear();
         searchQuery = "";
+        catSearchQuery = "";
         if (searchInput) searchInput.value = "";
+        if (catSearchInput) catSearchInput.value = "";
         if (searchClearBtn) searchClearBtn.classList.add("hidden");
         if (sortSelect) sortSelect.value = "newest";
         currentSort = "newest";
+        applyMatchMode("or");
+        renderPrimaryCategories();
         renderCategoryPills();
         renderList();
       });
     }
 
+    // Initial Boot
+    applyViewMode(currentView, false);
+    applyMatchMode(matchMode);
+    renderPrimaryCategories();
     renderCategoryPills();
     renderList();
+
     window.addEventListener("langchange", () => {
+      renderPrimaryCategories();
       renderCategoryPills();
       renderList();
     });
@@ -1819,11 +2620,11 @@
           <span>${lang === 'mm' ? 'လမင်း၊ ကြယ်စင်နှင့် သစ်တောည • ANIME FOREST VIBE' : 'MOONLIT FOREST POEM'}</span>
         `;
       } else if (isLovePoem) {
-        modalContainer.classList.add("bg-gradient-to-br", "from-rose-50/95", "via-card", "to-pink-50/90", "dark:from-[#200d14]", "dark:via-card", "dark:to-[#260f18]", "text-charcoal", "border-2", "border-rose-300", "dark:border-rose-800", "shadow-[0_0_50px_rgba(244,63,94,0.3)]");
-        modalHeader.classList.add("bg-card/90", "border-rose-200/60", "dark:border-rose-900/60");
-        modalFooter.classList.add("bg-card/90", "border-rose-200/60", "dark:border-rose-900/60", "text-muted");
+        modalContainer.classList.add("bg-card", "text-charcoal", "border-2", "border-rose-400/50", "dark:border-rose-800/60", "shadow-[0_0_50px_rgba(244,63,94,0.25)]", "love-poem-modal");
+        modalHeader.classList.add("bg-card/95", "border-rose-300/40", "dark:border-rose-900/60");
+        modalFooter.classList.add("bg-card/95", "border-rose-300/40", "dark:border-rose-900/60", "text-muted");
 
-        modalCategoryBadge.className = "inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-rose-500/15 to-pink-500/15 text-rose-700 dark:text-rose-300 font-bold border border-rose-300/70 dark:border-rose-800/70 text-xs";
+        modalCategoryBadge.className = "inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-rose-500/15 text-rose-600 dark:text-rose-300 font-bold border border-rose-400/50 text-xs";
         modalCategoryBadge.innerHTML = `
           <i class="ri-heart-pulse-fill text-rose-500"></i>
           <span>${lang === 'mm' ? 'အချစ်ကဗျာနှင့် စာလွှာ' : 'LOVE POETRY & LETTERS'}</span>
@@ -1950,23 +2751,23 @@
             <div class="absolute -right-4 -bottom-4 text-9xl text-rose-500/10 select-none pointer-events-none font-serif">❦</div>
 
             <div class="space-y-2">
-              <h2 id="modal-post-title" class="font-serif-editorial text-2xl sm:text-3xl font-bold text-rose-950 dark:text-rose-200 leading-snug flex items-center space-x-2">
+              <h2 id="modal-post-title" class="font-serif-editorial text-2xl sm:text-3xl font-bold text-charcoal leading-snug flex items-center space-x-2">
                 <span>${(lang === 'en' && item.title_en) ? item.title_en : item.title_mm}</span>
-                <span class="text-rose-400 text-lg">❦</span>
+                <span class="text-rose-500 text-lg">❦</span>
               </h2>
               <div class="text-xs text-rose-600 dark:text-rose-400 font-serif italic">
                 <span>❦ ထက် (Htet) ရေးဖွဲ့သည့် ရင်ဖွင့်အချစ်ကဗျာ</span>
               </div>
             </div>
 
-            <div class="pl-5 sm:pl-7 border-l-4 border-rose-400/80 dark:border-rose-600/80 bg-rose-50/70 dark:bg-rose-950/40 rounded-r-3xl py-6 pr-6 shadow-inner">
-              <div class="modal-text-content font-serif ${fontClass} text-charcoal/95 italic whitespace-pre-line">
+            <div class="pl-5 sm:pl-7 border-l-4 border-rose-500 bg-cream/60 dark:bg-stone-900/40 rounded-r-3xl py-6 pr-6 shadow-xs">
+              <div class="modal-text-content font-serif ${fontClass} text-charcoal italic whitespace-pre-line leading-relaxed sm:leading-loose">
                 ${poemContent}
               </div>
             </div>
 
             <div class="flex flex-wrap items-center gap-1.5 pt-2">
-              ${(item.tags || []).map(t => `<span class="text-[11px] px-3 py-1 rounded-lg bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-900/60 font-sans-ui">#${t}</span>`).join('')}
+              ${(item.tags || []).map(t => `<span class="text-[11px] px-3 py-1 rounded-lg bg-cream/80 dark:bg-rose-950/60 text-charcoal border border-rose-300/40 dark:border-rose-900/60 font-sans-ui">#${t}</span>`).join('')}
             </div>
           </div>
         `;
@@ -2133,14 +2934,17 @@
 
       renderModalContent(item);
 
+      readerModal.classList.add("is-open");
       readerModal.classList.remove("hidden");
+      readerModal.style.display = "flex";
       readerModal.classList.add("animate-modal-backdrop");
       modalContainer.classList.add("animate-modal-spring");
 
       requestAnimationFrame(() => {
         readerModal.classList.remove("opacity-0");
-        modalContainer.classList.remove("scale-95", "translate-y-4");
+        modalContainer.classList.remove("scale-95", "translate-y-4", "translate-y-full");
         modalContainer.classList.add("scale-100", "translate-y-0");
+        modalContainer.style.transform = '';
       });
 
       document.body.classList.add("overflow-hidden");
@@ -2149,17 +2953,24 @@
     function closeReaderModal() {
       if (!readerModal || !modalContainer) return;
       modalItemLangOverride = null;
+      readerModal.classList.remove("is-open");
       readerModal.classList.add("opacity-0");
       modalContainer.classList.remove("scale-100", "translate-y-0");
       modalContainer.classList.add("scale-95", "translate-y-4");
 
       setTimeout(() => {
         readerModal.classList.add("hidden");
+        readerModal.style.display = "none";
         readerModal.classList.remove("animate-modal-backdrop");
         modalContainer.classList.remove("animate-modal-spring");
+        modalContainer.style.transform = '';
         document.body.classList.remove("overflow-hidden");
       }, 250);
     }
+
+    // Expose global modal controllers for PWA and external navigation
+    window.openJournalReaderModal = openReaderModal;
+    window.closeJournalModal = closeReaderModal;
 
     if (modalBackdrop) {
       modalBackdrop.addEventListener("click", closeReaderModal);
@@ -2171,8 +2982,44 @@
       modalFooterCloseBtn.addEventListener("click", closeReaderModal);
     }
 
+    // Native Mobile Swipe-Down to Dismiss Bottom Sheet
+    if (modalContainer) {
+      let touchStartY = 0;
+      let touchDiffY = 0;
+      modalContainer.addEventListener('touchstart', (e) => {
+        if (!modalBody || modalBody.scrollTop <= 0) {
+          touchStartY = e.touches[0].clientY;
+          touchDiffY = 0;
+        } else {
+          touchStartY = 0;
+        }
+      }, { passive: true });
+
+      modalContainer.addEventListener('touchmove', (e) => {
+        if (!touchStartY) return;
+        const currentY = e.touches[0].clientY;
+        touchDiffY = currentY - touchStartY;
+        if (touchDiffY > 0) {
+          modalContainer.style.transform = `translateY(${touchDiffY}px)`;
+        }
+      }, { passive: true });
+
+      modalContainer.addEventListener('touchend', () => {
+        if (!touchStartY) return;
+        if (touchDiffY > 75) {
+          closeReaderModal();
+        } else {
+          modalContainer.style.transition = 'transform 0.2s ease-out';
+          modalContainer.style.transform = '';
+          setTimeout(() => { modalContainer.style.transition = ''; }, 200);
+        }
+        touchStartY = 0;
+        touchDiffY = 0;
+      }, { passive: true });
+    }
+
     window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && readerModal && !readerModal.classList.contains("hidden")) {
+      if (e.key === "Escape" && readerModal && (readerModal.classList.contains("is-open") || !readerModal.classList.contains("hidden"))) {
         closeReaderModal();
       }
     });
@@ -2465,7 +3312,7 @@
           const isLongExcerpt = excerptText.length > 160;
 
           cardsHtml += `
-            <article class="journal-card group rounded-3xl border border-blue-500/20 bg-card p-5 sm:p-6 shadow-xs hover:shadow-md transition-all relative overflow-hidden" data-category="articles">
+            <article class="journal-card group rounded-2xl sm:rounded-3xl border border-blue-500/20 bg-card p-3.5 sm:p-5 md:p-6 shadow-xs hover:shadow-md transition-all relative overflow-hidden cursor-pointer" data-category="articles" data-item-id="${item.id}">
               <!-- Card Header Badge & Date -->
               <div class="flex items-center justify-between mb-3 text-xs font-sans-ui">
                 <div class="flex items-center space-x-2">
@@ -2579,7 +3426,7 @@
           const shareTelegramUrl = "https://t.me/share/url?url=" + encodeURIComponent("https://htetofficialmm.blogspot.com") + "&text=" + encodeURIComponent(quoteContent + " — " + (sourceContent || "ထက်") + " (@Htet_Myat_Ekri)");
 
           cardsHtml += `
-            <article class="journal-card group rounded-3xl border-2 border-amber-400/40 bg-gradient-to-br from-amber-500/5 via-card to-amber-500/10 p-5 sm:p-7 shadow-xs hover:shadow-md transition-all relative overflow-hidden" data-category="quotes">
+            <article class="journal-card group rounded-2xl sm:rounded-3xl border-2 border-amber-400/40 bg-gradient-to-br from-amber-500/5 via-card to-amber-500/10 p-3.5 sm:p-5 md:p-7 shadow-xs hover:shadow-md transition-all relative overflow-hidden cursor-pointer" data-category="quotes" data-item-id="${item.id}">
               <!-- Decorative Quotation Mark Watermark -->
               <div class="absolute -right-2 -bottom-6 text-7xl sm:text-8xl font-serif text-amber-500/10 select-none pointer-events-none font-bold">
                 “
@@ -2662,7 +3509,7 @@
 
           if (isAnimeForestPoem) {
             cardsHtml += `
-            <article class="journal-card group rounded-3xl border-2 border-emerald-400/50 dark:border-emerald-500/60 bg-gradient-to-b from-[#021b14] via-[#052b20] to-[#01140e] text-emerald-50 shadow-[0_12px_45px_-8px_rgba(5,150,105,0.35)] hover:shadow-[0_16px_50px_-6px_rgba(16,185,129,0.45)] transition-all relative overflow-hidden my-4" data-category="poetry">
+            <article class="journal-card group rounded-3xl border-2 border-emerald-400/50 dark:border-emerald-500/60 bg-gradient-to-b from-[#021b14] via-[#052b20] to-[#01140e] text-emerald-50 shadow-[0_12px_45px_-8px_rgba(5,150,105,0.35)] hover:shadow-[0_16px_50px_-6px_rgba(16,185,129,0.45)] transition-all relative overflow-hidden my-4 cursor-pointer" data-category="poetry" data-item-id="${item.id}">
               <!-- Glowing Moonlight Halo and Night Sky Radial Gradient -->
               <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-emerald-400/15 blur-3xl pointer-events-none select-none"></div>
               <div class="absolute top-1/2 left-0 w-72 h-72 rounded-full bg-teal-500/10 blur-3xl pointer-events-none select-none"></div>
@@ -2707,7 +3554,7 @@
               </div>
 
               <!-- Card Body -->
-              <div class="relative z-20 p-5 sm:p-7 space-y-4">
+              <div class="relative z-20 p-3.5 sm:p-5 md:p-7 space-y-4">
                 <!-- Header Badge & Meta -->
                 <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-sans-ui pr-24 sm:pr-28">
                   <div class="flex items-center space-x-2">
@@ -2782,7 +3629,7 @@
             `;
           } else {
             cardsHtml += `
-            <article class="journal-card group rounded-3xl border-2 border-rose-300/50 dark:border-rose-800/50 bg-gradient-to-br from-rose-50/70 via-card to-pink-50/60 dark:from-rose-950/20 dark:via-card dark:to-pink-950/20 shadow-xs hover:shadow-md transition-all relative overflow-hidden" data-category="poetry">
+            <article class="journal-card group rounded-2xl sm:rounded-3xl border-2 border-rose-400/40 dark:border-rose-800/50 bg-card p-3.5 sm:p-5 md:p-7 shadow-xs hover:shadow-md transition-all relative overflow-hidden cursor-pointer" data-category="poetry" data-item-id="${item.id}">
               <!-- Romantic Decorative Floral Watermark -->
               <div class="absolute -right-4 -bottom-6 text-7xl sm:text-8xl text-rose-500/10 select-none pointer-events-none font-serif">
                 ❦
@@ -2791,7 +3638,7 @@
               <!-- Header Badge & Date -->
               <div class="flex items-center justify-between mb-3 text-xs font-sans-ui relative z-10">
                 <div class="flex items-center space-x-2">
-                  <span class="inline-flex items-center space-x-1.5 px-3 py-0.5 rounded-full bg-gradient-to-r from-rose-500/15 to-pink-500/15 text-rose-700 dark:text-rose-300 font-bold border border-rose-300/70 dark:border-rose-800/70 text-[11px] shadow-2xs">
+                  <span class="inline-flex items-center space-x-1.5 px-3 py-0.5 rounded-full bg-rose-500/15 text-rose-600 dark:text-rose-300 font-bold border border-rose-400/50 text-[11px] shadow-2xs">
                     <i class="ri-heart-pulse-fill text-rose-500"></i>
                     <span data-mm="${isLovePoem ? 'အချစ်ကဗျာနှင့် စာလွှာ' : 'ကဗျာနှင့် စာပေ'}" data-en="${isLovePoem ? 'LOVE POETRY & LETTERS' : 'POETRY & LITERATURE'}">
                       ${lang === 'mm' ? (isLovePoem ? 'အချစ်ကဗျာနှင့် စာလွှာ' : 'ကဗျာနှင့် စာပေ') : (isLovePoem ? 'LOVE POETRY & LETTERS' : 'POETRY & LITERATURE')}
@@ -2804,18 +3651,18 @@
               </div>
 
               <!-- Title with Flourish -->
-              <h3 class="font-serif-editorial text-lg sm:text-xl font-bold text-rose-950 dark:text-rose-200 leading-snug flex items-center space-x-2 relative z-10">
+              <h3 class="font-serif-editorial text-lg sm:text-xl font-bold text-charcoal group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors leading-snug flex items-center space-x-2 relative z-10">
                 <span>${lang === 'en' && item.title_en ? item.title_en : item.title_mm}</span>
-                <span class="text-rose-400 text-sm">❦</span>
+                <span class="text-rose-500 text-sm">❦</span>
               </h3>
 
               <!-- Poetry Stanza Layout with See More -->
               <div class="expandable-wrap relative z-10 my-3" data-collapsed="${isLongPoem ? 'true' : 'false'}">
-                <div class="expandable-content pl-4 sm:pl-6 border-l-3 border-rose-400/80 dark:border-rose-600/80 bg-rose-50/60 dark:bg-rose-950/30 rounded-r-2xl py-3.5 pr-4 font-serif text-sm sm:text-base leading-relaxed sm:leading-loose text-charcoal/95 italic whitespace-pre-line ${isLongPoem ? 'line-clamp-4' : ''}">
+                <div class="expandable-content pl-3 sm:pl-6 border-l-3 border-rose-500 bg-cream/60 dark:bg-stone-900/40 rounded-r-xl sm:rounded-r-2xl py-2.5 sm:py-3.5 pr-2.5 sm:pr-4 font-serif text-sm sm:text-base leading-relaxed sm:leading-loose text-charcoal italic whitespace-pre-line ${isLongPoem ? 'line-clamp-4' : ''}">
                   ${poemContent}
                 </div>
                 ${isLongPoem ? `
-                <button class="see-more-toggle-btn text-[11px] text-rose-600 dark:text-rose-400 font-bold hover:underline mt-1.5 inline-flex items-center space-x-1 pl-4 cursor-pointer">
+                <button class="see-more-toggle-btn text-[11px] text-rose-600 dark:text-rose-400 font-bold hover:underline mt-1.5 inline-flex items-center space-x-1 pl-3 sm:pl-4 cursor-pointer">
                   <span class="see-more-label">${lang === 'mm' ? 'ပိုမိုဖတ်ရှုရန်... (See more)' : 'See more...'}</span>
                   <i class="ri-arrow-down-s-line text-xs"></i>
                 </button>
@@ -2824,7 +3671,7 @@
 
               <!-- Tags in Soft Rose -->
               <div class="flex flex-wrap items-center gap-1.5 pt-1 relative z-10">
-                ${(item.tags || []).map(t => `<span class="text-[10px] px-2 py-0.5 rounded-md bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-900/50">#${t}</span>`).join('')}
+                ${(item.tags || []).map(t => `<span class="text-[10px] px-2 py-0.5 rounded-md bg-cream/80 dark:bg-rose-950/40 text-charcoal/80 border border-rose-300/40 dark:border-rose-900/50">#${t}</span>`).join('')}
               </div>
 
               <!-- Actions Bar -->
@@ -2834,8 +3681,8 @@
                     <i class="ri-focus-2-line text-xs"></i>
                     <span data-mm="ကဗျာဖတ်ရန်" data-en="Read Poem">${lang === 'mm' ? 'ကဗျာဖတ်ရန်' : 'Read Poem'}</span>
                   </button>
-                  ${renderCardLangToggleBtn(item, lang, 'border-rose-300/60 bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-200')}
-                  <a href="${shareTelegramUrl}" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-xl bg-rose-100 hover:bg-rose-200 dark:bg-rose-950/60 dark:hover:bg-rose-900/60 text-rose-800 dark:text-rose-200 font-medium text-xs flex items-center space-x-1 border border-rose-200 dark:border-rose-900/60 transition-all">
+                  ${renderCardLangToggleBtn(item, lang, 'border-rose-300/50 bg-cream/80 dark:bg-rose-950/60 text-charcoal')}
+                  <a href="${shareTelegramUrl}" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-xl bg-cream/80 hover:bg-cream dark:bg-rose-950/60 dark:hover:bg-rose-900/60 text-charcoal font-medium text-xs flex items-center space-x-1 border border-rose-300/50 dark:border-rose-900/60 transition-all">
                     <i class="ri-telegram-fill text-rose-600 dark:text-rose-400"></i>
                     <span data-mm="မျှဝေရန်" data-en="Share">${lang === 'mm' ? 'မျှဝေရန်' : 'Share'}</span>
                   </a>
@@ -2857,7 +3704,7 @@
           const isLongNote = noteContent.length > 200;
 
           cardsHtml += `
-            <article class="journal-card group rounded-3xl border border-purple-500/20 bg-card p-5 sm:p-6 shadow-xs hover:shadow-md transition-all relative overflow-hidden" data-category="notes">
+            <article class="journal-card group rounded-2xl sm:rounded-3xl border border-purple-500/20 bg-card p-3.5 sm:p-5 md:p-6 shadow-xs hover:shadow-md transition-all relative overflow-hidden cursor-pointer" data-category="notes" data-item-id="${item.id}">
               <!-- Header -->
               <div class="flex items-center justify-between mb-3 text-xs font-sans-ui">
                 <div class="flex items-center space-x-2">
@@ -2940,7 +3787,7 @@
           const isLongActivism = activismContent.length > 200;
 
           cardsHtml += `
-            <article class="journal-card group rounded-3xl border border-rose-500/30 bg-gradient-to-br from-rose-500/5 via-card to-rose-500/10 p-5 sm:p-6 shadow-xs hover:shadow-md transition-all relative overflow-hidden" data-category="activism">
+            <article class="journal-card group rounded-2xl sm:rounded-3xl border border-rose-500/30 bg-gradient-to-br from-rose-500/5 via-card to-rose-500/10 p-3.5 sm:p-5 md:p-6 shadow-xs hover:shadow-md transition-all relative overflow-hidden cursor-pointer" data-category="activism" data-item-id="${item.id}">
               <!-- Header -->
               <div class="flex items-center justify-between mb-3 text-xs font-sans-ui">
                 <div class="flex items-center space-x-2">
@@ -3330,6 +4177,21 @@
         return;
       }
 
+      // 3b. Native Mobile Card Tap-to-Read Delegation
+      const journalCard = e.target.closest(".journal-card, .journal-compact-card");
+      if (journalCard) {
+        // Disregard clicks on interactive buttons, links, inputs, or controls
+        if (e.target.closest("button, a, input, textarea, select, .see-more-toggle-btn, .journal-fav-btn, .journal-share-btn, .journal-card-lang-toggle-btn")) {
+          return;
+        }
+        const itemId = journalCard.getAttribute("data-item-id") || journalCard.querySelector("[data-item-id]")?.getAttribute("data-item-id");
+        if (itemId) {
+          e.preventDefault();
+          openReaderModal(itemId);
+          return;
+        }
+      }
+
       // 4. Share Button
       const shareBtn = e.target.closest(".journal-share-btn");
       if (shareBtn) {
@@ -3368,87 +4230,764 @@
     }
   }
 
-  // 13. Glossary Page Explorer Renderer
+  // 13. Glossary Page Explorer Renderer (Conceptual Glossary & Philosophy Lexicon)
   async function initGlossaryPage() {
     const listContainer = document.getElementById('glossary-terms-list');
-    if (!listContainer || !window.HtetData) return;
+    if (!listContainer) return;
 
+    // Load glossary data
+    let terms = [];
+    if (window.HtetData && typeof window.HtetData.getGlossary === 'function') {
+      try {
+        terms = (await window.HtetData.getGlossary()) || [];
+      } catch (e) {
+        console.warn('[initGlossaryPage] HtetData error:', e);
+      }
+    }
+    if ((!terms || terms.length === 0) && (window.HTET_GLOSSARY_BACKUP || window.HtetGlossaryBackup)) {
+      terms = window.HTET_GLOSSARY_BACKUP || window.HtetGlossaryBackup || [];
+    }
+
+    if (!terms || terms.length === 0) return;
+
+    // Load articles for cross-linking
+    let allArticles = [];
+    if (window.HtetData && typeof window.HtetData.getArticles === 'function') {
+      try {
+        allArticles = (await window.HtetData.getArticles()) || [];
+      } catch (e) {
+        // non-blocking
+      }
+    }
+    if ((!allArticles || allArticles.length === 0) && (window.HTET_ARTICLES_BACKUP || window.HtetArticlesBackup)) {
+      allArticles = window.HTET_ARTICLES_BACKUP || window.HtetArticlesBackup || [];
+    }
+
+    // Related article mapping by concept slug
+    const GLOSSARY_ARTICLE_MAP = {
+      'intersectionality': ['is-gender-a-social-construct', 'cisgender-privilege-easy-mode', 'from-the-margins-of-womanhood-trans-confession'],
+      'gender-performativity': ['is-gender-a-social-construct', 'who-defines-womanhood', 'clothing-culture-conflict'],
+      'cisnormativity': ['cisgender-privilege-easy-mode', 'is-gender-a-social-construct'],
+      'heteronormativity': ['cisgender-privilege-easy-mode', 'from-the-margins-of-womanhood-trans-confession'],
+      'transmisogyny': ['from-the-margins-of-womanhood-trans-confession', 'who-defines-womanhood'],
+      'patriarchy': ['is-gender-a-social-construct', 'revolutionary-government-philosophy'],
+      'hegemonic-masculinity': ['is-gender-a-social-construct', 'from-jinggangshan-to-yanan'],
+      'compulsory-heterosexuality': ['cisgender-privilege-easy-mode', 'who-defines-womanhood'],
+      'ecofeminism': ['myanmar-earthquake-special-article-2025', 'commufemocratism-manifesto'],
+      'homonationalism': ['myanmar-on-the-tightrope', 'honest-information-sham-election-analysis'],
+      'queer-utopianism': ['commufemocratism-manifesto', 'who-owns-htet-identity-thoughts'],
+      'affect-theory': ['who-owns-htet-identity-thoughts', 'mosaic-brain-gender-neuroscience'],
+      'hegemony': ['commufemocratism-manifesto', 'honest-information-sham-election-analysis', 'from-jinggangshan-to-yanan'],
+      'epistemic-injustice': ['the-world-is-growing-opportunities', 'essential-future-skills-for-youth-digital-era'],
+      'biopolitics': ['mosaic-brain-gender-neuroscience', 'early-puberty-scientific-feminist-analysis'],
+      'commufemocratism': ['commufemocratism-manifesto', 'revolutionary-government-philosophy'],
+      'wae-thi-democracy': ['commufemocratism-manifesto', 'revolutionary-government-philosophy'],
+      'ethics-of-care': ['commufemocratism-manifesto', 'when-stars-fall-are-prostitutes-laughing'],
+      'standpoint-epistemology': ['who-defines-womanhood', 'honest-information-interview-cdm-htet'],
+      'panopticism': ['who-owns-htet-identity-thoughts', 'from-jinggangshan-to-yanan'],
+      'banality-of-evil': ['honest-information-sham-election-analysis', 'from-jinggangshan-to-yanan'],
+      'prefigurative-politics': ['commufemocratism-manifesto', 'classrooms-of-spring-revolution'],
+      'dialectical-materialism': ['commufemocratism-manifesto', 'revolutionary-helen-keller'],
+      'alienation': ['who-owns-htet-identity-thoughts', 'the-road-of-slow-walkers'],
+      'decommodification': ['commufemocratism-manifesto', 'when-stars-fall-are-prostitutes-laughing'],
+      'tyranny-of-merit': ['the-world-is-growing-opportunities', 'three-generation-gap-parents'],
+      'mutual-aid': ['commufemocratism-manifesto', 'classrooms-of-spring-revolution'],
+      'economizing-care': ['commufemocratism-manifesto', 'when-stars-fall-are-prostitutes-laughing'],
+      'subaltern-studies': ['classrooms-of-spring-revolution', 'honest-information-interview-cdm-htet'],
+      'abolition-feminism': ['commufemocratism-manifesto', 'revolutionary-helen-keller'],
+      'social-reproduction-theory': ['commufemocratism-manifesto', 'when-stars-fall-are-prostitutes-laughing'],
+      'necropolitics': ['honest-information-interview-cdm-htet', 'from-jinggangshan-to-yanan'],
+      'redistribution-recognition': ['commufemocratism-manifesto', 'cisgender-privilege-easy-mode'],
+      'structural-violence': ['phoenix-from-ashes-history-written-in-tears', 'honest-information-interview-cdm-htet'],
+      'decolonial-feminism': ['phoenix-from-ashes-history-written-in-tears', 'clothing-culture-conflict'],
+      'ideological-state-apparatus': ['honest-information-sham-election-analysis', 'classrooms-of-spring-revolution'],
+      'manufactured-consent': ['honest-information-sham-election-analysis', 'myanmar-on-the-tightrope'],
+      'critical-pedagogy': ['classrooms-of-spring-revolution', 'essential-future-skills-for-youth-digital-era'],
+      'orientalism-othering': ['myanmar-on-the-tightrope', 'clothing-culture-conflict'],
+      'subaltern-counterpublics': ['classrooms-of-spring-revolution', 'from-the-margins-of-womanhood-trans-confession'],
+      'radical-equality': ['revolutionary-helen-keller', 'commufemocratism-manifesto'],
+      'transformative-justice': ['commufemocratism-manifesto', 'war-on-child-grooming'],
+      'bodily-autonomy': ['bodily-autonomy-workplace-ethics', 'from-the-margins-of-womanhood-trans-confession'],
+      'multispecies-justice': ['commufemocratism-manifesto', 'myanmar-earthquake-special-article-2025'],
+      'reproductive-justice': ['bodily-autonomy-workplace-ethics', 'early-puberty-scientific-feminist-analysis'],
+      'disability-justice': ['revolutionary-helen-keller', 'the-road-of-slow-walkers'],
+      'transfeminism': ['cisgender-privilege-easy-mode', 'who-defines-womanhood', 'from-the-margins-of-womanhood-trans-confession'],
+      'cissexism': ['cisgender-privilege-easy-mode', 'is-gender-a-social-construct'],
+      'cisgender-privilege': ['cisgender-privilege-easy-mode', 'who-defines-womanhood'],
+      'misogynoir': ['who-defines-womanhood', 'phoenix-from-ashes-history-written-in-tears'],
+      'matrix-of-domination': ['is-gender-a-social-construct', 'commufemocratism-manifesto'],
+      'queer-temporality': ['who-owns-htet-identity-thoughts', 'the-road-of-slow-walkers'],
+      'gender-dysphoria': ['mosaic-brain-gender-neuroscience', 'who-owns-htet-identity-thoughts'],
+      'gender-euphoria': ['who-defines-womanhood', 'from-the-margins-of-womanhood-trans-confession'],
+      'somatechnics': ['mosaic-brain-gender-neuroscience', 'who-owns-htet-identity-thoughts'],
+      'kyriarchy': ['commufemocratism-manifesto', 'revolutionary-government-philosophy'],
+      'sexual-scripting': ['is-gender-a-social-construct', 'clothing-culture-conflict'],
+      'toxic-masculinity': ['from-jinggangshan-to-yanan', 'war-on-child-grooming'],
+      'passing': ['from-the-margins-of-womanhood-trans-confession', 'who-defines-womanhood'],
+      'neuroqueer': ['mosaic-brain-gender-neuroscience', 'who-owns-htet-identity-thoughts'],
+      'reproductive-labor': ['commufemocratism-manifesto', 'when-stars-fall-are-prostitutes-laughing'],
+      'gender-trouble': ['is-gender-a-social-construct', 'clothing-culture-conflict'],
+      'historical-materialism': ['commufemocratism-manifesto', 'revolutionary-helen-keller'],
+      'base-and-superstructure': ['commufemocratism-manifesto', 'revolutionary-government-philosophy'],
+      'commodity-fetishism': ['commufemocratism-manifesto', 'the-world-is-growing-opportunities'],
+      'surplus-value': ['commufemocratism-manifesto', 'when-stars-fall-are-prostitutes-laughing'],
+      'social-contract': ['revolutionary-government-philosophy', 'commufemocratism-manifesto'],
+      'general-will': ['revolutionary-government-philosophy', 'commufemocratism-manifesto'],
+      'radical-democracy': ['commufemocratism-manifesto', 'classrooms-of-spring-revolution'],
+      'agonistic-pluralism': ['revolutionary-government-philosophy', 'myanmar-on-the-tightrope'],
+      'epistemic-violence': ['classrooms-of-spring-revolution', 'phoenix-from-ashes-history-written-in-tears'],
+      'sovereign-power': ['revolutionary-government-philosophy', 'from-jinggangshan-to-yanan'],
+      'bare-life': ['from-jinggangshan-to-yanan', 'honest-information-interview-cdm-htet'],
+      'state-of-exception': ['honest-information-sham-election-analysis', 'from-jinggangshan-to-yanan'],
+      'disciplinary-power': ['classrooms-of-spring-revolution', 'who-owns-htet-identity-thoughts'],
+      'governmentality': ['revolutionary-government-philosophy', 'early-puberty-scientific-feminist-analysis'],
+      'anarcho-communism': ['commufemocratism-manifesto', 'classrooms-of-spring-revolution'],
+      'democratic-confederalism': ['commufemocratism-manifesto', 'revolutionary-government-philosophy'],
+      'de-alienation': ['who-owns-htet-identity-thoughts', 'the-road-of-slow-walkers', 'commufemocratism-manifesto'],
+      'substantive-democracy': ['revolutionary-government-philosophy', 'commufemocratism-manifesto'],
+      'coloniality-of-power': ['phoenix-from-ashes-history-written-in-tears', 'myanmar-on-the-tightrope'],
+      'border-thinking': ['phoenix-from-ashes-history-written-in-tears', 'classrooms-of-spring-revolution'],
+      'mimicry-and-hybridity': ['clothing-culture-conflict', 'myanmar-on-the-tightrope'],
+      'cultural-imperialism': ['clothing-culture-conflict', 'phoenix-from-ashes-history-written-in-tears'],
+      'interpellation': ['honest-information-sham-election-analysis', 'classrooms-of-spring-revolution'],
+      'cultural-capital': ['the-world-is-growing-opportunities', 'three-generation-gap-parents'],
+      'symbolic-violence': ['is-gender-a-social-construct', 'clothing-culture-conflict'],
+      'habitus': ['three-generation-gap-parents', 'who-owns-htet-identity-thoughts'],
+      'the-gaze': ['who-defines-womanhood', 'when-stars-fall-are-prostitutes-laughing'],
+      'carceral-feminism': ['commufemocratism-manifesto', 'bodily-autonomy-workplace-ethics'],
+      'postcolonial-state': ['from-jinggangshan-to-yanan', 'revolutionary-government-philosophy'],
+      'zone-of-non-being': ['phoenix-from-ashes-history-written-in-tears', 'honest-information-interview-cdm-htet'],
+      'spectacle-society': ['honest-information-sham-election-analysis', 'who-owns-htet-identity-thoughts'],
+      'surveillance-capitalism': ['who-owns-htet-identity-thoughts', 'honest-information-sham-election-analysis'],
+      'restorative-justice': ['commufemocratism-manifesto', 'war-on-child-grooming'],
+      'distributive-justice': ['commufemocratism-manifesto', 'the-world-is-growing-opportunities'],
+      'intergenerational-justice': ['myanmar-earthquake-special-article-2025', 'commufemocratism-manifesto'],
+      'environmental-justice': ['myanmar-earthquake-special-article-2025', 'commufemocratism-manifesto'],
+      'right-to-the-city': ['commufemocratism-manifesto', 'when-stars-fall-are-prostitutes-laughing'],
+      'universal-basic-services': ['commufemocratism-manifesto', 'revolutionary-government-philosophy'],
+      'the-commons': ['commufemocratism-manifesto', 'essential-future-skills-for-youth-digital-era'],
+      'care-drain': ['from-the-margins-of-womanhood-trans-confession', 'when-stars-fall-are-prostitutes-laughing'],
+      'emotional-labor': ['when-stars-fall-are-prostitutes-laughing', 'the-road-of-slow-walkers'],
+      'climate-reparations': ['myanmar-earthquake-special-article-2025', 'myanmar-on-the-tightrope'],
+      'priestcraft': ['problems-for-burmas-freedom-1946', 'revolutionary-government-philosophy', 'commufemocratism-manifesto'],
+      'economic-fascism': ['problems-for-burmas-freedom-1946', 'commufemocratism-manifesto', 'classrooms-of-spring-revolution'],
+      'anti-hero-worship': ['problems-for-burmas-freedom-1946', 'classrooms-of-spring-revolution', 'revolutionary-government-philosophy'],
+      'scientific-internationalism': ['problems-for-burmas-freedom-1946', 'myanmar-on-the-tightrope', 'phoenix-from-ashes-history-written-in-tears'],
+      'university-as-public-well': ['classrooms-of-spring-revolution', 'pridi-banomyong-thammasat-inauguration-1934', 'essential-future-skills-for-youth-digital-era']
+    };
+
+    // State
+    let activeCategory = 'all';
+    let activeLetter = 'ALL';
+    let searchQuery = '';
+    let viewMode = localStorage.getItem('htet_glossary_view_mode') || 'grid';
+    let savedFavorites = [];
+    try {
+      savedFavorites = JSON.parse(localStorage.getItem('htet_glossary_favorites') || '[]');
+      if (!Array.isArray(savedFavorites)) savedFavorites = [];
+    } catch (e) {
+      savedFavorites = [];
+    }
+
+    // Modal state
+    let activeModalTerm = null;
+    let activeCiteFormat = 'apa';
+
+    // DOM Elements
     const searchInput = document.getElementById('glossary-search');
+    const searchClear = document.getElementById('glossary-search-clear');
     const categoryContainer = document.getElementById('glossary-category-filter');
     const countBadge = document.getElementById('glossary-count-badge');
+    const activeCountBadge = document.getElementById('glossary-active-count');
+    const activeFilterLabel = document.getElementById('glossary-active-filter-label');
+    const resetFiltersBtn = document.getElementById('glossary-reset-filters-btn');
+    const randomBtn = document.getElementById('glossary-random-btn');
+    const favFilterBtn = document.getElementById('glossary-fav-filter-btn');
+    const favCountBadge = document.getElementById('glossary-fav-count');
+    const viewGridBtn = document.getElementById('glossary-view-grid');
+    const viewCompactBtn = document.getElementById('glossary-view-compact');
+    const azBar = document.getElementById('glossary-az-bar');
 
-    const terms = (await window.HtetData.getGlossary()) || [];
-    let activeCategory = 'all';
-    let searchQuery = '';
+    // Detail Modal Elements
+    const modal = document.getElementById('glossary-detail-modal');
+    const modalBackdrop = document.getElementById('glossary-modal-backdrop');
+    const modalClose = document.getElementById('glossary-modal-close');
+    const modalCloseBottom = document.getElementById('glossary-modal-close-bottom');
+    const modalCategoryBadge = document.getElementById('glossary-modal-category-badge');
+    const modalIpa = document.getElementById('glossary-modal-ipa');
+    const modalSpeechBtn = document.getElementById('glossary-modal-speech-btn');
+    const modalFavBtn = document.getElementById('glossary-modal-fav-btn');
+    const modalTerm = document.getElementById('glossary-modal-term');
+    const modalSubterm = document.getElementById('glossary-modal-subterm');
+    const modalThinker = document.getElementById('glossary-modal-thinker');
+    const modalDefPrimary = document.getElementById('glossary-modal-def-primary');
+    const modalDefSecondary = document.getElementById('glossary-modal-def-secondary');
+    const modalContext = document.getElementById('glossary-modal-context');
+    const modalCiteOutput = document.getElementById('glossary-cite-output');
+    const modalCopyCiteBtn = document.getElementById('glossary-copy-cite-btn');
+    const modalCiteTabs = document.getElementById('glossary-cite-format-tabs');
+    const modalArticlesList = document.getElementById('glossary-modal-articles-list');
+    const modalCopyLink = document.getElementById('glossary-modal-copy-link');
+    const modalShareTg = document.getElementById('glossary-modal-share-tg');
 
+    // Speech synthesis helper
+    function speakTerm(englishTerm, btnEl) {
+      if (!('speechSynthesis' in window)) {
+        if (window.HtetUI) window.HtetUI.showToast('Speech synthesis is not supported on this device.');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(englishTerm);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.9;
+      utterance.pitch = 1.0;
+
+      const icon = btnEl ? btnEl.querySelector('i') : null;
+      if (icon) {
+        icon.className = 'ri-volume-vibrate-line speech-playing';
+      }
+
+      utterance.onend = () => {
+        if (icon) icon.className = 'ri-volume-up-line';
+      };
+      utterance.onerror = () => {
+        if (icon) icon.className = 'ri-volume-up-line';
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // Toggle favorite
+    function toggleFavorite(id) {
+      const idx = savedFavorites.indexOf(id);
+      if (idx >= 0) {
+        savedFavorites.splice(idx, 1);
+        if (window.HtetUI) window.HtetUI.showToast('Bookmark removed');
+      } else {
+        savedFavorites.push(id);
+        if (window.HtetUI) window.HtetUI.showToast('Concept bookmarked ⭐');
+      }
+      localStorage.setItem('htet_glossary_favorites', JSON.stringify(savedFavorites));
+      updateFavBadges();
+      renderGlossary();
+    }
+
+    function updateFavBadges() {
+      if (favCountBadge) favCountBadge.textContent = savedFavorites.length;
+    }
+
+    // Build A-Z alphabet bar
+    function initAlphabetBar() {
+      if (!azBar) return;
+      const initialLetters = new Set();
+      terms.forEach(t => {
+        if (t.term_en && t.term_en.length > 0) {
+          const firstChar = t.term_en.charAt(0).toUpperCase();
+          if (/[A-Z]/.test(firstChar)) {
+            initialLetters.add(firstChar);
+          }
+        }
+      });
+      const sortedLetters = Array.from(initialLetters).sort();
+
+      const pills = ['ALL', ...sortedLetters];
+      azBar.innerHTML = pills.map(letter => {
+        const isActive = activeLetter === letter;
+        return `
+          <button data-az="${letter}" class="glossary-az-btn px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer whitespace-nowrap ${
+            isActive 
+              ? 'bg-vermilion text-white shadow-xs font-bold' 
+              : 'bg-card text-charcoal hover:bg-cream dark:hover:bg-stone-800 border border-hairline'
+          }">
+            ${letter}
+          </button>
+        `;
+      }).join('');
+
+      azBar.querySelectorAll('[data-az]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeLetter = btn.getAttribute('data-az');
+          azBar.querySelectorAll('[data-az]').forEach(b => {
+            b.className = 'glossary-az-btn px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer whitespace-nowrap bg-card text-charcoal hover:bg-cream dark:hover:bg-stone-800 border border-hairline';
+          });
+          btn.className = 'glossary-az-btn px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer whitespace-nowrap bg-vermilion text-white shadow-xs';
+          renderGlossary();
+        });
+      });
+    }
+
+    // Academic citation formatter
+    function generateCitations(t) {
+      const match = (t.thinker || '').match(/^([^(]+)(?:\(([^)]+)\))?/);
+      const author = match ? match[1].trim() : (t.thinker || 'Htet');
+      const year = match && match[2] ? match[2].trim() : '2026';
+      const cleanTerm = t.term_en || 'Theoretical Term';
+      const url = `https://htetofficial.github.io/glossary.html#${t.id}`;
+
+      return {
+        apa: `${author}. (${year}). ${cleanTerm} [Theoretical concept]. In Htet (Ed.), Conceptual Glossary & Philosophy Lexicon. Yangon: Htet Official Research Platform. ${url}`,
+        chicago: `${author}. "${cleanTerm}." In Conceptual Glossary & Philosophy Lexicon, edited by Htet. Yangon: Htet Official, ${year}. ${url}.`,
+        mla: `${author}. "${cleanTerm}." Conceptual Glossary & Philosophy Lexicon, edited by Htet, 2026, ${url}.`,
+        harvard: `${author}, ${year}. '${cleanTerm}', in Htet (ed.), Conceptual Glossary & Philosophy Lexicon, Htet Official Platform, viewed ${new Date().toLocaleDateString('en-GB')}, <${url}>.`
+      };
+    }
+
+    function updateModalCitation() {
+      if (!activeModalTerm || !modalCiteOutput) return;
+      const citations = generateCitations(activeModalTerm);
+      modalCiteOutput.textContent = citations[activeCiteFormat] || citations.apa;
+
+      if (modalCiteTabs) {
+        modalCiteTabs.querySelectorAll('[data-cite]').forEach(tab => {
+          const fmt = tab.getAttribute('data-cite');
+          if (fmt === activeCiteFormat) {
+            tab.className = 'px-2.5 py-1 rounded-lg bg-vermilion text-white font-medium cursor-pointer shadow-xs';
+          } else {
+            tab.className = 'px-2.5 py-1 rounded-lg bg-cream text-charcoal font-medium hover:bg-taupe-light cursor-pointer';
+          }
+        });
+      }
+    }
+
+    // Open Deep Dive Modal
+    function openConceptModal(termId) {
+      const t = terms.find(x => x.id === termId);
+      if (!t || !modal) return;
+      activeModalTerm = t;
+
+      const lang = window.I18n ? window.I18n.getLang() : 'mm';
+
+      // Header info
+      if (modalCategoryBadge) {
+        modalCategoryBadge.textContent = lang === 'mm' ? (t.category_mm || t.category) : (t.category_en || t.category);
+      }
+      if (modalIpa) {
+        modalIpa.textContent = t.pronunciation || '';
+      }
+      if (modalTerm) {
+        modalTerm.textContent = lang === 'mm' ? t.term_mm : t.term_en;
+      }
+      if (modalSubterm) {
+        modalSubterm.textContent = lang === 'mm' ? t.term_en : t.term_mm;
+      }
+      if (modalThinker) {
+        modalThinker.textContent = t.thinker || '';
+      }
+
+      // Definitions
+      if (modalDefPrimary) {
+        modalDefPrimary.textContent = lang === 'mm' ? t.definition_mm : t.definition_en;
+      }
+      if (modalDefSecondary) {
+        modalDefSecondary.textContent = lang === 'mm' ? t.definition_en : t.definition_mm;
+      }
+      if (modalContext) {
+        modalContext.textContent = lang === 'mm' ? (t.context_mm || t.example_mm) : (t.context_en || t.example_en);
+      }
+
+      // Bookmark button state
+      const isFav = savedFavorites.includes(t.id);
+      if (modalFavBtn) {
+        const icon = modalFavBtn.querySelector('i');
+        if (icon) {
+          icon.className = isFav ? 'ri-star-fill text-lg text-amber-500' : 'ri-star-line text-lg';
+        }
+      }
+
+      // Audio pronounce button in modal
+      if (modalSpeechBtn) {
+        modalSpeechBtn.onclick = () => speakTerm(t.term_en, modalSpeechBtn);
+      }
+
+      // Citation
+      activeCiteFormat = 'apa';
+      updateModalCitation();
+
+      // Related articles by Htet
+      if (modalArticlesList) {
+        const mappedSlugs = GLOSSARY_ARTICLE_MAP[t.id] || [];
+        const related = allArticles.filter(a => mappedSlugs.includes(a.id) || mappedSlugs.includes(a.slug));
+
+        if (related.length > 0) {
+          modalArticlesList.innerHTML = related.map(art => `
+            <a href="article.html?slug=${art.slug || art.id}" class="p-3 rounded-xl border border-hairline bg-cream/50 hover:bg-cream dark:bg-stone-900/40 dark:hover:bg-stone-800 transition-all flex items-start space-x-2.5 group">
+              <i class="ri-article-line text-vermilion mt-0.5 text-sm shrink-0 group-hover:scale-110 transition-transform"></i>
+              <div class="min-w-0">
+                <span class="block text-xs font-semibold text-charcoal group-hover:text-vermilion transition-colors line-clamp-1">
+                  ${lang === 'mm' ? (art.title_mm || art.title_en) : (art.title_en || art.title_mm)}
+                </span>
+                <span class="text-[10px] text-faint font-sans-ui block mt-0.5 line-clamp-1">
+                  ${art.category_mm || art.category} • ${art.date || '2025–2026'}
+                </span>
+              </div>
+            </a>
+          `).join('');
+          const relatedSec = document.getElementById('glossary-modal-related-section');
+          if (relatedSec) relatedSec.classList.remove('hidden');
+        } else {
+          modalArticlesList.innerHTML = `
+            <div class="col-span-full text-xs text-muted font-sans-ui italic">
+              ${lang === 'mm' ? 'ဤသဘောတရားနှင့် တိုက်ရိုက်သက်ဆိုင်သော ဆောင်းပါးများကို ထပ်မံဖြည့်စွက်နေပါသည်။' : 'Further connected essays are being curated.'}
+            </div>
+          `;
+        }
+      }
+
+      // Copy link & share buttons
+      const directUrl = `${window.location.origin}${window.location.pathname}#${t.id}`;
+      if (modalCopyLink) {
+        modalCopyLink.onclick = () => {
+          navigator.clipboard.writeText(directUrl).then(() => {
+            if (window.HtetUI) window.HtetUI.showToast('Concept link copied to clipboard!');
+          });
+        };
+      }
+      if (modalShareTg) {
+        modalShareTg.onclick = () => {
+          const text = encodeURIComponent(`“${t.term_en} (${t.term_mm})” — ${t.thinker}\n\n${t.definition_mm}\n\n`);
+          window.open(`https://t.me/share/url?url=${encodeURIComponent(directUrl)}&text=${text}`, '_blank');
+        };
+      }
+
+      // Update URL hash cleanly
+      try {
+        history.replaceState(null, '', `#${t.id}`);
+      } catch (e) {
+        // safe ignore
+      }
+
+      // Show modal
+      modal.classList.add('is-open');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        const container = modal.querySelector('#glossary-modal-container');
+        if (container) {
+          container.classList.remove('scale-95', 'translate-y-4');
+        }
+      }, 10);
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeConceptModal() {
+      if (!modal) return;
+      modal.classList.add('opacity-0');
+      const container = modal.querySelector('#glossary-modal-container');
+      if (container) {
+        container.classList.add('scale-95', 'translate-y-4');
+      }
+      setTimeout(() => {
+        modal.classList.remove('is-open');
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }, 200);
+
+      // Clean URL hash
+      try {
+        if (window.location.hash) {
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+      } catch (e) {
+        // safe ignore
+      }
+    }
+
+    // Modal listeners
+    if (modalClose) modalClose.addEventListener('click', closeConceptModal);
+    if (modalCloseBottom) modalCloseBottom.addEventListener('click', closeConceptModal);
+    if (modalBackdrop) modalBackdrop.addEventListener('click', closeConceptModal);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) {
+        closeConceptModal();
+      }
+    });
+
+    if (modalFavBtn) {
+      modalFavBtn.addEventListener('click', () => {
+        if (activeModalTerm) {
+          toggleFavorite(activeModalTerm.id);
+          const isFav = savedFavorites.includes(activeModalTerm.id);
+          const icon = modalFavBtn.querySelector('i');
+          if (icon) {
+            icon.className = isFav ? 'ri-star-fill text-lg text-amber-500' : 'ri-star-line text-lg';
+          }
+        }
+      });
+    }
+
+    if (modalCiteTabs) {
+      modalCiteTabs.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-cite]');
+        if (btn) {
+          activeCiteFormat = btn.getAttribute('data-cite');
+          updateModalCitation();
+        }
+      });
+    }
+
+    if (modalCopyCiteBtn) {
+      modalCopyCiteBtn.addEventListener('click', () => {
+        if (modalCiteOutput && modalCiteOutput.textContent) {
+          navigator.clipboard.writeText(modalCiteOutput.textContent).then(() => {
+            if (window.HtetUI) window.HtetUI.showToast(`Citation copied in ${activeCiteFormat.toUpperCase()} format!`);
+            if (window.confetti) {
+              window.confetti({ particleCount: 25, spread: 40, origin: { y: 0.6 } });
+            }
+          });
+        }
+      });
+    }
+
+    // Search query highlight helper
+    function highlightQuery(text, query) {
+      if (!query || !text) return text;
+      try {
+        const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`(${escaped})`, 'gi');
+        return text.replace(regex, '<mark class="glossary-highlight">$1</mark>');
+      } catch (e) {
+        return text;
+      }
+    }
+
+    // Main render function
     function renderGlossary() {
       const lang = window.I18n ? window.I18n.getLang() : 'mm';
 
       const filtered = terms.filter(t => {
-        const matchesCategory = activeCategory === 'all' || t.category === activeCategory;
-        const haystack = `${t.term_en} ${t.term_mm} ${t.definition_en} ${t.definition_mm} ${t.thinker}`.toLowerCase();
-        const matchesSearch = !searchQuery || haystack.includes(searchQuery.toLowerCase());
-        return matchesCategory && matchesSearch;
+        // Category filter
+        let matchesCategory = true;
+        if (activeCategory === 'saved') {
+          matchesCategory = savedFavorites.includes(t.id);
+        } else if (activeCategory !== 'all') {
+          matchesCategory = t.category === activeCategory;
+        }
+
+        // Letter filter
+        let matchesLetter = true;
+        if (activeLetter !== 'ALL') {
+          const firstChar = (t.term_en || '').charAt(0).toUpperCase();
+          matchesLetter = firstChar === activeLetter;
+        }
+
+        // Search query
+        let matchesSearch = true;
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const haystack = `${t.term_en} ${t.term_mm} ${t.definition_en} ${t.definition_mm} ${t.thinker} ${t.context_mm || ''} ${t.context_en || ''}`.toLowerCase();
+          matchesSearch = haystack.includes(q);
+        }
+
+        return matchesCategory && matchesLetter && matchesSearch;
       });
 
-      if (countBadge) countBadge.textContent = filtered.length;
+      // Update counters
+      if (countBadge) countBadge.textContent = terms.length;
+      if (activeCountBadge) activeCountBadge.textContent = filtered.length;
 
+      // Update category pill count badges dynamically
+      if (categoryContainer) {
+        const catGender = categoryContainer.querySelector('[data-category="gender"] .cat-count-badge');
+        if (catGender) catGender.textContent = `(${terms.filter(t => t.category === 'gender').length})`;
+
+        const catPhil = categoryContainer.querySelector('[data-category="philosophy"] .cat-count-badge');
+        if (catPhil) catPhil.textContent = `(${terms.filter(t => t.category === 'philosophy').length})`;
+
+        const catCrit = categoryContainer.querySelector('[data-category="critical-theory"] .cat-count-badge');
+        if (catCrit) catCrit.textContent = `(${terms.filter(t => t.category === 'critical-theory').length})`;
+
+        const catRights = categoryContainer.querySelector('[data-category="rights"] .cat-count-badge');
+        if (catRights) catRights.textContent = `(${terms.filter(t => t.category === 'rights').length})`;
+      }
+
+      // Sync drawer navigation badges across the page
+      document.querySelectorAll('a[href="glossary.html"].drawer-nav-item span.font-mono').forEach(el => {
+        el.textContent = terms.length;
+      });
+
+      // Update filter label and reset button
+      const hasActiveFilters = activeCategory !== 'all' || activeLetter !== 'ALL' || searchQuery.length > 0;
+      if (resetFiltersBtn) {
+        resetFiltersBtn.classList.toggle('hidden', !hasActiveFilters);
+      }
+      if (activeFilterLabel) {
+        if (hasActiveFilters) {
+          let label = '';
+          if (activeCategory !== 'all') label += `ကဏ္ဍ: ${activeCategory} `;
+          if (activeLetter !== 'ALL') label += `အစကားလုံး: ${activeLetter} `;
+          if (searchQuery) label += `ရှာဖွေချက်: "${searchQuery}"`;
+          activeFilterLabel.textContent = label.trim();
+          activeFilterLabel.classList.remove('hidden');
+        } else {
+          activeFilterLabel.classList.add('hidden');
+        }
+      }
+
+      // Empty state
       if (filtered.length === 0) {
+        listContainer.className = 'grid grid-cols-1';
         listContainer.innerHTML = `
-          <div class="col-span-full py-16 text-center border border-dashed border-taupe-light rounded-2xl bg-card">
-            <i class="ri-book-open-line text-4xl text-faint mb-2 block"></i>
-            <p class="text-muted text-sm font-sans-ui">${lang === 'mm' ? 'မည်သည့် သဘောတရားမျှ ရှာမတွေ့ပါ။' : 'No conceptual terms found matching query.'}</p>
+          <div class="col-span-full py-16 text-center border border-dashed border-taupe-light rounded-3xl bg-card p-6" data-aos="fade-up">
+            <div class="w-16 h-16 rounded-full bg-cream mx-auto flex items-center justify-center mb-4 text-vermilion">
+              <i class="ri-book-open-line text-3xl"></i>
+            </div>
+            <h4 class="font-serif-editorial text-xl font-bold text-charcoal mb-2">
+              ${lang === 'mm' ? 'မည်သည့် သဘောတရားမျှ ရှာမတွေ့ပါ' : 'No conceptual terms found'}
+            </h4>
+            <p class="text-muted text-xs sm:text-sm font-sans-ui max-w-md mx-auto mb-5 leading-relaxed">
+              ${activeCategory === 'saved' 
+                ? (lang === 'mm' ? 'သင် သိမ်းဆည်းထားသော သဘောတရား မရှိသေးပါ။ ကြယ်ပွင့် (⭐) အမှတ်အသားကို နှိပ်၍ အလွယ်တကူ သိမ်းဆည်းနိုင်ပါသည်။' : 'You have not bookmarked any concepts yet. Click the star icon to save favorites.')
+                : (lang === 'mm' ? 'ရှာဖွေမှု စကားလုံး သို့မဟုတ် ကဏ္ဍစစ်ထုတ်မှုကို ပြန်လည်စစ်ဆေးပေးပါ။' : 'Try adjusting your search keywords or active filters.')}
+            </p>
+            <button onclick="document.getElementById('glossary-reset-filters-btn').click();" class="px-4 py-2 rounded-xl bg-vermilion text-white font-medium text-xs font-sans-ui shadow-sm hover:opacity-95 transition-all">
+              ${lang === 'mm' ? 'စစ်ထုတ်မှုများ အကုန်ဖျက်မည်' : 'Clear All Filters'}
+            </button>
           </div>
         `;
         return;
       }
 
-      listContainer.innerHTML = filtered.map((t, idx) => `
-        <div id="${t.id}" class="glass-3d-card card-3d-interactive p-6 md:p-8 rounded-3xl border border-taupe-light bg-card transition-all shadow-sm flex flex-col justify-between" data-aos="fade-up" data-aos-delay="${idx * 60}">
-          <div>
-            <div class="flex items-center justify-between mb-3 text-xs font-sans-ui">
-              <span class="px-3 py-1 rounded-full bg-cream text-charcoal font-medium border border-hairline flex items-center space-x-1">
-                <i class="ri-bookmark-2-line text-vermilion"></i>
-                <span>${lang === 'mm' ? t.category_mm : t.category_en}</span>
-              </span>
-              <span class="font-mono text-faint text-[11px]">${t.pronunciation || ''}</span>
+      // Apply view mode styling to container
+      if (viewMode === 'compact') {
+        listContainer.className = 'flex flex-col gap-3';
+      } else {
+        listContainer.className = 'grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6';
+      }
+
+      // Render cards
+      listContainer.innerHTML = filtered.map((t, idx) => {
+        const isFav = savedFavorites.includes(t.id);
+        const categoryClass = `glossary-accent-${t.category}`;
+        
+        let categoryColorTag = 'bg-cream text-charcoal border-hairline';
+        if (t.category === 'gender') categoryColorTag = 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20';
+        else if (t.category === 'philosophy') categoryColorTag = 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20';
+        else if (t.category === 'critical-theory') categoryColorTag = 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20';
+        else if (t.category === 'rights') categoryColorTag = 'bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/20';
+
+        const termMmHighlighted = highlightQuery(t.term_mm, searchQuery);
+        const termEnHighlighted = highlightQuery(t.term_en, searchQuery);
+        const defMmHighlighted = highlightQuery(t.definition_mm, searchQuery);
+        const defEnHighlighted = highlightQuery(t.definition_en, searchQuery);
+        const thinkerHighlighted = highlightQuery(t.thinker, searchQuery);
+
+        // COMPACT LIST VIEW
+        if (viewMode === 'compact') {
+          return `
+            <div id="${t.id}" class="glossary-card ${categoryClass} p-3 sm:p-4 rounded-2xl border border-taupe-light bg-card transition-all shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 group" data-aos="fade-up" data-aos-delay="${Math.min(idx * 25, 300)}">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center space-x-2 mb-1">
+                  <span class="px-2 py-0.5 rounded-full text-[10px] font-sans-ui font-medium border ${categoryColorTag}">
+                    ${lang === 'mm' ? (t.category_mm || t.category) : (t.category_en || t.category)}
+                  </span>
+                  <span class="font-mono text-faint text-[10px] hidden sm:inline">${t.pronunciation || ''}</span>
+                </div>
+                <div class="flex flex-wrap items-baseline gap-2">
+                  <h3 class="font-serif-editorial text-lg sm:text-xl font-bold text-charcoal group-hover:text-vermilion transition-colors cursor-pointer" onclick="window.HtetGlossary.openModal('${t.id}')">
+                    ${lang === 'mm' ? termMmHighlighted : termEnHighlighted}
+                  </h3>
+                  <span class="text-xs text-faint font-sans-ui">
+                    (${lang === 'mm' ? termEnHighlighted : termMmHighlighted})
+                  </span>
+                  <span class="text-xs text-vermilion font-medium font-sans-ui">
+                    • ${thinkerHighlighted}
+                  </span>
+                </div>
+                <p class="text-xs text-muted leading-relaxed font-sans-ui mt-1 line-clamp-2">
+                  ${lang === 'mm' ? defMmHighlighted : defEnHighlighted}
+                </p>
+              </div>
+
+              <div class="flex items-center justify-end space-x-1.5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-hairline/60">
+                <button onclick="window.HtetGlossary.speak('${t.term_en.replace(/'/g, "\\'")}', this)" class="p-1.5 rounded-lg hover:bg-cream text-muted hover:text-vermilion transition-colors cursor-pointer" title="Speak English Term">
+                  <i class="ri-volume-up-line text-sm"></i>
+                </button>
+                <button onclick="window.HtetGlossary.toggleFav('${t.id}')" class="p-1.5 rounded-lg hover:bg-cream transition-colors cursor-pointer" title="Bookmark">
+                  <i class="${isFav ? 'ri-star-fill text-amber-500' : 'ri-star-line text-muted hover:text-amber-500'} text-sm"></i>
+                </button>
+                <button onclick="window.HtetGlossary.openModal('${t.id}')" class="px-3 py-1.5 rounded-xl bg-cream hover:bg-taupe-light text-charcoal font-medium text-xs font-sans-ui transition-colors flex items-center space-x-1 cursor-pointer">
+                  <span data-mm="အသေးစိတ်" data-en="Deep Dive">အသေးစိတ်</span>
+                  <i class="ri-arrow-right-up-line text-xs"></i>
+                </button>
+              </div>
             </div>
+          `;
+        }
 
-            <h3 class="font-serif-editorial text-2xl font-bold text-charcoal mb-1">
-              ${lang === 'mm' ? t.term_mm : t.term_en}
-            </h3>
-            <span class="text-xs text-faint font-sans-ui block mb-3 font-medium">
-              ${lang === 'mm' ? t.term_en : t.term_mm} • ${t.thinker}
-            </span>
+        // GRID CARD VIEW (EXPANSIVE 3D EDITORIAL)
+        return `
+          <div id="${t.id}" class="glossary-card ${categoryClass} p-4 sm:p-6 md:p-7 rounded-2xl sm:rounded-3xl border border-taupe-light bg-card transition-all shadow-sm flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="${Math.min(idx * 40, 400)}">
+            <div>
+              <!-- Header Badges -->
+              <div class="flex items-center justify-between mb-3 text-xs font-sans-ui">
+                <span class="px-2.5 py-0.8 rounded-full text-[10px] font-medium border flex items-center space-x-1.5 ${categoryColorTag}">
+                  <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
+                  <span>${lang === 'mm' ? (t.category_mm || t.category) : (t.category_en || t.category)}</span>
+                </span>
+                
+                <div class="flex items-center space-x-1">
+                  <span class="font-mono text-faint text-[10px] sm:text-[11px]">${t.pronunciation || ''}</span>
+                  <button onclick="window.HtetGlossary.speak('${t.term_en.replace(/'/g, "\\'")}', this)" class="p-1 rounded-md hover:bg-cream text-faint hover:text-vermilion transition-colors cursor-pointer" title="Listen pronunciation">
+                    <i class="ri-volume-up-line text-xs"></i>
+                  </button>
+                </div>
+              </div>
 
-            <p class="text-sm text-muted leading-relaxed font-sans-ui mb-4">
-              ${lang === 'mm' ? t.definition_mm : t.definition_en}
-            </p>
+              <!-- Term Titles -->
+              <h3 class="font-serif-editorial text-xl sm:text-2xl font-bold text-charcoal mb-1 group-hover:text-vermilion transition-colors cursor-pointer leading-snug" onclick="window.HtetGlossary.openModal('${t.id}')">
+                ${lang === 'mm' ? termMmHighlighted : termEnHighlighted}
+              </h3>
+              <div class="text-xs text-faint font-sans-ui flex flex-wrap items-center gap-1.5 mb-3 font-medium">
+                <span class="text-charcoal/80 font-semibold">${lang === 'mm' ? termEnHighlighted : termMmHighlighted}</span>
+                <span>•</span>
+                <span class="text-vermilion">${thinkerHighlighted}</span>
+              </div>
 
-            <div class="p-3.5 rounded-2xl bg-ivory border border-hairline text-xs font-sans-ui text-charcoal mb-4">
-              <span class="font-semibold text-vermilion block mb-1 flex items-center space-x-1">
-                <i class="ri-lightbulb-line"></i>
-                <span>${lang === 'mm' ? 'မြန်မာ့လူ့ဘောင်နှင့် ဆက်စပ်မှု' : 'Context & Relevance'}</span>
-              </span>
-              <p class="text-muted leading-relaxed">
-                ${lang === 'mm' ? t.context_mm : t.context_en}
+              <!-- Primary Definition -->
+              <p class="text-xs sm:text-sm text-muted leading-relaxed font-sans-ui mb-4">
+                ${lang === 'mm' ? defMmHighlighted : defEnHighlighted}
               </p>
-            </div>
-          </div>
 
-          <div class="pt-4 border-t border-hairline flex items-center justify-between text-xs font-sans-ui">
-            <span class="hanko-seal-3d px-2.5 py-0.5 text-[10px] rounded-full">ထက်</span>
-            <div class="flex items-center space-x-2">
-              <button onclick="navigator.clipboard.writeText('“${t.term_en} (${t.term_mm})” — ${t.thinker}\\n${t.definition_mm}'); HtetUI.showToast('Concept copied!');" class="btn-3d-tactile p-1.5 rounded-lg hover:bg-cream text-muted hover:text-vermilion transition-colors" title="Copy definition">
-                <i class="ri-file-copy-line text-sm"></i>
-              </button>
-              <button onclick="window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href) + '&text=' + encodeURIComponent('${t.term_en}: ${t.definition_en}'), '_blank');" class="btn-3d-tactile p-1.5 rounded-lg hover:bg-cream text-muted hover:text-[#2AABEE] transition-colors" title="Share on Telegram">
-                <i class="ri-telegram-fill text-sm"></i>
-              </button>
+              <!-- Myanmar Context Callout -->
+              <div class="p-3 sm:p-3.5 rounded-xl bg-ivory border border-hairline text-xs font-sans-ui text-charcoal mb-4">
+                <span class="font-semibold text-vermilion block mb-1 flex items-center space-x-1 text-[11px]">
+                  <i class="ri-lightbulb-line"></i>
+                  <span>${lang === 'mm' ? 'မြန်မာ့လူ့ဘောင်နှင့် ဆက်စပ်မှု' : 'Relevance in Myanmar'}</span>
+                </span>
+                <p class="text-muted leading-relaxed line-clamp-3">
+                  ${lang === 'mm' ? (t.context_mm || t.example_mm) : (t.context_en || t.example_en)}
+                </p>
+              </div>
+            </div>
+
+            <!-- Card Bottom Bar -->
+            <div class="pt-3.5 border-t border-hairline flex items-center justify-between text-xs font-sans-ui">
+              <div class="flex items-center space-x-2">
+                <span class="hanko-seal-3d px-2 py-0.5 text-[9px] rounded-full">ထက်</span>
+                <button onclick="window.HtetGlossary.openModal('${t.id}')" class="text-charcoal hover:text-vermilion font-semibold transition-colors flex items-center space-x-1 text-[11px] cursor-pointer">
+                  <span data-mm="အသေးစိတ်ဖတ်ရှုရန်" data-en="Deep Dive">အသေးစိတ်ဖတ်ရှုရန်</span>
+                  <i class="ri-arrow-right-up-line"></i>
+                </button>
+              </div>
+
+              <div class="flex items-center space-x-1">
+                <!-- Favorite Toggle -->
+                <button onclick="window.HtetGlossary.toggleFav('${t.id}')" class="btn-3d-tactile p-1.5 rounded-lg hover:bg-cream transition-colors cursor-pointer" title="Bookmark">
+                  <i class="${isFav ? 'ri-star-fill text-amber-500' : 'ri-star-line text-muted hover:text-amber-500'} text-sm"></i>
+                </button>
+                <!-- Copy definition -->
+                <button onclick="navigator.clipboard.writeText('“${t.term_en} (${t.term_mm})” — ${t.thinker}\\n${t.definition_mm}'); if(window.HtetUI) window.HtetUI.showToast('Concept definition copied!');" class="btn-3d-tactile p-1.5 rounded-lg hover:bg-cream text-muted hover:text-vermilion transition-colors cursor-pointer" title="Copy definition">
+                  <i class="ri-file-copy-line text-sm"></i>
+                </button>
+                <!-- Telegram Share -->
+                <button onclick="window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.origin + window.location.pathname + '#' + '${t.id}') + '&text=' + encodeURIComponent('“${t.term_en} (${t.term_mm})” — ${t.thinker}\\n${t.definition_mm}'), '_blank');" class="btn-3d-tactile p-1.5 rounded-lg hover:bg-cream text-muted hover:text-[#2AABEE] transition-colors cursor-pointer" title="Share on Telegram">
+                  <i class="ri-telegram-fill text-sm"></i>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
 
       initAOS();
       if (typeof init3DTiltAndFloatingEffects === 'function') {
@@ -3456,13 +4995,45 @@
       }
     }
 
+    // Expose global methods for inline HTML events
+    window.HtetGlossary = {
+      openModal: openConceptModal,
+      closeModal: closeConceptModal,
+      speak: speakTerm,
+      toggleFav: toggleFavorite
+    };
+
+    // Live search event
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
         searchQuery = e.target.value.trim();
+        if (searchClear) {
+          searchClear.classList.toggle('hidden', searchQuery.length === 0);
+        }
         renderGlossary();
+      });
+
+      // Clear search button
+      if (searchClear) {
+        searchClear.addEventListener('click', () => {
+          searchInput.value = '';
+          searchQuery = '';
+          searchClear.classList.add('hidden');
+          searchInput.focus();
+          renderGlossary();
+        });
+      }
+
+      // Keyboard shortcut '/' to focus search
+      window.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== searchInput && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+          e.preventDefault();
+          searchInput.focus();
+        }
       });
     }
 
+    // Category button filter click
     if (categoryContainer) {
       categoryContainer.addEventListener('click', (e) => {
         const btn = e.target.closest('[data-category]');
@@ -3471,18 +5042,163 @@
           activeCategory = btn.getAttribute('data-category');
 
           categoryContainer.querySelectorAll('[data-category]').forEach(b => {
-            b.classList.remove('bg-vermilion', 'text-white', 'shadow-md');
+            b.classList.remove('bg-vermilion', 'text-white', 'shadow-sm');
             b.classList.add('bg-cream', 'text-charcoal');
           });
 
           btn.classList.remove('bg-cream', 'text-charcoal');
-          btn.classList.add('bg-vermilion', 'text-white', 'shadow-md');
+          btn.classList.add('bg-vermilion', 'text-white', 'shadow-sm');
+
+          // Reset favorites button styling
+          if (favFilterBtn) {
+            favFilterBtn.classList.remove('bg-amber-500/15', 'border-amber-500/50');
+          }
+
           renderGlossary();
         }
       });
     }
 
+    // Favorites Filter Button
+    if (favFilterBtn) {
+      favFilterBtn.addEventListener('click', () => {
+        if (activeCategory === 'saved') {
+          activeCategory = 'all';
+          favFilterBtn.classList.remove('bg-amber-500/15', 'border-amber-500/50');
+          const allBtn = categoryContainer.querySelector('[data-category="all"]');
+          if (allBtn) {
+            categoryContainer.querySelectorAll('[data-category]').forEach(b => {
+              b.classList.remove('bg-vermilion', 'text-white', 'shadow-sm');
+              b.classList.add('bg-cream', 'text-charcoal');
+            });
+            allBtn.classList.remove('bg-cream', 'text-charcoal');
+            allBtn.classList.add('bg-vermilion', 'text-white', 'shadow-sm');
+          }
+        } else {
+          activeCategory = 'saved';
+          favFilterBtn.classList.add('bg-amber-500/15', 'border-amber-500/50');
+          categoryContainer.querySelectorAll('[data-category]').forEach(b => {
+            b.classList.remove('bg-vermilion', 'text-white', 'shadow-sm');
+            b.classList.add('bg-cream', 'text-charcoal');
+          });
+        }
+        renderGlossary();
+      });
+    }
+
+    // Random Concept button ("ကျပန်း သဘောတရား")
+    if (randomBtn) {
+      randomBtn.addEventListener('click', () => {
+        const randomTerm = terms[Math.floor(Math.random() * terms.length)];
+        if (randomTerm) {
+          openConceptModal(randomTerm.id);
+          if (window.confetti) {
+            window.confetti({ particleCount: 20, spread: 35, origin: { y: 0.5 } });
+          }
+        }
+      });
+    }
+
+    // View Mode Toggle (Grid vs Compact)
+    if (viewGridBtn && viewCompactBtn) {
+      function updateViewModeButtons() {
+        if (viewMode === 'grid') {
+          viewGridBtn.className = 'p-1.5 rounded-lg bg-vermilion text-white transition-all shadow-xs cursor-pointer';
+          viewCompactBtn.className = 'p-1.5 rounded-lg text-muted hover:text-charcoal transition-all cursor-pointer';
+        } else {
+          viewGridBtn.className = 'p-1.5 rounded-lg text-muted hover:text-charcoal transition-all cursor-pointer';
+          viewCompactBtn.className = 'p-1.5 rounded-lg bg-vermilion text-white transition-all shadow-xs cursor-pointer';
+        }
+      }
+
+      viewGridBtn.addEventListener('click', () => {
+        viewMode = 'grid';
+        localStorage.setItem('htet_glossary_view_mode', 'grid');
+        updateViewModeButtons();
+        renderGlossary();
+      });
+
+      viewCompactBtn.addEventListener('click', () => {
+        viewMode = 'compact';
+        localStorage.setItem('htet_glossary_view_mode', 'compact');
+        updateViewModeButtons();
+        renderGlossary();
+      });
+
+      updateViewModeButtons();
+    }
+
+    // Reset Filters button
+    if (resetFiltersBtn) {
+      resetFiltersBtn.addEventListener('click', () => {
+        activeCategory = 'all';
+        activeLetter = 'ALL';
+        searchQuery = '';
+        if (searchInput) searchInput.value = '';
+        if (searchClear) searchClear.classList.add('hidden');
+
+        if (categoryContainer) {
+          categoryContainer.querySelectorAll('[data-category]').forEach(b => {
+            b.classList.remove('bg-vermilion', 'text-white', 'shadow-sm');
+            b.classList.add('bg-cream', 'text-charcoal');
+          });
+          const allBtn = categoryContainer.querySelector('[data-category="all"]');
+          if (allBtn) {
+            allBtn.classList.remove('bg-cream', 'text-charcoal');
+            allBtn.classList.add('bg-vermilion', 'text-white', 'shadow-sm');
+          }
+        }
+
+        if (azBar) {
+          azBar.querySelectorAll('[data-az]').forEach(b => {
+            b.className = 'glossary-az-btn px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer whitespace-nowrap bg-card text-charcoal hover:bg-cream dark:hover:bg-stone-800 border border-hairline';
+          });
+          const allAzBtn = azBar.querySelector('[data-az="ALL"]');
+          if (allAzBtn) {
+            allAzBtn.className = 'glossary-az-btn px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer whitespace-nowrap bg-vermilion text-white shadow-xs';
+          }
+        }
+
+        if (favFilterBtn) {
+          favFilterBtn.classList.remove('bg-amber-500/15', 'border-amber-500/50');
+        }
+
+        renderGlossary();
+      });
+    }
+
+    // Initialize components
+    updateFavBadges();
+    initAlphabetBar();
     renderGlossary();
+
+    // Check URL Hash deep-linking on page load
+    if (window.location.hash) {
+      const targetId = window.location.hash.substring(1);
+      const targetTerm = terms.find(t => t.id === targetId || t.slug === targetId);
+      if (targetTerm) {
+        setTimeout(() => {
+          const el = document.getElementById(targetTerm.id);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.classList.add('glossary-card-target');
+          }
+          openConceptModal(targetTerm.id);
+        }, 350);
+      }
+    }
+
+    // Handle hash change dynamically
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash) {
+        const targetId = window.location.hash.substring(1);
+        const targetTerm = terms.find(t => t.id === targetId || t.slug === targetId);
+        if (targetTerm && (!activeModalTerm || activeModalTerm.id !== targetTerm.id)) {
+          openConceptModal(targetTerm.id);
+        }
+      }
+    });
+
     window.addEventListener('langchange', renderGlossary);
   }
 
@@ -3559,7 +5275,7 @@
         }
 
         return `
-        <div class="glass-3d-card card-3d-interactive p-6 md:p-8 rounded-3xl border border-taupe-light bg-card transition-all shadow-sm group" data-aos="fade-up" data-aos-delay="${(idx % 6) * 60}">
+        <div class="glass-3d-card card-3d-interactive p-3.5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl border border-taupe-light bg-card transition-all shadow-sm group" data-aos="fade-up" data-aos-delay="${(idx % 6) * 60}">
           <div class="flex flex-wrap items-center justify-between gap-2 mb-3 text-xs font-sans-ui text-faint">
             <div class="flex items-center space-x-2">
               <span class="px-3 py-0.5 rounded-full bg-cream text-charcoal font-medium border border-hairline flex items-center space-x-1">
@@ -3757,20 +5473,33 @@
     const topicEl = document.getElementById('daily-quote-topic');
     const sourceEl = document.getElementById('daily-quote-source');
     const nextBtn = document.getElementById('daily-quote-next');
+    const counterEl = document.getElementById('daily-quote-counter');
     const copyBtn = document.getElementById('daily-quote-copy');
     const shareBtn = document.getElementById('daily-quote-share');
 
-    function updateQuote(index) {
+    function updateQuote(index, animate = true) {
       const q = quotes[index];
       const lang = window.I18n ? window.I18n.getLang() : 'mm';
 
+      if (counterEl) {
+        counterEl.textContent = `${index + 1}/${quotes.length}`;
+      }
+
       if (textEl) {
-        textEl.style.opacity = '0';
-        setTimeout(() => {
-          const text = (lang === 'mm') ? q.quote_mm : (q[`quote_${lang}`] || q.quote_en);
+        const text = (lang === 'mm') ? q.quote_mm : (q[`quote_${lang}`] || q.quote_en);
+        if (animate) {
+          textEl.style.opacity = '0';
+          textEl.style.transform = 'translateY(4px)';
+          setTimeout(() => {
+            textEl.textContent = `“${text}”`;
+            textEl.style.opacity = '1';
+            textEl.style.transform = 'translateY(0)';
+          }, 150);
+        } else {
           textEl.textContent = `“${text}”`;
           textEl.style.opacity = '1';
-        }, 180);
+          textEl.style.transform = 'translateY(0)';
+        }
       }
 
       if (topicEl) {
@@ -3784,7 +5513,13 @@
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
         currentIndex = (currentIndex + 1) % quotes.length;
-        updateQuote(currentIndex);
+        updateQuote(currentIndex, true);
+
+        // Tactile icon spin + pulse feedback on click/tap
+        nextBtn.classList.remove('is-clicked');
+        void nextBtn.offsetWidth;
+        nextBtn.classList.add('is-clicked');
+        setTimeout(() => nextBtn.classList.remove('is-clicked'), 520);
       });
     }
 
@@ -3933,7 +5668,7 @@
     }
   }
 
-  // 18. Dynamic Featured Essays on index.html
+  // 18. Dynamic Featured Essays on index.html (with Uncropped Full Covers + Instant Topic Tabs)
   async function initFeaturedArticlesOnIndex() {
     const container = document.getElementById('index-featured-articles');
     if (!container || !window.HtetData) return;
@@ -3942,81 +5677,124 @@
       const articles = await window.HtetData.getArticles();
       if (!Array.isArray(articles) || articles.length === 0) return;
 
+      const filterBar = document.getElementById('index-featured-filter');
+      let activeTopic = 'latest';
+
+      const escHtml = (str) => String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+
       const mmDigits = ['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'];
       function toBurmeseDigits(numStr) {
         return String(numStr).replace(/[0-9]/g, d => mmDigits[d]);
       }
 
+      const topicMatchers = {
+        geopolitics: (hay) => /နိုင်ငံရေး|ပထဝီ|တော်လှန်ရေး|ဖက်ဒရယ်|အာဏာ|လူ့ဘောင်သစ်|politic|geopolitic|federal|commufemocrat|tightrope|revolutionary|systemicfear|election/.test(hay),
+        feminism: (hay) => /ဖီမင်|ဖီမီနစ်|ကျား|ဂျန်ဒါ|အမျိုးသမီး|trans|lgbtq|gender|feminis|cisgender|womanhood|bodily|consent|apartheid|clothing|dream/.test(hay),
+        archives: (hay, art) => art.category === 'historical-archive' || /သမိုင်း|မော်ကွန်း|ဘာသာပြန်|နိုဘယ်|မင်ဒဲလား|အောင်ဆန်း|ပရီဒီ|ဟယ်လင်|historical|archive|nobel|mandela|suu kyi|aung san|pridi|sakharov|translation/.test(hay)
+      };
+
+      function getFilteredFeatured() {
+        if (activeTopic === 'latest' || !topicMatchers[activeTopic]) {
+          return articles.slice(0, 6);
+        }
+        const matcher = topicMatchers[activeTopic];
+        const matched = articles.filter(art => {
+          const hay = [
+            art.category, art.category_mm, art.category_en,
+            ...(art.categories_mm || []), ...(art.categories_en || []),
+            ...(art.tags || []), art.title_mm, art.title_en
+          ].filter(Boolean).join(' ').toLowerCase();
+          return matcher(hay, art);
+        });
+        return matched.slice(0, 6);
+      }
+
       function renderFeatured() {
         const lang = window.I18n ? window.I18n.getLang() : 'mm';
-        const featured = articles.slice(0, 6);
+        const featured = getFilteredFeatured();
 
         container.innerHTML = featured.map((art, idx) => {
+          const id = art.id || art.slug;
           const title = (lang === 'mm') ? (art.title_mm || art.title_en) : (art.title_en || art.title_mm);
           const excerpt = (lang === 'mm') ? (art.excerpt_mm || art.excerpt_en) : (art.excerpt_en || art.excerpt_mm);
           const cat = (lang === 'mm')
-            ? (art.category_mm || art.category_en || (art.category === 'essay' ? 'အတွေးခေါ်နှင့် ဒဿနဆိုင်ရာ အက်ဆေး' : (art.category || 'ဆောင်းပါးနှင့် စာတမ်း')))
-            : (art.category_en || art.category_mm || (art.category === 'essay' ? 'Philosophical Essay' : (art.category || 'Research Article')));
+            ? (art.category_mm || art.category_en || 'ဆောင်းပါးနှင့် စာတမ်း')
+            : (art.category_en || art.category_mm || 'Research Article');
           const readTime = (lang === 'mm')
             ? (art.read_time_mm || (art.reading_time ? `${toBurmeseDigits(parseInt(art.reading_time) || 6)} မိနစ် ဖတ်ရှုရန်` : '၁၂ မိနစ် ဖတ်ရှုရန်'))
             : (art.read_time_en || art.reading_time || '12 min read');
           const citationsCount = Array.isArray(art.citations) ? art.citations.length : (Array.isArray(art.references) ? art.references.length : 0);
           const citationsLabel = (lang === 'mm')
-            ? `${toBurmeseDigits(citationsCount)} ခု ကိုးကား`
-            : `${citationsCount} Citations`;
+            ? `${toBurmeseDigits(citationsCount)} စာကိုး`
+            : `${citationsCount} Cites`;
+          const imgSrc = art.image || art.cover_image || '';
 
           return `
-            <article class="glass-3d-card card-3d-interactive p-6 sm:p-8 lg:p-9 rounded-2xl sm:rounded-3xl border border-taupe-light flex flex-col justify-between group shadow-sm hover:shadow-md" data-aos="fade-up" data-aos-delay="${(idx + 1) * 80}">
+            <article class="glass-3d-card card-3d-interactive rounded-2xl sm:rounded-3xl border border-taupe-light flex flex-col justify-between overflow-hidden group shadow-sm hover:shadow-md" data-aos="fade-up" data-aos-delay="${Math.min((idx + 1) * 55, 250)}">
               <div>
-                <div class="flex flex-wrap items-center gap-2 text-xs text-faint font-sans-ui mb-3.5">
-                  <span class="glass-3d-pill px-3 py-1 text-charcoal font-medium border border-hairline flex items-center space-x-1.5 shadow-2xs">
-                    <i class="ri-quill-pen-line text-vermilion"></i>
-                    <span>${cat}</span>
-                  </span>
-                  <span class="text-hairline">•</span>
-                  <span class="flex items-center space-x-1">
-                    <i class="ri-time-line text-muted"></i>
-                    <span>${readTime}</span>
-                  </span>
-                  ${citationsCount > 0 ? `
-                    <span class="text-hairline">•</span>
-                    <span class="flex items-center space-x-1 text-vermilion/90 font-medium">
-                      <i class="ri-book-mark-line"></i>
-                      <span>${citationsLabel}</span>
-                    </span>
-                  ` : ''}
-                </div>
-
-                <h3 class="font-serif-editorial text-2xl sm:text-3xl font-medium text-charcoal group-hover:text-vermilion transition-colors leading-[1.38] mb-3.5">
-                  <a href="article.html?id=${art.id || art.slug}">
-                    <span>${title}</span>
+                ${imgSrc ? `
+                  <a href="article.html?id=${escHtml(id)}" class="index-featured-cover-stage block" aria-label="${escHtml(title)}">
+                    <img src="${escHtml(imgSrc)}" alt="${escHtml(title)}" class="index-featured-cover-img" loading="lazy" decoding="async">
                   </a>
-                </h3>
+                ` : ''}
 
-                <p class="text-muted text-xs sm:text-sm leading-[2.1] font-sans-ui mb-6">
-                  ${excerpt}
-                </p>
+                <div class="p-4 sm:p-6 pb-3">
+                  <div class="flex flex-wrap items-center gap-1.5 text-[11px] text-faint font-sans-ui mb-3">
+                    <span class="glass-3d-pill px-2.5 py-0.5 text-charcoal font-medium border border-hairline inline-flex items-center space-x-1 shadow-2xs max-w-full">
+                      <i class="ri-quill-pen-line text-vermilion shrink-0" aria-hidden="true"></i>
+                      <span class="truncate max-w-[14rem]">${escHtml(cat)}</span>
+                    </span>
+                    <span class="text-hairline" aria-hidden="true">•</span>
+                    <span class="inline-flex items-center space-x-1">
+                      <i class="ri-time-line text-muted" aria-hidden="true"></i>
+                      <span>${escHtml(readTime)}</span>
+                    </span>
+                    ${citationsCount > 0 ? `
+                      <span class="text-hairline" aria-hidden="true">•</span>
+                      <span class="inline-flex items-center space-x-1 text-vermilion/90 font-medium">
+                        <i class="ri-book-mark-line" aria-hidden="true"></i>
+                        <span>${escHtml(citationsLabel)}</span>
+                      </span>
+                    ` : ''}
+                  </div>
+
+                  <h3 class="font-serif-editorial text-xl sm:text-[1.35rem] font-semibold text-charcoal group-hover:text-vermilion transition-colors leading-[1.42] mb-2.5">
+                    <a href="article.html?id=${escHtml(id)}" class="hover:underline">
+                      <span>${escHtml(title)}</span>
+                    </a>
+                  </h3>
+
+                  <p class="text-muted text-xs sm:text-[13.5px] leading-[1.9] font-sans-ui line-clamp-3 m-0">
+                    ${escHtml(excerpt)}
+                  </p>
+                </div>
               </div>
 
-              <div class="pt-4 border-t border-hairline flex flex-wrap items-center justify-between gap-2.5 text-xs font-sans-ui">
-                <span class="text-faint flex items-center space-x-1.5">
-                  <i class="ri-calendar-line"></i>
-                  <span>${art.date || '2026-02-14'}</span>
+              <div class="px-4 sm:px-6 pb-4 sm:pb-5 pt-3 mt-2 border-t border-hairline flex flex-wrap items-center justify-between gap-2 text-xs font-sans-ui">
+                <span class="text-faint inline-flex items-center space-x-1">
+                  <i class="ri-calendar-line" aria-hidden="true"></i>
+                  <span>${escHtml(art.date || '2026')}</span>
                 </span>
-                <div class="flex flex-wrap items-center gap-2">
+                <div class="flex flex-wrap items-center gap-1.5">
                   ${art.pdf_file ? `
-                    <a href="${art.pdf_file.startsWith('downloads/') ? art.pdf_file : 'downloads/' + art.pdf_file}" download class="btn-3d-tactile px-3 py-1.5 rounded-xl bg-red-50 hover:bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 font-semibold border border-red-200 dark:border-red-900/60 flex items-center space-x-1 transition-all shadow-2xs" title="Download Full Version PDF">
-                      <i class="ri-file-pdf-line text-red-500"></i>
+                    <a href="${escHtml(art.pdf_file.startsWith('downloads/') ? art.pdf_file : 'downloads/' + art.pdf_file)}" download class="btn-3d-tactile px-2.5 py-1.5 rounded-xl bg-red-50 hover:bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 font-semibold border border-red-200 dark:border-red-900/60 inline-flex items-center space-x-1 transition-all shadow-2xs" aria-label="${escHtml('Download PDF — ' + title)}">
+                      <i class="ri-file-pdf-line text-red-500" aria-hidden="true"></i>
                       <span>PDF</span>
                     </a>
                   ` : ''}
-                  <button type="button" class="btn-3d-tactile article-card-lang-toggle-btn px-2.5 py-1.5 rounded-xl border border-hairline bg-cream hover:bg-taupe-light dark:bg-zinc-800 text-charcoal font-medium text-xs flex items-center space-x-1 cursor-pointer transition-all shadow-2xs" data-article-id="${art.id || art.slug}" data-showing-original="${lang === 'mm' ? 'true' : 'false'}" title="${lang === 'mm' ? 'အင်္ဂလိပ်ဘာသာပြန်ချက် ကြည့်ရန်' : 'မူရင်းမြန်မာဘာသာဖြင့် ကြည့်ရန် (View Original Burmese)'}">
-                    <span class="lang-toggle-flag text-xs">${lang === 'mm' ? '🌐' : '🇲🇲'}</span>
-                    <span class="lang-toggle-label text-[11px] font-sans-ui">${lang === 'mm' ? 'English' : 'Original (MM)'}</span>
+                  <button type="button" class="btn-3d-tactile article-card-lang-toggle-btn px-2 py-1.5 rounded-xl border border-hairline bg-cream hover:bg-taupe-light dark:bg-zinc-800 text-charcoal font-medium text-xs inline-flex items-center space-x-1 cursor-pointer transition-all shadow-2xs" data-article-id="${escHtml(id)}" data-showing-original="${lang === 'mm' ? 'true' : 'false'}" aria-label="${escHtml(lang === 'mm' ? 'Switch to English summary — ' + title : 'View original Burmese — ' + title)}">
+                    <span class="lang-toggle-flag text-xs" aria-hidden="true">${lang === 'mm' ? '🌐' : '🇲🇲'}</span>
+                    <span class="lang-toggle-label text-[11px] font-sans-ui">${lang === 'mm' ? 'EN' : 'MM'}</span>
                   </button>
-                  <a href="article.html?id=${art.id || art.slug}" class="btn-3d-tactile px-3.5 py-1.5 rounded-xl bg-vermilion text-white font-semibold flex items-center space-x-1.5 hover:bg-vermilion-dark transition-all shadow-xs group-hover:translate-x-0.5" title="${lang === 'mm' ? 'ဆောင်းပါး အပြည့်အစုံ ဖတ်ရှုရန်' : 'Read Full Article'}">
-                    <i class="ri-book-open-line text-xs"></i>
-                    <span>${lang === 'mm' ? 'ဆောင်းပါး ဖတ်ရန်' : 'Read Article'}</span>
+                  <a href="article.html?id=${escHtml(id)}" class="btn-3d-tactile px-3 py-1.5 rounded-xl bg-vermilion text-white font-semibold inline-flex items-center space-x-1 hover:bg-vermilion-dark transition-all shadow-xs">
+                    <i class="ri-book-open-line text-xs" aria-hidden="true"></i>
+                    <span>${lang === 'mm' ? 'ဖတ်ရှုရန်' : 'Read'}</span>
+                    <span class="visually-hidden"> — ${escHtml(title)}</span>
                   </a>
                 </div>
               </div>
@@ -4025,6 +5803,20 @@
         }).join('');
 
         init3DTiltAndFloatingEffects();
+      }
+
+      if (filterBar) {
+        filterBar.addEventListener('click', (e) => {
+          const tab = e.target.closest('[data-index-topic]');
+          if (!tab) return;
+          activeTopic = tab.getAttribute('data-index-topic') || 'latest';
+          filterBar.querySelectorAll('[data-index-topic]').forEach(btn => {
+            const isMatch = btn === tab;
+            btn.classList.toggle('active', isMatch);
+            btn.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
+          });
+          renderFeatured();
+        });
       }
 
       renderFeatured();
@@ -4042,34 +5834,13 @@
         if (!card) return;
 
         const isShowingOriginal = btn.getAttribute('data-showing-original') === 'true';
-        const siteLang = window.I18n ? window.I18n.getLang() : 'mm';
         const willShowOriginal = !isShowingOriginal;
 
         btn.setAttribute('data-showing-original', willShowOriginal ? 'true' : 'false');
-        const flagEl = btn.querySelector('.lang-toggle-flag') || btn.querySelector('span:first-child');
+        const flagEl = btn.querySelector('.lang-toggle-flag');
         const labelEl = btn.querySelector('.lang-toggle-label');
-
-        if (siteLang !== 'mm') {
-          if (willShowOriginal) {
-            if (flagEl) flagEl.textContent = '🌐';
-            if (labelEl) labelEl.textContent = siteLang.toUpperCase();
-            btn.title = `Switch back to ${siteLang.toUpperCase()} translation`;
-          } else {
-            if (flagEl) flagEl.textContent = '🇲🇲';
-            if (labelEl) labelEl.textContent = 'Original (MM)';
-            btn.title = 'View Original Burmese (မူရင်းမြန်မာဘာသာဖြင့် ကြည့်ရန်)';
-          }
-        } else {
-          if (willShowOriginal) {
-            if (flagEl) flagEl.textContent = '🌐';
-            if (labelEl) labelEl.textContent = 'English';
-            btn.title = 'View English translation';
-          } else {
-            if (flagEl) flagEl.textContent = '🇲🇲';
-            if (labelEl) labelEl.textContent = 'Original (MM)';
-            btn.title = 'မူရင်းမြန်မာစာမူသို့ ပြန်သွားရန်';
-          }
-        }
+        if (flagEl) flagEl.textContent = willShowOriginal ? '🌐' : '🇲🇲';
+        if (labelEl) labelEl.textContent = willShowOriginal ? 'EN' : 'MM';
 
         const titleSpan = card.querySelector('h3 a span');
         if (titleSpan) {
@@ -4081,9 +5852,9 @@
         }
 
         if (window.HtetUI && typeof window.HtetUI.showToast === 'function') {
-          window.HtetUI.showToast(willShowOriginal 
-            ? 'မူရင်းမြန်မာဘာသာ စာမူသို့ ပြောင်းလဲပြသထားပါသည် ✓' 
-            : 'ဘာသာပြန်ဆိုချက်သို့ ပြောင်းလဲပြသထားပါသည် ✓');
+          window.HtetUI.showToast(willShowOriginal
+            ? 'မူရင်းမြန်မာဘာသာ စာမူသို့ ပြောင်းလဲပြသထားပါသည် ✓'
+            : 'English ဘာသာပြန်အနှစ်ချုပ်သို့ ပြောင်းလဲပြသထားပါသည် ✓');
         }
       });
     } catch (err) {
@@ -4091,30 +5862,179 @@
     }
   }
 
-  // 19. Copy Bio Text Helper for Media Press Kit
+  // 19. Copy Bio Text Engine (Invoker Commands + Async Clipboard + Accessible Status Bubble)
+  const bioCopyTimers = new WeakMap();
+  let lastBioCopyMessage = '';
+
+  function legacyCopyText(text) {
+    const field = Object.assign(document.createElement('textarea'), { value: text });
+    field.setAttribute('readonly', '');
+    field.style.cssText = 'position:fixed;inset-block-start:0;opacity:0';
+    document.body.append(field);
+    field.select();
+    try {
+      return document.execCommand('copy');
+    } catch {
+      return false;
+    } finally {
+      field.remove();
+    }
+  }
+
+  function reportBioCopy(button, ok) {
+    if (!button) return;
+    const tip = button.nextElementSibling && button.nextElementSibling.getAttribute('role') === 'status'
+      ? button.nextElementSibling
+      : null;
+
+    clearTimeout(bioCopyTimers.get(button));
+    button.removeAttribute('data-copied');
+    button.removeAttribute('data-failed');
+
+    let message = ok ? 'ကူးယူပြီးပါပြီ ✓ (Copied)' : 'ကူးယူမရပါ — ကျေးဇူးပြု၍ ကိုယ်တိုင် Select လုပ်ကူးယူပါ (Copy failed)';
+    if (message === lastBioCopyMessage) message += '\u00A0'; // VoiceOver re-announcement guard
+    lastBioCopyMessage = message;
+
+    if (tip) tip.textContent = '';
+    void button.offsetWidth; // restart feedback animation on repeat clicks
+    button.setAttribute(ok ? 'data-copied' : 'data-failed', '');
+    if (tip) {
+      requestAnimationFrame(() => {
+        tip.textContent = message;
+      });
+    }
+
+    bioCopyTimers.set(button, setTimeout(() => {
+      button.removeAttribute('data-copied');
+      button.removeAttribute('data-failed');
+      if (tip) tip.textContent = '';
+    }, 2200));
+
+    showToast(ok ? 'Bio စာသားကို ကူးယူပြီးပါပြီ (Copied to clipboard) ✓' : 'Clipboard ခွင့်ပြုချက် မရရှိပါ (Copy failed)');
+  }
+
+  async function copyBioTarget(button, target) {
+    if (!target) return;
+    if (navigator.vibrate) try { navigator.vibrate(15); } catch (err) {}
+    const text = target.matches('input, textarea')
+      ? target.value.trim()
+      : (target.innerText || target.textContent || '').replace(/\s+\n/g, '\n').trim();
+    if (!text) return;
+
+    try {
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        await navigator.clipboard.writeText(text);
+      } else if (!legacyCopyText(text)) {
+        throw new Error('Copy failed');
+      }
+      reportBioCopy(button, true);
+    } catch {
+      if (legacyCopyText(text)) {
+        reportBioCopy(button, true);
+      } else {
+        reportBioCopy(button, false);
+      }
+    }
+  }
+
+  // Backward-compatible global helper
   window.copyBioText = function(elementId, btn) {
     const el = document.getElementById(elementId);
-    if (!el) return;
-    const text = el.innerText || el.textContent;
-    navigator.clipboard.writeText(text.trim()).then(() => {
-      if (btn) {
-        const origHTML = btn.innerHTML;
-        btn.innerHTML = '<i class="ri-check-line text-emerald-500 text-sm"></i> <span class="text-emerald-600 dark:text-emerald-400 font-semibold">ကူးယူပြီးပါပြီ / Copied!</span>';
-        setTimeout(() => { btn.innerHTML = origHTML; }, 2200);
-      }
-      showToast('Bio စာသားကို ကူးယူပြီးပါပြီ (Copied to clipboard)');
-    }).catch(err => {
-      console.warn('Clipboard write failed:', err);
-      // Fallback
-      const textarea = document.createElement('textarea');
-      textarea.value = text.trim();
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-      showToast('Bio စာသားကို ကူးယူပြီးပါပြီ (Copied to clipboard)');
-    });
+    if (el) copyBioTarget(btn, el);
   };
+
+  // Native Invoker Commands (`command="--copy" commandfor="..."`) with single-path fallback
+  if ('CommandEvent' in window) {
+    document.addEventListener('command', (event) => {
+      if (event.command && event.command.startsWith('--copy')) {
+        copyBioTarget(event.source, event.target);
+      }
+    }, true);
+  } else {
+    document.addEventListener('click', (event) => {
+      const button = event.target.closest('button[command^="--copy"]');
+      if (!button) return;
+      const target = document.getElementById(button.getAttribute('commandfor'));
+      if (target) copyBioTarget(button, target);
+    });
+  }
+
+  // 19b. Accessible Bio Snippets Tabs (Arrow Keys, hidden="until-found" beforematch, Global Sync)
+  function initBioCardTabs() {
+    const bioCards = Array.from(document.querySelectorAll('.bio-card'));
+    if (!bioCards.length) return;
+
+    function applyCardTabMode(card, mode, focusSelected = false) {
+      const buttons = Array.from(card.querySelectorAll('.bio-tab-btn'));
+      const selectedBtn = buttons.find(b => b.dataset.bioTab === mode) || buttons[0];
+      if (!selectedBtn) return;
+
+      buttons.forEach(b => {
+        const isSelected = b === selectedBtn;
+        b.classList.toggle('active', isSelected);
+        b.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+        b.setAttribute('tabindex', isSelected ? '0' : '-1');
+      });
+
+      if (focusSelected) selectedBtn.focus();
+
+      const mmBlock = card.querySelector('.bio-block-mm');
+      const enBlock = card.querySelector('.bio-block-en');
+
+      if (mode === 'mm') {
+        if (mmBlock) mmBlock.removeAttribute('hidden');
+        if (enBlock) enBlock.setAttribute('hidden', 'until-found');
+      } else if (mode === 'en') {
+        if (mmBlock) mmBlock.setAttribute('hidden', 'until-found');
+        if (enBlock) enBlock.removeAttribute('hidden');
+      } else {
+        if (mmBlock) mmBlock.removeAttribute('hidden');
+        if (enBlock) enBlock.removeAttribute('hidden');
+      }
+    }
+
+    bioCards.forEach(card => {
+      const tabGroup = card.querySelector('.bio-card-tabs');
+      if (!tabGroup) return;
+      const buttons = Array.from(tabGroup.querySelectorAll('.bio-tab-btn'));
+
+      buttons.forEach((btn, idx) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (navigator.vibrate) try { navigator.vibrate(12); } catch (err) {}
+          applyCardTabMode(card, btn.dataset.bioTab);
+        });
+
+        btn.addEventListener('keydown', (e) => {
+          let nextIdx = null;
+          if (e.key === 'ArrowRight') nextIdx = (idx + 1) % buttons.length;
+          else if (e.key === 'ArrowLeft') nextIdx = (idx - 1 + buttons.length) % buttons.length;
+          else if (e.key === 'Home') nextIdx = 0;
+          else if (e.key === 'End') nextIdx = buttons.length - 1;
+          if (nextIdx !== null) {
+            e.preventDefault();
+            applyCardTabMode(card, buttons[nextIdx].dataset.bioTab, true);
+          }
+        });
+      });
+
+      // Sync tab state automatically if browser Find-in-Page matches hidden="until-found" text
+      const mmBlock = card.querySelector('.bio-block-mm');
+      const enBlock = card.querySelector('.bio-block-en');
+      if (mmBlock) mmBlock.addEventListener('beforematch', () => applyCardTabMode(card, 'mm'));
+      if (enBlock) enBlock.addEventListener('beforematch', () => applyCardTabMode(card, 'en'));
+    });
+
+    // Global Language Sync Buttons (flip all 4 bio cards at once)
+    const globalBtns = Array.from(document.querySelectorAll('[data-bio-global-lang]'));
+    globalBtns.forEach(gBtn => {
+      gBtn.addEventListener('click', () => {
+        const mode = gBtn.dataset.bioGlobalLang;
+        globalBtns.forEach(b => b.setAttribute('aria-pressed', b === gBtn ? 'true' : 'false'));
+        bioCards.forEach(card => applyCardTabMode(card, mode));
+      });
+    });
+  }
 
   // 20. Interactive 3D Tilt, Floating Physics & Specular Glass Reflection Engine
   function init3DTiltAndFloatingEffects() {
@@ -4170,8 +6090,42 @@
     });
   }
 
+  async function syncGlobalDynamicCounts() {
+    if (!window.HtetData) return;
+    const nodes = document.querySelectorAll('[data-dynamic-count]');
+    if (!nodes || nodes.length === 0) return;
+    try {
+      const setCount = (key, val) => {
+        document.querySelectorAll(`[data-dynamic-count="${key}"]`).forEach(el => {
+          el.textContent = val;
+        });
+      };
+      if (document.querySelector('[data-dynamic-count="articles"]') && typeof window.HtetData.getArticles === 'function') {
+        const list = await window.HtetData.getArticles();
+        setCount('articles', list.length);
+      }
+      if (document.querySelector('[data-dynamic-count="publications"]') && typeof window.HtetData.getPublications === 'function') {
+        const list = await window.HtetData.getPublications();
+        setCount('publications', list.length);
+      }
+      if (document.querySelector('[data-dynamic-count="posts"]') && typeof window.HtetData.getPosts === 'function') {
+        const list = await window.HtetData.getPosts();
+        setCount('posts', list.length);
+      }
+      if (document.querySelector('[data-dynamic-count="glossary"]') && typeof window.HtetData.getGlossary === 'function') {
+        const list = await window.HtetData.getGlossary();
+        setCount('glossary', list.length);
+      }
+      if (document.querySelector('[data-dynamic-count="quotes"]') && typeof window.HtetData.getQuotes === 'function') {
+        const list = window.HtetData.getQuotes() || [];
+        setCount('quotes', list.length);
+      }
+    } catch (_) {}
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
+    initAppBottomNav();
     initShareButtons();
     initAOS();
     initBackToTop();
@@ -4187,9 +6141,12 @@
     initContactForm();
     initDynamicMetrics();
     initFeaturedArticlesOnIndex();
+    initBioCardTabs();
     init3DTiltAndFloatingEffects();
+    syncGlobalDynamicCounts();
   });
 
+  
   window.HtetUI = {
     showToast,
     BookmarkSystem,

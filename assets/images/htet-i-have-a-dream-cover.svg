@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="I Have a Dream — ထက်မှာ အိပ်မက်တစ်ခု ရှိတယ်">
+  <defs>
+    <linearGradient id="dawnSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E1B18"/>
+      <stop offset="42%" stop-color="#3B2421"/>
+      <stop offset="76%" stop-color="#9A3F32"/>
+      <stop offset="100%" stop-color="#E8B87D"/>
+    </linearGradient>
+    <radialGradient id="dawnSun" cx="50%" cy="66%" r="36%">
+      <stop offset="0%" stop-color="#FFF4DC" stop-opacity="0.95"/>
+      <stop offset="35%" stop-color="#F6C278" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#C84B31" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="riverGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#221917" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#C84B31" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#221917" stop-opacity="0.95"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dawn Sky Backdrop -->
+  <rect width="1200" height="630" fill="url(#dawnSky)"/>
+  <rect width="1200" height="630" fill="url(#dawnSun)"/>
+
+  <!-- Fine Editorial Frame -->
+  <rect x="28" y="28" width="1144" height="574" fill="none" stroke="#F8EFE2" stroke-opacity="0.28" stroke-width="1.5"/>
+  <rect x="38" y="38" width="1124" height="554" fill="none" stroke="#F8EFE2" stroke-opacity="0.14" stroke-width="1"/>
+
+  <!-- Rising Sun -->
+  <circle cx="600" cy="405" r="88" fill="#FFF3D6" opacity="0.88"/>
+
+  <!-- Shan Highlands Layered Mountains -->
+  <path d="M0 445 Q170 330 350 405 T720 385 T1040 355 L1200 415 L1200 630 L0 630 Z" fill="#2A1D1B" opacity="0.62"/>
+  <path d="M0 475 Q210 380 430 445 T870 420 T1200 455 L1200 630 L0 630 Z" fill="#1F1615" opacity="0.82"/>
+
+  <!-- Subtle Bagan Stupa Silhouettes on Horizon -->
+  <g fill="#191211" opacity="0.9">
+    <path d="M230 472 L242 428 L254 472 Z"/>
+    <path d="M268 475 L276 446 L284 475 Z"/>
+    <path d="M908 468 L922 418 L936 468 Z"/>
+    <path d="M948 474 L957 444 L966 474 Z"/>
+  </g>
+
+  <!-- Ayeyarwady River Horizon & Ripples -->
+  <rect x="0" y="472" width="1200" height="158" fill="#171211"/>
+  <rect x="0" y="472" width="1200" height="158" fill="url(#riverGlow)"/>
+  <g stroke="#F8EFE2" stroke-opacity="0.24" stroke-width="1.5" fill="none">
+    <path d="M410 502 Q600 492 790 502"/>
+    <path d="M465 524 Q600 516 735 524"/>
+    <path d="M515 546 Q600 540 685 546"/>
+  </g>
+
+  <!-- Top Classification Pill -->
+  <g transform="translate(600, 96)">
+    <rect x="-175" y="-18" width="350" height="34" rx="17" fill="#171211" fill-opacity="0.55" stroke="#F8EFE2" stroke-opacity="0.32"/>
+    <text x="0" y="4" text-anchor="middle" fill="#F8EFE2" font-family="Georgia, serif" font-size="13" letter-spacing="3.5" opacity="0.92">MANIFESTO FOR EQUAL DIGNITY</text>
+  </g>
+
+  <!-- Main Bilingual Title -->
+  <text x="600" y="196" text-anchor="middle" fill="#FFF8EE" font-family="Georgia, 'Times New Roman', serif" font-size="64" font-weight="700" letter-spacing="1.5">I Have a Dream</text>
+  <text x="600" y="256" text-anchor="middle" fill="#F8D8B0" font-family="'Pyidaungsu', sans-serif" font-size="34" font-weight="700">ထက်မှာ အိပ်မက်တစ်ခု ရှိတယ်</text>
+
+  <!-- Divider Line -->
+  <line x1="460" y1="286" x2="740" y2="286" stroke="#E8B87D" stroke-opacity="0.65" stroke-width="1.5"/>
+
+  <!-- Subtitle -->
+  <text x="600" y="324" text-anchor="middle" fill="#F5E6D3" font-family="Georgia, serif" font-size="18" font-style="italic" opacity="0.92">Equal Dignity, Inclusive Freedom &amp; Solidarity Beyond Difference</text>
+
+  <!-- Hanko Seal Stamp (Bottom Right) -->
+  <g transform="translate(1078, 520)">
+    <rect x="-34" y="-34" width="68" height="68" rx="10" fill="#B83B28" stroke="#F8EFE2" stroke-opacity="0.5" stroke-width="1.5"/>
+    <text x="0" y="8" text-anchor="middle" fill="#FFF8EE" font-family="'Pyidaungsu', serif" font-size="24" font-weight="700">ထက်</text>
+  </g>
+
+  <!-- Author Attribution (Bottom Left) -->
+  <text x="72" y="544" fill="#F8EFE2" font-family="'Pyidaungsu', sans-serif" font-size="18" opacity="0.88">ထက် (Htet) — Htet Official Archive</text>
+  <text x="72" y="570" fill="#E8B87D" font-family="Georgia, serif" font-size="13" letter-spacing="2" opacity="0.8">SHAN HIGHLANDS • AYEYARWADY • BAGAN • YANGON</text>
+</svg>

@@ -1,0 +1,834 @@
+# -*- coding: utf-8 -*-
+import os
+
+html_content = '''<!DOCTYPE html>
+<html lang="my" data-lang="mm">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Critical Anti-FOUC & Anti-Flash Engine -->
+  <script>
+    (function() {
+      try {
+        var validThemes = [
+          'light', 'sepia', 'dark', 'amoled',
+          'green', 'green-forest',
+          'blue', 'blue-sapphire',
+          'red', 'red-crimson', 'red-rosewood',
+          'purple', 'purple-lavender', 'purple-plum', 'purple-indigo',
+          'pink', 'pink-peach', 'pink-rose'
+        ];
+        var savedTheme = null;
+        try { savedTheme = localStorage.getItem('site_theme'); } catch(e) {}
+        var theme = (savedTheme && validThemes.indexOf(savedTheme) !== -1) ? savedTheme : 'light';
+        
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark' || theme === 'amoled') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+
+        var themeBgs = {
+          light: '#FAF8F5',
+          sepia: '#F5EEDB',
+          dark: '#121110',
+          amoled: '#000000',
+          green: '#F5FAF6',
+          'green-forest': '#F4F8F5',
+          blue: '#F4F8FD',
+          'blue-sapphire': '#F3F7FC',
+          red: '#FAF5F5',
+          'red-crimson': '#FAF4F5',
+          'red-rosewood': '#FAF6F3',
+          purple: '#F8F6FD',
+          'purple-lavender': '#F8F7FD',
+          'purple-plum': '#F9F5FA',
+          'purple-indigo': '#F5F6FC',
+          pink: '#FDF6F8',
+          'pink-peach': '#FDF7F4',
+          'pink-rose': '#FDF5F7'
+        };
+        if (themeBgs[theme]) {
+          document.documentElement.style.backgroundColor = themeBgs[theme];
+        }
+      } catch (e) {}
+
+      try {
+        var validLangs = ['mm', 'en', 'zh', 'th', 'ja'];
+        var savedLang = localStorage.getItem('site_lang');
+        var lang = (validLangs.indexOf(savedLang) !== -1) ? savedLang : 'mm';
+        document.documentElement.setAttribute('data-lang', lang);
+      } catch (e) {}
+    })();
+  </script>
+
+  <title>ဘာသာပြန်စတူဒီယို (Universal Translator) | Htet Official</title>
+  <meta name="description" content="ရိုးရှင်းလွယ်ကူပြီး အင်တာနက်မရှိဘဲ သုံးနိုင်သော စမတ်ဘာသာပြန်စနစ်။ Mobile, Tablet, Laptop, iOS, Android, Windows, Mac, Linux အတွက် LibreTranslate & 12K+ Parallel Corpus ပေါင်းစပ် ဘာသာပြန်အင်ဂျင်။">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
+  <meta name="theme-color" content="#C84B31">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Htet Translate">
+
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/remixicon.css">
+
+  <style>
+    @font-face {
+      font-family: 'Pyidaungsu';
+      src: url('fonts/Pyidaungsu-Regular.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Pyidaungsu';
+      src: url('fonts/Pyidaungsu-Bold.ttf') format('truetype');
+      font-weight: bold;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Cormorant Garamond';
+      src: url('fonts/CormorantGaramond-Regular.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Cormorant Garamond';
+      src: url('fonts/CormorantGaramond-Bold.ttf') format('truetype');
+      font-weight: bold;
+      font-style: normal;
+      font-display: swap;
+    }
+    body {
+      font-family: 'Pyidaungsu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .font-serif-editorial {
+      font-family: 'Cormorant Garamond', 'Pyidaungsu', Georgia, serif;
+    }
+    .font-sans-ui {
+      font-family: 'Pyidaungsu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .hanko-stamp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid #C84B31;
+      color: #C84B31;
+      border-radius: 4px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+    /* Touch optimization */
+    .touch-target {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  </style>
+
+  <!-- Tailwind CDN & Config -->
+  <script src="js/tailwind.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            vermilion: '#C84B31',
+            charcoal: '#2D4263',
+            ivory: '#FAF8F5',
+            cream: '#F5EEDB',
+            hairline: 'rgba(45, 66, 99, 0.12)',
+            faint: 'rgba(45, 66, 99, 0.05)',
+            muted: '#6B7280',
+            card: 'var(--bg-card, #FFFFFF)'
+          }
+        }
+      }
+    };
+  </script>
+  <script src="js/theme.js"></script>
+</head>
+
+<body class="min-h-screen flex flex-col bg-cream/30 text-charcoal antialiased transition-colors duration-200">
+
+  <!-- Master Minimalist Header -->
+  <header class="sticky top-0 z-40 bg-ivory/85 dark:bg-[#121110]/85 backdrop-blur-md border-b border-hairline transition-colors duration-300 w-full max-w-full overflow-x-clip left-0 right-0">
+    <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-4 xl:px-6 2xl:px-8 h-16 flex items-center justify-between gap-1.5 sm:gap-3 w-full">
+      
+      <!-- Minimalist Brand Identity -->
+      <a href="index.html" class="flex items-center space-x-2 sm:space-x-2.5 group shrink-0" aria-label="Htet — Home">
+        <div class="nav-brand-glass-icon w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0" title="ထက် (Htet)">
+          <img src="assets/favicon.svg" alt="ထက်" class="w-full h-full object-contain">
+        </div>
+        <div class="flex flex-col">
+          <span class="font-serif-editorial text-lg sm:text-xl font-bold tracking-tight text-charcoal group-hover:text-vermilion transition-colors leading-none">HTET</span>
+          <span class="nav-brand-subtitle text-[9px] tracking-wider text-muted uppercase font-sans-ui mt-0.5 leading-none hidden xs:inline sm:inline truncate max-w-[130px]">စာရေးဆရာမ • သုတေသီ</span>
+        </div>
+      </a>
+
+      <!-- Floating Minimalist Navigation Capsule -->
+      <div class="hidden lg:flex flex-1 justify-center items-center min-w-0 px-1 sm:px-2">
+        <nav class="flex items-center p-1 rounded-full border border-hairline/80 bg-cream/70 dark:bg-stone-900/60 nav-capsule font-sans-ui text-xs 2xl:text-[13px] shadow-xs shrink-0">
+          <a href="index.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ပင်မ" data-en="Home">ပင်မ</a>
+          <a href="articles.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဆောင်းပါးများ" data-en="Articles">ဆောင်းပါးများ</a>
+          <a href="publications.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ထုတ်ဝေမှုများ" data-en="Publications">ထုတ်ဝေမှုများ</a>
+          <a href="journal.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="မှတ်စုနှင့် ပို့စ်များ" data-en="Journal & Posts">မှတ်စုနှင့် ပို့စ်များ</a>
+          <a href="glossary.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဝေါဟာရအဘိဓာန်" data-en="Glossary">ဝေါဟာရအဘိဓာန်</a>
+          <a href="dictionary.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="အဘိဓာန်" data-en="Dictionary">အဘိဓာန်</a>
+          <a href="translate.html" class="nav-link-pill px-2.5 2xl:px-3.5 py-1 2xl:py-1.5 rounded-full active bg-vermilion text-white font-medium shadow-xs" data-mm="ဘာသာပြန်" data-en="Translate">ဘာသာပြန်</a>
+          <a href="about.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="စာရေးသူအကြောင်း" data-en="About">စာရေးသူအကြောင်း</a>
+          <a href="contact.html" class="nav-link-pill px-2.5 2xl:px-3 py-1 2xl:py-1.5 rounded-full text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion hover:bg-cream/80 dark:hover:bg-stone-800/80 font-medium transition-all" data-mm="ဆက်သွယ်ရန်" data-en="Contact">ဆက်သွယ်ရန်</a>
+        </nav>
+      </div>
+
+      <!-- Action Utilities Cluster -->
+      <div class="flex items-center space-x-1 sm:space-x-1.5 shrink-0">
+        <!-- Spotlight Search Trigger (Cmd+K) -->
+        <button id="spotlight-search-trigger" class="nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-charcoal hover:text-vermilion transition-all flex items-center justify-center shadow-xs" title="Global Search (⌘K)">
+          <i class="ri-search-line text-xs sm:text-sm"></i>
+        </button>
+
+        <!-- Theme Palette -->
+        <button data-set-theme="palette" title="စာဖတ်ရောင်စဉ် စတူဒီယို" class="w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 text-charcoal hover:text-vermilion transition-all flex items-center justify-center cursor-pointer shadow-xs">
+          <i class="ri-palette-line text-xs sm:text-sm"></i>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-toggle" class="lg:hidden nav-util-btn w-8 h-8 rounded-full border border-hairline/80 bg-cream/60 dark:bg-stone-900/50 flex items-center justify-center text-charcoal hover:text-vermilion" aria-label="Open Navigation">
+          <i class="ri-menu-3-line text-base"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay & Drawer -->
+  <div id="mobile-menu-overlay" style="display: none;" class="fixed inset-0 bg-charcoal/40 dark:bg-black/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
+
+  <div id="mobile-menu-drawer" style="visibility: hidden; transform: translateX(-100%); -webkit-transform: translateX(-100%); pointer-events: none;" class="fixed top-0 left-0 bottom-0 w-80 sm:w-88 max-w-[88vw] bg-ivory dark:bg-[#141312] z-50 border-r border-hairline p-4 sm:p-5 flex flex-col justify-between shadow-2xl overflow-y-auto overscroll-contain">
+    <div>
+      <div class="flex items-center justify-between pb-4 border-b border-hairline">
+        <a href="index.html" class="flex items-center space-x-3 group">
+          <div class="nav-brand-glass-icon w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 shadow-sm border border-hairline/80">
+            <img src="assets/favicon.svg" alt="ထက်" class="w-6 h-6 object-contain">
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif-editorial text-xl font-bold tracking-tight text-charcoal leading-none">HTET</span>
+            <span class="text-[10px] tracking-wider text-muted uppercase font-sans-ui mt-1">စာရေးဆရာမ • သုတေသီ</span>
+          </div>
+        </a>
+        <button id="mobile-menu-close" class="w-8 h-8 rounded-full border border-hairline/80 bg-cream/50 dark:bg-stone-900/50 flex items-center justify-center text-muted hover:text-charcoal cursor-pointer" aria-label="Close Navigation">
+          <i class="ri-close-line text-lg"></i>
+        </button>
+      </div>
+
+      <nav class="flex flex-col space-y-1 py-3 font-sans-ui text-sm">
+        <a href="index.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion">
+          <span class="flex items-center space-x-2.5"><i class="ri-home-5-line text-muted"></i><span>ပင်မ</span></span>
+          <i class="ri-arrow-right-s-line text-sm text-muted/50"></i>
+        </a>
+        <a href="articles.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion">
+          <span class="flex items-center space-x-2.5"><i class="ri-article-line text-muted"></i><span>ဆောင်းပါးများ</span></span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold">25</span>
+        </a>
+        <a href="publications.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion">
+          <span class="flex items-center space-x-2.5"><i class="ri-book-2-line text-muted"></i><span>ထုတ်ဝေမှုများ</span></span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold">4</span>
+        </a>
+        <a href="journal.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion">
+          <span class="flex items-center space-x-2.5"><i class="ri-booklet-line text-muted"></i><span>မှတ်စုနှင့် ပို့စ်များ</span></span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold">14</span>
+        </a>
+        <a href="glossary.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion">
+          <span class="flex items-center space-x-2.5"><i class="ri-book-read-line text-muted"></i><span>ဝေါဟာရအဘိဓာန်</span></span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold">42</span>
+        </a>
+        <a href="dictionary.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion">
+          <span class="flex items-center space-x-2.5"><i class="ri-book-2-line text-muted"></i><span>အဘိဓာန်</span></span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cream dark:bg-stone-800 text-muted font-mono font-bold">111K+</span>
+        </a>
+        <a href="translate.html" class="drawer-nav-item active flex items-center justify-between px-3 py-2 rounded-2xl font-medium bg-vermilion text-white shadow-xs">
+          <span class="flex items-center space-x-2.5"><i class="ri-translate-2 text-white"></i><span>ဘာသာပြန်စတူဒီယို</span></span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/20 text-white font-mono font-bold">Neural</span>
+        </a>
+        <a href="about.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion">
+          <span class="flex items-center space-x-2.5"><i class="ri-user-smile-line text-muted"></i><span>စာရေးသူအကြောင်း</span></span>
+        </a>
+        <a href="contact.html" class="drawer-nav-item flex items-center justify-between px-3 py-2 rounded-2xl font-medium text-charcoal/80 dark:text-[#D1C9BE] hover:text-vermilion">
+          <span class="flex items-center space-x-2.5"><i class="ri-mail-send-line text-muted"></i><span>ဆက်သွယ်ရန်</span></span>
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Breadcrumb Bar -->
+  <div class="border-b border-hairline/60 bg-cream/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center space-x-2 text-xs text-muted font-sans-ui">
+      <a href="index.html" class="hover:text-vermilion flex items-center space-x-1">
+        <i class="ri-home-5-line"></i>
+        <span>ပင်မ</span>
+      </a>
+      <span class="opacity-40">/</span>
+      <span class="text-charcoal font-semibold flex items-center space-x-1">
+        <i class="ri-translate-2 text-vermilion"></i>
+        <span>ဘာသာပြန်စတူဒီယို (Universal Translator)</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Main Translator Container -->
+  <main class="flex-1 max-w-5xl mx-auto px-3.5 sm:px-6 lg:px-8 py-6 w-full space-y-6">
+    
+    <!-- Hero Title & Live Status -->
+    <div class="text-center space-y-2">
+      <div class="flex items-center justify-center space-x-2">
+        <span class="hanko-stamp px-2.5 py-0.5 text-xs font-semibold">ဘာသာပြန်</span>
+        <span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300 border border-indigo-300 dark:border-indigo-700/60 shadow-xs">
+          <i class="ri-sparkling-fill"></i>
+          <span>LibreTranslate • 12K+ Corpus • Ornagai Hybrid</span>
+        </span>
+      </div>
+
+      <h1 class="text-2xl sm:text-4xl font-black font-serif-editorial text-charcoal tracking-tight m-0">
+        စမတ် ဘာသာပြန်စတူဒီယို
+      </h1>
+      <p class="text-xs sm:text-sm text-muted max-w-xl mx-auto leading-relaxed m-0">
+        ဖုန်း၊ တက်ဘလက်၊ လက်ပ်တော့နှင့် ကွန်ပျူတာ အားလုံးအတွက် လွယ်ကူလျင်မြန်စွာ အသုံးပြုနိုင်သော စက်ဘာသာပြန်စနစ်
+      </p>
+
+      <!-- Device Compatibility Badges -->
+      <div class="flex flex-wrap items-center justify-center gap-1.5 pt-1 text-[11px] font-sans-ui text-muted">
+        <span class="px-2 py-0.5 rounded-md bg-cream/70 dark:bg-stone-800 border border-hairline"><i class="ri-smartphone-line"></i> iOS / Android</span>
+        <span class="px-2 py-0.5 rounded-md bg-cream/70 dark:bg-stone-800 border border-hairline"><i class="ri-tablet-line"></i> iPad / Tablet</span>
+        <span class="px-2 py-0.5 rounded-md bg-cream/70 dark:bg-stone-800 border border-hairline"><i class="ri-macbook-line"></i> macOS / Windows / Linux</span>
+        <span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 font-bold"><i class="ri-wifi-off-line"></i> အော့ဖ်လိုင်းသုံးနိုင်သည်</span>
+      </div>
+    </div>
+
+    <!-- MAIN TRANSLATION CARD (Mobile & Desktop Touch Optimized) -->
+    <div class="rounded-3xl bg-card border border-hairline shadow-md overflow-hidden">
+      
+      <!-- Language Selection Bar -->
+      <div class="p-3 sm:p-4 bg-cream/40 dark:bg-stone-900/60 border-b border-hairline flex items-center justify-between gap-2 select-none">
+        
+        <!-- Source Lang Dropdown -->
+        <div class="flex-1 min-w-0">
+          <div class="relative">
+            <select id="trans-src-lang" class="w-full bg-card text-charcoal border border-hairline rounded-2xl px-3 py-2.5 text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/40 shadow-xs appearance-none pr-8 cursor-pointer touch-target">
+              <option value="auto">🌐 အလိုအလျောက် (Auto Detect)</option>
+              <option value="en">🇬🇧 English (အင်္ဂလိပ်)</option>
+              <option value="my">🇲🇲 မြန်မာ (Burmese)</option>
+              <option value="zh">🇨🇳 中文 (Chinese)</option>
+              <option value="th">🇹🇭 ภาษาไทย (Thai)</option>
+              <option value="ja">🇯🇵 日本語 (Japanese)</option>
+            </select>
+            <i class="ri-arrow-down-s-line absolute right-3 top-1/2 -translate-y-1/2 text-muted pointer-events-none"></i>
+          </div>
+        </div>
+
+        <!-- Swap Languages Button -->
+        <button id="trans-swap-btn" onclick="swapLanguages()" class="touch-target w-11 h-11 rounded-2xl bg-card border border-hairline hover:bg-indigo-600 hover:text-white transition-all flex items-center justify-center text-charcoal shadow-xs cursor-pointer active:scale-90 shrink-0" title="ဘာသာစကား နေရာလဲလှယ်ရန် (Swap)">
+          <i id="swap-icon" class="ri-arrow-left-right-line text-base transition-transform duration-300"></i>
+        </button>
+
+        <!-- Target Lang Dropdown -->
+        <div class="flex-1 min-w-0">
+          <div class="relative">
+            <select id="trans-tgt-lang" class="w-full bg-card text-charcoal border border-hairline rounded-2xl px-3 py-2.5 text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/40 shadow-xs appearance-none pr-8 cursor-pointer touch-target">
+              <option value="my" selected>🇲🇲 မြန်မာ (Burmese)</option>
+              <option value="en">🇬🇧 English (အင်္ဂလိပ်)</option>
+              <option value="zh">🇨🇳 中文 (Chinese)</option>
+              <option value="th">🇹🇭 ภาษาไทย (Thai)</option>
+              <option value="ja">🇯🇵 日本語 (Japanese)</option>
+            </select>
+            <i class="ri-arrow-down-s-line absolute right-3 top-1/2 -translate-y-1/2 text-muted pointer-events-none"></i>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Dual Translation Panes (Side-by-side on desktop, stacked on mobile) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-hairline">
+        
+        <!-- SOURCE INPUT PANE -->
+        <div class="p-4 sm:p-6 flex flex-col justify-between space-y-3 bg-card min-h-[220px]">
+          <div class="space-y-2 flex-1">
+            <div class="flex items-center justify-between text-xs text-muted pb-1 border-b border-hairline/60">
+              <span class="font-mono uppercase font-bold text-[10px] tracking-wider text-muted">မူရင်းစာသား (SOURCE)</span>
+              <button onclick="clearSource()" class="hover:text-red-500 cursor-pointer font-medium text-xs px-2 py-0.5 rounded hover:bg-cream dark:hover:bg-stone-800 transition-colors">
+                <i class="ri-delete-bin-line"></i> <span>ရှင်းမည်</span>
+              </button>
+            </div>
+            <textarea 
+              id="trans-input" 
+              rows="6" 
+              placeholder="ဘာသာပြန်လိုသော စာသား သို့မဟုတ် စာကြောင်းအား ရိုက်ထည့်ပါ သို့မဟုတ် ကူးယူထည့်သွင်းပါ..." 
+              class="w-full bg-transparent text-charcoal placeholder-muted text-base sm:text-lg focus:outline-none resize-none font-sans-ui leading-relaxed"
+            >The only real prison is fear, and the only real freedom is Freedom from Fear.</textarea>
+          </div>
+
+          <!-- Bottom Toolbar (Source) -->
+          <div class="flex items-center justify-between pt-2 border-t border-hairline/60 text-xs">
+            <div class="flex items-center space-x-1">
+              <button onclick="speakSource()" class="touch-target p-2 rounded-xl hover:bg-cream dark:hover:bg-stone-800 text-muted hover:text-vermilion transition-colors cursor-pointer" title="အသံထွက် နားထောင်ရန်">
+                <i class="ri-volume-up-line text-lg"></i>
+              </button>
+              <button onclick="pasteFromClipboard()" class="p-2 rounded-xl hover:bg-cream dark:hover:bg-stone-800 text-muted hover:text-charcoal transition-colors cursor-pointer hidden sm:flex items-center space-x-1" title="ကလစ်ဘုတ်မှ ကူးထည့်ရန်">
+                <i class="ri-clipboard-line"></i>
+                <span class="text-[11px]">Paste</span>
+              </button>
+            </div>
+            <span id="trans-char-count" class="font-mono text-xs text-muted">74 characters</span>
+          </div>
+        </div>
+
+        <!-- TARGET OUTPUT PANE -->
+        <div class="p-4 sm:p-6 flex flex-col justify-between space-y-3 bg-cream/20 dark:bg-stone-900/30 min-h-[220px]">
+          <div class="space-y-2 flex-1">
+            <div class="flex items-center justify-between text-xs text-muted pb-1 border-b border-hairline/60">
+              <span class="font-mono uppercase font-bold text-[10px] tracking-wider text-indigo-600 dark:text-indigo-400">ဘာသာပြန်ရလဒ် (TRANSLATION)</span>
+              <span id="trans-engine-badge" class="transition-all">
+                <span class="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-400/30">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span>12K+ Parallel Corpus Match</span>
+                </span>
+              </span>
+            </div>
+            <textarea 
+              id="trans-output" 
+              rows="6" 
+              readonly 
+              placeholder="ဘာသာပြန်ရလဒ် ဤနေရာတွင် ပေါ်လာပါမည်..." 
+              class="w-full bg-transparent text-charcoal placeholder-muted text-base sm:text-lg focus:outline-none resize-none font-sans-ui leading-relaxed font-medium"
+            >စစ်မှန်သော အကျဉ်းထောင်ဟူသည် ကြောက်ရွံ့ခြင်းသာဖြစ်ပြီး စစ်မှန်သော လွတ်မြောက်ခြင်းဟူသည်မှာလည်း ကြောက်ရွံ့ခြင်းမှ လွတ်ကင်းခြင်းသာ ဖြစ်သည်။</textarea>
+          </div>
+
+          <!-- Bottom Toolbar (Target) -->
+          <div class="flex items-center justify-between pt-2 border-t border-hairline/60 text-xs">
+            <button onclick="speakTarget()" class="touch-target p-2 rounded-xl hover:bg-cream dark:hover:bg-stone-800 text-muted hover:text-vermilion transition-colors cursor-pointer" title="အသံထွက် နားထောင်ရန်">
+              <i class="ri-volume-up-line text-lg"></i>
+            </button>
+            <button onclick="copyOutput()" class="touch-target px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold flex items-center space-x-1.5 transition-all shadow-xs cursor-pointer active:scale-95">
+              <i class="ri-file-copy-line text-sm"></i>
+              <span>ကူးယူမည် (Copy)</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Footer with Primary Button & Settings Toggle -->
+      <div class="p-3 sm:p-4 bg-cream/40 dark:bg-stone-900/60 border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center space-x-2 text-xs text-muted">
+          <i class="ri-shield-check-line text-emerald-600 text-base"></i>
+          <span>အချက်အလက် လုံခြုံရေး: မည်သည့်ဒေတာမျှ အပြင်သို့ မပေါက်ကြားဘဲ လုံခြုံစွာ အလုပ်လုပ်ပါသည်</span>
+        </div>
+
+        <div class="flex items-center space-x-2 w-full sm:w-auto">
+          <button onclick="openServerSettings()" class="touch-target p-2.5 rounded-2xl border border-hairline bg-card hover:bg-cream dark:hover:bg-stone-800 text-muted hover:text-charcoal transition-colors cursor-pointer" title="ဆာဗာလိပ်စာ ပြင်ဆင်ရန် (Advanced Settings)">
+            <i class="ri-settings-4-line text-lg"></i>
+          </button>
+          <button id="do-translate-btn" onclick="executeTranslation()" class="touch-target flex-1 sm:flex-initial px-8 py-3 rounded-2xl bg-vermilion hover:bg-vermilion/90 text-white font-bold text-sm sm:text-base flex items-center justify-center space-x-2 transition-all shadow-md active:scale-95 cursor-pointer">
+            <i class="ri-translate-2 text-lg"></i>
+            <span>ချက်ချင်း ဘာသာပြန်ဆိုမည်</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- QUICK PRESETS FOR NON-TECH USERS -->
+    <div class="p-4 sm:p-6 rounded-3xl bg-card border border-hairline shadow-xs space-y-3">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold text-charcoal font-sans-ui flex items-center space-x-1.5">
+          <i class="ri-magic-line text-vermilion"></i>
+          <span>အသုံးများသော နမူနာ စာကြောင်းများ (Quick Presets)</span>
+        </span>
+        <span class="text-[10px] text-muted font-mono">ONE-TAP LOAD</span>
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        <button onclick="loadPreset('The only real prison is fear, and the only real freedom is Freedom from Fear.')" class="px-3 py-1.5 rounded-xl bg-cream/70 dark:bg-stone-800 hover:text-vermilion text-xs font-sans-ui transition-colors cursor-pointer border border-hairline">
+          🕊️ Freedom from Fear (ဒေါ်အောင်ဆန်းစုကြည်)
+        </button>
+        <button onclick="loadPreset('I have a dream that my four little children will one day live in a nation where they will not be judged by the color of their skin.')" class="px-3 py-1.5 rounded-xl bg-cream/70 dark:bg-stone-800 hover:text-vermilion text-xs font-sans-ui transition-colors cursor-pointer border border-hairline">
+          ✊ I Have a Dream (Martin Luther King Jr.)
+        </button>
+        <button onclick="loadPreset('One child, one teacher, one book, one pen can change the world.')" class="px-3 py-1.5 rounded-xl bg-cream/70 dark:bg-stone-800 hover:text-vermilion text-xs font-sans-ui transition-colors cursor-pointer border border-hairline">
+          📚 One Book, One Pen (Malala Yousafzai)
+        </button>
+        <button onclick="loadPreset('ဒီမိုကရေစီစနစ်သည် လူ့အခွင့်အရေးနှင့် တရားမျှတမှုကို အခြေခံသည်။')" class="px-3 py-1.5 rounded-xl bg-teal-500/10 text-teal-800 dark:text-teal-200 hover:text-teal-900 text-xs font-sans-ui transition-colors cursor-pointer border border-teal-400/30">
+          🇲🇲 ဒီမိုကရေစီနှင့် တရားမျှတမှု
+        </button>
+        <button onclick="loadPreset('စစ်မှန်သော ငြိမ်းချမ်းရေးသည် လူတိုင်းအတွက် တန်းတူညီမျှမှုမှ စတင်သည်။')" class="px-3 py-1.5 rounded-xl bg-teal-500/10 text-teal-800 dark:text-teal-200 hover:text-teal-900 text-xs font-sans-ui transition-colors cursor-pointer border border-teal-400/30">
+          🇲🇲 စစ်မှန်သော ငြိမ်းချမ်းရေး
+        </button>
+      </div>
+    </div>
+
+    <!-- RECENT TRANSLATIONS HISTORY DRAWER -->
+    <div class="p-4 sm:p-6 rounded-3xl bg-card border border-hairline shadow-xs space-y-3">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold text-charcoal font-sans-ui flex items-center space-x-1.5">
+          <i class="ri-history-line text-indigo-600"></i>
+          <span>လတ်တလော ဘာသာပြန်မှတ်တမ်း (Recent History)</span>
+        </span>
+        <button onclick="clearHistoryList()" class="text-[11px] text-muted hover:text-red-500 cursor-pointer">မှတ်တမ်းဖျက်မည်</button>
+      </div>
+
+      <div id="trans-history-container" class="space-y-2 max-h-[300px] overflow-y-auto pr-1 scrollbar-thin">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- LibreTranslate Server Settings Modal -->
+  <div id="libre-settings-modal" class="fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="w-full max-w-md p-6 rounded-3xl bg-card border border-hairline shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-hairline">
+        <div class="flex items-center space-x-2">
+          <i class="ri-server-line text-indigo-600 text-xl"></i>
+          <h3 class="text-lg font-bold font-serif-editorial text-charcoal m-0">ဆာဗာ ပြင်ဆင်သတ်မှတ်ခြင်း</h3>
+        </div>
+        <button onclick="closeServerSettings()" class="w-8 h-8 rounded-full hover:bg-cream dark:hover:bg-stone-800 flex items-center justify-center text-muted hover:text-charcoal cursor-pointer">
+          <i class="ri-close-line text-lg"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div class="space-y-1">
+          <label class="font-semibold text-charcoal block">LibreTranslate API Endpoint URL:</label>
+          <input 
+            type="url" 
+            id="libre-setting-url" 
+            placeholder="http://localhost:5000" 
+            class="w-full p-2.5 rounded-xl bg-cream/40 dark:bg-stone-900/40 border border-hairline font-mono text-charcoal focus:border-indigo-500 focus:outline-none"
+          >
+          <p class="text-[11px] text-muted">ပုံမှန်အားဖြင့် Localhost သို့မဟုတ် Public Server အလိုအလျောက် ချိတ်ဆက်ပေးပါသည်</p>
+        </div>
+
+        <div class="p-3 rounded-2xl bg-indigo-500/10 border border-indigo-400/30 text-indigo-900 dark:text-indigo-200 space-y-1">
+          <span class="font-bold flex items-center space-x-1"><i class="ri-terminal-box-line"></i><span>Local Docker ဖြင့် Run ရန်:</span></span>
+          <pre class="font-mono text-[10px] p-2 rounded-lg bg-black/40 text-emerald-300 overflow-x-auto select-all">docker run -ti --rm -p 5000:5000 libretranslate/libretranslate</pre>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end space-x-2 pt-2 border-t border-hairline">
+        <button onclick="closeServerSettings()" class="px-4 py-2 rounded-xl text-muted hover:text-charcoal cursor-pointer font-medium text-xs">
+          မလုပ်ဆောင်ပါ
+        </button>
+        <button onclick="saveServerSettings()" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs cursor-pointer shadow-xs transition-colors">
+          သိမ်းဆည်းမည်
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Editorial Master 4-Column Footer -->
+  <footer class="border-t border-hairline bg-cream/70 dark:bg-stone-900/60 py-12 text-xs text-muted font-sans-ui transition-colors">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="space-y-3">
+        <div class="flex items-center space-x-2">
+          <div class="nav-brand-glass-icon w-8 h-8 rounded-xl flex items-center justify-center shrink-0" title="ထက် (Htet)">
+            <img src="assets/favicon.svg" alt="ထက်" class="w-full h-full object-contain">
+          </div>
+          <span class="font-serif-editorial text-lg font-semibold text-charcoal">Htet Official</span>
+        </div>
+        <p class="leading-relaxed">
+          မြန်မာ Transgirl စာရေးဆရာမ၊ နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီနှင့် လူမှုတက်ကြွလှုပ်ရှားသူ ထက်၏ တရားဝင် ဝက်ဘ်စာမျက်နှာ။
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]">စာမျက်နှာများ</h4>
+        <ul class="space-y-2">
+          <li><a href="index.html" class="hover:text-vermilion transition-colors flex items-center space-x-2"><i class="ri-home-5-line text-vermilion/70"></i> <span>ပင်မ</span></a></li>
+          <li><a href="articles.html" class="hover:text-vermilion transition-colors flex items-center space-x-2"><i class="ri-article-line text-vermilion/70"></i> <span>ဆောင်းပါးများ</span></a></li>
+          <li><a href="publications.html" class="hover:text-vermilion transition-colors flex items-center space-x-2"><i class="ri-file-paper-2-line text-vermilion/70"></i> <span>ထုတ်ဝေမှုများ</span></a></li>
+          <li><a href="journal.html" class="hover:text-vermilion transition-colors flex items-center space-x-2"><i class="ri-booklet-line text-vermilion/70"></i> <span>မှတ်စုနှင့် ပို့စ်များ</span></a></li>
+          <li><a href="glossary.html" class="hover:text-vermilion transition-colors flex items-center space-x-2"><i class="ri-book-read-line text-vermilion/70"></i> <span>ဝေါဟာရအဘိဓာန်</span></a></li>
+          <li><a href="dictionary.html" class="hover:text-vermilion transition-colors flex items-center space-x-2"><i class="ri-book-2-line text-vermilion/70"></i> <span>အဘိဓာန်</span></a></li>
+          <li><a href="translate.html" class="hover:text-vermilion transition-colors flex items-center space-x-2 text-vermilion font-semibold"><i class="ri-translate-2 text-vermilion"></i> <span>ဘာသာပြန်စတူဒီယို</span></a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]">တိုက်ရိုက်လိုင်းများ</h4>
+        <ul class="space-y-2">
+          <li><a href="https://github.com/htetofficial/htetofficial.github.io/releases/tag/v1.2.0-beta" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-android-line text-emerald-600"></i> <span class="font-medium text-emerald-700 dark:text-emerald-400">Android App (v1.2.0-beta APK)</span></a></li>
+          <li><a href="https://t.me/htetmmofficial" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-telegram-fill text-[#2AABEE]"></i> <span>Telegram: @htetmmofficial</span></a></li>
+          <li><a href="https://t.me/ideahublibrary" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-book-open-fill text-amber-600"></i> <span>Library: @ideahublibrary (1,522+ PDFs)</span></a></li>
+          <li><a href="https://facebook.com/htetmyatekri" target="_blank" rel="noopener noreferrer" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-facebook-circle-fill text-[#1877F2]"></i> <span>Facebook: htetmyatekri</span></a></li>
+          <li><a href="mailto:htethtet2025ideahub@gmail.com" class="hover:text-vermilion transition-colors flex items-center space-x-1.5"><i class="ri-mail-line text-vermilion"></i> <span>htethtet2025ideahub@gmail.com</span></a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-3">
+        <h4 class="font-semibold text-charcoal uppercase tracking-wider mb-3 text-[11px]">တန်ဖိုးထားမှု</h4>
+        <p class="leading-relaxed">
+          ခွဲခြားဆက်ဆံမှု ကင်းမဲ့သော၊ ကျား၊ မ တန်းတူညီမျှပြီး တရားမျှတသော လူ့ဘောင် တည်ဆောက်ရေး။
+        </p>
+        <div class="pt-2">
+          <span class="text-[11px] text-faint">© 2026 Htet (ထက်). All Rights Reserved.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/confetti.browser.min.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/data-loader.js"></script>
+
+  <!-- BurmeseNLP Engine -->
+  <script src="js/burmesenlp.js"></script>
+
+  <!-- 12,021 Parallel Sentences Corpus -->
+  <script src="js/data/translations/pairs.js"></script>
+
+  <!-- Pre-cached Common Dictionaries -->
+  <script src="js/data/dictionary/meta.js"></script>
+  <script src="js/data/dictionary/common.js"></script>
+  <script src="js/data/dictionary/reverse/meta.js"></script>
+  <script src="js/data/dictionary/reverse/common.js"></script>
+
+  <!-- Universal Translation Engine -->
+  <script src="js/translator-engine.js"></script>
+
+  <!-- Master Site Framework (Flyout Menu, Spotlight Search Modal ⌘K, Theme Sync) -->
+  <script src="js/main.js"></script>
+
+  <!-- Client Controller for translate.html -->
+  <script>
+    var inputEl = document.getElementById('trans-input');
+    var outputEl = document.getElementById('trans-output');
+    var srcLangEl = document.getElementById('trans-src-lang');
+    var tgtLangEl = document.getElementById('trans-tgt-lang');
+    var badgeEl = document.getElementById('trans-engine-badge');
+    var charCountEl = document.getElementById('trans-char-count');
+    var translateBtn = document.getElementById('do-translate-btn');
+
+    function updateCharCount() {
+      if (inputEl && charCountEl) {
+        charCountEl.textContent = inputEl.value.length + ' characters';
+      }
+    }
+
+    if (inputEl) {
+      inputEl.addEventListener('input', function() {
+        updateCharCount();
+        debounceTranslate();
+      });
+    }
+
+    var debounceTimer = null;
+    function debounceTranslate() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(function() {
+        executeTranslation();
+      }, 350);
+    }
+
+    async function executeTranslation() {
+      if (!inputEl || !outputEl) return;
+      var text = inputEl.value.trim();
+      if (!text) {
+        outputEl.value = '';
+        return;
+      }
+
+      var src = srcLangEl ? srcLangEl.value : 'auto';
+      var tgt = tgtLangEl ? tgtLangEl.value : 'my';
+
+      if (translateBtn) {
+        translateBtn.disabled = true;
+        translateBtn.innerHTML = '<i class="ri-loader-4-line animate-spin text-lg"></i><span>ဘာသာပြန်နေပါသည်...</span>';
+      }
+
+      try {
+        if (window.HtetTranslator) {
+          var res = await window.HtetTranslator.translate(text, src, tgt);
+          outputEl.value = res.text || '';
+
+          if (badgeEl) {
+            badgeEl.innerHTML = '<span class="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-400/30"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span><span>' + (res.badge || 'Universal MT') + '</span></span>';
+          }
+          renderHistory();
+        }
+      } catch(e) {
+        console.error(e);
+      } finally {
+        if (translateBtn) {
+          translateBtn.disabled = false;
+          translateBtn.innerHTML = '<i class="ri-translate-2 text-lg"></i><span>ချက်ချင်း ဘာသာပြန်ဆိုမည်</span>';
+        }
+      }
+    }
+
+    function swapLanguages() {
+      if (!srcLangEl || !tgtLangEl) return;
+      var s = srcLangEl.value;
+      var t = tgtLangEl.value;
+      if (s === 'auto') {
+        s = (outputEl && /[\u1000-\u109F]/.test(outputEl.value)) ? 'my' : 'en';
+      }
+      srcLangEl.value = t;
+      tgtLangEl.value = s;
+
+      var icon = document.getElementById('swap-icon');
+      if (icon) {
+        icon.classList.add('rotate-180');
+        setTimeout(function() { icon.classList.remove('rotate-180'); }, 300);
+      }
+
+      if (inputEl && outputEl && outputEl.value) {
+        var temp = inputEl.value;
+        inputEl.value = outputEl.value;
+        outputEl.value = temp;
+        updateCharCount();
+        executeTranslation();
+      }
+    }
+
+    function clearSource() {
+      if (inputEl) {
+        inputEl.value = '';
+        updateCharCount();
+      }
+      if (outputEl) outputEl.value = '';
+    }
+
+    function speakSource() {
+      if (inputEl && window.HtetTranslator) {
+        var src = srcLangEl ? srcLangEl.value : 'auto';
+        window.HtetTranslator.speak(inputEl.value, src);
+      }
+    }
+
+    function speakTarget() {
+      if (outputEl && window.HtetTranslator) {
+        var tgt = tgtLangEl ? tgtLangEl.value : 'my';
+        window.HtetTranslator.speak(outputEl.value, tgt);
+      }
+    }
+
+    function copyOutput() {
+      if (!outputEl || !outputEl.value) return;
+      navigator.clipboard.writeText(outputEl.value).then(function() {
+        if (typeof window.showToast === 'function') {
+          window.showToast('ဘာသာပြန်ရလဒ်ကို ကူးယူပြီးပါပြီ');
+        } else {
+          alert('ဘာသာပြန်ရလဒ်ကို ကူးယူပြီးပါပြီ');
+        }
+      });
+    }
+
+    function pasteFromClipboard() {
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        navigator.clipboard.readText().then(function(t) {
+          if (inputEl) {
+            inputEl.value = t;
+            updateCharCount();
+            executeTranslation();
+          }
+        }).catch(function(){});
+      }
+    }
+
+    function loadPreset(text) {
+      if (inputEl) {
+        inputEl.value = text;
+        updateCharCount();
+        executeTranslation();
+      }
+    }
+
+    function renderHistory() {
+      var container = document.getElementById('trans-history-container');
+      if (!container || !window.HtetTranslator) return;
+      var hist = window.HtetTranslator.getHistory();
+      if (hist.length === 0) {
+        container.innerHTML = '<p class="text-xs text-muted italic">ဘာသာပြန်မှတ်တမ်း မရှိသေးပါ</p>';
+        return;
+      }
+      container.innerHTML = hist.map(function(item) {
+        return `
+          <div class="p-3 rounded-2xl bg-cream/30 dark:bg-stone-900/40 border border-hairline/70 flex items-start justify-between gap-3 text-xs hover:border-indigo-400/50 transition-colors">
+            <div class="space-y-1 min-w-0 flex-1">
+              <p class="font-semibold text-charcoal truncate">${escapeHtml(item.sourceText)}</p>
+              <p class="text-muted truncate">${escapeHtml(item.targetText)}</p>
+              <span class="text-[9px] font-mono text-muted uppercase">${escapeHtml(item.badge || '')} • ${escapeHtml(item.timestamp || '')}</span>
+            </div>
+            <button onclick="loadPreset('${escapeHtml(item.sourceText).replace(/'/g, "\\'")}')" class="p-1.5 rounded-lg hover:bg-cream dark:hover:bg-stone-800 text-muted hover:text-indigo-600 transition-colors shrink-0" title="ပြန်လည်အသုံးပြုရန်">
+              <i class="ri-restart-line text-sm"></i>
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function clearHistoryList() {
+      if (window.HtetTranslator) {
+        window.HtetTranslator.clearHistory();
+        renderHistory();
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function openServerSettings() {
+      var modal = document.getElementById('libre-settings-modal');
+      var urlInput = document.getElementById('libre-setting-url');
+      if (!modal) return;
+      if (window.HtetTranslator && urlInput) {
+        urlInput.value = window.HtetTranslator.getLibreEndpoint();
+      }
+      modal.classList.remove('hidden');
+    }
+
+    function closeServerSettings() {
+      var modal = document.getElementById('libre-settings-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function saveServerSettings() {
+      var urlInput = document.getElementById('libre-setting-url');
+      var url = urlInput ? urlInput.value.trim() : '';
+      if (window.HtetTranslator) {
+        window.HtetTranslator.setLibreEndpoint(url);
+      }
+      closeServerSettings();
+      alert('ဆာဗာလိပ်စာ သိမ်းဆည်းပြီးပါပြီ');
+      executeTranslation();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      updateCharCount();
+      renderHistory();
+    });
+  </script>
+</body>
+</html>
+'''
+
+with open('translate.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print(f'Successfully wrote translate.html ({len(html_content)} bytes)')

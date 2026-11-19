@@ -1,0 +1,1 @@
+window.HTET_MW_GHA = {"ဃ": {"p": ["n"], "s": ["myanmar-words"]}, "ဃကြီး": {"p": ["n"], "s": ["myanmar-words"]}, "ဃဋီ": {"p": ["n"], "s": ["myanmar-words"]}, "ဃနာနို့ဆွမ်း": {"p": ["n"], "s": ["myanmar-words"]}, "ဃရာဝါသ": {"p": ["v"], "s": ["myanmar-words"]}, "ဃောရဝိသနအာဂတဝိသ": {"p": ["n"], "s": ["burmesenlp"]}, "ဃောသ": {"p": ["n"], "s": ["myanmar-words"]}};

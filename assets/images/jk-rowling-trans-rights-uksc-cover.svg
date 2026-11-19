@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="title desc">
+  <title id="title">J.K. Rowling၊ Transgender Women နှင့် အမြင်မတူမှုများကြားက တရားမျှတမှု (UKSC 2025)</title>
+  <desc id="desc">Editorial cover artwork combining literary book and starlight motifs with balanced scales of justice and overlapping dialogue spheres representing principled disagreement between sex-based rights and transgender inclusion.</desc>
+  <defs>
+    <linearGradient id="bgSlate" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="48%" stop-color="#1e1b38"/>
+      <stop offset="82%" stop-color="#3b1d36"/>
+      <stop offset="100%" stop-color="#4c1d2f"/>
+    </linearGradient>
+
+    <radialGradient id="goldGlow" cx="77%" cy="46%" r="44%">
+      <stop offset="0%" stop-color="#fcd34d" stop-opacity="0.28"/>
+      <stop offset="50%" stop-color="#f472b6" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="blueGlow" cx="18%" cy="80%" r="45%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="brassGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="50%" stop-color="#f5c469"/>
+      <stop offset="100%" stop-color="#c98b32"/>
+    </linearGradient>
+
+    <linearGradient id="accentRule" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#fcd34d"/>
+    </linearGradient>
+
+    <linearGradient id="glassBox" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgSlate)"/>
+  <rect width="1200" height="675" fill="url(#goldGlow)"/>
+  <rect width="1200" height="675" fill="url(#blueGlow)"/>
+
+  <!-- Subtle Blueprint / Legal Grid Lines -->
+  <g stroke="#ffffff" stroke-opacity="0.045" stroke-width="1">
+    <line x1="690" y1="30" x2="690" y2="645"/>
+    <line x1="30" y1="530" x2="1170" y2="530"/>
+  </g>
+
+  <!-- Outer Editorial Double Frame -->
+  <rect x="26" y="26" width="1148" height="623" rx="18" fill="none" stroke="#f5c469" stroke-opacity="0.3" stroke-width="1.2"/>
+  <rect x="34" y="34" width="1132" height="607" rx="14" fill="none" stroke="#ffffff" stroke-opacity="0.1" stroke-width="0.8"/>
+
+  <!-- Right Symbolic Composition: Scales of Justice + Literary Book + Overlapping Dialogue Spheres -->
+  <g transform="translate(915, 310)">
+    <!-- Outer Law & Dialogue Orbits -->
+    <circle cx="0" cy="0" r="210" fill="none" stroke="#f5c469" stroke-opacity="0.18" stroke-width="1"/>
+    <circle cx="0" cy="0" r="168" fill="none" stroke="#e2e8f0" stroke-opacity="0.15" stroke-width="0.9" stroke-dasharray="5 7"/>
+
+    <!-- Overlapping Dialogue Spheres (Principled Disagreement & Common Humanity) -->
+    <circle cx="-54" cy="-6" r="88" fill="#38bdf8" fill-opacity="0.13" stroke="#7dd3fc" stroke-opacity="0.65" stroke-width="1.4"/>
+    <circle cx="54" cy="-6" r="88" fill="#f472b6" fill-opacity="0.14" stroke="#f9a8d4" stroke-opacity="0.68" stroke-width="1.4"/>
+
+    <!-- Illuminated Intersection Lens ("Shared Dignity & Protection") -->
+    <path d="M 0 -75 A 88 88 0 0 1 0 63 A 88 88 0 0 1 0 -75 Z" fill="#fef3c7" fill-opacity="0.16" stroke="url(#brassGold)" stroke-width="1.4"/>
+
+    <!-- Scales of Justice Pillar & Beam (UKSC 2025 / Equality Act 2010) -->
+    <g stroke="url(#brassGold)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Pillar -->
+      <line x1="0" y1="-122" x2="0" y2="82" stroke-width="2.6"/>
+      <circle cx="0" cy="-126" r="7" fill="url(#brassGold)"/>
+      <!-- Base Pedestal / Open Book Pages -->
+      <path d="M -78 106 Q -38 82 0 96 Q 38 82 78 106" stroke-width="2.4" fill="#fde68a" fill-opacity="0.12"/>
+      <path d="M -68 116 Q -34 94 0 106 Q 34 94 68 116" stroke-width="1.5" stroke-opacity="0.7"/>
+      <line x1="0" y1="82" x2="0" y2="106" stroke-width="2.2"/>
+
+      <!-- Balance Beam -->
+      <path d="M -112 -74 Q 0 -92 112 -74" stroke-width="2.6"/>
+      <circle cx="-112" cy="-74" r="3.5" fill="#fef3c7"/>
+      <circle cx="112" cy="-74" r="3.5" fill="#fef3c7"/>
+
+      <!-- Left Pan (Sex-Based Law) -->
+      <line x1="-112" y1="-74" x2="-136" y2="-16" stroke-width="1.3" stroke-opacity="0.85"/>
+      <line x1="-112" y1="-74" x2="-88" y2="-16" stroke-width="1.3" stroke-opacity="0.85"/>
+      <path d="M -142 -16 Q -112 6 -82 -16 Z" fill="#38bdf8" fill-opacity="0.24" stroke-width="1.8"/>
+
+      <!-- Right Pan (Gender Identity & Protection) -->
+      <line x1="112" y1="-74" x2="88" y2="-16" stroke-width="1.3" stroke-opacity="0.85"/>
+      <line x1="112" y1="-74" x2="136" y2="-16" stroke-width="1.3" stroke-opacity="0.85"/>
+      <path d="M 82 -16 Q 112 6 142 -16 Z" fill="#f472b6" fill-opacity="0.26" stroke-width="1.8"/>
+    </g>
+
+    <!-- Literary Sparkles (Harry Potter / Storytelling Tribute) -->
+    <g fill="#fef3c7">
+      <path d="M -140 -122 L -137 -114 L -129 -111 L -137 -108 L -140 -100 L -143 -108 L -151 -111 L -143 -114 Z" opacity="0.85"/>
+      <path d="M 136 -112 L 138 -106 L 144 -104 L 138 -102 L 136 -96 L 134 -102 L 128 -104 L 134 -106 Z" opacity="0.75"/>
+      <circle cx="0" cy="-148" r="2.4" opacity="0.9"/>
+      <circle cx="-94" cy="94" r="2" opacity="0.65"/>
+      <circle cx="98" cy="86" r="2" opacity="0.65"/>
+    </g>
+
+    <!-- Diagram Labels -->
+    <text x="-112" y="24" text-anchor="middle" fill="#bae6fd" font-family="'Inter', sans-serif" font-size="10.5" font-weight="600" letter-spacing="0.8">SEX-BASED RIGHTS</text>
+    <text x="112" y="24" text-anchor="middle" fill="#fbcfe8" font-family="'Inter', sans-serif" font-size="10.5" font-weight="600" letter-spacing="0.8">TRANS DIGNITY</text>
+    <text x="0" y="156" text-anchor="middle" fill="#fde68a" font-family="Georgia, serif" font-size="12.5" letter-spacing="2.2">UKSC [2025] 16  •  EQUALITY ACT 2010</text>
+    <text x="0" y="180" text-anchor="middle" fill="#e2e8f0" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="13.5" opacity="0.9">အမြင်မတူမှုများကြားက မျှတသော သုံးသပ်ချက်</text>
+  </g>
+
+  <!-- Left Editorial Typography Column -->
+  <g transform="translate(72, 82)">
+    <!-- Category Pill -->
+    <rect x="0" y="0" width="406" height="34" rx="17" fill="#ffffff" fill-opacity="0.09" stroke="#f5c469" stroke-opacity="0.42" stroke-width="1"/>
+    <circle cx="20" cy="17" r="4.5" fill="#38bdf8"/>
+    <text x="34" y="22" fill="#fef3c7" font-family="'Inter', -apple-system, sans-serif" font-size="12.2" font-weight="600" letter-spacing="1.5">GENDER STUDIES • LEGAL COMMENTARY</text>
+
+    <!-- Kicker -->
+    <text x="2" y="72" fill="#f9a8d4" font-family="'Inter', sans-serif" font-size="16" font-weight="600" letter-spacing="0.8">J.K. ROWLING  •  TRANSGENDER WOMEN  •  UK SUPREME COURT 2025</text>
+
+    <!-- Main Burmese Headline -->
+    <text x="0" y="132" fill="#ffffff" font-family="'Pyidaungsu', 'Noto Serif Myanmar', Georgia, serif" font-size="36" font-weight="700">J.K. Rowling၊ Transgender Women နှင့်</text>
+    <text x="0" y="184" fill="#fde68a" font-family="'Pyidaungsu', 'Noto Serif Myanmar', Georgia, serif" font-size="36" font-weight="700">အမြင်မတူမှုများကြားက တရားမျှတမှု</text>
+
+    <!-- Gradient Divider -->
+    <rect x="2" y="208" width="136" height="3.5" rx="2" fill="url(#accentRule)"/>
+
+    <!-- Subtitle -->
+    <text x="0" y="248" fill="#e2e8f0" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="18" opacity="0.94">Biological Sex၊ Gender Identity နှင့် For Women Scotland v Scottish Ministers [2025]</text>
+    <text x="0" y="280" fill="#cbd5e1" font-family="Georgia, serif" font-style="italic" font-size="15.5" opacity="0.88">Principled Disagreement, Literary Appreciation &amp; the Equality Act 2010 Ruling</text>
+
+    <!-- Featured Quote Card -->
+    <rect x="0" y="312" width="582" height="132" rx="14" fill="url(#glassBox)" stroke="#f5c469" stroke-opacity="0.3" stroke-width="1"/>
+    <rect x="0" y="312" width="5" height="132" rx="2.5" fill="url(#accentRule)"/>
+    <text x="24" y="346" fill="#fef3c7" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="15.5" font-weight="600">“ဟယ်ရီပေါ်တာ စာအုပ်တွေနဲ့ အမျိုးသမီးအရေး လှူဒါန်းမှုတွေကို ကြိုက်ပါတယ်။</text>
+    <text x="24" y="374" fill="#fef3c7" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="15.5" font-weight="600">Transgender Woman တွေအပေါ် သူ့အမြင်ကိုတော့ မကြိုက်ဘူး...</text>
+    <text x="24" y="402" fill="#fbcfe8" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="15.5" font-weight="600">ဒါပေမယ့် သူက လုံးဝကြီးတော့ မကောင်းတာမဟုတ်ပါဘူး။ အမြင်မတူကြရုံပါဘဲ။”</text>
+    <text x="24" y="430" fill="#bae6fd" font-family="'Inter', 'Pyidaungsu', sans-serif" font-size="12.5" opacity="0.9">— ထက်မြတ်ဧကရီ (ထက်) • စက်တင်ဘာ ၂၃၊ ၂၀၂၆</text>
+
+    <!-- Author & Archive Metadata -->
+    <g transform="translate(0, 478)">
+      <text x="0" y="16" fill="#f8fafc" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="15" font-weight="600">ရေးသားသူ — ထက်မြတ်ဧကရီ (ထက်) • ၈ ခုသော နိုင်ငံတကာ ဥပဒေနှင့် အဖွဲ့အစည်း ကိုးကားချက်များ</text>
+      <text x="0" y="42" fill="#94a3b8" font-family="'Inter', sans-serif" font-size="12.5" letter-spacing="0.4">Htet Official Digital Archive  •  Sex-Based Rights &amp; Trans Inclusion Essay  •  23 September 2026</text>
+    </g>
+  </g>
+
+  <!-- Artisanal Vermilion Hanko Seal ("ထက်") -->
+  <g transform="translate(1078, 558)">
+    <rect x="0" y="0" width="66" height="66" rx="12" fill="#b91c1c" fill-opacity="0.9" stroke="#fecaca" stroke-opacity="0.65" stroke-width="1.5"/>
+    <rect x="5" y="5" width="56" height="56" rx="8" fill="none" stroke="#fde68a" stroke-opacity="0.5" stroke-width="1"/>
+    <text x="33" y="41" text-anchor="middle" fill="#fff7ed" font-family="'Pyidaungsu', 'Noto Serif Myanmar', serif" font-size="24" font-weight="700">ထက်</text>
+    <text x="33" y="56" text-anchor="middle" fill="#fecaca" font-family="'Inter', sans-serif" font-size="7.2" letter-spacing="1.4" font-weight="600">HTET SEAL</text>
+  </g>
+</svg>

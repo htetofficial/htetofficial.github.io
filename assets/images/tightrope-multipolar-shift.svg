@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="1000" height="520" role="img" aria-label="Europe, NATO, Russia-Ukraine War and the Transition to a Multipolar Global Order">
+  <defs>
+    <linearGradient id="mpBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B1324"/>
+      <stop offset="50%" stop-color="#111C35"/>
+      <stop offset="100%" stop-color="#19162B"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="520" rx="16" fill="url(#mpBg)"/>
+  <rect x="14" y="14" width="972" height="492" rx="12" fill="none" stroke="#94A3B8" stroke-opacity="0.28" stroke-width="1.2"/>
+
+  <!-- Header -->
+  <text x="42" y="50" font-family="ui-monospace, monospace" font-size="11.5" font-weight="bold" letter-spacing="2" fill="#38BDF8">FIGURE 04 • GLOBAL BALANCE OF POWER REALIGNMENT</text>
+  <text x="42" y="82" font-family="Pyidaungsu, sans-serif" font-size="22" font-weight="bold" fill="#FFFBEB">ဥရောပ၊ NATO၊ ယူကရိန်းစစ်ပွဲနှင့် ဗဟုဝင်ရိုး (Multipolar) ကမ္ဘာ့အခင်းအကျင်းသစ်</text>
+  <text x="42" y="106" font-family="Georgia, serif" font-size="13.5" font-style="italic" fill="#CBD5E1">From Post-Cold War Unipolarity to Fragmented Great-Power Spheres &amp; Strategic Autonomy</text>
+  <line x1="42" y1="122" x2="958" y2="122" stroke="#38BDF8" stroke-opacity="0.3"/>
+
+  <!-- Left Orbital Constellation Diagram -->
+  <g transform="translate(275, 315)">
+    <circle cx="0" cy="0" r="158" fill="none" stroke="#475569" stroke-opacity="0.45" stroke-dasharray="4 5"/>
+    <circle cx="0" cy="0" r="102" fill="none" stroke="#38BDF8" stroke-opacity="0.25"/>
+    <circle cx="0" cy="0" r="46" fill="#0F172A" stroke="#F59E0B" stroke-width="2"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#FDE68A">MULTIPOLAR</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Pyidaungsu, sans-serif" font-size="11" fill="#FFFBEB">ဗဟုဝင်ရိုးကမ္ဘာ</text>
+
+    <!-- Orbit Lines -->
+    <g stroke="#64748B" stroke-opacity="0.5" stroke-width="1.2">
+      <line x1="0" y1="-46" x2="0" y2="-122"/>
+      <line x1="40" y1="-22" x2="112" y2="-64"/>
+      <line x1="40" y1="22" x2="112" y2="64"/>
+      <line x1="0" y1="46" x2="0" y2="122"/>
+      <line x1="-40" y1="22" x2="-112" y2="64"/>
+      <line x1="-40" y1="-22" x2="-112" y2="-64"/>
+    </g>
+
+    <!-- 6 Power Poles -->
+    <!-- Top: US -->
+    <g transform="translate(0, -142)">
+      <rect x="-54" y="-20" width="108" height="38" rx="19" fill="#1E3A8A" stroke="#60A5FA" stroke-width="1.4"/>
+      <text x="0" y="4" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="bold" fill="#EFF6FF">USA</text>
+    </g>
+    <!-- Top Right: China -->
+    <g transform="translate(136, -74)">
+      <rect x="-56" y="-20" width="112" height="38" rx="19" fill="#7F1D1D" stroke="#F87171" stroke-width="1.4"/>
+      <text x="0" y="4" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="bold" fill="#FEF2F2">CHINA</text>
+    </g>
+    <!-- Bottom Right: Russia -->
+    <g transform="translate(136, 74)">
+      <rect x="-56" y="-20" width="112" height="38" rx="19" fill="#3F1D2E" stroke="#FB7185" stroke-width="1.4"/>
+      <text x="0" y="4" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="bold" fill="#FFE4E6">RUSSIA</text>
+    </g>
+    <!-- Bottom: ASEAN / Global South -->
+    <g transform="translate(0, 142)">
+      <rect x="-78" y="-20" width="156" height="38" rx="19" fill="#78350F" stroke="#F59E0B" stroke-width="1.4"/>
+      <text x="0" y="4" text-anchor="middle" font-family="Georgia, serif" font-size="11.5" font-weight="bold" fill="#FEF3C7">ASEAN &amp; SOUTH</text>
+    </g>
+    <!-- Bottom Left: India -->
+    <g transform="translate(-136, 74)">
+      <rect x="-56" y="-20" width="112" height="38" rx="19" fill="#064E3B" stroke="#34D399" stroke-width="1.4"/>
+      <text x="0" y="4" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="bold" fill="#ECFDF5">INDIA</text>
+    </g>
+    <!-- Top Left: EU / NATO -->
+    <g transform="translate(-136, -74)">
+      <rect x="-58" y="-20" width="116" height="38" rx="19" fill="#1E293B" stroke="#38BDF8" stroke-width="1.4"/>
+      <text x="0" y="4" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="bold" fill="#E0F2FE">EU / NATO</text>
+    </g>
+  </g>
+
+  <!-- Right Panel: 3 Structural Shifts -->
+  <g transform="translate(532, 146)">
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="426" height="104" rx="12" fill="#101D36" stroke="#38BDF8" stroke-opacity="0.45"/>
+      <text x="18" y="28" font-family="Pyidaungsu, sans-serif" font-size="14" font-weight="bold" fill="#7DD3FC">၁။ ဥရောပ လုံခြုံရေး ကိုယ်ပိုင်ရပ်တည်မှု (European Defense)</text>
+      <text x="18" y="54" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#E2E8F0">ယူကရိန်း–ရုရှားစစ်ပွဲနှင့် NATO ကာကွယ်ရေးအသုံးစရိတ်</text>
+      <text x="18" y="73" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#E2E8F0">ဝန်ထုပ်ဝန်ပိုးကြောင့် အနောက်အုပ်စု၏ အာရုံစိုက်မှုနှင့်</text>
+      <text x="18" y="92" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#94A3B8">အရင်းအမြစ်များ ဥရောပနှင့် အရှေ့အလယ်ပိုင်းသို့ ခွဲဝေနေရခြင်း</text>
+    </g>
+
+    <g transform="translate(0, 118)">
+      <rect x="0" y="0" width="426" height="104" rx="12" fill="#1E1428" stroke="#FB7185" stroke-opacity="0.45"/>
+      <text x="18" y="28" font-family="Pyidaungsu, sans-serif" font-size="14" font-weight="bold" fill="#FDA4AF">၂။ ရုရှား–တရုတ် နီးကပ်မှုနှင့် လက်နက်ကွန်ရက်</text>
+      <text x="18" y="54" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#E2E8F0">အနောက်ပိတ်ဆို့မှုများအောက်တွင် ရုရှားနှင့် တရုတ်၏</text>
+      <text x="18" y="73" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#E2E8F0">စွမ်းအင်၊ စစ်ရေးပူးပေါင်းမှုများသည် မြန်မာ့ပြည်တွင်း</text>
+      <text x="18" y="92" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#94A3B8">ပဋိပက္ခ၏ စစ်လက်နက်နှင့် သံတမန်ရေးအပေါ် သက်ရောက်ခြင်း</text>
+    </g>
+
+    <g transform="translate(0, 236)">
+      <rect x="0" y="0" width="426" height="104" rx="12" fill="#1E1B12" stroke="#F59E0B" stroke-opacity="0.5"/>
+      <text x="18" y="28" font-family="Pyidaungsu, sans-serif" font-size="14" font-weight="bold" fill="#FDE68A">၃။ နိုင်ငံငယ်များအတွက် သင်ခန်းစာ — အချုပ်အခြာအာဏာ</text>
+      <text x="18" y="54" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#FEF3C7">ဗဟုဝင်ရိုးကမ္ဘာတွင် အင်အားကြီးတစ်နိုင်ငံတည်းအပေါ်</text>
+      <text x="18" y="73" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#FEF3C7">ပုံအောမှီခိုခြင်းသည် အန္တရာယ်အကြီးဆုံးဖြစ်ပြီး၊</text>
+      <text x="18" y="92" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#FDE68A">အိန္ဒိယ၊ ASEAN နှင့် ဘက်စုံသံတမန်ရေး ချိန်ညှိမှုသာ ထွက်ပေါက်</text>
+    </g>
+  </g>
+</svg>

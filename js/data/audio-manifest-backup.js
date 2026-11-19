@@ -1,0 +1,248 @@
+window.HTET_AUDIO_MANIFEST_BACKUP = {
+  "engine": "Nara Mini v1 (Apache-2.0 — https://naraaudio.app)",
+  "default_voice": "htet-myat",
+  "tracks": {
+    "femininity-is-not-weakness": {
+      "url": "assets/audio/femininity-is-not-weakness.mp3",
+      "voice": "shoon",
+      "duration_sec": 218.4,
+      "size": "1.3 MB"
+    },
+    "jk-rowling-transgender-rights-uksc-2025": {
+      "url": "assets/audio/jk-rowling-transgender-rights-uksc-2025.mp3",
+      "voice": "shoon",
+      "duration_sec": 286.9,
+      "size": "1.6 MB"
+    },
+    "yoshi-rinrada-club-friday-interview-mm": {
+      "url": "assets/audio/yoshi-rinrada-club-friday-interview-mm.mp3",
+      "voice": "shoon",
+      "duration_sec": 702.2,
+      "size": "4.0 MB"
+    },
+    "overcoming-fear-standing-for-truth": {
+      "url": "assets/audio/overcoming-fear-standing-for-truth.mp3",
+      "voice": "shoon",
+      "duration_sec": 1119.1,
+      "size": "6.4 MB"
+    },
+    "i-have-a-dream-htet": {
+      "url": "assets/audio/i-have-a-dream-htet.mp3",
+      "voice": "shoon",
+      "duration_sec": 144.7,
+      "size": "848 KB"
+    },
+    "clothing-is-not-consent": {
+      "url": "assets/audio/clothing-is-not-consent.mp3",
+      "voice": "shoon",
+      "duration_sec": 131.1,
+      "size": "769 KB"
+    },
+    "the-rules-nobody-told-you": {
+      "url": "assets/audio/the-rules-nobody-told-you.mp3",
+      "voice": "shoon",
+      "duration_sec": 122.8,
+      "size": "720 KB"
+    },
+    "aung-san-suu-kyi-freedom-from-fear-1990-mm": {
+      "url": "assets/audio/aung-san-suu-kyi-freedom-from-fear-1990-mm.mp3",
+      "voice": "shoon",
+      "duration_sec": 892.3,
+      "size": "5.1 MB"
+    },
+    "aung-san-suu-kyi-1991-nobel-acceptance-speech-mm": {
+      "url": "assets/audio/aung-san-suu-kyi-1991-nobel-acceptance-speech-mm.mp3",
+      "voice": "shoon",
+      "duration_sec": 741.9,
+      "size": "4.2 MB"
+    },
+    "aung-san-suu-kyi-1991-nobel-acceptance-study": {
+      "url": "assets/audio/aung-san-suu-kyi-1991-nobel-acceptance-study.mp3",
+      "voice": "shoon",
+      "duration_sec": 208.5,
+      "size": "1.2 MB"
+    },
+    "malala-mandela-lecture-2023-gender-apartheid-study": {
+      "url": "assets/audio/malala-mandela-lecture-2023-gender-apartheid-study.mp3",
+      "voice": "shoon",
+      "duration_sec": 215.9,
+      "size": "1.2 MB"
+    },
+    "malala-yousafzai-nobel-lecture-2014-study": {
+      "url": "assets/audio/malala-yousafzai-nobel-lecture-2014-study.mp3",
+      "voice": "shoon",
+      "duration_sec": 250.2,
+      "size": "1.4 MB"
+    },
+    "who-owns-htet-identity-thoughts": {
+      "url": "assets/audio/who-owns-htet-identity-thoughts.mp3",
+      "voice": "shoon",
+      "duration_sec": 529.3,
+      "size": "3.0 MB"
+    },
+    "phoenix-from-ashes-history-written-in-tears": {
+      "url": "assets/audio/phoenix-from-ashes-history-written-in-tears.mp3",
+      "voice": "shoon",
+      "duration_sec": 406.1,
+      "size": "2.3 MB"
+    },
+    "when-stars-fall-are-prostitutes-laughing": {
+      "url": "assets/audio/when-stars-fall-are-prostitutes-laughing.mp3",
+      "voice": "shoon",
+      "duration_sec": 687.5,
+      "size": "3.9 MB"
+    },
+    "mosaic-brain-gender-neuroscience": {
+      "url": "assets/audio/mosaic-brain-gender-neuroscience.mp3",
+      "voice": "shoon",
+      "duration_sec": 401.6,
+      "size": "2.3 MB"
+    },
+    "cisgender-privilege-easy-mode": {
+      "url": "assets/audio/cisgender-privilege-easy-mode.mp3",
+      "voice": "shoon",
+      "duration_sec": 405.0,
+      "size": "2.3 MB"
+    },
+    "revolutionary-government-philosophy": {
+      "url": "assets/audio/revolutionary-government-philosophy.mp3",
+      "voice": "shoon",
+      "duration_sec": 2470.1,
+      "size": "14.1 MB"
+    },
+    "essential-future-skills-for-youth-digital-era": {
+      "url": "assets/audio/essential-future-skills-for-youth-digital-era.mp3",
+      "voice": "shoon",
+      "duration_sec": 456.6,
+      "size": "2.6 MB"
+    },
+    "from-the-margins-of-womanhood-trans-confession": {
+      "url": "assets/audio/from-the-margins-of-womanhood-trans-confession.mp3",
+      "voice": "shoon",
+      "duration_sec": 363.6,
+      "size": "2.1 MB"
+    },
+    "early-puberty-scientific-feminist-analysis": {
+      "url": "assets/audio/early-puberty-scientific-feminist-analysis.mp3",
+      "voice": "shoon",
+      "duration_sec": 448.0,
+      "size": "2.6 MB"
+    },
+    "honest-information-interview-cdm-htet": {
+      "url": "assets/audio/honest-information-interview-cdm-htet.mp3",
+      "voice": "shoon",
+      "duration_sec": 471.7,
+      "size": "2.7 MB"
+    },
+    "myanmar-earthquake-special-article-2025": {
+      "url": "assets/audio/myanmar-earthquake-special-article-2025.mp3",
+      "voice": "shoon",
+      "duration_sec": 437.0,
+      "size": "2.5 MB"
+    },
+    "honest-information-sham-election-analysis": {
+      "url": "assets/audio/honest-information-sham-election-analysis.mp3",
+      "voice": "shoon",
+      "duration_sec": 528.3,
+      "size": "3.0 MB"
+    },
+    "three-generation-gap-parents": {
+      "url": "assets/audio/three-generation-gap-parents.mp3",
+      "voice": "shoon",
+      "duration_sec": 713.7,
+      "size": "4.1 MB"
+    },
+    "myanmar-on-the-tightrope": {
+      "url": "assets/audio/myanmar-on-the-tightrope.mp3",
+      "voice": "shoon",
+      "duration_sec": 1307.3,
+      "size": "7.5 MB"
+    },
+    "who-defines-womanhood": {
+      "url": "assets/audio/who-defines-womanhood.mp3",
+      "voice": "shoon",
+      "duration_sec": 84.9,
+      "size": "498 KB"
+    },
+    "is-gender-a-social-construct": {
+      "url": "assets/audio/is-gender-a-social-construct.mp3",
+      "voice": "shoon",
+      "duration_sec": 109.8,
+      "size": "644 KB"
+    },
+    "from-jinggangshan-to-yanan": {
+      "url": "assets/audio/from-jinggangshan-to-yanan.mp3",
+      "voice": "shoon",
+      "duration_sec": 495.1,
+      "size": "2.8 MB"
+    },
+    "bodily-autonomy-workplace-ethics": {
+      "url": "assets/audio/bodily-autonomy-workplace-ethics.mp3",
+      "voice": "shoon",
+      "duration_sec": 979.7,
+      "size": "5.6 MB"
+    },
+    "clothing-culture-conflict": {
+      "url": "assets/audio/clothing-culture-conflict.mp3",
+      "voice": "shoon",
+      "duration_sec": 620.9,
+      "size": "3.6 MB"
+    },
+    "classrooms-of-spring-revolution": {
+      "url": "assets/audio/classrooms-of-spring-revolution.mp3",
+      "voice": "shoon",
+      "duration_sec": 1082.6,
+      "size": "6.2 MB"
+    },
+    "revolutionary-helen-keller": {
+      "url": "assets/audio/revolutionary-helen-keller.mp3",
+      "voice": "shoon",
+      "duration_sec": 741.7,
+      "size": "4.2 MB"
+    },
+    "war-on-child-grooming": {
+      "url": "assets/audio/war-on-child-grooming.mp3",
+      "voice": "shoon",
+      "duration_sec": 1101.7,
+      "size": "6.3 MB"
+    },
+    "the-world-is-growing-opportunities": {
+      "url": "assets/audio/the-world-is-growing-opportunities.mp3",
+      "voice": "shoon",
+      "duration_sec": 896.3,
+      "size": "5.1 MB"
+    },
+    "commufemocratism-manifesto": {
+      "url": "assets/audio/commufemocratism-manifesto.mp3",
+      "voice": "shoon",
+      "duration_sec": 101.1,
+      "size": "593 KB"
+    },
+    "the-road-of-slow-walkers": {
+      "url": "assets/audio/the-road-of-slow-walkers.mp3",
+      "voice": "shoon",
+      "duration_sec": 57.0,
+      "size": "334 KB"
+    },
+    "toxic-positivity-hidden-dangers": {
+      "url": "assets/audio/toxic-positivity-hidden-dangers.mp3",
+      "voice": "shoon",
+      "duration_sec": 327.4,
+      "size": "1.9 MB"
+    },
+    "daw-aung-san-suu-kyi-81st-birthday-tribute": {
+      "url": "assets/audio/daw-aung-san-suu-kyi-81st-birthday-tribute.mp3",
+      "voice": "shoon",
+      "duration_sec": 158.2,
+      "size": "928 KB"
+    },
+    "aung-san-suu-kyi-freedom-from-fear-1990-en": {
+      "url": "assets/audio/aung-san-suu-kyi-freedom-from-fear-1990-en.mp3",
+      "voice": "daniel-uk",
+      "duration_sec": 96.1,
+      "size": "1.5 MB",
+      "title": "Freedom from Fear (1990) — English Audio Study & Quotations",
+      "article_id": "aung-san-suu-kyi-freedom-from-fear-1990-mm"
+    }
+  }
+};

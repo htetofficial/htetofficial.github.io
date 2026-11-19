@@ -236,7 +236,7 @@
       const current = this.currentLang;
       const modal = document.createElement('div');
       modal.id = 'htet-lang-modal';
-      modal.className = 'fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-4 animate-fade-in';
+      modal.className = 'fixed inset-0 z-[99999] bg-black/60 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-4 animate-fade-in';
       modal.setAttribute('role', 'dialog');
       modal.setAttribute('aria-modal', 'true');
       modal.setAttribute('aria-label', 'Select Language');
@@ -384,10 +384,12 @@
       const dropdownBtn = document.getElementById('lang-dropdown-btn');
       if (!dropdownMenu) return;
 
-      const shouldOpen = (typeof forceState === 'boolean') ? forceState : dropdownMenu.classList.contains('hidden');
+      const isCurrentlyOpen = dropdownMenu.classList.contains('is-open') && !dropdownMenu.classList.contains('hidden');
+      const shouldOpen = (typeof forceState === 'boolean') ? forceState : !isCurrentlyOpen;
 
       if (shouldOpen) {
         dropdownMenu.classList.remove('hidden');
+        dropdownMenu.classList.add('is-open');
         if (dropdownBtn) {
           dropdownBtn.classList.add('is-open');
           dropdownBtn.setAttribute('aria-expanded', 'true');
@@ -395,6 +397,7 @@
         this.isDropdownOpen = true;
       } else {
         dropdownMenu.classList.add('hidden');
+        dropdownMenu.classList.remove('is-open');
         if (dropdownBtn) {
           dropdownBtn.classList.remove('is-open');
           dropdownBtn.setAttribute('aria-expanded', 'false');
@@ -408,10 +411,6 @@
     },
 
     bindControls() {
-      const isTouchOrSmallScreen = () => {
-        return (window.innerWidth < 768) || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || window.matchMedia('(pointer: coarse)').matches;
-      };
-
       // Header button click/touch handler
       document.addEventListener('click', (e) => {
         const dropdownBtn = e.target.closest('#lang-dropdown-btn');
@@ -425,12 +424,7 @@
 
         if (dropdownBtn) {
           e.preventDefault();
-          // On mobile screens (< 768px), open the deluxe touch sheet; on desktop, toggle dropdown
-          if (window.innerWidth < 768) {
-            this.openLanguageModal();
-          } else {
-            this.toggleDesktopDropdown();
-          }
+          this.toggleDesktopDropdown();
           return;
         }
 
@@ -455,7 +449,7 @@
 
         // Close dropdown when clicking outside
         const dropdownMenu = document.getElementById('lang-dropdown-menu');
-        if (dropdownMenu && !dropdownMenu.classList.contains('hidden') && !e.target.closest('#lang-dropdown-menu') && !e.target.closest('#lang-dropdown-btn')) {
+        if (dropdownMenu && (dropdownMenu.classList.contains('is-open') || !dropdownMenu.classList.contains('hidden')) && !e.target.closest('#lang-dropdown-menu') && !e.target.closest('#lang-dropdown-btn')) {
           this.closeDesktopDropdown();
         }
       });
@@ -470,6 +464,8 @@
   };
 
   window.I18n = I18n;
+  window.HtetI18n = I18n;
+  I18n.setLanguage = I18n.setLang.bind(I18n);
 
   // Instant synchronous execution if body is present, plus DOMContentLoaded sync
   if (document.body) {

@@ -1,0 +1,22 @@
+{
+  "versionCode": 10200,
+  "versionName": "1.2.0-beta",
+  "minSupportedVersion": "1.0.0",
+  "releaseDate": "2026-11-16",
+  "packageName": "com.htetofficial.app",
+  "apkUrl": "https://github.com/htetofficial/htetofficial.github.io/releases/tag/v1.2.0-beta",
+  "directDownloadUrl": "https://github.com/htetofficial/htetofficial.github.io/releases/download/v1.2.0-beta/htet-official-v1.2.0-beta.apk",
+  "releaseNotes": {
+    "mm": "Htet Official Android App (v1.2.0-beta) တရားဝင် ထွက်ရှိပါပြီ။ မြန်မာစာလုံးပေါင်း စနစ်သစ်၊ အော့ဖ်လိုင်း စာကြည့်တိုက်နှင့် မြန်ဆန်သော စာဖတ်အတွေ့အကြုံများ ပါဝင်ပါသည်။",
+    "en": "Htet Official Android App (v1.2.0-beta) released. Features offline research library, Pyidaungsu typography, and high-performance reading engine."
+  },
+  "sha256": "08:F8:1F:FE:9A:40:E1:81:F6:95:F4:6E:60:B9:1C:3B:65:95:AC:EF:AA:3C:CC:92:DC:44:EF:37:83:D0:A1:01",
+  "mandatory": false,
+  "features": [
+    "Offline Research Archive",
+    "14 Reading Themes & Palette Studio",
+    "5-Language Instant Translation",
+    "PDF Monograph Downloader",
+    "Trusted Web Activity (TWA) & Digital Asset Links"
+  ]
+}

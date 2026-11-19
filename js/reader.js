@@ -144,6 +144,11 @@
           percentEl.textContent = `${Math.round(progress)}%`;
         }
 
+        const drawerPercent = document.getElementById('drawer-scroll-percent');
+        const drawerBar = document.getElementById('drawer-progress-bar');
+        if (drawerPercent) drawerPercent.textContent = `${Math.round(progress)}%`;
+        if (drawerBar) drawerBar.style.width = `${progress}%`;
+
         // Top button subtle opacity indicator when at very top
         const topBtn = document.getElementById('article-scroll-top-btn');
         if (topBtn) {
@@ -1527,6 +1532,55 @@
       const menuBtn = document.getElementById('article-scroll-menu-btn');
       const flyout = document.getElementById('article-scroll-flyout');
       const companion = document.getElementById('floating-reading-companion');
+      const hideBtn = document.getElementById('article-scroll-hide-btn');
+
+      function getOrCreateArticleRestoreBtn() {
+        let restoreBtn = document.getElementById('article-scroll-restore-btn');
+        if (!restoreBtn) {
+          restoreBtn = document.createElement('button');
+          restoreBtn.id = 'article-scroll-restore-btn';
+          restoreBtn.className = 'hidden fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 w-9 h-9 rounded-full bg-card/90 dark:bg-stone-900/90 border border-hairline/80 shadow-lg flex items-center justify-center text-muted hover:text-vermilion hover:scale-110 active:scale-95 transition-all text-sm cursor-pointer glass-3d-pill no-print';
+          restoreBtn.title = 'ဖတ်ရှုမှု ကိရိယာများ ပြန်ဖော်ရန် (Restore Reading Hub)';
+          restoreBtn.setAttribute('aria-label', 'Restore Reading Hub');
+          restoreBtn.innerHTML = '<i class="ri-compass-3-line text-sm"></i>';
+          document.body.appendChild(restoreBtn);
+
+          restoreBtn.addEventListener('click', () => {
+            localStorage.removeItem('htet_all_in_one_hidden');
+            restoreBtn.classList.add('hidden');
+            if (companion) {
+              companion.classList.remove('all-in-one-dismissed');
+              companion.style.display = '';
+            }
+            if (window.HtetUI && typeof window.HtetUI.showToast === 'function') {
+              window.HtetUI.showToast('ဖတ်ရှုမှု ကိရိယာများ ပြန်လည်ဖော်ပြပြီးပါပြီ ✓');
+            }
+          });
+        }
+        return restoreBtn;
+      }
+
+      if (localStorage.getItem('htet_all_in_one_hidden') === 'true' && companion) {
+        companion.classList.add('all-in-one-dismissed');
+        companion.style.display = 'none';
+        const restoreBtn = getOrCreateArticleRestoreBtn();
+        restoreBtn.classList.remove('hidden');
+      }
+
+      if (hideBtn && companion) {
+        hideBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          localStorage.setItem('htet_all_in_one_hidden', 'true');
+          companion.classList.add('all-in-one-dismissed');
+          companion.style.display = 'none';
+          if (flyout) flyout.classList.add('hidden');
+          const restoreBtn = getOrCreateArticleRestoreBtn();
+          restoreBtn.classList.remove('hidden');
+          if (window.HtetUI && typeof window.HtetUI.showToast === 'function') {
+            window.HtetUI.showToast('ဖတ်ရှုမှု ကိရိယာခလုတ်ကို ဖျောက်ထားပါသည် (ပြန်ဖော်ရန် ညာဘက်အောက်ထောင့်ရှိ အိုင်ကွန်ကို နှိပ်ပါ)');
+          }
+        });
+      }
 
       if (menuBtn && flyout) {
         menuBtn.addEventListener('click', (e) => {

@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="title desc">
+  <title id="title">မိန်းကလေးတစ်ယောက်ရဲ့ Femininity ဟာ သူ့ရဲ့ Weakness မဟုတ်ဘူး — ထက် (Htet)</title>
+  <desc id="desc">Editorial cover artwork combining soft blush rose and bold midnight cinema crimson, featuring a faceted pink diamond shield intertwined with a blooming rose and lightning bolt symbolizing that femininity and courage coexist.</desc>
+  <defs>
+    <linearGradient id="bgPinkNoir" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0f24"/>
+      <stop offset="46%" stop-color="#3a1236"/>
+      <stop offset="80%" stop-color="#7a1c4b"/>
+      <stop offset="100%" stop-color="#be185d"/>
+    </linearGradient>
+
+    <radialGradient id="roseSpotlight" cx="77%" cy="46%" r="44%">
+      <stop offset="0%" stop-color="#fbcfe8" stop-opacity="0.34"/>
+      <stop offset="48%" stop-color="#f472b6" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#1a0f24" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="crimsonAura" cx="18%" cy="82%" r="48%">
+      <stop offset="0%" stop-color="#fb7185" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#1a0f24" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="goldPink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff1f2"/>
+      <stop offset="50%" stop-color="#f9a8d4"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+
+    <linearGradient id="shieldFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f472b6" stop-opacity="0.28"/>
+      <stop offset="50%" stop-color="#be185d" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#fde68a" stop-opacity="0.18"/>
+    </linearGradient>
+
+    <linearGradient id="barAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="55%" stop-color="#fb7185"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+
+    <linearGradient id="cardTint" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.11"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base Canvas -->
+  <rect width="1200" height="675" fill="url(#bgPinkNoir)"/>
+  <rect width="1200" height="675" fill="url(#roseSpotlight)"/>
+  <rect width="1200" height="675" fill="url(#crimsonAura)"/>
+
+  <!-- Subtle Cinema Film-Strip Perforations along right top/bottom edge (Horror/Action Cinema motif) -->
+  <g fill="#fbcfe8" opacity="0.12">
+    <rect x="740" y="42" width="18" height="10" rx="2"/>
+    <rect x="772" y="42" width="18" height="10" rx="2"/>
+    <rect x="804" y="42" width="18" height="10" rx="2"/>
+    <rect x="836" y="42" width="18" height="10" rx="2"/>
+    <rect x="868" y="42" width="18" height="10" rx="2"/>
+    <rect x="900" y="42" width="18" height="10" rx="2"/>
+    <rect x="932" y="42" width="18" height="10" rx="2"/>
+    <rect x="964" y="42" width="18" height="10" rx="2"/>
+    <rect x="996" y="42" width="18" height="10" rx="2"/>
+    <rect x="1028" y="42" width="18" height="10" rx="2"/>
+    <rect x="1060" y="42" width="18" height="10" rx="2"/>
+  </g>
+
+  <!-- Outer Editorial Double Frame -->
+  <rect x="26" y="26" width="1148" height="623" rx="18" fill="none" stroke="#f9a8d4" stroke-opacity="0.34" stroke-width="1.2"/>
+  <rect x="34" y="34" width="1132" height="607" rx="14" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="0.8"/>
+
+  <!-- Right Emblem: Faceted Pink Shield + Fearless Lightning + Blooming Rose Petals -->
+  <g transform="translate(920, 318)">
+    <!-- Concentric Orbits -->
+    <circle cx="0" cy="0" r="205" fill="none" stroke="#f9a8d4" stroke-opacity="0.2" stroke-width="1"/>
+    <circle cx="0" cy="0" r="162" fill="none" stroke="#fde68a" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="6 8"/>
+
+    <!-- Shattered Stereotype Box Fragments (floating dashed square breaking apart) -->
+    <g stroke="#fbcfe8" stroke-opacity="0.28" stroke-width="1.2" fill="none" stroke-dasharray="5 6">
+      <path d="M -130 -105 L -92 -128 L -112 -74"/>
+      <path d="M 118 -118 L 146 -88 L 106 -64"/>
+      <path d="M -134 78 L -104 114 L -74 92"/>
+      <path d="M 112 96 L 142 66 L 98 54"/>
+    </g>
+
+    <!-- Faceted Diamond-Shield ("Soft Pink + Unbreakable Courage") -->
+    <path d="M 0 -132 L 104 -86 L 90 36 C 82 88, 38 122, 0 142 C -38 122, -82 88, -90 36 L -104 -86 Z"
+          fill="url(#shieldFill)" stroke="url(#goldPink)" stroke-width="2.4" stroke-linejoin="round"/>
+    <!-- Inner Shield Facet -->
+    <path d="M 0 -112 L 84 -74 L 72 28 C 66 72, 30 100, 0 118 C -30 100, -66 72, -72 28 L -84 -74 Z"
+          fill="none" stroke="#fbcfe8" stroke-opacity="0.45" stroke-width="1.1"/>
+
+    <!-- Blooming Rose Silhouette inside lower-left & right of shield -->
+    <g fill="#f472b6" fill-opacity="0.24" stroke="#fbcfe8" stroke-width="1.3">
+      <path d="M 0 68 C -48 58, -68 18, -46 -18 C -22 -12, -8 24, 0 68 Z"/>
+      <path d="M 0 68 C 48 58, 68 18, 46 -18 C 22 -12, 8 24, 0 68 Z"/>
+      <path d="M 0 74 C -28 38, -28 -8, 0 -40 C 28 -8, 28 38, 0 74 Z" fill="#fbcfe8" fill-opacity="0.22"/>
+    </g>
+
+    <!-- Bold Courage Lightning Bolt rising through center of the Rose -->
+    <path d="M 12 -78 L -28 8 L 2 8 L -16 78 L 32 -12 L 2 -12 Z"
+          fill="url(#goldPink)" stroke="#ffffff" stroke-width="1.4" stroke-linejoin="round"/>
+
+    <!-- Sparkle Stars -->
+    <g fill="#fef3c7">
+      <path d="M 0 -164 L 3.5 -154 L 13 -150.5 L 3.5 -147 L 0 -137 L -3.5 -147 L -13 -150.5 L -3.5 -154 Z" opacity="0.92"/>
+      <circle cx="-116" cy="-16" r="3" opacity="0.8"/>
+      <circle cx="122" cy="-22" r="2.6" opacity="0.85"/>
+      <circle cx="108" cy="112" r="2.4" opacity="0.7"/>
+      <circle cx="-102" cy="126" r="2.2" opacity="0.65"/>
+    </g>
+
+    <!-- Caption under Shield -->
+    <text x="0" y="176" text-anchor="middle" fill="#fde68a" font-family="Georgia, serif" font-size="13" letter-spacing="2.8" font-weight="600">SOFT  •  BOLD  •  COMPLEX</text>
+    <text x="0" y="200" text-anchor="middle" fill="#fbcfe8" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="14">နူးညံ့နိုင်သလို ရဲရင့်ခိုင်မာနိုင်တဲ့ မိန်းကလေးများ</text>
+  </g>
+
+  <!-- Left Editorial Typography Column -->
+  <g transform="translate(72, 82)">
+    <!-- Category Pill -->
+    <rect x="0" y="0" width="402" height="34" rx="17" fill="#ffffff" fill-opacity="0.1" stroke="#f9a8d4" stroke-opacity="0.48" stroke-width="1"/>
+    <circle cx="20" cy="17" r="4.5" fill="#f472b6"/>
+    <text x="34" y="22" fill="#fef3c7" font-family="'Inter', -apple-system, sans-serif" font-size="12.2" font-weight="600" letter-spacing="1.5">FEMINIST CRITIQUE • CULTURAL ESSAY</text>
+
+    <!-- Kicker -->
+    <text x="2" y="72" fill="#f9a8d4" font-family="'Inter', sans-serif" font-size="16" font-weight="600" letter-spacing="0.9">BEYOND THE “TIMID GIRL” STEREOTYPE  •  #HTET</text>
+
+    <!-- Main Burmese Headline -->
+    <text x="0" y="132" fill="#ffffff" font-family="'Pyidaungsu', 'Noto Serif Myanmar', Georgia, serif" font-size="37" font-weight="700">မိန်းကလေးတစ်ယောက်ရဲ့ Femininity ဟာ</text>
+    <text x="0" y="186" fill="#fde68a" font-family="'Pyidaungsu', 'Noto Serif Myanmar', Georgia, serif" font-size="37" font-weight="700">သူ့ရဲ့ Weakness မဟုတ်ဘူး</text>
+
+    <!-- Accent Bar -->
+    <rect x="2" y="210" width="138" height="3.5" rx="2" fill="url(#barAccent)"/>
+
+    <!-- Subtitle -->
+    <text x="0" y="250" fill="#fce7f3" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="18.5" opacity="0.95">“ကြောက်တတ်တဲ့ ချစ်စရာကောင်မလေး” ဆိုတဲ့ ပုံစံခွက်ကို ကျော်လွန်ခြင်း</text>
+    <text x="0" y="282" fill="#f5d0fe" font-family="Georgia, serif" font-style="italic" font-size="16" opacity="0.88">Femininity Is Not Weakness — Humor, Stereotypes &amp; Full Human Complexity</text>
+
+    <!-- Featured Quote Card -->
+    <rect x="0" y="314" width="588" height="130" rx="14" fill="url(#cardTint)" stroke="#f9a8d4" stroke-opacity="0.34" stroke-width="1"/>
+    <rect x="0" y="314" width="5" height="130" rx="2.5" fill="url(#barAccent)"/>
+    <text x="24" y="348" fill="#fff1f2" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="15.8" font-weight="600">“Makeup လိမ်းထားတဲ့လက်နဲ့ action game ဆော့လို့ရသလို၊</text>
+    <text x="24" y="376" fill="#fff1f2" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="15.8" font-weight="600">dress လှလှလေးဝတ်ထားပြီး horror movie ကို popcorn စားရင်း</text>
+    <text x="24" y="404" fill="#fde68a" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="15.8" font-weight="600">အေးအေးဆေးဆေးကြည့်နေလို့လည်း ရတယ်။”</text>
+    <text x="24" y="432" fill="#f9a8d4" font-family="'Inter', 'Pyidaungsu', sans-serif" font-size="12.5" opacity="0.92">— ထက်မြတ်ဧကရီ (#Htet) • Htet Official Digital Archive</text>
+
+    <!-- Footer Metadata -->
+    <g transform="translate(0, 478)">
+      <text x="0" y="16" fill="#fff1f2" font-family="'Pyidaungsu', 'Noto Sans Myanmar', sans-serif" font-size="15" font-weight="600">ရေးသားသူ — ထက်မြတ်ဧကရီ (ထက်) • ဖီမီနစ်သဘောတရားနှင့် လူမှုရေးဝေဖန်ချက်</text>
+      <text x="0" y="42" fill="#f3e8ff" font-family="'Inter', sans-serif" font-size="12.5" opacity="0.82" letter-spacing="0.4">Htet Official Digital Archive  •  Gender &amp; Cultural Critique Essay  •  18 November 2026</text>
+    </g>
+  </g>
+
+  <!-- Artisanal Vermilion Hanko Seal ("ထက်") -->
+  <g transform="translate(1078, 558)">
+    <rect x="0" y="0" width="66" height="66" rx="12" fill="#b91c1c" fill-opacity="0.92" stroke="#fecaca" stroke-opacity="0.7" stroke-width="1.5"/>
+    <rect x="5" y="5" width="56" height="56" rx="8" fill="none" stroke="#fde68a" stroke-opacity="0.55" stroke-width="1"/>
+    <text x="33" y="41" text-anchor="middle" fill="#fff7ed" font-family="'Pyidaungsu', 'Noto Serif Myanmar', serif" font-size="24" font-weight="700">ထက်</text>
+    <text x="33" y="56" text-anchor="middle" fill="#fecaca" font-family="'Inter', sans-serif" font-size="7.2" letter-spacing="1.4" font-weight="600">HTET SEAL</text>
+  </g>
+</svg>

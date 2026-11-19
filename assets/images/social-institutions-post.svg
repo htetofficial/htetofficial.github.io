@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="title desc">
+  <title id="title">အဓိက အင်စတီကျူးရှင်း (၅) ခုနှင့် မာက်စ်ဝါဒီ ဝေဖန်ရေး — Sociology &amp; Critical Thinking Note</title>
+  <desc id="desc">Editorial illustration depicting the five core social institutions (Family, Education, Religion, Economy, Politics) and the critical Marxist inquiry into who the system truly benefits.</desc>
+  <defs>
+    <linearGradient id="bgCanvas" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d"/>
+      <stop offset="48%" stop-color="#141c2e"/>
+      <stop offset="100%" stop-color="#1f162b"/>
+    </linearGradient>
+    <radialGradient id="glowAmber" cx="72%" cy="42%" r="48%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.25"/>
+      <stop offset="55%" stop-color="#8b5cf6" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#0a0f1d" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldCol" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="critAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="50%" stop-color="#f43f5e"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <filter id="cardGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgCanvas)"/>
+  <rect width="1200" height="675" fill="url(#glowAmber)"/>
+
+  <!-- Editorial Double Border -->
+  <rect x="28" y="28" width="1144" height="619" rx="16" fill="none" stroke="#f59e0b" stroke-opacity="0.35" stroke-width="1.2"/>
+  <rect x="36" y="36" width="1128" height="603" rx="12" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="0.8"/>
+
+  <!-- Left Header Branding & Topic Tags -->
+  <g transform="translate(70, 75)">
+    <rect x="0" y="0" width="190" height="28" rx="6" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-opacity="0.4"/>
+    <text x="14" y="19" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#fde68a" letter-spacing="1">SOCIOLOGY • CRITICAL THOUGHT</text>
+
+    <text x="0" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="700" fill="#ffffff" letter-spacing="-0.5">
+      လူ့အဖွဲ့အစည်း၏ အဓိက အင်စတီကျူးရှင်း (၅) ခု
+    </text>
+    <text x="0" y="108" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="500" fill="#f59e0b">
+      The 5 Core Social Institutions &amp; The Marxist Critique
+    </text>
+
+    <!-- Subtitle Prompt -->
+    <rect x="0" y="135" width="520" height="42" rx="8" fill="#1e293b" fill-opacity="0.8" stroke="#334155" stroke-width="1"/>
+    <text x="16" y="161" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#f43f5e">
+      “ဒီစနစ်တွေဟာ လူတိုင်းအတွက်လား၊ အာဏာရှိသူတွေအတွက်လား?”
+    </text>
+  </g>
+
+  <!-- Left Center: Five Pillars Diagram List -->
+  <g transform="translate(70, 275)">
+    <!-- 1. Family -->
+    <g transform="translate(0, 0)">
+      <circle cx="16" cy="16" r="14" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="16" y="21" font-family="sans-serif" font-size="12" font-weight="bold" fill="#93c5fd" text-anchor="middle">၁</text>
+      <text x="42" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="16" font-weight="600" fill="#ffffff">မိသားစု (Family)</text>
+      <text x="42" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="12" fill="#94a3b8">လူသားမျိုးဆက်သစ် ပြုစုပျိုးထောင်ခြင်းနှင့် လူမှုကျင့်ဝတ် စတင်သင်ကြားခြင်း (Socialization)</text>
+    </g>
+
+    <!-- 2. Education -->
+    <g transform="translate(0, 56)">
+      <circle cx="16" cy="16" r="14" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.5"/>
+      <text x="16" y="21" font-family="sans-serif" font-size="12" font-weight="bold" fill="#6ee7b7" text-anchor="middle">၂</text>
+      <text x="42" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="16" font-weight="600" fill="#ffffff">ပညာရေး (Education)</text>
+      <text x="42" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="12" fill="#94a3b8">ယဉ်ကျေးမှု၊ ဗဟုသုတနှင့် နည်းပညာ အသိပညာများကို လက်ဆင့်ကမ်း သင်ကြားပေးခြင်း</text>
+    </g>
+
+    <!-- 3. Religion -->
+    <g transform="translate(0, 112)">
+      <circle cx="16" cy="16" r="14" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="1.5"/>
+      <text x="16" y="21" font-family="sans-serif" font-size="12" font-weight="bold" fill="#c4b5fd" text-anchor="middle">၃</text>
+      <text x="42" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="16" font-weight="600" fill="#ffffff">ဘာသာရေး (Religion)</text>
+      <text x="42" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="12" fill="#94a3b8">ဘဝ၏ အဓိပ္ပာယ်ကို ရှာဖွေပေးခြင်း၊ စိတ်ပိုင်းဆိုင်ရာ နှစ်သိမ့်မှုနှင့် ကိုယ်ကျင့်တရား</text>
+    </g>
+
+    <!-- 4. Economy -->
+    <g transform="translate(0, 168)">
+      <circle cx="16" cy="16" r="14" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1.5"/>
+      <text x="16" y="21" font-family="sans-serif" font-size="12" font-weight="bold" fill="#fde68a" text-anchor="middle">၄</text>
+      <text x="42" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="16" font-weight="600" fill="#ffffff">စီးပွားရေး (Economy)</text>
+      <text x="42" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="12" fill="#94a3b8">အသက်ရှင်ရန် လိုအပ်သော အစားအစာ၊ အဝတ်အထည်၊ နေရာထိုင်ခင်း ထုတ်လုပ်ခွဲဝေခြင်း</text>
+    </g>
+
+    <!-- 5. Politics / Government -->
+    <g transform="translate(0, 224)">
+      <circle cx="16" cy="16" r="14" fill="#ef4444" fill-opacity="0.2" stroke="#ef4444" stroke-width="1.5"/>
+      <text x="16" y="21" font-family="sans-serif" font-size="12" font-weight="bold" fill="#fca5a5" text-anchor="middle">၅</text>
+      <text x="42" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="16" font-weight="600" fill="#ffffff">အစိုးရနှင့် နိုင်ငံရေး (Politics &amp; Government)</text>
+      <text x="42" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="12" fill="#94a3b8">ဥပဒေပြဋ္ဌာန်းခြင်း၊ စည်းကမ်းနှင့် တရားဥပဒေစိုးမိုးရေး ထိန်းသိမ်းခြင်း</text>
+    </g>
+  </g>
+
+  <!-- Right Visual: The Architectural Temple of Institutions & The Critical Inspection Lens -->
+  <g transform="translate(680, 110)">
+    <!-- Architectural Pediment / Roof -->
+    <path d="M 40,90 L 230,20 L 420,90 Z" fill="#1e293b" stroke="#f59e0b" stroke-width="2.5" filter="url(#cardGlow)"/>
+    <text x="230" y="65" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="bold" fill="#fde68a" text-anchor="middle" letter-spacing="2">SOCIAL INSTITUTIONS</text>
+
+    <!-- Entablature Beam -->
+    <rect x="30" y="90" width="400" height="20" rx="3" fill="#334155" stroke="#f59e0b" stroke-width="1"/>
+
+    <!-- 5 Classical Pillars -->
+    <!-- Pillar 1: Family -->
+    <g transform="translate(50, 110)">
+      <rect x="0" y="0" width="46" height="260" rx="4" fill="url(#goldCol)" fill-opacity="0.85"/>
+      <rect x="-4" y="0" width="54" height="12" rx="2" fill="#fde68a"/>
+      <rect x="-4" y="248" width="54" height="12" rx="2" fill="#d97706"/>
+      <text x="23" y="140" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle" transform="rotate(-90 23 140)">မိသားစု</text>
+    </g>
+
+    <!-- Pillar 2: Education -->
+    <g transform="translate(130, 110)">
+      <rect x="0" y="0" width="46" height="260" rx="4" fill="url(#goldCol)" fill-opacity="0.85"/>
+      <rect x="-4" y="0" width="54" height="12" rx="2" fill="#fde68a"/>
+      <rect x="-4" y="248" width="54" height="12" rx="2" fill="#d97706"/>
+      <text x="23" y="140" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle" transform="rotate(-90 23 140)">ပညာရေး</text>
+    </g>
+
+    <!-- Pillar 3: Religion -->
+    <g transform="translate(210, 110)">
+      <rect x="0" y="0" width="46" height="260" rx="4" fill="url(#goldCol)" fill-opacity="0.85"/>
+      <rect x="-4" y="0" width="54" height="12" rx="2" fill="#fde68a"/>
+      <rect x="-4" y="248" width="54" height="12" rx="2" fill="#d97706"/>
+      <text x="23" y="140" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle" transform="rotate(-90 23 140)">ဘာသာရေး</text>
+    </g>
+
+    <!-- Pillar 4: Economy -->
+    <g transform="translate(290, 110)">
+      <rect x="0" y="0" width="46" height="260" rx="4" fill="url(#goldCol)" fill-opacity="0.85"/>
+      <rect x="-4" y="0" width="54" height="12" rx="2" fill="#fde68a"/>
+      <rect x="-4" y="248" width="54" height="12" rx="2" fill="#d97706"/>
+      <text x="23" y="140" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle" transform="rotate(-90 23 140)">စီးပွားရေး</text>
+    </g>
+
+    <!-- Pillar 5: Politics -->
+    <g transform="translate(370, 110)">
+      <rect x="0" y="0" width="46" height="260" rx="4" fill="url(#goldCol)" fill-opacity="0.85"/>
+      <rect x="-4" y="0" width="54" height="12" rx="2" fill="#fde68a"/>
+      <rect x="-4" y="248" width="54" height="12" rx="2" fill="#d97706"/>
+      <text x="23" y="140" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle" transform="rotate(-90 23 140)">နိုင်ငံရေး</text>
+    </g>
+
+    <!-- Temple Foundation Plinth -->
+    <rect x="20" y="370" width="420" height="24" rx="4" fill="#334155" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="230" y="386" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle" letter-spacing="1">FOUNDATION OF HUMAN CIVILIZATION</text>
+
+    <!-- Overlay Callout: Karl Marx Critical Lens -->
+    <g transform="translate(20, 415)">
+      <rect x="0" y="0" width="420" height="74" rx="10" fill="#450a0a" fill-opacity="0.9" stroke="#f43f5e" stroke-width="1.5" filter="url(#cardGlow)"/>
+      <text x="18" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="13" font-weight="bold" fill="#fda4af">
+        Karl Marx's Critique:
+      </text>
+      <text x="18" y="46" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" fill="#fecdd3">
+        “အင်စတီကျူးရှင်းတွေဟာ အာဏာရှိသူတွေက သူတို့ရဲ့ အာဏာနဲ့ စည်းစိမ်ကို
+      </text>
+      <text x="18" y="62" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" fill="#fecdd3">
+        ဆက်လက်ထိန်းသိမ်းထားဖို့ တည်ဆောက်ထားတဲ့ လက်နက်တွေသာ ဖြစ်တယ်”
+      </text>
+    </g>
+  </g>
+
+  <!-- Bottom Metadata Footer -->
+  <g transform="translate(70, 600)">
+    <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">
+      Htet Official Journal • IdeaHub Myanmar (2026-08-31) • Author: Htet Myat Ekri
+    </text>
+    <text x="1060" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#f59e0b" text-anchor="end" font-weight="600">
+      t.me/ideahubmyanmarv2
+    </text>
+  </g>
+</svg>

@@ -123,5 +123,5 @@
 
 ## 📬 တရားဝင် ဆက်သွယ်ရန် (Official Contact)
 
-* **Email:** `htethtet2025ideahub@gmail.com`
+* **Email:**  | `htethtet2025ideahub@gmail.com`
 * **Telegram:** [@htetmmofficial](https://t.me/htetmmofficial)

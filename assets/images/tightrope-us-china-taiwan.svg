@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="1000" height="520" role="img" aria-label="US-China Rivalry, Taiwan Strait Flashpoint, and Spillover Impact on Myanmar">
+  <defs>
+    <linearGradient id="twBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1024"/>
+      <stop offset="55%" stop-color="#141830"/>
+      <stop offset="100%" stop-color="#22101A"/>
+    </linearGradient>
+    <linearGradient id="clashLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="50%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="520" rx="16" fill="url(#twBg)"/>
+  <rect x="14" y="14" width="972" height="492" rx="12" fill="none" stroke="#F59E0B" stroke-opacity="0.28" stroke-width="1.2"/>
+
+  <!-- Header -->
+  <text x="42" y="50" font-family="ui-monospace, monospace" font-size="11.5" font-weight="bold" letter-spacing="2" fill="#FDE68A">FIGURE 03 • INDO-PACIFIC FLASHPOINTS &amp; TAIWAN STRAIT</text>
+  <text x="42" y="82" font-family="Pyidaungsu, sans-serif" font-size="22" font-weight="bold" fill="#FFFBEB">အမေရိကန်–တရုတ် မဟာဗျူဟာပြိုင်ဆိုင်မှု၊ ထိုင်ဝမ်အရေးနှင့် ဒေသတွင်းသက်ရောက်မှု</text>
+  <text x="42" y="106" font-family="Georgia, serif" font-size="13.5" font-style="italic" fill="#CBD5E1">Semiconductor Decoupling, First Island Chain Deterrence &amp; Why Taiwan Tensions Elevate Myanmar's Backdoor Value</text>
+  <line x1="42" y1="122" x2="958" y2="122" stroke="#F59E0B" stroke-opacity="0.3"/>
+
+  <!-- 3 Interlocking Strategic Arenas -->
+  <!-- Arena 1: US Deterrence -->
+  <g transform="translate(42, 146)">
+    <rect x="0" y="0" width="286" height="232" rx="12" fill="#0E1B38" stroke="#3B82F6" stroke-opacity="0.55" stroke-width="1.4"/>
+    <rect x="0" y="0" width="286" height="6" rx="3" fill="#3B82F6"/>
+    <text x="143" y="34" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" letter-spacing="1.2" fill="#93C5FD">U.S. &amp; ALLIES</text>
+    <text x="143" y="55" text-anchor="middle" font-family="Pyidaungsu, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">ပထမကျွန်းစုကွင်းဆက် ထိန်းချုပ်မှု</text>
+    <line x1="24" y1="70" x2="262" y2="70" stroke="#3B82F6" stroke-opacity="0.3"/>
+    <text x="22" y="96" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#DBEAFE">• Japan • Philippines • AUKUS • Quad</text>
+    <text x="22" y="122" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#CBD5E1">• AI နှင့် Semiconductor ချစ်ပ်ပြား</text>
+    <text x="30" y="140" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#CBD5E1">တင်ပို့မှု ကန့်သတ်ပိတ်ဆို့ခြင်း</text>
+    <text x="22" y="168" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#CBD5E1">• ထိုင်ဝမ်ရေလက်ကြား စစ်ရေးဟန့်တားမှု</text>
+    <text x="22" y="196" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#93C5FD">• တောင်တရုတ်ပင်လယ် ရေကြောင်းလွတ်လပ်ခွင့်</text>
+  </g>
+
+  <!-- Center Focal Node: Taiwan Strait -->
+  <g transform="translate(362, 152)">
+    <circle cx="138" cy="110" r="102" fill="#1E1B3A" stroke="url(#clashLine)" stroke-width="2.5"/>
+    <circle cx="138" cy="110" r="82" fill="none" stroke="#F59E0B" stroke-opacity="0.35" stroke-dasharray="5 4"/>
+    <text x="138" y="64" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" font-weight="bold" letter-spacing="1.5" fill="#FDE68A">EPICENTER</text>
+    <text x="138" y="96" text-anchor="middle" font-family="Pyidaungsu, sans-serif" font-size="20" font-weight="bold" fill="#FFFBEB">ထိုင်ဝမ်အရေး</text>
+    <text x="138" y="120" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-style="italic" fill="#FDE68A">Taiwan Strait</text>
+    <text x="138" y="146" text-anchor="middle" font-family="Pyidaungsu, sans-serif" font-size="11.5" fill="#CBD5E1">ကမ္ဘာ့အဆင့်မြင့် ချစ်ပ်ပြား</text>
+    <text x="138" y="164" text-anchor="middle" font-family="Pyidaungsu, sans-serif" font-size="11.5" fill="#CBD5E1">ထောက်ပံ့ကွင်းဆက်၏ နှလုံးသား</text>
+  </g>
+
+  <!-- Connector Arrows to Epicenter -->
+  <line x1="328" y1="262" x2="394" y2="262" stroke="#60A5FA" stroke-width="2.5"/>
+  <line x1="606" y1="262" x2="672" y2="262" stroke="#F87171" stroke-width="2.5"/>
+
+  <!-- Arena 2: Beijing Counter-Strategy -->
+  <g transform="translate(672, 146)">
+    <rect x="0" y="0" width="286" height="232" rx="12" fill="#241019" stroke="#EF4444" stroke-opacity="0.55" stroke-width="1.4"/>
+    <rect x="0" y="0" width="286" height="6" rx="3" fill="#DC2626"/>
+    <text x="143" y="34" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" letter-spacing="1.2" fill="#FCA5A5">CHINA (PRC)</text>
+    <text x="143" y="55" text-anchor="middle" font-family="Pyidaungsu, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">နည်းပညာကိုယ်ပိုင်ရပ်တည်ရေးနှင့် စင်္ကြံ</text>
+    <line x1="24" y1="70" x2="262" y2="70" stroke="#EF4444" stroke-opacity="0.3"/>
+    <text x="22" y="96" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#FEE2E2">• Core Interest — တရုတ်တစ်နိုင်ငံတည်းမူ</text>
+    <text x="22" y="122" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#CBD5E1">• ပစိဖိတ်ရေကြောင်း ပိတ်ဆို့ခံရပါက</text>
+    <text x="30" y="140" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#CBD5E1">မြန်မာမှတစ်ဆင့် အိန္ဒိယသမုဒ္ဒရာ ထွက်ပေါက်</text>
+    <text x="22" y="168" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#CBD5E1">• BRICS နှင့် ယွမ်ငွေကြေး စီးပွားရေးကွန်ရက်</text>
+    <text x="22" y="196" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#FCA5A5">• မဟာဗျူဟာ နောက်ဖေးတံခါး လုံခြုံရေး</text>
+  </g>
+
+  <!-- Bottom Spillover Impact Strip on Myanmar -->
+  <g transform="translate(42, 400)">
+    <rect x="0" y="0" width="916" height="84" rx="12" fill="#1E1B2E" stroke="#F59E0B" stroke-opacity="0.55" stroke-width="1.4"/>
+    <rect x="0" y="0" width="6" height="84" rx="3" fill="#F59E0B"/>
+    <text x="24" y="29" font-family="Pyidaungsu, sans-serif" font-size="14" font-weight="bold" fill="#FDE68A">မြန်မာနိုင်ငံအပေါ် တိုက်ရိုက်သက်ရောက်မှု (Strategic Spillover on Myanmar)</text>
+    <text x="24" y="54" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#F1F5F9">ထိုင်ဝမ်နှင့် တောင်တရုတ်ပင်လယ် တင်းမာမှု မြင့်တက်လာလေလေ — တရုတ်အတွက် မြန်မာ့ကုန်းလမ်း/ရေလမ်း စင်္ကြံသည် “အသက်သွေးကြော”</text>
+    <text x="24" y="73" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#CBD5E1">ဖြစ်လာပြီး၊ အမေရိကန်အတွက်လည်း ဒေသတွင်း ထိန်းညှိရေးနယ်မြေအဖြစ် ဖိအားနှစ်ဖက်ကြား ကြိုးတန်းပေါ် ပိုမိုကျဉ်းမြောင်းလာစေသည်။</text>
+  </g>
+</svg>

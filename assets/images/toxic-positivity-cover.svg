@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="title desc">
+  <title id="title">အကောင်းမြင်လွန်းရင် ဘာဖြစ်မလဲ? — Toxic Positivity ၏ နောက်ကွယ်က မမြင်နိုင်သော အန္တရာယ်များ</title>
+  <desc id="desc">Editorial artwork depicting the psychological contrast between toxic positivity (forced optimism and emotional suppression) and healthy realism grounded in self-acceptance.</desc>
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16"/>
+      <stop offset="48%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1f102a"/>
+    </linearGradient>
+
+    <!-- Warm Amber / Rose Glow -->
+    <radialGradient id="sunGlow" cx="72%" cy="42%" r="52%">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.32"/>
+      <stop offset="50%" stop-color="#f43f5e" stop-opacity="0.18"/>
+      <stop offset="85%" stop-color="#090d16" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Split Mask Gradients -->
+    <linearGradient id="forcedSmileGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="60%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+
+    <linearGradient id="trueSelfGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="60%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#312e81"/>
+    </linearGradient>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000000" flood-opacity="0.65"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="675" fill="url(#bgGrad)"/>
+  <rect width="1200" height="675" fill="url(#sunGlow)"/>
+
+  <!-- Editorial Double Border -->
+  <rect x="28" y="28" width="1144" height="619" rx="16" fill="none" stroke="#f59e0b" stroke-opacity="0.35" stroke-width="1.2"/>
+  <rect x="36" y="36" width="1128" height="603" rx="12" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="0.8"/>
+
+  <!-- Right Visual: The Mask of Forced Optimism vs The Depths of True Emotional Balance -->
+  <g transform="translate(680, 85)">
+    <!-- Ambient Halo -->
+    <circle cx="230" cy="240" r="190" fill="#f43f5e" opacity="0.1" filter="url(#softGlow)"/>
+
+    <!-- Central Two-Sided Psychological Emblem -->
+    <!-- Outer Frame of Balance -->
+    <circle cx="230" cy="240" r="160" fill="#0f172a" stroke="#334155" stroke-width="2" filter="url(#softGlow)"/>
+
+    <!-- Left Side of Head: Emotional Reality / Truth (Deep Indigo & Real Stars) -->
+    <path d="M 230,90 C 145,90 110,150 110,240 C 110,320 150,380 230,390 Z" fill="#1e1b4b" stroke="#6366f1" stroke-width="1.5"/>
+    <!-- Gentle tear/rain drops transforming into seeds of resilience -->
+    <g fill="#93c5fd" opacity="0.8">
+      <circle cx="160" cy="180" r="2.5"/>
+      <circle cx="140" cy="240" r="3"/>
+      <circle cx="170" cy="290" r="2"/>
+      <circle cx="190" cy="340" r="2.5"/>
+    </g>
+
+    <!-- Right Side of Head: The Artificial Yellow Smiling Mask Being Examined -->
+    <path d="M 230,90 C 315,90 350,150 350,240 C 350,320 310,380 230,390 Z" fill="url(#forcedSmileGrad)" opacity="0.9" stroke="#f59e0b" stroke-width="2"/>
+
+    <!-- The Forced Smile Curve (Rigid, unnatural grin) -->
+    <path d="M 255,270 Q 290,320 325,270" stroke="#78350f" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+    <ellipse cx="290" cy="200" rx="9" ry="12" fill="#78350f"/>
+
+    <!-- The Divider: Breaking Through the Façade -->
+    <line x1="230" y1="80" x2="230" y2="400" stroke="#ffffff" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.6"/>
+
+    <!-- Top Callout Banner -->
+    <g transform="translate(130, 60)">
+      <rect x="0" y="0" width="200" height="32" rx="16" fill="#1e293b" stroke="#f59e0b" stroke-width="1.2" filter="url(#softGlow)"/>
+      <text x="100" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11.5" font-weight="700" fill="#fef08a" text-anchor="middle">
+        TOXIC vs HEALTHY
+      </text>
+    </g>
+
+    <!-- Lower Quote Plaque -->
+    <g transform="translate(60, 420)">
+      <rect x="0" y="0" width="340" height="48" rx="10" fill="#0f172a" stroke="#4338ca" stroke-width="1.2" filter="url(#softGlow)"/>
+      <text x="170" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11.5" font-weight="600" fill="#cbd5e1" text-anchor="middle">
+        “အမှန်တရားကို ရင်ဆိုင်ရင်း အကောင်းမြင်တတ်ဖို့”
+      </text>
+      <text x="170" y="38" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">
+        Emotional Acceptance &gt; Forced Positivity
+      </text>
+    </g>
+  </g>
+
+  <!-- Left Editorial Typography & Content Pillars -->
+  <g transform="translate(70, 75)">
+    <!-- Header Pill -->
+    <rect x="0" y="0" width="250" height="28" rx="6" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-opacity="0.4"/>
+    <text x="14" y="19" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#fde68a" letter-spacing="1">PSYCHOLOGY • MENTAL HEALTH</text>
+
+    <!-- Main Title -->
+    <text x="0" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="33" font-weight="700" fill="#ffffff" letter-spacing="-0.5">
+      အကောင်းမြင်လွန်းရင် ဘာဖြစ်မလဲ?
+    </text>
+    <text x="0" y="104" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="19" font-weight="500" fill="url(#forcedSmileGrad)">
+      The Hidden Dangers of Toxic Positivity &amp; The Path to Healthy Realism
+    </text>
+
+    <!-- Subtitle Card -->
+    <g transform="translate(0, 130)">
+      <rect x="0" y="0" width="530" height="85" rx="10" fill="#1e1b4b" fill-opacity="0.75" stroke="#4338ca" stroke-width="1.2"/>
+      <line x1="0" y1="0" x2="0" y2="85" stroke="#f59e0b" stroke-width="4"/>
+      <text x="20" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="13" font-weight="600" fill="#fef08a">
+        “စိတ်ဓာတ်ကျမနေပါနဲ့၊ အရာအားလုံး အဆင်ပြေသွားမှာပါ”
+      </text>
+      <text x="20" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="12" fill="#e2e8f0">
+        လက်တွေ့ပြဿနာတွေကို မျက်ကွယ်ပြုပြီး အတင်းပြုံးခိုင်းနေခြင်းသည် အကောင်းမြင်စိတ်မဟုတ်၊
+      </text>
+      <text x="20" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="12" fill="#fca5a5">
+        ခံစားချက်များကို ဖိနှိပ်စေသော အဆိပ်သင့် အကောင်းမြင်ဝါဒ (Toxic Positivity) သာဖြစ်သည်။
+      </text>
+    </g>
+
+    <!-- 4 Hazards of Excessive Optimism -->
+    <g transform="translate(0, 235)">
+      <!-- 1 -->
+      <g transform="translate(0, 0)">
+        <circle cx="12" cy="12" r="10" fill="#ef4444" fill-opacity="0.25" stroke="#ef4444" stroke-width="1.2"/>
+        <text x="12" y="16" font-family="sans-serif" font-size="10" font-weight="bold" fill="#fca5a5" text-anchor="middle">၁</text>
+        <text x="32" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="13.5" font-weight="600" fill="#ffffff">ခံစားချက်များကို ဖိနှိပ်ထားမိခြင်း (Emotional Repression)</text>
+        <text x="32" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" fill="#94a3b8">ဝမ်းနည်းမှုများကို အပြင်မထုတ်ရဲဘဲ ဖိသိပ်ထားရာမှ ပိုကြီးမားသော စိုးရိမ်သောကဖြစ်လာခြင်း</text>
+      </g>
+
+      <!-- 2 -->
+      <g transform="translate(0, 48)">
+        <circle cx="12" cy="12" r="10" fill="#f59e0b" fill-opacity="0.25" stroke="#f59e0b" stroke-width="1.2"/>
+        <text x="12" y="16" font-family="sans-serif" font-size="10" font-weight="bold" fill="#fde68a" text-anchor="middle">၂</text>
+        <text x="32" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="13.5" font-weight="600" fill="#ffffff">ပြဿနာများကို ဖြေရှင်းရန် ပျက်ကွက်ခြင်း (Failure to Solve Problems)</text>
+        <text x="32" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" fill="#94a3b8">“အဆင်ပြေသွားမှာပါ” ဆိုသော စကားလုံးနောက်တွင် ပုန်းကွယ်ရင်း ပြဿနာအရင်းအမြစ်ကို မဖြေရှင်းနိုင်ခြင်း</text>
+      </g>
+
+      <!-- 3 -->
+      <g transform="translate(0, 96)">
+        <circle cx="12" cy="12" r="10" fill="#8b5cf6" fill-opacity="0.25" stroke="#a855f7" stroke-width="1.2"/>
+        <text x="12" y="16" font-family="sans-serif" font-size="10" font-weight="bold" fill="#d8b4fe" text-anchor="middle">၃</text>
+        <text x="32" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="13.5" font-weight="600" fill="#ffffff">ဝမ်းနည်းမိသည့်အတွက် အပြစ်ရှိသလို ခံစားရခြင်း (Secondary Guilt)</text>
+        <text x="32" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" fill="#94a3b8">“ငါဘာလို့ အကောင်းမမြင်နိုင်ရတာလဲ” ဟု ကိုယ့်ကိုယ်ကိုယ် ပြန်အပြစ်တင်မိသည့် ဖိအား</text>
+      </g>
+
+      <!-- 4 -->
+      <g transform="translate(0, 144)">
+        <circle cx="12" cy="12" r="10" fill="#3b82f6" fill-opacity="0.25" stroke="#3b82f6" stroke-width="1.2"/>
+        <text x="12" y="16" font-family="sans-serif" font-size="10" font-weight="bold" fill="#93c5fd" text-anchor="middle">၄</text>
+        <text x="32" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="13.5" font-weight="600" fill="#ffffff">ဆက်ဆံရေးများ ထိခိုက်ခြင်း (Erosion of Genuine Empathy)</text>
+        <text x="32" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', sans-serif" font-size="11" fill="#94a3b8">နားထောင်မပေးဘဲ အလောတကြီး အကြံပေးခြင်းက တစ်ဖက်လူ၏ နာကျင်မှုကို တန်ဖိုးမဲ့စေသည်</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom Metadata Footer -->
+  <g transform="translate(70, 600)">
+    <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">
+      Htet Official Research Paper &amp; Essay Archive • June 29, 2026 • Author: Htet Myat Ekri
+    </text>
+    <text x="1060" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Pyidaungsu', 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#f59e0b" text-anchor="end" font-weight="600">
+      #MentalHealth #ToxicPositivity #Htet
+    </text>
+  </g>
+</svg>

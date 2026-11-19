@@ -6,7 +6,7 @@
 **Nationality / Origin:** Myanmar (Burma)  
 **Specialization:** Political Philosophy, Radical & Intersectional Feminism, Labor Rights, Generational Sociology  
 **Official Portal:** https://htetofficial.github.io  
-**Contact / Verification Email:** htethtet2025ideahub@gmail.com  
+**Contact / Verification Emails:** htethtet2025ideahub@gmail.com | htetmyatekri@icloud.com  
 **Official Telegram:** https://t.me/htetmmofficial  
 **Dossier Revision Date:** November 2026  
 
@@ -34,10 +34,8 @@ Commufemocratism is a rigorous tripartite political philosophy formulated across
    - Sociological analysis of the profound epistemic rift separating Gen Z from older generations shaped by isolationism and authoritarian survivalism.
 
 ### 1.4 Institutional Accreditations & Honors
-- **မြန်မာ့နွေဦးတက္ကသိုလ် (MNOU / MYSU) တရားဝင် ဂုဏ်ပြုဆု (Certificate of Honor - Dec 2025)၊ Spring University Myanmar (SUM) – School of Political Science:** Academic Excellence and Distinction in Political Science and Democratic Theory.
-- **Myanmar Institute of Peace Studies (MIPS):** Certified training in Conflict Analysis, Transitional Justice, and Peacebuilding Frameworks.
-- **Myanmar Nway-Oo University (MNOU / MYSU):** Certificate of Honor (Dec 2025) for Seminal Research Paper on Revolutionary Classrooms and Federal Dream.
-- **มหาวิทยาลัยนวยอูแห่งเมียนมา (Myanmar Nway-Oo University / MNOU):** ได้รับใบประกาศเกียรติคุณยอดเยี่ยม (Certificate of Honor - Dec 2025)
+- **Myanmar Nway-Oo University (MNOU / MYSU):** Selected Research Essay & Official Certificate of Honor (3rd Anniversary Annual Magazine, December 2025) for her seminal paper on Revolutionary Classrooms and the Federal Dream — awarded as an independent self-directed scholar.
+- **IdeaHub Myanmar & Open Digital Library:** Founder & Chief Curator (est. 2024), curating 1,522+ open-access academic books and research papers.
 - **Women Nation:** Founder and Lead Research Editor, advocating for Myanmar women and LGBTQ+ rights.
 - **For The Future Organization - Myanmar:** Senior Content Writer; awarded **Certificate of Appreciation (November 2026)** for outstanding dedication and volunteer participation.
 
@@ -65,9 +63,8 @@ Commufemocratism is a rigorous tripartite political philosophy formulated across
    - 剖析威权家长制与Z世代自由独立意识之间的代际哲学冲突。
 
 ### 2.4 院校资历与官方嘉奖
-- **缅甸春季大学（Spring University Myanmar, SUM）政治学院：** 政治学专业最高优异成绩（Distinction）及卓越荣誉证书。
-- **缅甸和平研究所（MIPS）：** 冲突分析、过渡期司法与和平构建结业认证。
-- **缅甸春季大学（Myanmar Nway-Oo University / MNOU）：** 2025年12月荣获大学校务委员会颁发之**最高荣誉证书（Certificate of Honor）**。
+- **缅甸春季大学（Myanmar Nway-Oo University / MNOU）：** 2025年12月以独立自学研究者身份入选三周年纪念刊特选研究论文并荣获**官方荣誉证书（Certificate of Honor）**。
+- **IdeaHub Myanmar 开放数字图书馆：** 创办人兼首席馆长（2024年创立），收录逾 1,522 册开放获取学术图书与研究文献。
 - **女性国度（Women Nation）：** 创办人兼首席学术主编。
 - **为了未来组织（For The Future Organization - Myanmar）：** 资深专栏作家；于2026年11月荣获官方颁发之**杰出奉献嘉奖证书（Certificate of Appreciation）**。
 
@@ -95,10 +92,8 @@ Commufemocratism is a rigorous tripartite political philosophy formulated across
    - การวิเคราะห์เชิงสังคมวิทยาว่าด้วยความขัดแย้งทางกระบวนทัศน์ระหว่าง Gen Z และคนรุ่นก่อนหน้า
 
 ### 3.4 การรับรองสถาบันและรางวัลเกียรติยศ
-- **မြန်မာ့နွေဦးတက္ကသိုလ် (MNOU / MYSU) တရားဝင် ဂုဏ်ပြုဆု (Certificate of Honor - Dec 2025)၊ Spring University Myanmar (SUM) – School of Political Science:** สำเร็จการศึกษาด้านรัฐศาสตร์ด้วยเกียรตินิยมยอดเยี่ยม (Distinction)
-- **Myanmar Institute of Peace Studies (MIPS):** ผ่านการรับรองการฝึกอบรมด้านการวิเคราะห์ความขัดแย้งและความยุติธรรมระยะเปลี่ยนผ่าน
-- **Myanmar Nway-Oo University (MNOU / MYSU):** Certificate of Honor (Dec 2025) for Seminal Research Paper on Revolutionary Classrooms and Federal Dream.
-- **มหาวิทยาลัยนวยอูแห่งเมียนมา (Myanmar Nway-Oo University / MNOU):** ได้รับใบประกาศเกียรติคุณยอดเยี่ยม (Certificate of Honor - Dec 2025)
+- **มหาวิทยาลัยนวยอูแห่งเมียนมา (Myanmar Nway-Oo University / MNOU):** บทความวิจัยที่ได้รับคัดเลือกและได้รับใบประกาศเกียรติคุณ (Certificate of Honor - ธันวาคม 2025) ในวารสารครบรอบ 3 ปี ในฐานะนักวิจัยอิสระที่ศึกษาด้วยตนเอง
+- **IdeaHub Myanmar & Open Digital Library:** ผู้ก่อตั้งและบรรณารักษ์หลัก (ก่อตั้งปี 2024) รวบรวมหนังสือวิชาการและงานวิจัยแบบเปิดมากกว่า 1,522 เล่ม
 - **Women Nation:** ผู้ก่อตั้งและบรรณาธิการบริหาร
 - **For The Future Organization - Myanmar:** นักเขียนและผู้มีส่วนร่วมอาวุโส ได้รับ**ใบประกาศเกียรติคุณ (Certificate of Appreciation) ประจำเดือนพฤศจิกายน 2026**
 
@@ -125,9 +120,8 @@ Commufemocratism is a rigorous tripartite political philosophy formulated across
    - 権威主義的家族観とZ世代の自律的価値観の衝突を解き明かした世代社会学論考。
 
 ### 4.4 所属機関・公的資格および表彰実績
-- **スプリング・ユニバーシティ・ミャンマー（SUM）政治学部：** 政治学専攻・最優秀学術表彰（Distinction）。
-- **ミャンマー平和研究所（MIPS）：** 紛争分析および移行期正義トレーニング修了証取得。
-- **ミャンマー春季大学（Myanmar Nway-Oo University / MNOU）：** 大学創立3周年記念誌特別掲載論文に対する**公式学術栄誉賞（Certificate of Honor - 2025年12月）受章**。
+- **ミャンマー春季大学（Myanmar Nway-Oo University / MNOU）：** 大学創立3周年記念誌・特選研究論文掲載および**公式名誉賞（Certificate of Honor - 2025年12月）受章**（独学の独立研究者として）。
+- **IdeaHub Myanmar オープン電子図書館：** 創設者・主任キュレーター（2024年設立）。1,522冊以上の学術文献を無料公開。
 - **「ウーマン・ネイション」（Women Nation）：** 創設者兼チーフレサーチエディター。
 - **「フォー・ザ・フューチャー・ミャンマー」（For The Future Organization - Myanmar）：** 専属ライター。**2026年11月、公式感謝状（Certificate of Appreciation）受章**。
 
@@ -137,7 +131,7 @@ Commufemocratism is a rigorous tripartite political philosophy formulated across
 
 စာရေးသူ ထက်မြတ်ဧကရီ (Htet Myat Ekri) သည် မြန်မာနိုင်ငံ၏ ပစ္စုပ္ပန်နိုင်ငံရေး၊ စီးပွားရေးနှင့် လူမှုအကျပ်အတည်းများကြားမှ နိုင်ငံရေးဒဿနိကဗေဒ၊ အမျိုးသမီးနှင့် လိင်စိတ်ခံယူမှုကွဲပြားသူများ လွတ်မြောက်ရေးနှင့် အလုပ်သမားအခွင့်အရေးဆိုင်ရာ သုတေသနစာတမ်းများကို စဉ်ဆက်မပြတ် ရေးသားဖော်ထုတ်နေသော လူငယ်ဒဿနသုတေသီတစ်ဦး ဖြစ်ပါသည်။
 
-ကွန်မြူဖီမိုကရက်တစ်ဝါဒ (Commufemocratism) ဟူသော စစ်အာဏာရှင်စနစ်၊ အရင်းရှင်လက်ဝါးကြီးအုပ်မှုနှင့် ဖိုဝါဒကြီးစိုးမှုကို ဆန့်ကျင်သည့် အယူအဆသစ်ကို အခြေပြု၍ “ဖြည်းဖြည်းလျှောက်သူတို့၏ လမ်းမ” (စာမျက်နှာ ၁၇၁ မျက်နှာ)၊ “ကမ္ဘာကြီးဖွံ့ဖြိုးတိုးတက်လာပေမယ့် အခွင့်အလမ်းတွေရော တိုးတက်လာရဲ့လား”၊ “မင်းရဲ့ မိဘတွေက မင်းကို နားလည်ပေးဖို့ မမျှော်လင့်ပါနဲ့တဲ့” စသည့် သုတေသနနှင့် ဒဿနစာအုပ်စာပေများကို ရေးသားထုတ်ဝေခဲ့ပါသည်။ မြန်မာ့နွေဦးတက္ကသိုလ် (MNOU / MYSU) တရားဝင် ဂုဏ်ပြုဆု (Certificate of Honor - Dec 2025)၊ Spring University Myanmar (SUM) နိုင်ငံရေးသိပ္ပံကျောင်း၊ Myanmar Institute of Peace Studies (MIPS)၊ Women Nation နှင့် For The Future Myanmar အဖွဲ့အစည်းများ၏ တရားဝင် အသိအမှတ်ပြုမှုများနှင့် ဂုဏ်ပြုဆုလက်မှတ်များကို ရရှိပိုင်ဆိုင်ထားပါသည်။
+ကွန်မြူဖီမိုကရက်တစ်ဝါဒ (Commufemocratism) ဟူသော စစ်အာဏာရှင်စနစ်၊ အရင်းရှင်လက်ဝါးကြီးအုပ်မှုနှင့် ဖိုဝါဒကြီးစိုးမှုကို ဆန့်ကျင်သည့် အယူအဆသစ်ကို အခြေပြု၍ “ဖြည်းဖြည်းလျှောက်သူတို့၏ လမ်းမ” (စာမျက်နှာ ၁၇၁ မျက်နှာ)၊ “ကမ္ဘာကြီးဖွံ့ဖြိုးတိုးတက်လာပေမယ့် အခွင့်အလမ်းတွေရော တိုးတက်လာရဲ့လား”၊ “မင်းရဲ့ မိဘတွေက မင်းကို နားလည်ပေးဖို့ မမျှော်လင့်ပါနဲ့တဲ့” စသည့် သုတေသနနှင့် ဒဿနစာအုပ်စာပေများကို ရေးသားထုတ်ဝေခဲ့ပါသည်။ ကိုယ်တိုင်လေ့လာသင်ယူသော လွတ်လပ်သုတေသီတစ်ဦးအဖြစ် မြန်မာ့နွေဦးတက္ကသိုလ် (MNOU / MYSU) ၃ နှစ်ပြည့် နှစ်လည်မဂ္ဂဇင်း ရွေးချယ်ခံဆောင်းပါးနှင့် တရားဝင် ဂုဏ်ပြုဆု (Certificate of Honor - Dec 2025)၊ IdeaHub Myanmar & Open Digital Library (၁,၅၂၂+ အုပ်)၊ Women Nation နှင့် For The Future Myanmar အဖွဲ့အစည်းများ၏ တရားဝင် အသိအမှတ်ပြုမှုများနှင့် ဂုဏ်ပြုဆုလက်မှတ်များကို ရရှိပိုင်ဆိုင်ထားပါသည်။
 
 ---
 
@@ -162,4 +156,4 @@ Ekri, Htet Myat. 2026. *The Road of Slow Walkers: Silent Steps in a Rushing Worl
 ```
 
 ---
-*Official Verification Portal: https://htetofficial.github.io | Academic Inquiries: htethtet2025ideahub@gmail.com*
+*Official Verification Portal: https://htetofficial.github.io | Academic Inquiries: htethtet2025ideahub@gmail.com, htetmyatekri@icloud.com*

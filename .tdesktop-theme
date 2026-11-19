@@ -1,0 +1,208 @@
+// Pastel Pink & Lavender Girly Theme
+windowBg: #fff5f8;
+windowFg: #4a3541;
+windowBgOver: #ffe4ee;
+windowBgRipple: #ffd1e1;
+windowFgOver: #3d2834;
+windowSubTextFg: #9e7b8e;
+windowSubTextFgOver: #876376;
+windowBoldFg: #4a3541;
+windowBoldFgOver: #3d2834;
+windowBgActive: #f06292;
+windowFgActive: #ffffff;
+windowActiveTextFg: #d81b60;
+windowShadowFg: #e8c3d2;
+windowShadowFgFallback: #f5dce6;
+
+shadowFg: #00000012;
+slideFadeOutBg: #0000003c;
+slideFadeOutShadowFg: windowShadowFg;
+
+imageBg: #000000;
+imageBgTransparent: #ffffff;
+
+activeButtonBg: #f06292;
+activeButtonBgOver: #ec407a;
+activeButtonBgRipple: #e91e63;
+activeButtonFg: #ffffff;
+activeButtonFgOver: #ffffff;
+activeButtonSecondaryFg: #fce4ec;
+activeButtonSecondaryFgOver: activeButtonSecondaryFg;
+
+lightButtonBg: #fff0f5;
+lightButtonBgOver: #ffe0eb;
+lightButtonBgRipple: #ffcce0;
+lightButtonFg: #d81b60;
+lightButtonFgOver: #c2185b;
+
+attentionButtonFg: #e53935;
+attentionButtonFgOver: #d32f2f;
+attentionButtonBgOver: #ffebee;
+attentionButtonBgRipple: #ffcdd2;
+
+outlineButtonBg: windowBg;
+outlineButtonBgOver: lightButtonBgOver;
+outlineButtonOutlineFg: #f06292;
+outlineButtonBgRipple: lightButtonBgRipple;
+
+menuBg: #fff8fa;
+menuBgOver: #ffe4ee;
+menuBgRipple: #ffd1e1;
+menuIconFg: #b88a9e;
+menuIconFgOver: #d81b60;
+menuSubmenuArrowFg: #b88a9e;
+menuFgDisabled: #d4b8c4;
+menuSeparatorFg: #f7dce6;
+
+scrollBarBg: #e09fb855;
+scrollBarBgOver: #d87a9e77;
+scrollBg: #f5dce622;
+scrollBgOver: #f5dce644;
+
+smallCloseIconFg: #c497aa;
+smallCloseIconFgOver: #d81b60;
+
+radialFg: windowFgActive;
+radialBg: #00000040;
+
+placeholderFg: #b592a3;
+placeholderFgActive: #cfa9bc;
+inputBorderFg: #f0c9d8;
+filterInputBorderFg: #f06292;
+filterInputActiveBg: #ffffff;
+filterInputInactiveBg: #ffeef4;
+checkboxFg: #c497aa;
+
+// Chat & Message Bubbles
+msgInBg: #ffffff;
+msgInBgSelected: #fce4ec;
+msgOutBg: #ffd6e6;
+msgOutBgSelected: #f8bbd0;
+msgSelectOverlay: #f0629233;
+msgStickerOverlay: #f0629255;
+
+msgInServiceFg: #d81b60;
+msgInServiceFgSelected: #c2185b;
+msgOutServiceFg: #c2185b;
+msgOutServiceFgSelected: #ad1457;
+
+msgInShadow: #e6c3d140;
+msgInShadowSelected: #d89ab460;
+msgOutShadow: #e6b3c750;
+msgOutShadowSelected: #d48ca870;
+
+msgInDateFg: #a68294;
+msgInDateFgSelected: #946d80;
+msgOutDateFg: #9e6b83;
+msgOutDateFgSelected: #8a566f;
+
+msgServiceFg: #ffffff;
+msgServiceBg: #e88db0aa;
+msgServiceBgSelected: #d87098cc;
+
+msgInReplyBarColor: #f06292;
+msgInReplyBarSelColor: #d81b60;
+msgOutReplyBarColor: #d81b60;
+msgOutReplyBarSelColor: #ad1457;
+
+historyTextInFg: #4a3541;
+historyTextInFgSelected: #3d2834;
+historyTextOutFg: #422936;
+historyTextOutFgSelected: #331c28;
+historyLinkInFg: #d81b60;
+historyLinkInFgSelected: #c2185b;
+historyLinkOutFg: #c2185b;
+historyLinkOutFgSelected: #ad1457;
+
+// Chat List (Dialogs)
+dialogsBg: #fff5f8;
+dialogsNameFg: #4a3541;
+dialogsChatIconFg: #d81b60;
+dialogsDateFg: #a68294;
+dialogsTextFg: #876376;
+dialogsTextFgService: #d81b60;
+dialogsDraftFg: #e53935;
+dialogsVerifiedIconBg: #f06292;
+dialogsVerifiedIconFg: #ffffff;
+dialogsSendingIconFg: #c497aa;
+dialogsSentIconFg: #f06292;
+dialogsUnreadBg: #f06292;
+dialogsUnreadBgMuted: #d9b4c4;
+dialogsUnreadFg: #ffffff;
+
+dialogsBgOver: #ffe8f0;
+dialogsNameFgOver: #3d2834;
+dialogsChatIconFgOver: #c2185b;
+dialogsDateFgOver: #946d80;
+dialogsTextFgOver: #735063;
+dialogsTextFgServiceOver: #c2185b;
+dialogsDraftFgOver: #d32f2f;
+dialogsVerifiedIconBgOver: #ec407a;
+dialogsVerifiedIconFgOver: #ffffff;
+dialogsSendingIconFgOver: #b08296;
+dialogsSentIconFgOver: #ec407a;
+dialogsUnreadBgOver: #ec407a;
+dialogsUnreadBgMutedOver: #c79eb0;
+dialogsUnreadFgOver: #ffffff;
+
+dialogsBgActive: #f06292;
+dialogsNameFgActive: #ffffff;
+dialogsChatIconFgActive: #ffffff;
+dialogsDateFgActive: #fce4ec;
+dialogsTextFgActive: #fff0f5;
+dialogsTextFgServiceActive: #ffffff;
+dialogsDraftFgActive: #ffebee;
+dialogsVerifiedIconBgActive: #ffffff;
+dialogsVerifiedIconFgActive: #f06292;
+dialogsSendingIconFgActive: #fce4ec;
+dialogsSentIconFgActive: #ffffff;
+dialogsUnreadBgActive: #ffffff;
+dialogsUnreadBgMutedActive: #f8bbd0;
+dialogsUnreadFgActive: #f06292;
+
+// Top Bar & Input Area
+topBarBg: #fff0f5;
+titleBg: #ffe4ee;
+titleBgActive: #ffd6e6;
+titleButtonFg: #9e7b8e;
+titleButtonBgOver: #ffcce0;
+titleButtonFgOver: #d81b60;
+titleButtonCloseBgOver: #f48fb1;
+titleButtonCloseFgOver: #ffffff;
+
+historyComposeAreaBg: #fff8fa;
+historyComposeAreaFg: #4a3541;
+historyComposeAreaFgService: #9e7b8e;
+historyComposeIconFg: #b88a9e;
+historyComposeIconFgOver: #d81b60;
+historySendIconFg: #f06292;
+historySendIconFgOver: #d81b60;
+historyComposeButtonBg: #fff8fa;
+historyComposeButtonBgOver: #ffe4ee;
+historyComposeButtonBgRipple: #ffd1e1;
+
+// Emoji & Sticker Panel
+emojiPanBg: #fff8fa;
+emojiPanCategories: #fff0f5;
+emojiPanHeaderFg: #9e7b8e;
+emojiPanHeaderBg: #fff8faf2;
+stickerPanDeleteBg: #000000cc;
+stickerPanDeleteFg: #ffffff;
+stickerPreviewBg: #fff5f8cc;
+
+// Profile & Info
+profileVerifiedCheckBg: #f06292;
+profileVerifiedCheckFg: #ffffff;
+profileAdminStartFg: #f06292;
+profileOtherAdminStarFg: #b88a9e;
+
+// Media & Calls
+mediaInFg: #d81b60;
+mediaInFgSelected: #c2185b;
+mediaOutFg: #c2185b;
+mediaOutFgSelected: #ad1457;
+callBg: #3d2834f2;
+callNameFg: #ffffff;
+callStatusFg: #f8bbd0;
+callAnswerBg: #66bb6a;
+callHangupBg: #ef5350;

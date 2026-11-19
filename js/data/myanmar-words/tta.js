@@ -1,0 +1,1 @@
+window.HTET_MW_TTA = {"ဋ": {"p": ["n"], "s": ["myanmar-words"]}, "ဋသန်လျင်းချိတ်": {"p": ["n"], "s": ["myanmar-words"]}, "ဋီကာ": {"p": ["n"], "s": ["myanmar-words"]}, "ဋီကာချဲ့": {"p": ["n"], "s": ["myanmar-words"]}, "ဋီကာဖွင့်": {"p": ["v"], "s": ["myanmar-words"]}};

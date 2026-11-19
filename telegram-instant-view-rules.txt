@@ -1,0 +1,75 @@
+~version: "2.1"
+
+### ====================================================================
+### Telegram Instant View Ruleset (v2.1)
+### Site: https://htetofficial.github.io
+### Channel: @htetmmofficial
+### Purpose: Instant View rendering for Htet Official academic reader, 
+###          articles, monographs, and public essays.
+### ====================================================================
+
+# Target paths: matches reader articles and essay pages
+?path: /article\.html.*
+?path: /articles/.*
+?path: /publications/.*
+
+# Telegram Channel integration (displays "Join Channel" pill in Instant View)
+channel: "@htetmmofficial"
+
+# Page container definition
+body: //article
+
+# Article Title
+title: //h1[@id="article-title"] | //h1[has-class("font-serif-editorial")] | //meta[@property="og:title"]/@content
+
+# Article Subtitle
+subtitle: //p[@id="article-subtitle"] | //p[has-class("article-subtitle")] | //p[has-class("text-muted") and preceding-sibling::h1]
+
+# Author
+author: //span[has-class("article-author")] | //meta[@name="author"]/@content
+author_url: "https://htetofficial.github.io/about.html"
+
+# Published Date & Reading Time
+published_date: //time/@datetime | //meta[@property="article:published_time"]/@content
+
+# Cover / Hero Image
+cover: //div[has-class("article-cover")]//img | //div[@id="article-cover-wrap"]//img | //meta[@property="og:image"]/@content
+
+# Clean up web navigation, floating UI elements, and interactive modals
+@remove: //nav
+@remove: //header[has-class("nav-header")]
+@remove: //header[has-class("sticky")]
+@remove: //div[has-class("nav-capsule")]
+@remove: //div[@id="mobile-menu-drawer"]
+@remove: //div[@id="mobile-menu-overlay"]
+@remove: //div[@id="spotlight-modal"]
+@remove: //div[@id="reading-settings-modal"]
+@remove: //div[@id="article-download-dropdown"]
+@remove: //div[has-class("article-action-bar")]
+@remove: //div[has-class("audio-player-bar")]
+@remove: //div[@id="citation-popover"]
+@remove: //button
+@remove: //footer
+@remove: //script
+@remove: //style
+@remove: //iframe[not(@src)]
+
+# Handle Blockquotes and Pull Quotes
+blockquote: //blockquote
+@wrap(<figure>): //blockquote[has-class("pull-quote")]
+
+# Handle Citations and Footnotes
+@wrap(<cite>): //span[has-class("citation-badge")]
+@wrap(<small>): //div[has-class("article-references")]
+
+# Handle Images with Captions
+@wrap(<figure>): //div[has-class("article-image-container")]//img
+@append_to(//figure): //div[has-class("image-caption")]
+@inline: //figure//figcaption
+
+# Paragraph and Text formatting
+@wrap(<p>): //div[@id="article-content-body"]/text()
+
+# Instant View site metadata
+site_name: "Htet Official (ထက်)"
+description: //meta[@property="og:description"]/@content | //meta[@name="description"]/@content

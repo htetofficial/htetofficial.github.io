@@ -1,0 +1,13 @@
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
+*/*/*/.DS_Store
+
+# Sensitive config & secrets
+telegram_bot/config.json
+.env
+*.local
+
+# Python cache
+__pycache__/
+*.pyc

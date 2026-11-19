@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" width="1000" height="480" role="img" aria-label="Strategic Trilemma: US Policy, China Interests, and Myanmar Sovereign Imperative">
+  <defs>
+    <linearGradient id="mxBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1224"/>
+      <stop offset="100%" stop-color="#171426"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="480" rx="16" fill="url(#mxBg)"/>
+  <rect x="14" y="14" width="972" height="452" rx="12" fill="none" stroke="#94A3B8" stroke-opacity="0.26" stroke-width="1.2"/>
+
+  <!-- Header -->
+  <text x="42" y="48" font-family="ui-monospace, monospace" font-size="11.5" font-weight="bold" letter-spacing="2" fill="#93C5FD">STRATEGIC MATRIX • COMPARATIVE POWER GEOMETRY</text>
+  <text x="42" y="80" font-family="Pyidaungsu, sans-serif" font-size="21" font-weight="bold" fill="#FFFBEB">အမေရိကန် – တရုတ် – မြန်မာ မဟာဗျူဟာ အကျိုးစီးပွား တြိဂံ နှိုင်းယှဉ်ချက်</text>
+  <line x1="42" y1="98" x2="958" y2="98" stroke="#64748B" stroke-opacity="0.35"/>
+
+  <!-- 3 Vector Columns -->
+  <!-- Column 1: US -->
+  <g transform="translate(42, 118)">
+    <rect x="0" y="0" width="290" height="320" rx="12" fill="#0D1B38" stroke="#3B82F6" stroke-opacity="0.55"/>
+    <rect x="0" y="0" width="290" height="44" rx="12" fill="#1D4ED8" fill-opacity="0.35"/>
+    <text x="145" y="28" text-anchor="middle" font-family="Pyidaungsu, sans-serif" font-size="14.5" font-weight="bold" fill="#DBEAFE">🇺🇸 အမေရိကန် (Washington)</text>
+
+    <text x="18" y="74" font-family="ui-monospace, monospace" font-size="10" font-weight="bold" fill="#60A5FA">CORE OBJECTIVE</text>
+    <text x="18" y="95" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#F1F5F9">တရုတ်သြဇာ ထိန်းညှိရေးနှင့်</text>
+    <text x="18" y="114" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#F1F5F9">အင်ဒို-ပစိဖိတ် ရေကြောင်းဟန်ချက်</text>
+
+    <line x1="18" y1="132" x2="272" y2="132" stroke="#3B82F6" stroke-opacity="0.25"/>
+    <text x="18" y="156" font-family="ui-monospace, monospace" font-size="10" font-weight="bold" fill="#60A5FA">PRIMARY TOOLS</text>
+    <text x="18" y="177" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#CBD5E1">• ပစ်မှတ်ထား စီးပွားရေးပိတ်ဆို့မှု</text>
+    <text x="18" y="198" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#CBD5E1">• BURMA Act / အရပ်ဘက်အကူအညီ</text>
+    <text x="18" y="219" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#CBD5E1">• ASEAN နှင့် မဟာမိတ် သံတမန်ရေး</text>
+
+    <line x1="18" y1="238" x2="272" y2="238" stroke="#3B82F6" stroke-opacity="0.25"/>
+    <text x="18" y="262" font-family="ui-monospace, monospace" font-size="10" font-weight="bold" fill="#93C5FD">KEY LIMITATION</text>
+    <text x="18" y="283" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#94A3B8">တိုက်ရိုက်စစ်ရေးဝင်ရောက်ရန်</text>
+    <text x="18" y="301" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#94A3B8">မဟာဗျူဟာ ဆန္ဒနှင့် ဦးစားပေးမှုနည်း</text>
+  </g>
+
+  <!-- Column 2: China -->
+  <g transform="translate(355, 118)">
+    <rect x="0" y="0" width="290" height="320" rx="12" fill="#230E16" stroke="#EF4444" stroke-opacity="0.55"/>
+    <rect x="0" y="0" width="290" height="44" rx="12" fill="#B91C1C" fill-opacity="0.38"/>
+    <text x="145" y="28" text-anchor="middle" font-family="Pyidaungsu, sans-serif" font-size="14.5" font-weight="bold" fill="#FEE2E2">🇨🇳 တရုတ် (Beijing)</text>
+
+    <text x="18" y="74" font-family="ui-monospace, monospace" font-size="10" font-weight="bold" fill="#F87171">CORE OBJECTIVE</text>
+    <text x="18" y="95" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#F1F5F9">အိန္ဒိယသမုဒ္ဒရာ ထွက်ပေါက် (CMEC)</text>
+    <text x="18" y="114" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#F1F5F9">နှင့် နယ်စပ်တည်ငြိမ်လုံခြုံရေး</text>
+
+    <line x1="18" y1="132" x2="272" y2="132" stroke="#EF4444" stroke-opacity="0.25"/>
+    <text x="18" y="156" font-family="ui-monospace, monospace" font-size="10" font-weight="bold" fill="#F87171">PRIMARY TOOLS</text>
+    <text x="18" y="177" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#CBD5E1">• ကျောက်ဖြူဆိပ်ကမ်းနှင့် ပိုက်လိုင်း</text>
+    <text x="18" y="198" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#CBD5E1">• နယ်စပ်ကုန်သွယ်ရေး ဖွင့်/ပိတ် ဖိအား</text>
+    <text x="18" y="219" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#CBD5E1">• ဘက်စုံထိတွေ့ ကြားဝင်ညှိနှိုင်းမှု</text>
+
+    <line x1="18" y1="238" x2="272" y2="238" stroke="#EF4444" stroke-opacity="0.25"/>
+    <text x="18" y="262" font-family="ui-monospace, monospace" font-size="10" font-weight="bold" fill="#FCA5A5">KEY RISK FOR MYANMAR</text>
+    <text x="18" y="283" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#94A3B8">စီးပွားရေးနှင့် နိုင်ငံရေး သြဇာ</text>
+    <text x="18" y="301" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#94A3B8">အလွန်အကျွံ မှီခိုသွားနိုင်သည့် အန္တရာယ်</text>
+  </g>
+
+  <!-- Column 3: Myanmar Sovereign Imperative -->
+  <g transform="translate(668, 118)">
+    <rect x="0" y="0" width="290" height="320" rx="12" fill="#1C1910" stroke="#F59E0B" stroke-width="1.8"/>
+    <rect x="0" y="0" width="290" height="44" rx="12" fill="#B45309" fill-opacity="0.42"/>
+    <text x="145" y="28" text-anchor="middle" font-family="Pyidaungsu, sans-serif" font-size="14.5" font-weight="bold" fill="#FEF3C7">★ မြန်မာ့ အချုပ်အခြာအာဏာ</text>
+
+    <text x="18" y="74" font-family="ui-monospace, monospace" font-size="10" font-weight="bold" fill="#FDE68A">SOVEREIGN IMPERATIVE</text>
+    <text x="18" y="95" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#FFFBEB">ပြည်ပအင်အားစုများ၏ ကြားခံမဖြစ်ဘဲ</text>
+    <text x="18" y="114" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#FFFBEB">ကိုယ်ပိုင်ကံကြမ္မာ ဖန်တီးပိုင်ခွင့်</text>
+
+    <line x1="18" y1="132" x2="272" y2="132" stroke="#F59E0B" stroke-opacity="0.32"/>
+    <text x="18" y="156" font-family="ui-monospace, monospace" font-size="10" font-weight="bold" fill="#FDE68A">STRATEGIC PILLARS</text>
+    <text x="18" y="177" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#FEF3C7">• ပြည်တွင်း ဖက်ဒရယ်ညီညွတ်ရေး</text>
+    <text x="18" y="198" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#FEF3C7">• တက်ကြွသော ဘက်မလိုက်မူဝါဒ</text>
+    <text x="18" y="219" font-family="Pyidaungsu, sans-serif" font-size="12.5" fill="#FEF3C7">• ASEAN + India + Global ချိန်ညှိမှု</text>
+
+    <line x1="18" y1="238" x2="272" y2="238" stroke="#F59E0B" stroke-opacity="0.32"/>
+    <text x="18" y="262" font-family="ui-monospace, monospace" font-size="10" font-weight="bold" fill="#34D399">ULTIMATE ANCHOR</text>
+    <text x="18" y="283" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#D1FAE5">ပြည်သူ့ဆန္ဒနှင့် တရားဝင်မှုသာ</text>
+    <text x="18" y="301" font-family="Pyidaungsu, sans-serif" font-size="12" fill="#D1FAE5">အခိုင်မာဆုံး ပထဝီနိုင်ငံရေး ဒိုင်းကာ</text>
+  </g>
+</svg>
