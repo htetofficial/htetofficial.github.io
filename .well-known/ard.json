@@ -1,0 +1,20 @@
+{
+  "$schema": "https://agenticresourcediscovery.org/schemas/ard-v1.json",
+  "name": "ထက် (Htet Official)",
+  "description": "Official academic portal, political philosophy monographs, and research archive of Burmese writer and researcher Htet.",
+  "url": "https://htetofficial.github.io",
+  "canonical": "https://htetofficial.github.io",
+  "mirrors": [
+    "https://web.htetofficial.workers.dev",
+    "https://htetofficialgithubio.vercel.app"
+  ],
+  "author": {
+    "name": "ထက် (Htet)",
+    "orcid": "https://orcid.org/0009-0004-7908-2949",
+    "telegram": "https://t.me/htetmmofficial"
+  },
+  "resources": [
+    { "type": "llms-txt", "url": "https://htetofficial.github.io/llms.txt" },
+    { "type": "sitemap", "url": "https://htetofficial.github.io/sitemap.xml" }
+  ]
+}

@@ -1,0 +1,25 @@
+# ထက် (Htet) — Official Portal & Academic Archive
+
+> စာရေးဆရာမနှင့် နိုင်ငံရေးဒဿနိကဗေဒ သုတေသီ ထက် (Htet) ၏ တရားဝင် ဒစ်ဂျစ်တယ် မော်ကွန်းတိုက်နှင့် သုတေသန ပလက်ဖောင်း။ (Writer and political philosophy researcher specializing in Burmese political thought, intersectional feminism, democratic resistance, and gender justice).
+
+## Core Pages & Archives
+
+- [Home / မူလစာမျက်နှာ](https://htetofficial.github.io/index.html): Official digital portal, research highlights, and featured monographs.
+- [Articles & Essays / စာတမ်းနှင့် ဆောင်းပါးများ](https://htetofficial.github.io/articles.html): Curated political philosophy essays, feminist theory, and resistance studies.
+- [Publications & Books / စာအုပ်နှင့် စာတမ်းစာရင်း](https://htetofficial.github.io/publications.html): Published academic monographs, research papers, and open-access books.
+- [Glossary of Concepts / သဘောတရားအဘိဓာန်](https://htetofficial.github.io/glossary.html): Theoretical lexicon on intersectionality, autonomy, and political philosophy.
+- [Journal Feed / ဂျာနယ် မှတ်စုများ](https://htetofficial.github.io/journal.html): Continuous academic reflections, field notes, and democratic commentary.
+- [Dictionary & BurmeseNLP / အဘိဓာန်](https://htetofficial.github.io/dictionary.html): Dual-direction Ornagai dictionary, 12,000+ parallel corpus, and NLP tools.
+- [Translation Studio / ဘာသာပြန်](https://htetofficial.github.io/translate.html): Multi-engine translation and lexical synthesis studio.
+- [About & Curriculum Vitae / ကိုယ်ရေးမှတ်တမ်း](https://htetofficial.github.io/about.html): Biography, curriculum vitae, and verified academic dossier.
+- [Contact & Channels / ဆက်သွယ်ရန်](https://htetofficial.github.io/contact.html): Official communication channels, Telegram networks, and PGP keys.
+
+## Verified Scholarly Profiles
+
+- [ORCID](https://orcid.org/0009-0004-7908-2949): 0009-0004-7908-2949
+- [Telegram Channel](https://t.me/htetmmofficial): @htetmmofficial
+
+## Official Mirrors & Endpoints
+
+- [Cloudflare Edge Mirror](https://web.htetofficial.workers.dev/): Global edge CDN deployment.
+- [Vercel Node (VPN-Free in Myanmar)](https://htetofficialgithubio.vercel.app/): Accessible without VPN for Burmese citizens.
