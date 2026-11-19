@@ -1,0 +1,12 @@
+# Ignore large files that exceed Workers 25MB limit (served via Cloudflare R2 CDN)
+Htet_Official_Research_Bundle.zip
+downloads/Htet_Official_Research_Bundle.zip
+
+# Ignore server-side & repo maintenance scripts
+scripts/
+telegram_bot/
+.github/
+.git/
+.DS_Store
+cloudflare/worker.js
+wrangler.toml
