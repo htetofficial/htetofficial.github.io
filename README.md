@@ -103,24 +103,6 @@
 
 ---
 
-## 🚀 GitHub Pages တွင် တင်နည်း (Deployment)
-
-1. Repository ကို GitHub တွင် အသစ်ပြုလုပ်ပါ။
-2. ဖိုင်အားလုံးကို commit & push ပြုလုပ်ပါ-
-   ```bash
-   git init
-   git add .
-   git commit -m "feat: complete master upgrade with glossary, publications, and spotlight search"
-   git branch -M main
-   git remote add origin <your-repo-url>
-   git push -u origin main
-   ```
-3. GitHub Repository > **Settings** > **Pages** သို့ သွားပါ။
-4. **Branch** နေရာတွင် `main` (သို့မဟုတ် `root`) ကို ရွေးချယ်ပြီး **Save** နှိပ်ပါ။
-5. မိနစ်အနည်းငယ်အတွင်း [https://htetofficial.github.io/](https://htetofficial.github.io/) တွင် တိုက်ရိုက် လွှင့်တင်အသုံးပြုနိုင်ပါပြီ။
-
----
-
 ## 📬 တရားဝင် ဆက်သွယ်ရန် (Official Contact)
 
 * **Email:**  | `htethtet2025ideahub@gmail.com`
