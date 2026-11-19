@@ -4,7 +4,7 @@
  * Supports Android, iOS, iPadOS, macOS, and Windows
  */
 
-const CACHE_NAME = 'htet-pwa-v6.6';
+const CACHE_NAME = 'htet-pwa-v6.8';
 const CORE_SHELL_ASSETS = [
   './',
   './index.html',
@@ -28,8 +28,11 @@ const CORE_SHELL_ASSETS = [
   './robots.txt',
   './browserconfig.xml',
   './css/custom.css',
+  './css/custom.min.css',
   './css/remixicon.css',
   './css/aos.css',
+  './js/theme-init.js',
+  './js/tailwind-config.js',
   './js/tailwind.min.js',
   './js/main.js',
   './js/theme.js',

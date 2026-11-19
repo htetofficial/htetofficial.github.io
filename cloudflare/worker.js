@@ -7,6 +7,25 @@
  * 4. 100% Cloudflare Free Tier Compatible (100,000 requests/day free)
  */
 
+const SECURITY_CSP = [
+  "default-src 'self'",
+  "script-src 'self' https://telegram.org 'wasm-unsafe-eval' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "img-src 'self' data: blob: https:",
+  "font-src 'self' https://fonts.gstatic.com data:",
+  "connect-src 'self' https://web.htetofficial.workers.dev https://app.htetofficial.workers.dev https://htetofficialgithubio.vercel.app https://api.mymemory.translated.net https://libretranslate.com https://translate.googleapis.com https://huggingface.co https://*.telegram.org",
+  "media-src 'self' data: blob: https://web.htetofficial.workers.dev https://app.htetofficial.workers.dev",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "frame-ancestors 'self' https://web.telegram.org https://*.telegram.org https://telegram.org",
+  "frame-src 'self' https://drive.google.com https://www.youtube.com",
+  "worker-src 'self' blob:",
+  "manifest-src 'self'",
+  "form-action 'self'",
+  "require-trusted-types-for 'script'",
+  "trusted-types default"
+].join('; ');
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -81,6 +100,12 @@ export default {
                 'content-type': 'text/html; charset=utf-8',
                 'cache-control': 'public, max-age=3600, s-maxage=86400',
                 'access-control-allow-origin': '*',
+                'strict-transport-security': 'max-age=63072000; includeSubDomains; preload',
+                'x-content-type-options': 'nosniff',
+                'cross-origin-opener-policy': 'same-origin-allow-popups',
+                'referrer-policy': 'strict-origin-when-cross-origin',
+                'permissions-policy': 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+                'content-security-policy': SECURITY_CSP,
                 'x-edge-worker': 'active-og-injected'
               }
             });
@@ -131,6 +156,7 @@ export default {
         newH.set('x-content-type-options', 'nosniff');
         newH.set('cross-origin-opener-policy', 'same-origin-allow-popups');
         newH.set('referrer-policy', 'strict-origin-when-cross-origin');
+        newH.set('permissions-policy', 'camera=(), microphone=(), geolocation=(), interest-cohort=()');
 
         // Ensure proper charset on HTML responses to satisfy character encoding audits
         const ct = newH.get('content-type');
@@ -140,8 +166,8 @@ export default {
           newH.set('content-type', 'text/html; charset=utf-8');
         }
 
-        // Frame protection with Telegram Mini App support (Mitigate clickjacking)
-        newH.set('content-security-policy', "frame-ancestors 'self' https://web.telegram.org https://*.telegram.org https://telegram.org;");
+        // Apply comprehensive CSP header with strict clickjacking mitigation & Telegram Mini App support
+        newH.set('content-security-policy', SECURITY_CSP);
 
         // Ensure CORS for Telegram Mini App & API requests
         if (url.pathname.endsWith('.json') || url.pathname.endsWith('.txt') || url.pathname.endsWith('.js') || url.pathname.endsWith('.css')) {

@@ -8,7 +8,8 @@
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Cross-Origin-Opener-Policy", "value": "same-origin-allow-popups" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Content-Security-Policy", "value": "frame-ancestors 'self' https://web.telegram.org https://*.telegram.org https://telegram.org;" }
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' https://telegram.org 'wasm-unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://web.htetofficial.workers.dev https://app.htetofficial.workers.dev https://htetofficialgithubio.vercel.app https://api.mymemory.translated.net https://libretranslate.com https://translate.googleapis.com https://huggingface.co https://*.telegram.org; media-src 'self' data: blob: https://web.htetofficial.workers.dev https://app.htetofficial.workers.dev; object-src 'none'; base-uri 'self'; frame-ancestors 'self' https://web.telegram.org https://*.telegram.org https://telegram.org; frame-src 'self' https://drive.google.com https://www.youtube.com; worker-src 'self' blob:; manifest-src 'self'; form-action 'self'; require-trusted-types-for 'script'; trusted-types default;" }
       ]
     },
     {

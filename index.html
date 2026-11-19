@@ -5,79 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
 
-  <!-- Critical Anti-FOUC & Anti-Flash Engine (Instant Theme & Language Initialization - 0ms Delay) -->
-  <script>
-    (function() {
-      // 1. Instant Theme Restore (Supports 14 curated themes across 4 categories)
-      try {
-        var validThemes = [
-          'light', 'sepia', 'dark', 'amoled',
-          'green', 'green-forest',
-          'blue', 'blue-sapphire',
-          'red', 'red-crimson', 'red-rosewood',
-          'purple', 'purple-lavender', 'purple-plum', 'purple-indigo',
-          'pink', 'pink-peach', 'pink-rose'
-        ];
-        var savedTheme = null;
-        try { savedTheme = localStorage.getItem('site_theme'); } catch(e) {}
-        var theme = (savedTheme && validThemes.indexOf(savedTheme) !== -1) ? savedTheme : 'light';
-        
-        document.documentElement.setAttribute('data-theme', theme);
-        if (theme === 'dark' || theme === 'amoled') {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-
-        var themeBgs = {
-          light: '#FAF8F5',
-          sepia: '#F5EEDB',
-          dark: '#121110',
-          amoled: '#000000',
-          green: '#F5FAF6',
-          'green-forest': '#F4F8F5',
-          blue: '#F4F8FD',
-          'blue-sapphire': '#F3F7FC',
-          red: '#FAF5F5',
-          'red-crimson': '#FAF4F5',
-          'red-rosewood': '#FAF6F3',
-          purple: '#F8F6FD',
-          'purple-lavender': '#F8F7FD',
-          'purple-plum': '#F9F5FA',
-          'purple-indigo': '#F5F6FC',
-          pink: '#FDF6F8',
-          'pink-peach': '#FDF7F4',
-          'pink-rose': '#FDF5F7'
-        };
-        if (themeBgs[theme]) {
-          document.documentElement.style.backgroundColor = themeBgs[theme];
-        }
-      } catch (e) {}
-
-      // 2. Instant Language Restore & Anti-Flicker Cloak
-      try {
-        var validLangs = ['mm', 'en', 'zh', 'th', 'ja'];
-        var savedLang = localStorage.getItem('site_lang');
-        var lang = (validLangs.indexOf(savedLang) !== -1) ? savedLang : 'mm';
-        
-        document.documentElement.setAttribute('data-lang', lang);
-        var htmlLangMap = { mm: 'my', en: 'en', zh: 'zh-Hans', th: 'th', ja: 'ja' };
-        document.documentElement.lang = htmlLangMap[lang] || 'my';
-
-        // If the user preferred a language other than Burmese, apply instant anti-flicker
-        if (lang !== 'mm') {
-          document.documentElement.classList.add('i18n-cloaked');
-          // Failsafe timer: guarantee reveal in under 300ms even if script hangs
-          setTimeout(function() {
-            document.documentElement.classList.remove('i18n-cloaked');
-          }, 300);
-        }
-      } catch (e) {}
-    })();
-  </script>
+  <!-- Critical Anti-FOUC & Anti-Flash Engine & Trusted Types Policy -->
+  <script src="js/theme-init.js"></script>
   <style>
     /* Critical zero-latency base paint to completely eliminate theme and language flash */
     html { color-scheme: light dark; }
+    html[data-announcement-dismissed="true"] #htet-announcement-bar { display: none !important; }
     html[data-theme="amoled"], html[data-theme="amoled"].dark { background-color: #000000 !important; }
     html[data-theme="amoled"] body, html[data-theme="amoled"].dark body { background-color: #000000 !important; color: #FFFFFF !important; }
     html[data-theme="amoled"] header.sticky { background-color: rgba(0, 0, 0, 0.95) !important; }
@@ -301,15 +234,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <link rel="mask-icon" href="assets/seal-stamp.svg" color="#B83A2D">
-  <script>
-    if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
-      var _ml = document.createElement('link');
-      _ml.rel = 'manifest';
-      _ml.href = 'manifest.webmanifest';
-      document.head.appendChild(_ml);
-    }
-  </script>
-  <noscript><link rel="manifest" href="manifest.webmanifest"></noscript>
+  <link rel="manifest" href="manifest.webmanifest">
   <!-- Agentic Resource Discovery & LLM Context Standards -->
   <link rel="ard" type="application/json" href="/.well-known/ard.json">
   <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM Context">
@@ -339,40 +264,7 @@
   <link rel="stylesheet" href="css/custom.min.css">
 
   <!-- Tailwind CSS Configuration Defined Before Script -->
-  <script>
-    window.tailwind = {
-      config: {
-        darkMode: ['class', '[data-theme="dark"]'],
-        theme: {
-          extend: {
-            screens: {
-              'xs': '400px'
-            },
-            colors: {
-              ivory: 'var(--bg-ivory)',
-              cream: 'var(--bg-cream)',
-              card: 'var(--bg-card)',
-              taupe: 'var(--border-taupe)',
-              charcoal: 'var(--text-charcoal)',
-              muted: 'var(--text-muted)',
-              faint: 'var(--text-faint)',
-              vermilion: {
-                DEFAULT: 'var(--accent-vermilion)',
-                light: '#E25B52',
-                dark: '#8A2B1D',
-                soft: 'var(--accent-vermilion-soft)'
-              }
-            },
-            fontFamily: {
-              serif: ['Cormorant Garamond', 'Pyidaungsu', 'Georgia', 'serif'],
-              sans: ['Pyidaungsu', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-              burmese: ['Pyidaungsu', 'sans-serif']
-            }
-          }
-        }
-      }
-    };
-  </script>
+  <script src="js/tailwind-config.js"></script>
   <script src="js/tailwind.min.js"></script>
   <script defer src="js/theme.js"></script>
   <!-- Telegram WebApp SDK & Mini App Controller (Deferred) -->
@@ -407,12 +299,6 @@
       </div>
     </div>
   </div>
-  <script>
-    if (localStorage.getItem('htet_announcement_dismissed') === 'a1') {
-      var _bar = document.getElementById('htet-announcement-bar');
-      if (_bar) _bar.style.display = 'none';
-    }
-  </script>
 
   <!-- Main Navigation Header -->
     <!-- Master Minimalist Header -->
