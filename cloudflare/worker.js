@@ -132,6 +132,17 @@ export default {
         newH.set('cross-origin-opener-policy', 'same-origin-allow-popups');
         newH.set('referrer-policy', 'strict-origin-when-cross-origin');
 
+        // Ensure proper charset on HTML responses to satisfy character encoding audits
+        const ct = newH.get('content-type');
+        if (ct && ct.includes('text/html') && !ct.includes('charset')) {
+          newH.set('content-type', 'text/html; charset=utf-8');
+        } else if (!ct && (url.pathname === '/' || url.pathname.endsWith('.html'))) {
+          newH.set('content-type', 'text/html; charset=utf-8');
+        }
+
+        // Frame protection with Telegram Mini App support (Mitigate clickjacking)
+        newH.set('content-security-policy', "frame-ancestors 'self' https://web.telegram.org https://*.telegram.org https://telegram.org;");
+
         // Ensure CORS for Telegram Mini App & API requests
         if (url.pathname.endsWith('.json') || url.pathname.endsWith('.txt') || url.pathname.endsWith('.js') || url.pathname.endsWith('.css')) {
           newH.set('access-control-allow-origin', '*');
