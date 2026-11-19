@@ -69,7 +69,7 @@
 ├── glossary.html              # ဒဿနနှင့် ဂျန်ဒါ သဘောတရားအဘိဓာန် (Searchable Lexicon)
 ├── publications.html          # စာစောင်များ၊ မိုနိုဂရပ်ဖ်များနှင့် Citation Generator Modal
 ├── journal.html               # နေ့စဉ် အတွေးစများ၊ အသံမှတ်တမ်းနှင့် လှုပ်ရှားမှု Timeline
-├── contact.html               # Telegram, Facebook, TikTok တိုက်ရိုက် ဆက်သွယ်ရန်နှင့် စာလွှာဖောင်
+├── contact.html               # Telegram, Facebook တိုက်ရိုက် ဆက်သွယ်ရန်နှင့် စာလွှာဖောင်
 ├── 404.html                   # Sino-Japanese "無" ရသ ၄၀၄ စာမျက်နှာ
 ├── css/
 │   ├── bootstrap.min.css      # Downloaded Bootstrap 5.3 framework
