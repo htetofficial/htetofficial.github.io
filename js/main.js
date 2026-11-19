@@ -964,21 +964,27 @@
       }
     });
 
-    popover.querySelector('#quote-copy-btn').addEventListener('click', () => {
-      const formattedQuote = `“${selectedText}”\n— Htet (ထက်) | ${window.location.href}`;
-      navigator.clipboard.writeText(formattedQuote).then(() => {
-        showToast('Quote copied with citation!');
+    const copyBtn = popover.querySelector('#quote-copy-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const formattedQuote = `“${selectedText}”\n— Htet (ထက်) | ${window.location.href}`;
+        navigator.clipboard.writeText(formattedQuote).then(() => {
+          showToast('Quote copied with citation!');
+          popover.style.display = 'none';
+        });
+      });
+    }
+
+    const shareBtn = popover.querySelector('#quote-share-btn');
+    if (shareBtn) {
+      shareBtn.addEventListener('click', () => {
+        const formattedQuote = `“${selectedText}”\n— Htet (ထက်)`;
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(formattedQuote);
+        window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
         popover.style.display = 'none';
       });
-    });
-
-    popover.querySelector('#quote-share-btn').addEventListener('click', () => {
-      const formattedQuote = `“${selectedText}”\n— Htet (ထက်)`;
-      const url = encodeURIComponent(window.location.href);
-      const text = encodeURIComponent(formattedQuote);
-      window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
-      popover.style.display = 'none';
-    });
+    }
   }
 
   // 10. Intelligent Global Article & Page Share Engine
@@ -6225,25 +6231,34 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    initMobileMenu();
-    initAppBottomNav();
-    initShareButtons();
-    initAOS();
-    initBackToTop();
-    initHankoRipple();
-    initQuoteSelectionPopover();
-    initReadingListDrawer();
-    initSpotlightSearch();
-    initArticlesArchive();
-    initJournalFeed();
-    initGlossaryPage();
-    initPublicationsPage();
-    initDailyQuoteWidget();
-    initContactForm();
-    initDynamicMetrics();
-    initFeaturedArticlesOnIndex();
-    initBioCardTabs();
-    init3DTiltAndFloatingEffects();
+    const tasks = [
+      initMobileMenu,
+      initAppBottomNav,
+      initShareButtons,
+      initAOS,
+      initBackToTop,
+      initHankoRipple,
+      initQuoteSelectionPopover,
+      initReadingListDrawer,
+      initSpotlightSearch,
+      initArticlesArchive,
+      initJournalFeed,
+      initGlossaryPage,
+      initPublicationsPage,
+      initDailyQuoteWidget,
+      initContactForm,
+      initDynamicMetrics,
+      initFeaturedArticlesOnIndex,
+      initBioCardTabs,
+      init3DTiltAndFloatingEffects
+    ];
+    tasks.forEach(fn => {
+      try {
+        if (typeof fn === 'function') fn();
+      } catch (err) {
+        console.warn('[Htet Init Error]', fn ? fn.name : 'anon', err);
+      }
+    });
     if ('requestIdleCallback' in window) {
       requestIdleCallback(syncGlobalDynamicCounts, { timeout: 3000 });
     } else {

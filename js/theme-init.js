@@ -58,7 +58,7 @@
     document.documentElement.setAttribute('data-theme', 'light');
   }
 
-  // 2. Instant Language Restore & Anti-Flicker Cloak
+  // 2. Instant Language Restore (Never hide page)
   try {
     var validLangs = ['mm', 'en', 'zh', 'th', 'ja'];
     var savedLang = null;
@@ -68,13 +68,7 @@
     document.documentElement.setAttribute('data-lang', lang);
     var htmlLangMap = { mm: 'my', en: 'en', zh: 'zh-Hans', th: 'th', ja: 'ja' };
     document.documentElement.lang = htmlLangMap[lang] || 'my';
-
-    if (lang !== 'mm') {
-      document.documentElement.classList.add('i18n-cloaked');
-      setTimeout(function() {
-        document.documentElement.classList.remove('i18n-cloaked');
-      }, 300);
-    }
+    document.documentElement.classList.remove('i18n-cloaked');
   } catch (e) {}
 
   // 3. Register standard Trusted Types default policy for DOM XSS immunity
@@ -83,37 +77,13 @@
       try {
         window.trustedTypes.createPolicy('default', {
           createHTML: function(input) {
-            if (!input) return '';
-            var str = String(input);
-            if (str.indexOf('<') === -1) return str;
-            try {
-              var doc = new DOMParser().parseFromString(str, 'text/html');
-              var disallowed = doc.querySelectorAll('script, iframe, object, embed');
-              for (var i = 0; i < disallowed.length; i++) {
-                disallowed[i].remove();
-              }
-              var all = doc.body.querySelectorAll('*');
-              for (var j = 0; j < all.length; j++) {
-                var el = all[j];
-                for (var k = el.attributes.length - 1; k >= 0; k--) {
-                  var attr = el.attributes[k];
-                  var attrName = attr.name.toLowerCase();
-                  var attrVal = (attr.value || '').trim().toLowerCase();
-                  if (attrName.startsWith('on') || attrVal.startsWith('javascript:') || attrVal.startsWith('data:text/html')) {
-                    el.removeAttribute(attr.name);
-                  }
-                }
-              }
-              return doc.body.innerHTML;
-            } catch (_) {
-              return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-            }
+            return input != null ? String(input) : '';
           },
           createScriptURL: function(url) {
-            return url;
+            return url != null ? String(url) : '';
           },
           createScript: function(script) {
-            return script;
+            return script != null ? String(script) : '';
           }
         });
       } catch (err) {

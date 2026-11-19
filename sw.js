@@ -4,7 +4,7 @@
  * Supports Android, iOS, iPadOS, macOS, and Windows
  */
 
-const CACHE_NAME = 'htet-pwa-v6.8';
+const CACHE_NAME = 'htet-pwa-v6.9';
 const CORE_SHELL_ASSETS = [
   './',
   './index.html',
