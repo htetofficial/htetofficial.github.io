@@ -411,6 +411,40 @@ def handle_articles(api, msg):
     }
     api.send_message(chat_id, text, reply_markup=keyboard)
 
+def handle_about(api, msg):
+    chat_id = msg['chat']['id']
+    text = (
+        "🌸 <b>စာရေးသူနှင့် သုတေသီ ထက် (Htet Myat Ekri) အကြောင်း</b>\n\n"
+        "• <b>အမည်:</b> ထက်မြတ်ဧကရီ (Htet Myat Ekri)\n"
+        "• <b>နယ်ပယ်:</b> နိုင်ငံရေးဒဿနိကဗေဒ၊ ဖီမင်နစ်နှင့် လူမှုလွတ်မြောက်ရေး လှုပ်ရှားမှု\n"
+        "• <b>ဖော်ထုတ်ထားသော ဝါဒ:</b> Commufemocratism (ကွန်မြူဖီမိုကရက်တစ်ဝါဒ)\n"
+        "• <b>ဂုဏ်ပြုမှတ်တမ်း:</b> မြန်မာ့နွေဦးတက္ကသိုလ် (MNOU) ၃ နှစ်ပြည့် နှစ်လည်မဂ္ဂဇင်း ရွေးချယ်ခံဆောင်းပါးနှင့် ဂုဏ်ပြုဆု (၂၀၂၅)\n"
+        "• <b>တည်ထောင်မှုများ:</b> Women Nation, IdeaHub Public Digital Library (၁,၅၂၂+ အုပ်)\n\n"
+        "🆔 <b>နိုင်ငံတကာ သုတေသီ မှတ်ပုံတင် (ORCID iD):</b>\n"
+        "🔗 <a href='https://orcid.org/0009-0004-7908-2949'>0009-0004-7908-2949</a>"
+    )
+    keyboard = {
+        "inline_keyboard": [
+            [
+                {
+                    "text": "🆔 ORCID Profile ဖွင့်ရန် ↗",
+                    "url": "https://orcid.org/0009-0004-7908-2949"
+                },
+                {
+                    "text": "📖 အပြည့်အစုံ ဖတ်ရှုရန် (Mini App)",
+                    "web_app": {"url": f"{WEBAPP_URL}/about.html"}
+                }
+            ],
+            [
+                {
+                    "text": "📥 Official CV (PDF ဒေါင်းလုဒ်)",
+                    "url": f"{WEBAPP_URL}/downloads/Htet_Myat_Ekri_Curriculum_Vitae.pdf"
+                }
+            ]
+        ]
+    }
+    api.send_message(chat_id, text, reply_markup=keyboard)
+
 def handle_publications(api, msg):
     chat_id = msg['chat']['id']
     pubs = repo.publications[:5]
@@ -622,6 +656,7 @@ def handle_help(api, msg):
         "📖 <b>Htet Official Bot — အသုံးပြုနိုင်သော Commands များ</b>\n\n"
         "• <code>/start</code> - နှုတ်ခွန်းဆက်နှင့် Mini App ဖွင့်ရန်\n"
         "• <code>/app</code> - Telegram Mini App မျက်နှာပြည့် ဖွင့်ရန်\n"
+        "• <code>/about</code> - စာရေးသူ ထက် အကြောင်းနှင့် ORCID သုတေသီ မှတ်ပုံတင်\n"
         "• <code>/mirrors</code> - တရားဝင် Mirror လင့်ခ်များနှင့် VPN အကြံပြုချက် (VPN မလို Vercel အပါအဝင်)\n"
         "• <code>/suukyi</code> သို့မဟုတ် <code>/birthday</code> - ဒေါ်အောင်ဆန်းစုကြည် ၈၁ နှစ်ပြည့် မွေးနေ့နှင့် Freedom from Fear စာတမ်း\n"
         "• <code>/dict &lt;word&gt;</code> - အင်္ဂလိပ်-မြန်မာ အဘိဓာန် ရှာဖွေရန်\n"
@@ -733,6 +768,8 @@ def process_message(api, msg):
         handle_start(api, msg)
     elif text.startswith('/app') or text.startswith('/mini'):
         handle_app(api, msg)
+    elif text.startswith('/about') or text.startswith('/author') or text.startswith('/bio') or text.startswith('/orcid'):
+        handle_about(api, msg)
     elif text.startswith('/mirrors') or text.startswith('/mirror') or text.startswith('/links') or text.startswith('/vpn'):
         handle_mirrors(api, msg)
     elif text.startswith('/suukyi') or text.startswith('/birthday'):
@@ -796,6 +833,7 @@ def main():
     commands = [
         {"command": "start", "description": "မင်္ဂလာပါ နှုတ်ခွန်းဆက်နှင့် Mini App ဖွင့်ရန်"},
         {"command": "app", "description": "Htet Mini App မျက်နှာပြည့် ဖွင့်ရန်"},
+        {"command": "about", "description": "စာရေးသူ အကြောင်းနှင့် ORCID သုတေသီ မှတ်ပုံတင်"},
         {"command": "mirrors", "description": "တရားဝင် Mirror လင့်ခ်များနှင့် VPN အကြံပြုချက်"},
         {"command": "translate", "description": "မြန်မာ ↔ အင်္ဂလိပ် စက်ဘာသာပြန်ဆိုရန်"},
         {"command": "dict", "description": "Ornagai အင်္ဂလိပ်-မြန်မာ အဘိဓာန် ရှာရန်"},
