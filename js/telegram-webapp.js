@@ -1,7 +1,8 @@
 /**
  * Htet Official — Telegram Mini App (TMA) & WebApp Engine
  * Seamless integration for Telegram iOS, Android, Desktop, and Web
- * Supports Theme Sync, Native BackButton, MainButton, Haptics, CloudStorage, Safe-Area & Instant View Sharing
+ * Supports Theme Sync, Native BackButton, MainButton, SettingsButton, VerticalSwipesControl,
+ * Haptics, CloudStorage, Safe-Area & Instant View Sharing
  */
 
 (function() {
@@ -32,12 +33,26 @@
           tg.expand();
         }
 
-        // 3. Enable closing confirmation to prevent accidental swipe dismissals
+        // 3. Disable vertical swipes to prevent accidental dismissal while scrolling reading articles (Telegram 7.7+)
+        if (typeof tg.disableVerticalSwipes === 'function') {
+          try {
+            tg.disableVerticalSwipes();
+          } catch (e) {}
+        }
+
+        // 4. Request full-screen display for immersive reader experience (Telegram 8.0+)
+        if (typeof tg.requestFullscreen === 'function') {
+          try {
+            tg.requestFullscreen();
+          } catch (e) {}
+        }
+
+        // 5. Enable closing confirmation to prevent accidental swipe dismissals
         if (typeof tg.enableClosingConfirmation === 'function') {
           tg.enableClosingConfirmation();
         }
 
-        // 4. Synchronize Theme & Colors with Telegram
+        // 6. Synchronize Theme & Colors with Telegram
         this.syncTheme();
         if (typeof tg.onEvent === 'function') {
           tg.onEvent('themeChanged', function() {
@@ -50,19 +65,25 @@
           });
         }
 
-        // 5. Setup Native BackButton Navigation
+        // 7. Setup Native BackButton Navigation
         this.setupBackButton();
 
-        // 6. Setup Haptic Feedback on interactive elements
+        // 8. Setup Native SettingsButton
+        this.setupSettingsButton();
+
+        // 9. Setup Haptic Feedback on interactive elements
         this.bindHaptics();
 
-        // 7. Inject Telegram Safe-Area CSS Variables
+        // 10. Inject Telegram Safe-Area CSS Variables & Mini App Network Badge
         this.applySafeAreaStyles();
 
-        // 8. Personalize greeting if user is known
+        // 11. Personalize greeting if user is known
         this.displayUserBadge();
 
-        // 9. Notify Telegram the WebApp is ready
+        // 12. Render Mini App VPN Node indicator
+        this.renderNodeIndicator();
+
+        // 13. Notify Telegram the WebApp is ready
         if (typeof tg.ready === 'function') {
           tg.ready();
         }
@@ -193,6 +214,26 @@
     },
 
     /**
+     * Setup Telegram Native SettingsButton in top bar
+     */
+    setupSettingsButton: function() {
+      if (!tg || !tg.SettingsButton || typeof tg.SettingsButton.show !== 'function') return;
+
+      try {
+        tg.SettingsButton.show();
+        tg.SettingsButton.onClick(function() {
+          TelegramMiniApp.haptic('medium');
+          var modal = document.getElementById('reading-settings-modal') || document.getElementById('libre-settings-modal');
+          if (modal) {
+            modal.classList.remove('hidden');
+          } else if (window.ThemeManager && typeof window.ThemeManager.toggleModal === 'function') {
+            window.ThemeManager.toggleModal();
+          }
+        });
+      } catch (e) {}
+    },
+
+    /**
      * Haptic feedback helper
      * @param {'light'|'medium'|'heavy'|'rigid'|'soft'|'selection'|'success'|'warning'|'error'} style
      */
@@ -250,6 +291,17 @@
         '  background: rgba(42, 171, 238, 0.12);',
         '  color: #2AABEE;',
         '  border: 1px solid rgba(42, 171, 238, 0.3);',
+        '}',
+        '.tg-node-badge {',
+        '  display: inline-flex;',
+        '  align-items: center;',
+        '  gap: 5px;',
+        '  font-size: 10.5px;',
+        '  padding: 2px 8px;',
+        '  border-radius: 9999px;',
+        '  background: rgba(16, 185, 129, 0.1);',
+        '  color: #059669;',
+        '  border: 1px solid rgba(16, 185, 129, 0.25);',
         '}'
       ].join('\n');
       document.head.appendChild(style);
@@ -267,6 +319,55 @@
       greetingContainers.forEach(function(el) {
         el.innerHTML = '<span class="tg-user-greeting"><i class="ri-telegram-fill"></i><span>မင်္ဂလာပါ ' + escapeHtml(name) + '</span></span>';
       });
+    },
+
+    /**
+     * Render node indicator inside Telegram Mini App
+     */
+    renderNodeIndicator: function() {
+      var isVercel = window.location.hostname.indexOf('vercel.app') !== -1;
+      var slots = document.querySelectorAll('.telegram-node-slot');
+
+      slots.forEach(function(slot) {
+        if (isVercel) {
+          slot.innerHTML = '<span class="tg-node-badge"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span><span>VPN မလို Direct Node (Vercel)</span></span>';
+        } else {
+          slot.innerHTML = '<span class="tg-node-badge"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span><span>Edge CDN Node</span></span>';
+        }
+      });
+    },
+
+    /**
+     * Telegram CloudStorage Helpers (persistent across devices)
+     */
+    saveCloudItem: function(key, value, callback) {
+      if (tg && tg.CloudStorage && typeof tg.CloudStorage.setItem === 'function') {
+        tg.CloudStorage.setItem(key, String(value), function(err, result) {
+          if (callback) callback(err, result);
+        });
+      } else {
+        try {
+          localStorage.setItem('tg_cloud_' + key, String(value));
+          if (callback) callback(null, true);
+        } catch (e) {
+          if (callback) callback(e, false);
+        }
+      }
+    },
+
+    getCloudItem: function(key, callback) {
+      if (tg && tg.CloudStorage && typeof tg.CloudStorage.getItem === 'function') {
+        tg.CloudStorage.getItem(key, function(err, value) {
+          if (callback) callback(err, value);
+        });
+      } else {
+        try {
+          var val = localStorage.getItem('tg_cloud_' + key);
+          if (callback) callback(null, val);
+        } catch (e) {
+          if (callback) callback(e, null);
+        }
+      }
     },
 
     /**
@@ -318,7 +419,7 @@
         shareUrl = 'https://t.me/iv?url=' + encodeURIComponent(shareUrl) + '&rhash=' + ivRhash;
       }
 
-      var text = (title ? title + '\n\n' : '') + 'ထက် (Htet) ၏ တရားဝင် စာဖတ်ခန်းမှ မျှဝေပါသည်။';
+      var text = (title ? title + '\n\n' : '') + 'ထက် (Htet) ၏ တရားဝင် စာဖတ်ခန်း (VPN မလို)\n' + shareUrl;
       var tgIntentUrl = 'https://t.me/share/url?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent(text);
 
       if (tg && typeof tg.openTelegramLink === 'function') {

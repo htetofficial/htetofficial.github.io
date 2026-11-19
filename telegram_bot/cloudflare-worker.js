@@ -7,7 +7,7 @@
  * 2. Paste this code into Worker editor
  * 3. Add Environment Variable in Worker Settings:
  *    BOT_TOKEN = "your_telegram_bot_token_from_botfather"
- *    WEBAPP_URL = "https://htetofficial.github.io"
+ *    WEBAPP_URL = "https://htetofficialgithubio.vercel.app"
  * 4. Set Telegram Webhook:
  *    curl -F "url=https://<your-worker-name>.<your-subdomain>.workers.dev" https://api.telegram.org/bot<BOT_TOKEN>/setWebhook
  */
@@ -19,7 +19,7 @@ export default {
     }
 
     const token = env.BOT_TOKEN;
-    const webappUrl = env.WEBAPP_URL || 'https://htetofficial.github.io';
+    const webappUrl = env.WEBAPP_URL || 'https://htetofficialgithubio.vercel.app';
 
     if (!token) {
       return new Response('BOT_TOKEN missing in environment', { status: 500 });
@@ -52,12 +52,14 @@ async function handleMessage(msg, token, webappUrl) {
     const welcomeText = 
       `🌸 <b>မင်္ဂလာပါ ${userName} ရှင့်၊</b>\n\n` +
       `<b>ထက် (Htet)</b> ၏ တရားဝင် Telegram Official Bot နှင့် Mini App မှ နွေးထွေးစွာ ကြိုဆိုပါသည်ရှင်။\n\n` +
+      `🇲🇲 <b>မြန်မာနိုင်ငံတွင်းမှ မိတ်ဆွေများအတွက်:</b>\n` +
+      `Telegram Mini App အား <b>VPN မလိုဘဲ တိုက်ရိုက်အသုံးပြုနိုင်သော Vercel Node</b> ဖြင့် ချိတ်ဆက်ထားပေးပါသဖြင့် လွယ်ကူလျင်မြန်စွာ ဖွင့်လှစ်နိုင်ပါသည်ရှင်။\n\n` +
       `🕊️ <b>ဒေါ်အောင်ဆန်းစုကြည် ၈၁ နှစ်ပြည့် မွေးနေ့ဂုဏ်ပြုလွှာနှင့် Freedom from Fear</b> စာတမ်းများကိုလည်း ` +
       `အောက်ပါခလုတ်များဖြင့် ချက်ချင်း ဖတ်ရှု/နားဆင်နိုင်ပါပြီရှင်။`;
 
     const keyboard = {
       inline_keyboard: [
-        [{ text: '📖 Htet Official Mini App ဖွင့်ရန်', web_app: { url: webappUrl } }],
+        [{ text: '🚀 Htet Mini App ဖွင့်ရန် (VPN မလို Vercel)', web_app: { url: webappUrl } }],
         [
           { text: '🌐 ဘာသာပြန်စတူဒီယို', web_app: { url: `${webappUrl}/translate.html` } },
           { text: '📚 အဘိဓာန်', web_app: { url: `${webappUrl}/dictionary.html` } }
@@ -82,11 +84,11 @@ async function handleMessage(msg, token, webappUrl) {
   } else if (text.startsWith('/app') || text.startsWith('/mini')) {
     await sendTelegram('sendMessage', token, {
       chat_id: chatId,
-      text: '🚀 <b>Htet Official Telegram Mini App</b>\n\nအောက်ပါခလုတ်ကို နှိပ်၍ မျက်နှာပြည့် Mini App ကို ဖွင့်လှစ်နိုင်ပါသည်ရှင်။',
+      text: '🚀 <b>Htet Official Telegram Mini App</b>\n\nမြန်မာနိုင်ငံတွင်းမှ VPN မလိုဘဲ တိုက်ရိုက်ဖွင့်နိုင်သော Vercel Node ဖြင့် ချိတ်ဆက်ထားပါသည်ရှင်။',
       parse_mode: 'HTML',
       reply_markup: {
         inline_keyboard: [
-          [{ text: '🚀 Mini App မျက်နှာပြည့် ဖွင့်မည်', web_app: { url: webappUrl } }]
+          [{ text: '🚀 Mini App မျက်နှာပြည့် ဖွင့်မည် (VPN မလို)', web_app: { url: webappUrl } }]
         ]
       }
     });
@@ -97,7 +99,7 @@ async function handleMessage(msg, token, webappUrl) {
       parse_mode: 'HTML',
       reply_markup: {
         inline_keyboard: [
-          [{ text: '🎂 မွေးနေ့ဆုတောင်းလွှာ ဖတ်ရန်', web_app: { url: `${webappUrl}/article.html?id=daw-aung-san-suu-kyi-81st-birthday-tribute` } }],
+          [{ text: '🎂 မွေးနေ့ဆုတောင်းလွှာ ဖတ်ရန် (VPN မလို)', web_app: { url: `${webappUrl}/article.html?id=daw-aung-san-suu-kyi-81st-birthday-tribute` } }],
           [{ text: '📖 Freedom from Fear စာတမ်း', web_app: { url: `${webappUrl}/article.html?id=aung-san-suu-kyi-freedom-from-fear-1990-mm` } }]
         ]
       }
@@ -125,18 +127,18 @@ async function handleMessage(msg, token, webappUrl) {
       parse_mode: 'HTML',
       reply_markup: {
         inline_keyboard: [
-          [{ text: '🌐 ဘာသာပြန်စတူဒီယို ဖွင့်မည်', web_app: { url: `${webappUrl}/translate.html` } }]
+          [{ text: '🌐 ဘာသာပြန်စတူဒီယို ဖွင့်မည် (VPN မလို)', web_app: { url: `${webappUrl}/translate.html` } }]
         ]
       }
     });
   } else {
     await sendTelegram('sendMessage', token, {
       chat_id: chatId,
-      text: '📖 <b>Htet Official Bot</b>\n\nCommands များ: /start, /app, /translate, /suukyi, /help\n\nအောက်ပါခလုတ်ဖြင့် Mini App ကို ဖွင့်လှစ်နိုင်ပါသည်ရှင်။',
+      text: '📖 <b>Htet Official Bot</b>\n\nCommands: /start, /app, /translate, /suukyi, /mirrors, /help\n\nအောက်ပါခလုတ်ဖြင့် Mini App (VPN မလို) ကို ဖွင့်လှစ်နိုင်ပါသည်ရှင်။',
       parse_mode: 'HTML',
       reply_markup: {
         inline_keyboard: [
-          [{ text: '📖 Htet Mini App ဖွင့်ရန်', web_app: { url: webappUrl } }]
+          [{ text: '🚀 Htet Mini App ဖွင့်ရန် (VPN မလို)', web_app: { url: webappUrl } }]
         ]
       }
     });
@@ -144,19 +146,18 @@ async function handleMessage(msg, token, webappUrl) {
 }
 
 async function handleInlineQuery(iq, token, webappUrl) {
-  const q = (iq.query || '').trim();
   const results = [
     {
       type: 'article',
       id: 'app',
-      title: '📖 Htet Official Mini App',
-      description: 'ဖွင့်လှစ်ဖတ်ရှုရန်',
+      title: '📖 Htet Official Mini App (VPN မလို)',
+      description: 'မြန်မာနိုင်ငံတွင်းမှ VPN မလိုဘဲ ဖွင့်လှစ်ဖတ်ရှုရန်',
       input_message_content: {
         message_text: `📖 <b>Htet Official Telegram Mini App</b>\n${webappUrl}`,
         parse_mode: 'HTML'
       },
       reply_markup: {
-        inline_keyboard: [[{ text: '🚀 Mini App ဖွင့်ရန်', web_app: { url: webappUrl } }]]
+        inline_keyboard: [[{ text: '🚀 Mini App ဖွင့်ရန် (VPN မလို)', web_app: { url: webappUrl } }]]
       }
     }
   ];

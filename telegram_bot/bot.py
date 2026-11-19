@@ -3,12 +3,15 @@
 """
 Htet Official — Telegram Bot Engine & Mini App Gateway
 A pure, zero-external-dependency Telegram Bot with:
-  • Mini App WebApp Buttons & Persistent Menu Button
+  • Mini App WebApp Buttons & Persistent Menu Button (VPN-Free Vercel Node)
+  • Full-Text Article & Publications Search (/search)
   • Ornagai En-My Dual Dictionary Lookup (/dict)
   • Universal Machine Translation (/translate)
   • Articles & Publications Catalog with Instant View links (/articles, /publications)
   • Daw Aung San Suu Kyi 81st Birthday Tribute & Freedom from Fear (/suukyi, /birthday)
   • Audio Voice Essays & Speech (/audio)
+  • Mirror Status & VPN Network Guidance (/mirrors)
+  • Ping & Node Health Diagnostics (/ping)
   • Inline Query Provider (@BotName <query>)
 """
 
@@ -26,7 +29,12 @@ from datetime import datetime
 BOT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(BOT_DIR, '..'))
 
-DEFAULT_WEBAPP_URL = "https://web.htetofficial.workers.dev"
+# Primary VPN-Free WebApp URL (Accessible across Myanmar without VPN)
+DEFAULT_WEBAPP_URL = "https://htetofficialgithubio.vercel.app"
+VERCEL_WEBAPP_URL = "https://htetofficialgithubio.vercel.app"
+WORKERS_WEBAPP_URL = "https://web.htetofficial.workers.dev"
+GITHUB_WEBAPP_URL = "https://htetofficial.github.io"
+
 TELEGRAM_API_BASE = "https://api.telegram.org/bot"
 
 # Load Configuration
@@ -69,7 +77,7 @@ def get_webapp_url():
 WEBAPP_URL = get_webapp_url()
 
 # ---------------------------------------------------------------------------
-# Telegram Bot API Helper (Pure urllib, zero pip requirements)
+# Telegram Bot API Helper (Pure urllib, zero external pip dependencies)
 # ---------------------------------------------------------------------------
 class TelegramAPI:
     def __init__(self, token):
@@ -78,7 +86,7 @@ class TelegramAPI:
 
     def request(self, method, data=None):
         url = self.endpoint + method
-        headers = {'User-Agent': 'HtetOfficialBot/1.0'}
+        headers = {'User-Agent': 'HtetOfficialBot/2.0'}
         req_data = None
         if data is not None:
             headers['Content-Type'] = 'application/json'
@@ -106,11 +114,11 @@ class TelegramAPI:
     def set_my_commands(self, commands):
         return self.request('setMyCommands', {'commands': commands})
 
-    def set_chat_menu_button(self, webapp_url):
+    def set_chat_menu_button(self, webapp_url, text="📖 Htet Mini App (VPN မလို)"):
         data = {
             "menu_button": {
                 "type": "web_app",
-                "text": "📖 Htet Mini App",
+                "text": text,
                 "web_app": {
                     "url": webapp_url
                 }
@@ -156,6 +164,38 @@ class TelegramAPI:
         return self.request('getUpdates', data)
 
 # ---------------------------------------------------------------------------
+# Persistent Reply Keyboard (Fast 1-Tap Access for Touch Devices)
+# ---------------------------------------------------------------------------
+def get_main_reply_keyboard():
+    return {
+        "keyboard": [
+            [
+                {
+                    "text": "📖 Htet Mini App ဖွင့်ရန် (VPN မလို)",
+                    "web_app": {"url": WEBAPP_URL}
+                }
+            ],
+            [
+                {"text": "📚 ဆောင်းပါးများ"},
+                {"text": "📑 စာတမ်းငယ်များ"},
+                {"text": "🔍 ဆောင်းပါးရှာရန်"}
+            ],
+            [
+                {"text": "🌐 ဘာသာပြန်စတူဒီယို"},
+                {"text": "📖 အဘိဓာန်"},
+                {"text": "🕊️ ဒေါ်အောင်ဆန်းစုကြည်"}
+            ],
+            [
+                {"text": "🆔 စာရေးသူအကြောင်း"},
+                {"text": "🎙️ အသံစာတမ်းများ"},
+                {"text": "🌐 Mirror လင့်ခ်များ"}
+            ]
+        ],
+        "resize_keyboard": True,
+        "is_persistent": True
+    }
+
+# ---------------------------------------------------------------------------
 # Data Repository Loaders (Articles, Dictionary, Translations)
 # ---------------------------------------------------------------------------
 class DataRepo:
@@ -192,6 +232,35 @@ class DataRepo:
                     self.translation_pairs = json.load(f)
             except Exception as e:
                 print(f"[Repo] Error loading translations: {e}")
+
+    def search_articles(self, query, limit=5):
+        """Full-text search in articles and monographs across Burmese & English"""
+        q = query.strip().lower()
+        if not q:
+            return []
+        
+        matches = []
+        for a in self.articles:
+            title_mm = (a.get('title', {}).get('mm', '') if isinstance(a.get('title'), dict) else a.get('title', '')).lower()
+            title_en = (a.get('title', {}).get('en', '') if isinstance(a.get('title'), dict) else '').lower()
+            desc_mm = (a.get('description', {}).get('mm', '') if isinstance(a.get('description'), dict) else a.get('description', '')).lower()
+            desc_en = (a.get('description', {}).get('en', '') if isinstance(a.get('description'), dict) else '').lower()
+            cat_mm = str(a.get('category_mm', '')).lower()
+            cat_en = str(a.get('category_en', '')).lower()
+            tags = " ".join(a.get('tags', []) if isinstance(a.get('tags'), list) else []).lower()
+
+            score = 0
+            if q in title_mm: score += 15
+            if q in title_en: score += 12
+            if q in desc_mm or q in desc_en: score += 7
+            if q in cat_mm or q in cat_en: score += 5
+            if q in tags: score += 4
+
+            if score > 0:
+                matches.append((score, a))
+
+        matches.sort(key=lambda x: x[0], reverse=True)
+        return [item[1] for item in matches[:limit]]
 
     def lookup_dictionary(self, word):
         word = word.strip().lower()
@@ -267,27 +336,37 @@ def handle_start(api, msg):
     welcome_text = (
         f"🌸 <b>မင်္ဂလာပါ {user_name} ရှင့်၊</b>\n\n"
         f"<b>ထက် (Htet)</b> ၏ တရားဝင် Telegram Official Bot နှင့် Mini App မှ နွေးထွေးစွာ ကြိုဆိုပါသည်ရှင်။\n\n"
-        f"နိုင်ငံရေးဒဿနိကဗေဒ၊ အမျိုးသမီးဝါဒနှင့် သုတေသနဆောင်းပါးများကို Telegram ထဲတွင် တိုက်ရိုက်ဖတ်ရှုနိုင်သလို "
-        f"ခေတ်မီ <b>Telegram Mini App</b> ဖြင့်လည်း ချောမွေ့စွာ ဝင်ရောက်အသုံးပြုနိုင်ပါသည်။\n\n"
-        f"🕊️ <b>ဒေါ်အောင်ဆန်းစုကြည် ၈၁ နှစ်ပြည့် မွေးနေ့ဂုဏ်ပြုလွှာနှင့် Freedom from Fear</b> စာတမ်းများကိုလည်း "
-        f"အောက်ပါခလုတ်များဖြင့် ချက်ချင်း ဖတ်ရှု/နားဆင်နိုင်ပါပြီရှင်။"
+        f"🇲🇲 <b>မြန်မာနိုင်ငံတွင်းမှ မိတ်ဆွေများအတွက်:</b>\n"
+        f"Telegram Mini App အား <b>VPN မလိုဘဲ တိုက်ရိုက်အသုံးပြုနိုင်သော Vercel Node</b> ဖြင့် ချိတ်ဆက်ထားပေးထားပါသဖြင့် "
+        f"လွယ်ကူလျင်မြန်စွာ ဝင်ရောက်ဖတ်ရှုနိုင်ပါပြီရှင်။\n\n"
+        f"📖 <b>အဓိကကဏ္ဍများ:</b>\n"
+        f"• နိုင်ငံရေးဒဿနိကဗေဒ၊ အမျိုးသမီးဝါဒနှင့် သုတေသနဆောင်းပါးများ\n"
+        f"• ဒေါ်အောင်ဆန်းစုကြည် ၈၁ နှစ်ပြည့် မွေးနေ့နှင့် Freedom from Fear စာတမ်း\n"
+        f"• စာလုံး ၁၂,၀၀၀+ အဘိဓာန်နှင့် မြန်မာ ↔ အင်္ဂလိပ် ဘာသာပြန်စတူဒီယို\n"
+        f"• သုတေသီ မှတ်ပုံတင် (ORCID iD: <code>0009-0004-7908-2949</code>)"
     )
 
-    keyboard = {
+    inline_keyboard = {
         "inline_keyboard": [
             [
                 {
-                    "text": "📖 Htet Official Mini App ဖွင့်ရန်",
+                    "text": "🚀 Htet Mini App ဖွင့်ရန် (VPN မလို Vercel)",
                     "web_app": {"url": WEBAPP_URL}
                 }
             ],
             [
                 {
-                    "text": "🌐 ဘာသာပြန်စတူဒီယို (Translate)",
+                    "text": "⚡ Workers Edge Mini App",
+                    "web_app": {"url": WORKERS_WEBAPP_URL}
+                }
+            ],
+            [
+                {
+                    "text": "🌐 ဘာသာပြန်စတူဒီယို",
                     "web_app": {"url": f"{WEBAPP_URL}/translate.html"}
                 },
                 {
-                    "text": "📚 အဘိဓာန် (Dictionary)",
+                    "text": "📚 အဘိဓာန်စတူဒီယို",
                     "web_app": {"url": f"{WEBAPP_URL}/dictionary.html"}
                 }
             ],
@@ -303,7 +382,8 @@ def handle_start(api, msg):
             ],
             [
                 {
-                    "text": "🌐 တရားဝင် Mirror လင့်ခ်များ (VPN မလို Vercel အပါအဝင်)",
+                    "text": "🌐 တရားဝင် Mirror လင့်ခ်များ (VPN လမ်းညွှန်)",
+                    "callback_data": "menu_mirrors" if False else None,
                     "url": "https://htetofficialgithubio.vercel.app"
                 }
             ],
@@ -320,21 +400,34 @@ def handle_start(api, msg):
         ]
     }
 
-    api.send_message(chat_id, welcome_text, reply_markup=keyboard)
+    # First send with Reply Keyboard to permanently dock at the bottom
+    api.send_message(chat_id, welcome_text, reply_markup=inline_keyboard)
+    
+    # Prompt persistent keyboard hint
+    hint_text = "💡 <i>အောက်ခြေရှိ အမြန်ခလုတ်များကို နှိပ်၍လည်း Mini App နှင့် ကဏ္ဍစုံသို့ ချက်ချင်း သွားရောက်နိုင်ပါသည်ရှင်။</i>"
+    api.send_message(chat_id, hint_text, reply_markup=get_main_reply_keyboard())
 
 def handle_app(api, msg):
     chat_id = msg['chat']['id']
     text = (
         "🚀 <b>Htet Official Telegram Mini App</b>\n\n"
+        "မြန်မာနိုင်ငံတွင်းမှ မိတ်ဆွေများအတွက် VPN မလိုဘဲ တိုက်ရိုက်ဖွင့်နိုင်သော "
+        "<b>Vercel Edge Node</b> အား အဓိကထား ချိတ်ဆက်ထားပေးပါသည်ရှင်။\n\n"
         "ဝက်ဘ်ဆိုက်တစ်ခုလုံးကို Telegram ထဲမှ ထွက်စရာမလိုဘဲ အပြည့်အဝ အသုံးပြုနိုင်ရန် "
-        "အောက်ပါခလုတ်ကို နှိပ်၍ ဖွင့်လှစ်နိုင်ပါသည်ရှင်။"
+        "အောက်ပါခလုတ်များထဲမှ မိမိနှစ်သက်ရာ Node ကို နှိပ်၍ ဖွင့်လှစ်နိုင်ပါသည်ရှင်။"
     )
     keyboard = {
         "inline_keyboard": [
             [
                 {
-                    "text": "🚀 Mini App ကို မျက်နှာပြည့် ဖွင့်မည်",
+                    "text": "🚀 Mini App မျက်နှာပြည့် ဖွင့်မည် (VPN မလို Vercel)",
                     "web_app": {"url": WEBAPP_URL}
+                }
+            ],
+            [
+                {
+                    "text": "⚡ Cloudflare Workers Edge Node",
+                    "web_app": {"url": WORKERS_WEBAPP_URL}
                 }
             ],
             [
@@ -343,8 +436,14 @@ def handle_app(api, msg):
                     "web_app": {"url": f"{WEBAPP_URL}/translate.html"}
                 },
                 {
-                    "text": "📚 အဘိဓာန်နှင့် NLP စတူဒီယို",
+                    "text": "📚 အဘိဓာန်နှင့် NLP",
                     "web_app": {"url": f"{WEBAPP_URL}/dictionary.html"}
+                }
+            ],
+            [
+                {
+                    "text": "📑 သုတေသန စာတမ်း ၄၂ စောင်လုံး",
+                    "web_app": {"url": f"{WEBAPP_URL}/publications.html"}
                 }
             ]
         ]
@@ -358,14 +457,14 @@ def handle_suukyi(api, msg):
         "<i>\"The only real prison is fear, and the only real freedom is Freedom from Fear.\"</i>\n"
         "— Aung San Suu Kyi (1990)\n\n"
         "၈၁ နှစ်ပြည့် မွေးနေ့မှသည် အလုံးစုံ လွတ်မြောက်ရေးဆီသို့ မျှော်ရည်၍ လူထုခေါင်းဆောင်၏ "
-        "ဂုဏ်ပြုလွှာနှင့် သမိုင်းဝင် Freedom from Fear စာတမ်းအား အင်္ဂလိပ်/မြန်မာ အသံဖိုင်နှင့်တကွ ဖတ်ရှုနိုင်ပါသည်ရှင်။"
+        "ဂုဏ်ပြုလွှာနှင့် သမိုင်းဝင် Freedom from Fear စာတမ်းအား အင်္ဂလိပ်/မြန်မာ အသံဖိုင်နှင့်တကွ ဖတ်ရှုနားဆင်နိုင်ပါသည်ရှင်။"
     )
 
     keyboard = {
         "inline_keyboard": [
             [
                 {
-                    "text": "🎂 ၈၁ နှစ်ပြည့် မွေးနေ့ဂုဏ်ပြုလွှာ ဖတ်ရန်",
+                    "text": "🎂 ၈၁ နှစ်ပြည့် မွေးနေ့ဂုဏ်ပြုလွှာ ဖတ်ရန် (VPN မလို)",
                     "web_app": {"url": f"{WEBAPP_URL}/article.html?id=daw-aung-san-suu-kyi-81st-birthday-tribute"}
                 }
             ],
@@ -403,13 +502,58 @@ def handle_articles(api, msg):
         "inline_keyboard": [
             [
                 {
-                    "text": "📑 ဆောင်းပါးများအားလုံး ကြည့်မည် (Mini App)",
+                    "text": "📑 ဆောင်းပါးများအားလုံး ကြည့်မည် (Mini App - VPN မလို)",
                     "web_app": {"url": f"{WEBAPP_URL}/articles.html"}
                 }
             ]
         ]
     }
     api.send_message(chat_id, text, reply_markup=keyboard)
+
+def handle_search(api, msg, query):
+    chat_id = msg['chat']['id']
+    query = query.strip()
+    if not query:
+        api.send_message(
+            chat_id,
+            "🔍 <b>ဆောင်းပါး ရှာဖွေနည်း:</b>\n\n"
+            "<code>/search &lt;စကားလုံး သို့မဟုတ် ခေါင်းစဉ်&gt;</code> ဟု ရိုက်ထည့်ပါရှင်။\n"
+            "ဥပမာ: <code>/search ဖီမင်နစ်</code> သို့မဟုတ် <code>/search suu kyi</code>"
+        )
+        return
+
+    results = repo.search_articles(query, limit=5)
+    if not results:
+        api.send_message(
+            chat_id,
+            f"🔍 <b>'{query}'</b> နှင့် ကိုက်ညီသော ဆောင်းပါး မတွေ့ရှိပါရှင်။\n\n"
+            f"💡 <i>Tip: အင်္ဂလိပ်စာလုံး ဖြစ်ပါက <code>/dict {query}</code> ဖြင့် အဘိဓာန် ရှာနိုင်သလို "
+            f"<code>/translate {query}</code> ဖြင့်လည်း ဘာသာပြန်နိုင်ပါသည်ရှင်။</i>"
+        )
+        return
+
+    text = f"🔍 <b>'{query}' အတွက် ရှာဖွေတွေ့ရှိသော ဆောင်းပါးများ ({len(results)} စောင်):</b>\n\n"
+    buttons = []
+
+    for i, a in enumerate(results, 1):
+        title = a.get('title', {}).get('mm', a.get('title', 'ဆောင်းပါး')) if isinstance(a.get('title'), dict) else a.get('title', 'ဆောင်းပါး')
+        aid = a.get('id', '')
+        cat = a.get('category_mm', '')
+        text += f"<b>{i}။ {title}</b>\n"
+        if cat:
+            text += f"🏷️ <i>{cat}</i>\n"
+        text += f"🔗 <a href='{WEBAPP_URL}/article.html?id={aid}'>ဖတ်ရှုရန် (Mini App)</a>\n\n"
+        buttons.append([{
+            "text": f"📖 {title[:28]}...",
+            "web_app": {"url": f"{WEBAPP_URL}/article.html?id={aid}"}
+        }])
+
+    buttons.append([{
+        "text": "📚 ဆောင်းပါးအားလုံး ကြည့်မည် (Mini App)",
+        "web_app": {"url": f"{WEBAPP_URL}/articles.html"}
+    }])
+
+    api.send_message(chat_id, text, reply_markup={"inline_keyboard": buttons})
 
 def handle_about(api, msg):
     chat_id = msg['chat']['id']
@@ -461,7 +605,7 @@ def handle_publications(api, msg):
         "inline_keyboard": [
             [
                 {
-                    "text": "📚 စာတမ်း ၄၂ စောင်လုံး ကြည့်မည် (Mini App)",
+                    "text": "📚 စာတမ်း ၄၂ စောင်လုံး ကြည့်မည် (Mini App - VPN မလို)",
                     "web_app": {"url": f"{WEBAPP_URL}/publications.html"}
                 }
             ]
@@ -509,7 +653,7 @@ def handle_dict(api, msg, query):
         "inline_keyboard": [
             [
                 {
-                    "text": "🔍 အဘိဓာန်စတူဒီယိုတွင် ဖွင့်ကြည့်မည်",
+                    "text": "🔍 အဘိဓာန်စတူဒီယိုတွင် ဖွင့်ကြည့်မည် (VPN မလို)",
                     "web_app": {"url": f"{WEBAPP_URL}/dictionary.html?q={urllib.parse.quote(query)}"}
                 }
             ]
@@ -558,7 +702,7 @@ def handle_translate(api, msg, query):
         "inline_keyboard": [
             [
                 {
-                    "text": "🌐 မျက်နှာပြည့် ဘာသာပြန်စတူဒီယို ဖွင့်မည်",
+                    "text": "🌐 မျက်နှာပြည့် ဘာသာပြန်စတူဒီယို ဖွင့်မည် (VPN မလို)",
                     "web_app": {"url": f"{WEBAPP_URL}/translate.html"}
                 }
             ]
@@ -583,13 +727,13 @@ def handle_audio(api, msg):
         "inline_keyboard": [
             [
                 {
-                    "text": "🎧 Freedom from Fear အသံဖိုင် နားဆင်ရန်",
+                    "text": "🎧 Freedom from Fear အသံဖိုင် နားဆင်ရန် (VPN မလို)",
                     "web_app": {"url": f"{WEBAPP_URL}/article.html?id=aung-san-suu-kyi-freedom-from-fear-1990-mm"}
                 }
             ],
             [
                 {
-                    "text": "🎂 မွေးနေ့ဆုတောင်းလွှာ အသံဖိုင် နားဆင်ရန်",
+                    "text": "🎂 မွေးနေ့ဆုတောင်းလွှာ အသံဖိုင် နားဆင်ရန် (VPN မလို)",
                     "web_app": {"url": f"{WEBAPP_URL}/article.html?id=daw-aung-san-suu-kyi-81st-birthday-tribute"}
                 }
             ]
@@ -602,13 +746,13 @@ def handle_mirrors(api, msg):
     text = (
         "🌐 <b>Htet Official — တရားဝင် ဝက်ဘ်ဆိုက်နှင့် Mirror လင့်ခ်များ</b>\n\n"
         "မြန်မာနိုင်ငံတွင်းမှ စာဖတ်သူများ အဆင်ပြေချောမွေ့စွာ ဝင်ရောက်ဖတ်ရှုနိုင်ရန် Mirror အများအပြားဖြင့် လွှင့်တင်ထားပါသည်ရှင်။\n\n"
-        "🟢 <b>၁။ Vercel Mirror (VPN မလို)</b>\n"
+        "🟢 <b>၁။ Vercel Mirror (VPN မလို — အထူးအကြံပြု)</b>\n"
         "👉 https://htetofficialgithubio.vercel.app\n"
         "<i>(မြန်မာနိုင်ငံတွင်းမှ VPN မလိုဘဲ တိုက်ရိုက် ဝင်ရောက်ဖတ်ရှုနိုင်ပါသည်)</i>\n\n"
-        "⚡ <b>၂။ Cloudflare Workers Edge (အလွန်မြန်ဆန်သော Engine)</b>\n"
+        "⚡ <b>၂။ Cloudflare Workers Edge (Web & App)</b>\n"
         "👉 https://web.htetofficial.workers.dev\n"
         "👉 https://app.htetofficial.workers.dev\n"
-        "<i>(ကမ္ဘာတစ်ဝှမ်း Edge CDN နှင့် Telegram Mini App အတွက် အကောင်းဆုံးဖြစ်ပါသည်)</i>\n\n"
+        "<i>(ကမ္ဘာတစ်ဝှမ်း Edge CDN မြန်နှုန်းမြင့် Node)</i>\n\n"
         "🐙 <b>၃။ GitHub Pages (မူရင်း Platform)</b>\n"
         "👉 https://htetofficial.github.io\n\n"
         "━━━━━━━━━━━━━━━━━━━━━\n"
@@ -622,30 +766,44 @@ def handle_mirrors(api, msg):
         "inline_keyboard": [
             [
                 {
-                    "text": "🟢 Vercel (VPN မလို)",
-                    "url": "https://htetofficialgithubio.vercel.app"
+                    "text": "🟢 Vercel Mini App (VPN မလို)",
+                    "web_app": {"url": VERCEL_WEBAPP_URL}
                 },
                 {
-                    "text": "⚡ Workers (Web)",
-                    "url": "https://web.htetofficial.workers.dev"
+                    "text": "⚡ Workers Mini App",
+                    "web_app": {"url": WORKERS_WEBAPP_URL}
                 }
             ],
             [
                 {
-                    "text": "⚡ Workers (App)",
-                    "url": "https://app.htetofficial.workers.dev"
+                    "text": "🟢 Vercel Browser ဖြင့် ဖွင့်ရန် ↗",
+                    "url": VERCEL_WEBAPP_URL
                 },
                 {
-                    "text": "🐙 GitHub Pages",
-                    "url": "https://htetofficial.github.io"
-                }
-            ],
-            [
-                {
-                    "text": "📖 Telegram Mini App ဖွင့်ရန်",
-                    "web_app": {"url": WEBAPP_URL}
+                    "text": "🐙 GitHub Pages ↗",
+                    "url": GITHUB_WEBAPP_URL
                 }
             ]
+        ]
+    }
+    api.send_message(chat_id, text, reply_markup=keyboard)
+
+def handle_ping(api, msg):
+    chat_id = msg['chat']['id']
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    text = (
+        f"⚡ <b>Htet Official Bot — Node Diagnostics</b>\n\n"
+        f"• <b>Status:</b> 🟢 Operational (Online)\n"
+        f"• <b>Active WebApp Node:</b> 🇲🇲 Vercel Edge (VPN-Free)\n"
+        f"• <b>WebApp URL:</b> <code>{WEBAPP_URL}</code>\n"
+        f"• <b>Articles Loaded:</b> {len(repo.articles)} စောင်\n"
+        f"• <b>Publications:</b> {len(repo.publications)} စောင်\n"
+        f"• <b>Translations Corpus:</b> {len(repo.translation_pairs):,} pairs\n"
+        f"• <b>Timestamp:</b> <i>{now}</i>"
+    )
+    keyboard = {
+        "inline_keyboard": [
+            [{"text": "📖 Mini App စမ်းသပ်ဖွင့်မည်", "web_app": {"url": WEBAPP_URL}}]
         ]
     }
     api.send_message(chat_id, text, reply_markup=keyboard)
@@ -654,20 +812,22 @@ def handle_help(api, msg):
     chat_id = msg['chat']['id']
     text = (
         "📖 <b>Htet Official Bot — အသုံးပြုနိုင်သော Commands များ</b>\n\n"
-        "• <code>/start</code> - နှုတ်ခွန်းဆက်နှင့် Mini App ဖွင့်ရန်\n"
+        "• <code>/start</code> - နှုတ်ခွန်းဆက်နှင့် Mini App ဖွင့်ရန် (VPN မလို)\n"
         "• <code>/app</code> - Telegram Mini App မျက်နှာပြည့် ဖွင့်ရန်\n"
-        "• <code>/about</code> - စာရေးသူ ထက် အကြောင်းနှင့် ORCID သုတေသီ မှတ်ပုံတင်\n"
-        "• <code>/mirrors</code> - တရားဝင် Mirror လင့်ခ်များနှင့် VPN အကြံပြုချက် (VPN မလို Vercel အပါအဝင်)\n"
-        "• <code>/suukyi</code> သို့မဟုတ် <code>/birthday</code> - ဒေါ်အောင်ဆန်းစုကြည် ၈၁ နှစ်ပြည့် မွေးနေ့နှင့် Freedom from Fear စာတမ်း\n"
+        "• <code>/search &lt;query&gt;</code> - သုတေသန ဆောင်းပါးများ ရှာဖွေရန်\n"
         "• <code>/dict &lt;word&gt;</code> - အင်္ဂလိပ်-မြန်မာ အဘိဓာန် ရှာဖွေရန်\n"
         "• <code>/translate &lt;text&gt;</code> - မြန်မာ ↔ အင်္ဂလိပ် စက်ဘာသာပြန်ဆိုရန်\n"
-        "• <code>/articles</code> - သုတေသနဆောင်းပါးများ စာရင်း\n"
-        "• <code>/publications</code> - ဒေါင်းလုဒ်ရယူနိုင်သော စာတမ်းငယ်များနှင့် PDF များ\n"
+        "• <code>/articles</code> - နောက်ဆုံးထုတ်ဝေထားသော ဆောင်းပါးများ\n"
+        "• <code>/publications</code> - သုတေသန စာတမ်းငယ်များနှင့် PDF များ\n"
+        "• <code>/suukyi</code> - ဒေါ်အောင်ဆန်းစုကြည် ၈၁ နှစ်ပြည့် မွေးနေ့နှင့် Freedom from Fear စာတမ်း\n"
         "• <code>/audio</code> - နားဆင်နိုင်သော အသံသွင်းစာတမ်းများ\n"
+        "• <code>/about</code> - စာရေးသူ အကြောင်းနှင့် ORCID သုတေသီ မှတ်ပုံတင်\n"
+        "• <code>/mirrors</code> - တရားဝင် Mirror လင့်ခ်များနှင့် VPN အကြံပြုချက်\n"
+        "• <code>/ping</code> - Bot နှင့် Server အခြေအနေ စစ်ဆေးရန်\n"
         "• <code>/help</code> - ဤလမ်းညွှန်ကို ပြန်လည်ပြသရန်\n\n"
-        "💡 <i>Tip: Chat တွင် အင်္ဂလိပ်စကားလုံး ရိုက်ထည့်လိုက်ရုံဖြင့် အဘိဓာန်အဓိပ္ပာယ်ကို အလိုအလျောက် ရှာဖွေပေးပါသည်ရှင်။</i>"
+        "💡 <i>Tip: စကားလုံးတစ်လုံးတည်း ရိုက်ထည့်ပါက အဘိဓာန် ရှာပေးပြီး၊ ဝါကျရှည် ရိုက်ထည့်ပါက ဆောင်းပါးရှာဖွေခြင်း သို့မဟုတ် ဘာသာပြန်ခြင်းကို အလိုအလျောက် ဆောင်ရွက်ပေးပါသည်ရှင်။</i>"
     )
-    api.send_message(chat_id, text)
+    api.send_message(chat_id, text, reply_markup=get_main_reply_keyboard())
 
 # ---------------------------------------------------------------------------
 # Inline Query Handler (@BotName <query>)
@@ -682,14 +842,14 @@ def handle_inline_query(api, iq):
         results.append({
             'type': 'article',
             'id': 'default-app',
-            'title': '📖 Htet Official Mini App',
-            'description': 'ဝက်ဘ်ဆိုက်နှင့် စာဖတ်ခန်းအား Telegram Mini App ဖြင့် ဖွင့်မည်',
+            'title': '📖 Htet Official Mini App (VPN မလို)',
+            'description': 'မြန်မာနိုင်ငံတွင်းမှ VPN မလိုဘဲ ဝက်ဘ်ဆိုက်နှင့် စာဖတ်ခန်း ဖွင့်မည်',
             'input_message_content': {
-                'message_text': f"📖 <b>Htet Official Telegram Mini App</b>\n\nနိုင်ငံရေးဒဿနိကဗေဒနှင့် သုတေသန စာဖတ်ခန်းကို အောက်ပါလင့်ခ်ဖြင့် ဝင်ရောက်နိုင်ပါသည်ရှင်။\n{WEBAPP_URL}",
+                'message_text': f"📖 <b>Htet Official Telegram Mini App</b>\n\nနိုင်ငံရေးဒဿနိကဗေဒနှင့် သုတေသန စာဖတ်ခန်းကို အောက်ပါလင့်ခ်ဖြင့် ဝင်ရောက်နိုင်ပါသည်ရှင်။ (VPN မလိုပါ)\n{WEBAPP_URL}",
                 'parse_mode': 'HTML'
             },
             'reply_markup': {
-                'inline_keyboard': [[{'text': '🚀 Mini App ဖွင့်ရန်', 'web_app': {'url': WEBAPP_URL}}]]
+                'inline_keyboard': [[{'text': '🚀 Mini App ဖွင့်ရန် (VPN မလို)', 'web_app': {'url': WEBAPP_URL}}]]
             }
         })
         results.append({
@@ -706,40 +866,84 @@ def handle_inline_query(api, iq):
             },
             'reply_markup': {
                 'inline_keyboard': [
-                    [{'text': '📖 စာတမ်းဖတ်ရန်', 'web_app': {'url': f"{WEBAPP_URL}/article.html?id=aung-san-suu-kyi-freedom-from-fear-1990-mm"}}]
+                    [{'text': '📖 စာတမ်းဖတ်ရန် (Mini App)', 'web_app': {'url': f"{WEBAPP_URL}/article.html?id=aung-san-suu-kyi-freedom-from-fear-1990-mm"}}]
+                ]
+            }
+        })
+        results.append({
+            'type': 'article',
+            'id': 'default-about',
+            'title': '🆔 စာရေးသူ ထက် (Htet Myat Ekri) & ORCID',
+            'description': 'ORCID iD: 0009-0004-7908-2949 | Commufemocratism',
+            'input_message_content': {
+                'message_text': (
+                    "🌸 <b>စာရေးသူနှင့် သုတေသီ ထက် (Htet Myat Ekri)</b>\n\n"
+                    "• <b>နယ်ပယ်:</b> နိုင်ငံရေးဒဿနိကဗေဒနှင့် ဖီမင်နစ်သုတေသန\n"
+                    "• <b>ORCID iD:</b> <code>0009-0004-7908-2949</code>\n\n"
+                    f"🔗 <a href='{WEBAPP_URL}/about.html'>ကိုယ်ရေးအကျဉ်း ဖတ်ရှုရန်</a>"
+                ),
+                'parse_mode': 'HTML'
+            },
+            'reply_markup': {
+                'inline_keyboard': [
+                    [{'text': '🆔 ORCID Profile ↗', 'url': 'https://orcid.org/0009-0004-7908-2949'}],
+                    [{'text': '📖 အပြည့်အစုံ ဖတ်ရန် (Mini App)', 'web_app': {'url': f"{WEBAPP_URL}/about.html"}}]
                 ]
             }
         })
     else:
-        # Check dictionary
-        dict_res = repo.lookup_dictionary(query)
-        if dict_res:
-            first = dict_res[0]
-            desc = first.get('d', '')
+        # 1. Search Articles
+        matched_articles = repo.search_articles(query, limit=3)
+        for art in matched_articles:
+            title = art.get('title', {}).get('mm', art.get('title', 'ဆောင်းပါး')) if isinstance(art.get('title'), dict) else art.get('title', 'ဆောင်းပါး')
+            aid = art.get('id', '')
+            desc = art.get('description', {}).get('mm', '') if isinstance(art.get('description'), dict) else art.get('description', '')
             results.append({
                 'type': 'article',
-                'id': f'dict-{query}',
-                'title': f'📚 အဘိဓာန်: {query.upper()}',
-                'description': desc[:100],
+                'id': f'art-{aid}',
+                'title': f'📄 {title}',
+                'description': desc[:120],
                 'input_message_content': {
-                    'message_text': f"📚 <b>{query.upper()}</b>\n\n📝 <b>အဓိပ္ပာယ်:</b> {desc}",
+                    'message_text': f"📄 <b>{title}</b>\n\n{desc[:250]}...\n\n🔗 <a href='{WEBAPP_URL}/article.html?id={aid}'>Mini App ဖြင့် ဖတ်ရှုရန်</a>",
                     'parse_mode': 'HTML'
                 },
                 'reply_markup': {
                     'inline_keyboard': [
-                        [{'text': '🔍 အဘိဓာန်တွင် ကြည့်မည်', 'web_app': {'url': f"{WEBAPP_URL}/dictionary.html?q={urllib.parse.quote(query)}"}}]
+                        [{'text': '📖 စာမူဖတ်ရှုရန် (Mini App)', 'web_app': {'url': f"{WEBAPP_URL}/article.html?id={aid}"}}]
                     ]
                 }
             })
 
-        # Check translation
+        # 2. Check dictionary if single word
+        if len(query.split()) == 1 and re.match(r'^[a-zA-Z]+$', query):
+            dict_res = repo.lookup_dictionary(query)
+            if dict_res:
+                first = dict_res[0]
+                desc = first.get('d', '')
+                results.append({
+                    'type': 'article',
+                    'id': f'dict-{query}',
+                    'title': f'📚 အဘိဓာန်: {query.upper()}',
+                    'description': desc[:100],
+                    'input_message_content': {
+                        'message_text': f"📚 <b>{query.upper()}</b>\n\n📝 <b>အဓိပ္ပာယ်:</b> {desc}",
+                        'parse_mode': 'HTML'
+                    },
+                    'reply_markup': {
+                        'inline_keyboard': [
+                            [{'text': '🔍 အဘိဓာန်တွင် ကြည့်မည် (VPN မလို)', 'web_app': {'url': f"{WEBAPP_URL}/dictionary.html?q={urllib.parse.quote(query)}"}}]
+                        ]
+                    }
+                })
+
+        # 3. Check translation
         src = 'my' if re.search(r'[က-႟]', query) else 'en'
         tgt = 'en' if src == 'my' else 'my'
         trans = online_translate(query, src, tgt)
         if trans:
             results.append({
                 'type': 'article',
-                'id': f'trans-{query}',
+                'id': f'trans-{query[:20]}',
                 'title': f'🌐 ဘာသာပြန်: {trans}',
                 'description': f'မူရင်း: {query}',
                 'input_message_content': {
@@ -748,7 +952,7 @@ def handle_inline_query(api, iq):
                 },
                 'reply_markup': {
                     'inline_keyboard': [
-                        [{'text': '🌐 ဘာသာပြန်စတူဒီယို ဖွင့်မည်', 'web_app': {'url': f"{WEBAPP_URL}/translate.html"}}]
+                        [{'text': '🌐 ဘာသာပြန်စတူဒီယို ဖွင့်မည် (VPN မလို)', 'web_app': {'url': f"{WEBAPP_URL}/translate.html"}}]
                     ]
                 }
             })
@@ -763,11 +967,62 @@ def process_message(api, msg):
     if not text:
         return
 
+    # Check Reply Keyboard taps
+    if text == "📖 Htet Mini App ဖွင့်ရန် (VPN မလို)":
+        handle_app(api, msg)
+        return
+    elif text in ("📚 ဆောင်းပါးများ", "/articles"):
+        handle_articles(api, msg)
+        return
+    elif text in ("📑 စာတမ်းငယ်များ", "/publications"):
+        handle_publications(api, msg)
+        return
+    elif text in ("🔍 ဆောင်းပါးရှာရန်", "🔍 ရှာဖွေရန်"):
+        handle_search(api, msg, '')
+        return
+    elif text in ("🌐 ဘာသာပြန်စတူဒီယို", "🌐 ဘာသာပြန်"):
+        api.send_message(
+            msg['chat']['id'],
+            "🌐 <b>ဘာသာပြန် စတူဒီယို:</b>\n\n<code>/translate &lt;စာသား&gt;</code> ဟု ရိုက်ထည့်ပါရှင်။\nဥပမာ: <code>/translate Freedom and democracy</code>",
+            reply_markup={
+                "inline_keyboard": [
+                    [{"text": "🌐 ဘာသာပြန်စတူဒီယို မျက်နှာပြည့် ဖွင့်မည် (VPN မလို)", "web_app": {"url": f"{WEBAPP_URL}/translate.html"}}]
+                ]
+            }
+        )
+        return
+    elif text in ("📖 အဘိဓာန်", "/dict"):
+        api.send_message(
+            msg['chat']['id'],
+            "📖 <b>အဘိဓာန် ရှာဖွေရန်:</b>\n\n<code>/dict &lt;English Word&gt;</code> ဟု ရိုက်ထည့်ပါရှင်။\nဥပမာ: <code>/dict autonomy</code>",
+            reply_markup={
+                "inline_keyboard": [
+                    [{"text": "📚 အဘိဓာန်စတူဒီယို ဖွင့်မည် (VPN မလို)", "web_app": {"url": f"{WEBAPP_URL}/dictionary.html"}}]
+                ]
+            }
+        )
+        return
+    elif text in ("🕊️ ဒေါ်အောင်ဆန်းစုကြည်", "/suukyi", "/birthday"):
+        handle_suukyi(api, msg)
+        return
+    elif text in ("🆔 စာရေးသူအကြောင်း", "/about", "/author", "/bio", "/orcid"):
+        handle_about(api, msg)
+        return
+    elif text in ("🎙️ အသံစာတမ်းများ", "/audio"):
+        handle_audio(api, msg)
+        return
+    elif text in ("🌐 Mirror လင့်ခ်များ", "/mirrors", "/mirror", "/links", "/vpn"):
+        handle_mirrors(api, msg)
+        return
+
     # Commands
     if text.startswith('/start'):
         handle_start(api, msg)
     elif text.startswith('/app') or text.startswith('/mini'):
         handle_app(api, msg)
+    elif text.startswith('/search') or text.startswith('/find'):
+        parts = text.split(maxsplit=1)
+        handle_search(api, msg, parts[1] if len(parts) > 1 else '')
     elif text.startswith('/about') or text.startswith('/author') or text.startswith('/bio') or text.startswith('/orcid'):
         handle_about(api, msg)
     elif text.startswith('/mirrors') or text.startswith('/mirror') or text.startswith('/links') or text.startswith('/vpn'):
@@ -786,14 +1041,24 @@ def process_message(api, msg):
         handle_translate(api, msg, parts[1] if len(parts) > 1 else '')
     elif text.startswith('/audio'):
         handle_audio(api, msg)
+    elif text.startswith('/ping') or text.startswith('/status'):
+        handle_ping(api, msg)
     elif text.startswith('/help'):
         handle_help(api, msg)
     else:
-        # If user types a single word, check dictionary
+        # Smart routing:
+        # 1. If user typed single English word -> lookup dictionary
         if len(text.split()) == 1 and re.match(r'^[a-zA-Z]+$', text):
             handle_dict(api, msg, text)
+        # 2. If user typed a search phrase in Burmese -> try searching articles first
+        elif re.search(r'[က-႟]', text):
+            matched = repo.search_articles(text, limit=3)
+            if matched:
+                handle_search(api, msg, text)
+            else:
+                handle_translate(api, msg, text)
+        # 3. If user typed multi-word English phrase -> translate
         elif len(text.split()) > 1:
-            # Offer translation
             handle_translate(api, msg, text)
         else:
             handle_help(api, msg)
@@ -826,13 +1091,14 @@ def main():
     print(f"🤖 Htet Official Telegram Bot အောင်မြင်စွာ ချိတ်ဆက်ပြီးပါပြီ!")
     print(f"• Bot Name: {bot_info.get('first_name')}")
     print(f"• Username: @{bot_username}")
-    print(f"• WebApp URL: {WEBAPP_URL}")
+    print(f"• WebApp URL (VPN မလို Vercel): {WEBAPP_URL}")
     print("=" * 60)
 
     # 1. Register commands with Telegram
     commands = [
-        {"command": "start", "description": "မင်္ဂလာပါ နှုတ်ခွန်းဆက်နှင့် Mini App ဖွင့်ရန်"},
+        {"command": "start", "description": "နှုတ်ခွန်းဆက်နှင့် Mini App ဖွင့်ရန် (VPN မလို)"},
         {"command": "app", "description": "Htet Mini App မျက်နှာပြည့် ဖွင့်ရန်"},
+        {"command": "search", "description": "သုတေသန ဆောင်းပါးများ ရှာဖွေရန်"},
         {"command": "about", "description": "စာရေးသူ အကြောင်းနှင့် ORCID သုတေသီ မှတ်ပုံတင်"},
         {"command": "mirrors", "description": "တရားဝင် Mirror လင့်ခ်များနှင့် VPN အကြံပြုချက်"},
         {"command": "translate", "description": "မြန်မာ ↔ အင်္ဂလိပ် စက်ဘာသာပြန်ဆိုရန်"},
@@ -841,14 +1107,15 @@ def main():
         {"command": "suukyi", "description": "ဒေါ်အောင်ဆန်းစုကြည် ၈၁ နှစ်ပြည့် မွေးနေ့နှင့် စာတမ်း"},
         {"command": "publications", "description": "သုတေသန စာတမ်းငယ်များနှင့် PDF များ"},
         {"command": "audio", "description": "နားဆင်နိုင်သော အသံသွင်းစာတမ်းများ"},
+        {"command": "ping", "description": "Node နှင့် Server အခြေအနေ စစ်ဆေးရန်"},
         {"command": "help", "description": "အသုံးပြုနည်း လမ်းညွှန်"}
     ]
     api.set_my_commands(commands)
 
-    # 2. Set persistent Menu Button to launch Mini App
-    menu_res = api.set_chat_menu_button(WEBAPP_URL)
+    # 2. Set persistent Menu Button to launch VPN-free Vercel Mini App
+    menu_res = api.set_chat_menu_button(WEBAPP_URL, "📖 Htet Mini App (VPN မလို)")
     if menu_res.get('ok'):
-        print("✅ Telegram Chat Menu Button အား Mini App သို့ ချိတ်ဆက်ပြီးပါပြီ။")
+        print("✅ Telegram Chat Menu Button အား Mini App (VPN မလို Vercel) သို့ ချိတ်ဆက်ပြီးပါပြီ။")
 
     # 3. Start Polling Loop
     print(f"🚀 Telegram Bot စတင် လည်ပတ်နေပါပြီ... (Press Ctrl+C to stop)")
