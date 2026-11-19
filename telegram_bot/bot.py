@@ -391,7 +391,7 @@ def handle_articles(api, msg):
         text += f"<b>{i}။ {title}</b>\n"
         if date:
             text += f"📅 <i>{date}</i>\n"
-        text += f"🔗 <a href='{WEBAPP_URL}/articles/{aid}.html'>စာမူဖတ်ရှုရန် (Web / Instant View)</a>\n\n"
+        text += f"🔗 <a href='{WEBAPP_URL}/article.html?id={aid}'>စာမူဖတ်ရှုရန် (Web / Instant View)</a>\n\n"
 
     keyboard = {
         "inline_keyboard": [

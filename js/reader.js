@@ -540,7 +540,7 @@
       if (!article) return;
       const baseUrl = 'https://htetofficial.github.io/';
       const slug = article.id || article.slug || '';
-      const cleanArticleUrl = `${baseUrl}articles/${encodeURIComponent(slug)}.html`;
+      const cleanArticleUrl = `${baseUrl}article.html?id=${encodeURIComponent(slug)}`;
       const pageUrl = cleanArticleUrl;
       const title = ((lang === 'mm' ? (article.title_mm || article.title_en) : (article.title_en || article.title_mm)) || 'Htet Official') + ' | Htet Official';
       const desc = ((lang === 'mm' ? (article.excerpt_mm || article.excerpt_en) : (article.excerpt_en || article.excerpt_mm)) || '').trim();
@@ -1694,16 +1694,16 @@
           if (window.HtetShare) {
             window.HtetShare.shareNative();
           } else if (navigator.share && this.articleData) {
-            const cleanUrl = 'https://htetofficial.github.io/articles/' + (this.articleData.id || this.articleData.slug) + '.html';
+            const cleanUrl = 'https://htetofficial.github.io/article.html?id=' + encodeURIComponent(this.articleData.id || this.articleData.slug);
             navigator.share({
               title: this.articleData.title_mm || this.articleData.title_en,
               url: cleanUrl
             }).catch(() => {});
           } else {
-            const cleanUrl = 'https://htetofficial.github.io/articles/' + (this.articleData ? (this.articleData.id || this.articleData.slug) : '') + '.html';
+            const cleanUrl = 'https://htetofficial.github.io/article.html?id=' + encodeURIComponent(this.articleData ? (this.articleData.id || this.articleData.slug) : '');
             navigator.clipboard.writeText(cleanUrl);
             if (window.HtetUI && window.HtetUI.showToast) {
-              window.HtetUI.showToast('စာမူ လင့်ခ် (Clean Link) ကို ကူးယူပြီးပါပြီ။');
+              window.HtetUI.showToast('စာမူ လင့်ခ်ကို ကူးယူပြီးပါပြီ။');
             }
           }
         });

@@ -993,7 +993,7 @@
       if (window.Reader && window.Reader.articleData) {
         var a = window.Reader.articleData;
         var slug = a.id || a.slug;
-        cleanUrl = baseUrl + '/articles/' + slug + '.html';
+        cleanUrl = baseUrl + '/article.html?id=' + encodeURIComponent(slug);
         title = a.title_mm || a.title_en || title;
         excerpt = a.excerpt_mm || a.excerpt_en || '';
         author = a.author_mm || a.author || author;
@@ -1001,12 +1001,12 @@
         var p = new URLSearchParams(window.location.search);
         var id = p.get('id') || p.get('slug');
         if (id) {
-          cleanUrl = baseUrl + '/articles/' + id + '.html';
+          cleanUrl = baseUrl + '/article.html?id=' + encodeURIComponent(id);
         } else {
           var m = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/i) ||
                   window.location.pathname.match(/\/([^\/\.]+)\.html$/i);
           if (m && m[1] && m[1] !== 'article' && m[1] !== 'articles' && m[1] !== 'index') {
-            cleanUrl = baseUrl + '/articles/' + m[1] + '.html';
+            cleanUrl = baseUrl + '/article.html?id=' + encodeURIComponent(m[1]);
           }
         }
       }
@@ -1059,7 +1059,7 @@
 
     copyLink: function() {
       var d = this.getShareData();
-      var msg = 'ဆောင်းပါးလင့်ခ် (Clean Static Link) အား ကူးယူပြီးပါပြီ။';
+      var msg = 'ဆောင်းပါးလင့်ခ် ကူးယူပြီးပါပြီ။';
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(d.url).then(function() {
           showToast(msg);

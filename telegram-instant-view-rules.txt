@@ -9,9 +9,7 @@
 
 # Target paths
 ?path: /article\.html.*
-?path: /articles/.*
 ?path: /publications/.*
-?path: /aung-san-suu-kyi-freedom-from-fear-1990-mm\.html
 
 # Telegram Channel & Site Integration
 channel: "@htetmmofficial"
@@ -23,9 +21,8 @@ body: //div[@id="article-content-body"]
 # Article Metadata
 title: //meta[@property="og:title"]/@content
 subtitle: //meta[@property="og:description"]/@content
-author: "ဒေါ်အောင်ဆန်းစုကြည်"
+author: //meta[@name="author"]/@content
 author_url: "https://htetofficial.github.io/about.html"
-published_date: "1990-07-19"
 cover: //meta[@property="og:image"]/@content
 
 # Clean up web navigation, floating UI elements, and interactive controls
